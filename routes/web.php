@@ -47,7 +47,7 @@ Route::get('forum/travesti/set-new-state/{id}', [
     'uses' => 'IndexController@setNewState'])
     ->name('set-new-state');
 
-Auth::routes();
+Auth::routes(['register'=>false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
