@@ -79,6 +79,8 @@ class RegisterController extends Controller
 
     public function register(Request $request, GoogleRecaptcha $googleRecaptcha)
     {
+        return redirect()->back();
+
         $data = $request->all();
 
         $recaptchaResponse = $data['g-recaptcha-response'];
