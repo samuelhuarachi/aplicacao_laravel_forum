@@ -4,18 +4,23 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <h1>Acessar o forum</h1>
 
-            <a href="{{ route('forum.index') }}">
-                <i class="icon-chevron-left"></i>  Voltar a página inicial do forum</a>
-        
-            <a href="{{ route('register') }}">
-                <button type="button" class="btn btn-dark float-right">
-                    <i class="icon-sign-blank"></i> 
-                        Sou novo, fazer meu cadastro rápido</button>
-            </a>
-            <br><br>
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <a href="{{ route('forum.index') }}">
+                    <i class="icon-chevron-left"></i>  Voltar a página inicial do forum</a>
+                
+                    <a href="{{ route('register') }}">
+                        <button type="button" class="btn btn-dark float-right">
+                            <i class="icon-sign-blank"></i> 
+                                Sou novo, fazer meu cadastro rápido</button>
+                    </a>
+
+                </div>
+            </div>
+            
             <div class="card">
                 <div class="card-header">{{ __('Acessar minha conta') }}</div>
 
