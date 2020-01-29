@@ -33,23 +33,24 @@
 
 <div class="container">
     
-    <a href="{{ route('login') }}">
-        <button type="button" class="btn btn-light">
-        <i class="icon-fire"></i> Entrar na minha conta</button>
-    </a>
-    
-    <a href="{{ route('register') }}">
-        <button type="button" class="btn btn-dark float-right">
-            <i class="icon-sign-blank"></i> 
-                Sou novo, fazer meu cadastro rápido</button>
-    </a>
-    
-    <br><br>
+    <div class="row mb-3">
+        <div class="col-md-12">
+                <a href="{{ route('login') }}">
+                <button type="button" class="btn btn-light">
+                <i class="icon-fire"></i> Entrar na minha conta</button>
+            </a>
+            
+            <a href="{{ route('register') }}">
+                <button type="button" class="btn btn-dark float-right">
+                    <i class="icon-sign-blank"></i> 
+                        Sou novo, fazer meu cadastro rápido</button>
+            </a>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-md-10">
-            <p>
-                <b>{{ $stateFounded->title }}</b> / <b>{{ $cityFounded->title }}</b></p>
+            <h2>{{ $stateFounded->title }} / {{ $cityFounded->title }}</h2>
             <div class="card">
                 <div class="card-header">
                     <b>Selecione seu estado</b>
@@ -134,7 +135,21 @@
                     <img 
                         class="mb-3"
                         style="width:100%"
-                        src="{{ asset('images/travesti-titulo.jpeg') }}" alt="">
+                        src="{{ asset('images/travesti-titulo.jpeg') }}" alt="travesti mostrando o pênis">
+                </figure>
+
+                <figure>
+                    <img 
+                        class="mb-3"
+                        style="width:100%"
+                        src="{{ asset('images/travesti-ativa.jpeg') }}" alt="travesti ativa comendo homem">
+                </figure>
+
+                <figure>
+                    <img 
+                        class="mb-3"
+                        style="width:100%"
+                        src="{{ asset('images/travesti-ativa-2.jpeg') }}" alt="travesti ativa comendo homem">
                 </figure>
             @endif
             

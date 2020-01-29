@@ -23,15 +23,17 @@
 <div class="container mb-3">
     <div class="row">
         <nav id="menu" class="col-md-12 mb-3">
-            <div>
+            <div class="row mb-3">
+                <div class="col-md-12">
                 @auth
                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
                         {{ csrf_field() }}
                         <button class="float-right" type="submit">Sair do forum</button>
                     </form>
                 @endauth
+                </div>
             </div>
-            <div class="col-md-12 text-center">
+            <div class="text-center">
                 <ul id="top-menu">
                     
                     <li>

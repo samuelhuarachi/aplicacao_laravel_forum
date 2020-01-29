@@ -24,7 +24,7 @@
 
                 @if (env('REMOVE_PORN') == false)
                     <figure class="text-center">
-                        <img width="400" src="{{ asset('images/travesti-capa.jpg') }}" alt="foto de capa de uma travesti">
+                        <img style="max-width:400px;" width="100%" src="{{ asset('images/travesti-capa.jpg') }}" alt="foto de capa de uma travesti">
                     </figure>
 
                     <p class="text-center">O maior forum de travesti do Brasil. Relatos de usuários,
