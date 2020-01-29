@@ -54,34 +54,30 @@ function() {
 
         });
     
+    Route::group(['prefix' => 'minha-conta', 
+        'middleware' => ['verified', 'auth']],
+        function() {
 
+            Route::get('', [
+                'uses' => 'MyAccountController@index'])
+                ->name('forum.myaccount');
+
+            Route::put('atualizar', [
+                'uses' => 'MyAccountController@update'])
+                ->name('forum.myaccount.update');
+                
+            Route::get('comentario/{id}/atualizar', [
+                'uses' => 'MyAccountController@updateComment'])
+                ->name('forum.myaccount.comment.update');
+
+            Route::put('comentario/atualizar', [
+                'uses' => 'MyAccountController@updateCommentRequest'])
+                ->name('forum.myaccount.comment.update.request');
+    });
 });
-
-
-
-
-
 
 
 
 
 
 Auth::routes(['verify' => true]);
-
-
-Route::group(['prefix' => 'forum/travesti/minha-conta', 
-        'middleware' => ['verified', 'auth']],
-    function() {
-
-        Route::get('', [
-            'uses' => 'MyAccountController@index'])
-            ->name('forum.myaccount');
-
-        Route::put('atualizar', [
-            'uses' => 'MyAccountController@update'])
-            ->name('forum.myaccount.update');
-            
-        Route::get('comentario/{id}/atualizar', [
-            'uses' => 'MyAccountController@updateComment'])
-            ->name('forum.myaccount.comment.update');
-});

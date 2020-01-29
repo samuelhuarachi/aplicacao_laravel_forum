@@ -178,7 +178,7 @@ class IndexController extends Controller
         $recaptchaResponse = $data['g-recaptcha-response'];
 
         if (!$googleRecaptcha->isvalid($recaptchaResponse)) {
-            // return redirect()->back()->withErrors(['Captcha inválido']);
+            return redirect()->back()->withErrors(['Captcha inválido']);
         }
 
         $commentSoul->insert($data);

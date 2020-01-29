@@ -128,6 +128,11 @@
 <script>
 
 $( document ).ready(function() {
+
+    if ($('#tdno').is(':checked')) {
+        $('#positiveComment').hide();
+    }
+    
     $('#tdyes').change(function(obj) {
         if ($('#tdyes').is(':checked')) {
             $('#positiveComment').fadeIn(2000);

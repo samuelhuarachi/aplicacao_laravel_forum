@@ -75,6 +75,10 @@
 
 <style>
 
+figure {
+    margin: 0px !important;
+}
+
 .traveti-title {
     background: #bfffea;
     padding-top: 30px;

@@ -31,9 +31,34 @@ class CommentSoul {
         $this->commentModel->comment = $data['comment'];
         $this->commentModel->td = (int)$data['td'];
         $this->commentModel->positive = (int)$data['positive'];
-        $this->commentModel->save();
+        $commentSaved = $this->commentModel->save();
 
-        return true;
+        return $commentSaved;
     }
 
+    public function update($data)
+    {
+        
+        $commentID = $data['commendID'];
+
+        $commentFinded = $this->commentModel->find($commentID);
+        if (!$commentFinded) {
+            throw new \Exception("Relato não encontrado");
+        }
+
+        $userFinded = $commentFinded->user;
+        $currentUser = Auth::user();
+
+        if ($userFinded->id !== $currentUser->id) {
+            throw new \Exception("Erro");
+        }
+        
+        $commentFinded->update([
+            'comment' => $data['comment'],
+            'td' => (int)$data['td'],
+            'positive' => (int)$data['positive']
+        ]);
+
+        return $commentFinded;
+    }
 }

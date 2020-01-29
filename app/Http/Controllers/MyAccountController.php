@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Samuel\CommentSoul;
 use Illuminate\Http\Request;
+use App\Samuel\GoogleRecaptcha;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\CommentRequest;
 
 class MyAccountController extends Controller
 {
@@ -46,5 +49,22 @@ class MyAccountController extends Controller
 
         return view('my-account.comment-update', 
                 compact('commentFind', 'topicFind'));
+    }
+
+    public function updateCommentRequest(
+                CommentRequest $request,
+                GoogleRecaptcha $googleRecaptcha,
+                CommentSoul $commentSoul)
+    {
+        $data = $request->all();
+        $recaptchaResponse = $data['g-recaptcha-response'];
+
+        if (!$googleRecaptcha->isvalid($recaptchaResponse)) {
+            return redirect()->back()->withInput()->withErrors(['Captcha inválido']);
+        }
+
+        $commentSaved = $commentSoul->update($data);
+
+        return redirect()->route('forum.myaccount');
     }
 }

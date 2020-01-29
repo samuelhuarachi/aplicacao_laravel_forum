@@ -8,10 +8,13 @@
     <div class="col-md-6">
         <div class="row">
             <div class="col-sm-6">
-                <input id="tdyes" type="radio" name="td" value="1" checked> Sim
+                <!-- <input id="tdyes" type="radio" name="td" value="1" checked> Sim -->
+
+                {!! Form::radio('td', '1', null, ['id' => 'tdyes']) !!} Sim
             </div>
             <div class="col-sm-6">
-                <input id="tdno" type="radio" name="td" value="0"> Não 
+                <!-- <input id="tdno" type="radio" name="td" value="0"> Não  -->
+                {!! Form::radio('td', '0', null, ['id' => 'tdno']) !!} Não
             </div>
         </div>
     </div>
@@ -23,10 +26,10 @@
     <div class="col-md-6">
         <div class="row">
             <div class="col-sm-6">
-                <input type="radio" name="positive" value="1" checked> Positivo
+                {!! Form::radio('positive', '1', null) !!} Positivo
             </div>
             <div class="col-sm-6">
-                <input type="radio" name="positive" value="0"> Negativo 
+                {!! Form::radio('positive', '0', null) !!} Negativo 
             </div>
         </div>
     </div>
@@ -38,19 +41,20 @@
 
     <div class="col-md-6">
 
-        <textarea
-                id="textareaComment"
-                style="height:200px;"
-                class="form-control @error('comment') is-invalid @enderror" 
-                name="comment"
-                maxlength="2999"
-                autocomplete="new-comment"></textarea>
-        <div id="commentCount"></div>
+
+        @error('comment')
+            {!! Form::textarea('comment', null, ['id' => 'textareaComment', 'style' => 'height:200px;', 'class' => 'form-control is-invalid', 'maxlength' => '2999', 'autocomplete' => 'new-comment']) !!}
+        @else
+        {!! Form::textarea('comment', null, ['id' => 'textareaComment', 'style' => 'height:200px;', 'class' => 'form-control', 'maxlength' => '2999', 'autocomplete' => 'new-comment']) !!}
+        @enderror
+        
         @error('comment')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
+
+        <div id="commentCount"></div>
     </div>
 </div>
 <div class="form-group row">

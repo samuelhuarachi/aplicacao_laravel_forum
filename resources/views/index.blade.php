@@ -131,31 +131,39 @@
         <div class="col-md-2">
             
             @if (env('REMOVE_PORN')!='true')
+                
                 <figure>
                     <img 
-                        class="mb-3"
+                        class="mb-1"
                         style="width:100%"
                         src="{{ asset('images/travesti-titulo.jpeg') }}" alt="travesti mostrando o pênis">
                 </figure>
 
                 <figure>
                     <img 
-                        class="mb-3"
+                        class="mb-1"
                         style="width:100%"
                         src="{{ asset('images/travesti-ativa.jpeg') }}" alt="travesti ativa comendo homem">
                 </figure>
-
+                
                 <figure>
                     <img 
-                        class="mb-3"
+                        class="mb-1"
+                        style="width:100%"
+                        src="{{ asset('images/travesti-2.jpg') }}" alt="travesti com a mão no pau">
+                </figure>
+                
+                <figure>
+                    <img 
+                        class="mb-1"
                         style="width:100%"
                         src="{{ asset('images/travesti-ativa-2.jpeg') }}" alt="travesti ativa comendo homem">
                 </figure>
             @endif
             
-            <img style="width:100%" src="{{ asset('images/iwant.jpg') }}" alt="">
-            <img style="width:100%" src="{{ asset('images/war2.jpg') }}" alt="">
-            <img style="width:100%" src="{{ asset('images/freddie.jpg') }}" alt="">
+            <img class="mb-1" style="width:100%" src="{{ asset('images/iwant.jpg') }}" alt="">
+            <img class="mb-1" style="width:100%" src="{{ asset('images/war2.jpg') }}" alt="">
+            <img class="mb-1" style="width:100%" src="{{ asset('images/freddie.jpg') }}" alt="">
             
         </div>
     </div>
