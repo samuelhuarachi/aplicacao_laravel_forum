@@ -161,6 +161,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Clarification\MailDrivers\Sparkpost\SparkpostServiceProvider::class,
 
         /*
          * Package Service Providers...
