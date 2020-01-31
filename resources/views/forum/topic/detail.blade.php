@@ -77,6 +77,13 @@
                                     <figure>
                                         <img style="width:80px;" class="float-right border border-danger" src="{{ asset('images/vader.png') }}" alt="Imagem do avatar do forum">
                                     </figure>
+
+                                    @if($comment->user->id == Auth::user()->id)
+                                        <a class="btn btn-outline-primary btn-sm" 
+                                            href="{{ route('forum.myaccount.comment.update', $comment->id) }}">
+                                            Editar</a>
+                                        <br><br>
+                                    @endif
                                     {{ $comment->comment }}
                                 </div>
                             </div>
@@ -111,7 +118,7 @@
         
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
         <button type="submit" class="btn btn-danger">
                         {{ __('Postar novo relato/comentário') }}
                     </button>

@@ -85,7 +85,7 @@
 
             <div class="card mt-5">
                 <div class="card-header">
-                    <b>Encontradas</b>
+                    <b>Relatos, sobre experiencias dos nossos usuários, com travestis, encontrados:</b>
                 </div>
                 <div class="card-body">
                     <a class="btn btn-danger" href="{{ route('forum.topic.new', 
@@ -96,7 +96,7 @@
                     @if (count($cityFounded->topics) == 0)
                         <p class="mb-0">Não foi encontrado nenhum tópico para a cidade {{ $cityFounded->title }}</p>
                     @else
-                        @foreach($cityFounded->topics as $topic)
+                        @foreach($cityFounded->topics->reverse() as $topic)
                             <div class="card mt-2">
                                 <div class="card-body">
                                     <div class="row">

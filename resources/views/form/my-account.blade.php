@@ -6,12 +6,6 @@
 
     <div class="col-md-6">
         {{ Auth::user()->name }}
-
-        @error('email')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
     </div>
 </div>
 
@@ -21,18 +15,7 @@
                 {{ __('E-mail') }}</label>
 
     <div class="col-md-6">
-        <input  id="email" 
-                type="text" 
-                class="form-control @error('email') is-invalid @enderror" 
-                name="email" 
-                value="{{ Auth::user()->email }}"
-                autocomplete="new-email">
-
-        @error('email')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
+        {{ Auth::user()->email }}
     </div>
 </div>
 

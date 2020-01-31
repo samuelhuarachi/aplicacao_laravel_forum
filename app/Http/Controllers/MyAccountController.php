@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Comment;
 use App\Samuel\CommentSoul;
 use Illuminate\Http\Request;
@@ -31,11 +32,33 @@ class MyAccountController extends Controller
         return view('my-account.index');
     }
 
-    public function update(Request $request)
+    public function update(
+        Request $request, 
+        User $user,
+        GoogleRecaptcha $googleRecaptcha)
     {
         $data = $request->all();
 
-        dump($data);
+        $recaptchaResponse = $data['g-recaptcha-response'];
+
+        if (!$googleRecaptcha->isvalid($recaptchaResponse)) {
+            return redirect()->back()->withErrors(['Captcha inválido']);
+        }
+
+        if (!isset($data['password'])) {
+           return redirect()->back();
+        }
+
+        if ($data['password'] == "" || $data['password'] == null) {
+            return redirect()->back();
+        }
+
+        $user = Auth::user();
+        $user->update([
+            'password' => bcrypt($data['password'])
+        ]);
+
+        return redirect()->back();
     }
 
     public function updateComment($commendID, Comment $comment)
@@ -65,6 +88,6 @@ class MyAccountController extends Controller
 
         $commentSaved = $commentSoul->update($data);
 
-        return redirect()->route('forum.myaccount');
+        return redirect()->back();
     }
 }

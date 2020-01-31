@@ -30,7 +30,10 @@ class CommentSoul {
         $this->commentModel->user_id = Auth::user()->id;
         $this->commentModel->comment = $data['comment'];
         $this->commentModel->td = (int)$data['td'];
-        $this->commentModel->positive = (int)$data['positive'];
+        if (isset($data['positive'])) {
+            $this->commentModel->positive = (int)$data['positive'];
+        }
+        
         $commentSaved = $this->commentModel->save();
 
         return $commentSaved;
@@ -51,6 +54,10 @@ class CommentSoul {
 
         if ($userFinded->id !== $currentUser->id) {
             throw new \Exception("Erro");
+        }
+
+        if (!isset($data['positive'])) {
+            $data['positive'] = null;
         }
         
         $commentFinded->update([

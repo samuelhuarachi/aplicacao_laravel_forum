@@ -126,7 +126,7 @@ class IndexController extends Controller
 
         }
 
-        return redirect()->back();
+        return redirect()->route('forum.index');
     }
 
     public function topicDetails($state, $city, $slug,
