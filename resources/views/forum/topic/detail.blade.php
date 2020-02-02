@@ -20,7 +20,7 @@
             <a href="{{ route('forum.index') }}">
                     <i class="icon-chevron-left"></i>  Voltar a página inicial do forum</a>
             <br><br>
-            <h1>{{ $topicFind->title }}</h1>
+            <h1>{{ ucwords($topicFind->title) }}</h1>
 
             @if ($topicFind->cellphone !== null)
                 <p>Celular {{ $topicFind->cellphone }}</p>
@@ -78,11 +78,13 @@
                                         <img style="width:80px;" class="float-right border border-danger" src="{{ asset('images/vader.png') }}" alt="Imagem do avatar do forum">
                                     </figure>
 
-                                    @if($comment->user->id == Auth::user()->id)
-                                        <a class="btn btn-outline-primary btn-sm" 
-                                            href="{{ route('forum.myaccount.comment.update', $comment->id) }}">
-                                            Editar</a>
-                                        <br><br>
+                                    @if (Auth::check())
+                                        @if($comment->user->id == Auth::user()->id)
+                                            <a class="btn btn-outline-primary btn-sm" 
+                                                href="{{ route('forum.myaccount.comment.update', $comment->id) }}">
+                                                Editar</a>
+                                            <br><br>
+                                        @endif
                                     @endif
                                     {{ $comment->comment }}
                                 </div>

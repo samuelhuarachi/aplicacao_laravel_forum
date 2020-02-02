@@ -4,14 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Forum</title>
+
+    @switch(\Request::route()->getName())
+
+        @case('forum.topic.details')
+            @if ($topicFind->cellphone && trim($topicFind->cellphone) !== '')
+                <title>Boneca Forum - Travesti {{ ucwords($topicFind->title) }} do número celular {{ $topicFind->cellphone }}</title>
+            @else
+                <title>Boneca Forum - Tópico {{ ucwords($topicFind->title) }}</title>
+            @endif
+            
+        @default
+            <title>Boneca Forum - Forum de relato das experiência dos usuários, com travestis</title>
+    @endswitch
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
     
     <meta name="description" content="Forum travesti tras relatos de usuários sobre experiencias com as travestis no Brasil."> 
     <meta name="og:title" property="og:title" content="Forum bonecas tem relatos de experiencias de pessoas com travetis no Brasil"> 
     <meta name="robots" content="index, follow"> 
-    <link href="URL" rel="canonical">  <!-  Configurar isso importnate-->
+    <link href="https://www.bonecaforum.com{{ $_SERVER['REQUEST_URI'] }}" rel="canonical">  <!-  Configurar isso importnate-->
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
