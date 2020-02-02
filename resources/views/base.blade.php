@@ -5,18 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    @switch(\Request::route()->getName())
+    @if(\Request::route()->getName() == 'forum.topic.details')
 
-        @case('forum.topic.details')
-            @if ($topicFind->cellphone && trim($topicFind->cellphone) !== '')
-                <title>Boneca Forum - Travesti {{ ucwords($topicFind->title) }} do número de celular {{ $topicFind->cellphone }}</title>
-            @else
-                <title>Boneca Forum - Tópico {{ ucwords($topicFind->title) }}</title>
-            @endif
+        
+        @if ($topicFind->cellphone && trim($topicFind->cellphone) !== '')
+            <title>Boneca Forum - Travesti {{ ucwords($topicFind->title) }} do número de celular {{ $topicFind->cellphone }}</title>
+        @else
+            <title>Boneca Forum - Tópico {{ ucwords($topicFind->title) }}</title>
+        @endif
             
-        @default
+    @else 
             <title>Boneca Forum - Forum de relato das experiência dos usuários, com travestis</title>
-    @endswitch
+    @endif
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
     
