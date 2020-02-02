@@ -20,17 +20,33 @@ class SitemapController extends Controller
 
         foreach($all as $topic)
         {
-            dump($_SERVER['REQUEST_URI']);
-
             $city = $topic->city;
             $state = $city->state;
 
             if ($topic->cellphone && trim($topic->cellphone) !== "") {
                 $url = 'https://www.bonecaforum.com/forum/travesti/' . $state->slug . '/' . $city->slug . '/' . $topic->slug . '<br>';
+
+            
+            echo "
+            <url>";
+            echo "
+                <loc>". strtolower($url) . "</loc>";
+            
+            echo "
+                <lastmod>2020-01-01</lastmod>";
+
+            echo "
+                <changefreq>weekly</changefreq>";
+            
+            echo "
+                <priority>0.9</priority>";
+
+            echo "
+            </url>";
+
             }
             
             
-            print_r($url);
         }
     }
 

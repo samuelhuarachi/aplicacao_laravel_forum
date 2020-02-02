@@ -9,7 +9,7 @@
 
         @case('forum.topic.details')
             @if ($topicFind->cellphone && trim($topicFind->cellphone) !== '')
-                <title>Boneca Forum - Travesti {{ ucwords($topicFind->title) }} do número celular {{ $topicFind->cellphone }}</title>
+                <title>Boneca Forum - Travesti {{ ucwords($topicFind->title) }} do número de celular {{ $topicFind->cellphone }}</title>
             @else
                 <title>Boneca Forum - Tópico {{ ucwords($topicFind->title) }}</title>
             @endif
