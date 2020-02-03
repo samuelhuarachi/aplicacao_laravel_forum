@@ -162,57 +162,41 @@ class IndexController extends Controller
             return redirect()->route('forum.index');
         }
 
+        $photos = [];
+        if ($topicFind->cellphone && trim($topicFind->cellphone) !== "") {
+            $s3Client = S3Client::factory([
+                            'credentials' => [
+                                'key' => ' AKIAJZ2ERZ5NLDUOLEKA',
+                                'secret' => ' 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'
+                            ],
+                            'version' => 'latest',
+                            'region' => 'sa-east-1'
+                        ]);
 
-        /**
-         * 
-         * sdfsafsafsa
-         * 
-         */
-        // $sharedConfig = [
-        //     'profile' => 'default',
-        //     'region' => 'sa-east-1 ',
-        //     'version' => 'latest'
-        // ];
+            $folder2 = env("APP_ENV").'/'.$stateFounded->slug.'/'.$cityFounded->slug.'/'.$topicFind->slug.'/photos/';
+            
+            $objects = $s3Client->getIterator('ListObjects', array(
+                'Bucket' => 'forumttt',
+                'Prefix' => $folder2
+            ));
 
-        // $sdk = new \Aws\Sdk($sharedConfig);
+            foreach($objects as $object) {
 
-        // $s3Client = S3Client::factory([
-        //                 'credentials' => [
-        //                     'key' => ' AKIAJZ2ERZ5NLDUOLEKA',
-        //                     'secret' => ' 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'
-        //                 ],
-        //                 'version' => 'latest',
-        //                 'region' => 'sa-east-1'
-        //             ]);
+                if ($object['Size'] !== "0") {
+                    $photo = 'https://forumttt.s3-sa-east-1.amazonaws.com/'.$object['Key'];
 
-        // $result = $s3Client->getObject([
-        //     'Bucket' => 'forumttt',
-        //     'Key' => 'dev/sao-paulo/campinas/carol-de-goais/photos/IMG-20150810-WA0016.jpg'
-        // ]);
-
-        // dump($result);
-       
-        // $objects = $s3Client->getIterator('ListObjects', array(
-        //     'Bucket' => 'forumttt',
-        //     'Prefix' => 'dev/sao-paulo/campinas/carol-de-goais/photos/'
-        // ));
-
-        // foreach ($objects as $object) {
-        //     // dump($object);
-        // }
-
-        // $result = $s3Client->putObject([
-        //     'Bucket' => 'forumttt',
-        //     'Key'    => 'dev/grossa/',
-        //     'ACL'    => 'public-read'
-        // ]);
-        
+                    $photos[] = $photo;
+                }
+                
+            }
+        }
 
         return view('forum.topic.detail', 
                         compact(
                             'topicFind', 
                             'stateFounded', 
-                            'cityFounded'));
+                            'cityFounded',
+                            'photos'));
     }
 
     public function commentInsert(

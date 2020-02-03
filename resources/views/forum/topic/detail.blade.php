@@ -26,15 +26,30 @@
                 <p>Celular {{ $topicFind->cellphone }}</p>
             @endif
 
+            @if($photos)
+                <h2>Fotos</h2>
+                <div class="card">
+                    <div class="card-body">
+                        @foreach($photos as $photo)
+                            <a 
+                            data-caption="Fotos da travesti {{ ucwords($topicFind->title) }}"
+                            data-fancybox="gallery" href="{{ $photo }}">
+                                <img width="40px" src="{{ $photo }}" alt="Fotos da travesti {{ ucwords($topicFind->title) }}">
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+                <br><br>
+            @endif
+            
+            <h2>Relatos</h2>
             <a  class="btn btn-danger" href="#"
                 data-toggle="modal" 
                 data-target="#exampleModal"
             >
                                 
                         <i class="icon-plus"></i> Novo relato ou comentário</a>
-            <br><br>
-            <h2>Relatos</h2>
-
+                        <br><br>
             @if ($topicFind->comments->count() == 0)
                 <div class="card">
                     <div class="card-body">
@@ -133,6 +148,9 @@
 @endsection
 
 @section('footer')
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <script>
 
