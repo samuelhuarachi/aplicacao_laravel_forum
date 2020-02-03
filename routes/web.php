@@ -19,8 +19,12 @@ Route::get('/', function () {
 // Route::get('tools/folders', [
 //     'uses' => 'ToolsController@createS3FoldersOfGirls']);
 
-// Route::get('/sitemap/generate', [
-//     'uses' => 'SitemapController@generate']);
+// Route::get('tools/extract-images', [
+//     'uses' => 'ToolsController@extractImagesFromWebSite']);
+
+
+Route::get('/sitemap/generate', [
+    'uses' => 'SitemapController@generate']);
 
 Route::group(['prefix' => 'forum/travesti'],
 function() {
