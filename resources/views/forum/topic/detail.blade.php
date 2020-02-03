@@ -177,6 +177,12 @@ $( document ).ready(function() {
     });
 
     $("#commentCount").text("Caracteres 0. Máximo 2999.");
+
+    $('[data-fancybox="gallery"]').fancybox({
+        thumbs : {
+            autoStart : true
+        }
+    });
     
 });
 

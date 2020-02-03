@@ -78,7 +78,7 @@ class ToolsController extends Controller
 
         //This will return the HTML source of the page as a string.
         $htmlString = file_get_contents(
-            'https://www.travesticomlocal.com.br/acompanhante/sabrina-oliveira-2/');
+            'https://www.travesticomlocal.com.br/acompanhante/grazi-martins/');
 
         //Create a new DOMDocument object.
         $htmlDom = new \DOMDocument;
@@ -125,7 +125,7 @@ class ToolsController extends Controller
             // fclose($fp);
 
             $url = $imgSrc;
-            $img = 'teste1/foto-da-travesti-sabrina-oliveira-'.$count.'.webp';
+            $img = 'teste1/foto-da-travesti-grazi-martins-'.$count.'.webp';
             file_put_contents($img, file_get_contents($url));
 
             $count = $count + 1;
