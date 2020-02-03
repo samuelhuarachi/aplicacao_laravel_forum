@@ -16,8 +16,8 @@ Route::get('/', function () {
 });
 
 
-Route::get('tools/folders', [
-    'uses' => 'ToolsController@createS3FoldersOfGirls']);
+// Route::get('tools/folders', [
+//     'uses' => 'ToolsController@createS3FoldersOfGirls']);
 
 // Route::get('/sitemap/generate', [
 //     'uses' => 'SitemapController@generate']);
