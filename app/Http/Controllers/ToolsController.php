@@ -292,7 +292,9 @@ class ToolsController extends Controller
                 
                 
                 $img = storage_path('teste1') . '/foto-da-travesti-'.$trannySlug.'-'.$count.'.webp';
+                
 
+                dump($imgSrc);
                 file_put_contents($img, file_get_contents($imgSrc));
                 $count = $count + 1;
             }
