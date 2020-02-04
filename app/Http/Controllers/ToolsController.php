@@ -173,6 +173,7 @@ class ToolsController extends Controller
 
                 if ($class == 'whatsapp-phone') {
                     $findPhone = trim(str_replace('- SÓ CONTATO PROFISSIONAL OU SERÁ BLOQUEADO','',trim($h6->textContent)));
+                    dump($findPhone);
                 }
             }
 
