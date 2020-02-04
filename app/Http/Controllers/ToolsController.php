@@ -270,7 +270,7 @@ class ToolsController extends Controller
 
     public function clearTeste1Folder()
     {
-        $files = glob(storage_path('teste1').'/*');
+        $files = glob(storage_path('logs').'/*');
         foreach($files as $file) {
             if(is_file($file))
                 unlink($file);
@@ -291,7 +291,7 @@ class ToolsController extends Controller
             if ($imgSrc !== 'https://www.travesticomlocal.com.br/wp-content/uploads/2015/05/cropped-cropped-acompanhantes-travestis-de-programa-com-local.png') {
                 
                 
-                $img = storage_path('teste1') . '/foto-da-travesti-'.$trannySlug.'-'.$count.'.webp';
+                $img = storage_path('logs') . '/foto-da-travesti-'.$trannySlug.'-'.$count.'.webp';
                 
 
                 dump($imgSrc);
@@ -316,7 +316,7 @@ class ToolsController extends Controller
             'region' => 'sa-east-1'
         ]);
 
-        $files = glob(storage_path('teste1').'/*'); // get all file names
+        $files = glob(storage_path('logs').'/*'); // get all file names
         foreach($files as $file){ // iterate files
             if(is_file($file)) {
                 
