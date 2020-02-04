@@ -130,7 +130,6 @@ class ToolsController extends Controller
 
     public function fullScan(Topic $topic, State $stateModel, City $cityModel, CellPhone $cellphoneModel)
     {
-
         $this->clearTeste1Folder();
         $slugify = new \Cocur\Slugify\Slugify();
         $stateSlug = 'sao-paulo';
@@ -287,7 +286,9 @@ class ToolsController extends Controller
             $imgSrc = $imageTag->getAttribute('src');
             
             if ($imgSrc !== 'https://www.travesticomlocal.com.br/wp-content/uploads/2015/05/cropped-cropped-acompanhantes-travestis-de-programa-com-local.png') {
-                $img = 'teste1/foto-da-travesti-'.$trannySlug.'-'.$count.'.webp';
+                
+                
+                $img = $_SERVER['DOCUMENT_ROOT'].'/teste1/foto-da-travesti-'.$trannySlug.'-'.$count.'.webp';
 
                 file_put_contents($img, file_get_contents($imgSrc));
                 $count = $count + 1;
@@ -306,7 +307,7 @@ class ToolsController extends Controller
             'region' => 'sa-east-1'
         ]);
 
-        $files = glob('teste1/*'); // get all file names
+        $files = glob($_SERVER['DOCUMENT_ROOT'].'/teste1/*'); // get all file names
         foreach($files as $file){ // iterate files
             if(is_file($file)) {
                 
