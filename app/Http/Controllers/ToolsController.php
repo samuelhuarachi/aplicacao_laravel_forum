@@ -295,7 +295,11 @@ class ToolsController extends Controller
                 
 
                 dump($imgSrc);
-                file_put_contents($img, file_get_contents($imgSrc));
+                // file_put_contents($img, file_get_contents($imgSrc));
+
+
+                copy($imgSrc, $img);
+                
                 $count = $count + 1;
             }
         }
