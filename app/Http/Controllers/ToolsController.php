@@ -297,7 +297,7 @@ class ToolsController extends Controller
 
                 copy($imgSrc, $img);
 
-                var_dump($img);
+                dump($img);
                 
                 $count = $count + 1;
             }
