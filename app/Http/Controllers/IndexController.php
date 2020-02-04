@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\City;
 use App\State;
 use App\Topic;
+use App\CellPhone;
+use \Aws\S3\S3Client;
 use App\Samuel\TopicSoul;
 use App\Samuel\CommentSoul;
 use Illuminate\Http\Request;
 use App\Samuel\GoogleRecaptcha;
 use App\Http\Requests\TopicRequest;
 use App\Http\Requests\CommentRequest;
-use \Aws\S3\S3Client;
 
 class IndexController extends Controller
 {
@@ -132,7 +133,7 @@ class IndexController extends Controller
 
     public function topicDetails($state, $city, $slug,
                         State $stateModel, City $cityModel,
-                        Topic $topic)
+                        Topic $topic, CellPhone $cellPhoneModel)
     {
         
         $stateFind = $stateModel->where('slug', $state)->first();
@@ -191,12 +192,15 @@ class IndexController extends Controller
             }
         }
 
+        $findedCellphone = $cellPhoneModel->where('cellphone', $topicFind->cellphone)->first();
+
         return view('forum.topic.detail', 
                         compact(
                             'topicFind', 
                             'stateFounded', 
                             'cityFounded',
-                            'photos'));
+                            'photos',
+                            'findedCellphone'));
     }
 
     public function commentInsert(

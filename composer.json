@@ -11,6 +11,7 @@
         "php": "^7.2",
         "aws/aws-sdk-php": "^3.133",
         "clarification/sparkpost-laravel-driver": "^1.2",
+        "cocur/slugify": "^4.0",
         "fideloper/proxy": "^4.0",
         "fzaninotto/faker": "^1.9",
         "guiliredu/laravel-seed-migration-estados-cidades-brasil": "^1.0",
