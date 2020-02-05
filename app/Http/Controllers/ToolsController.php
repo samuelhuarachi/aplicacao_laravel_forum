@@ -133,9 +133,9 @@ class ToolsController extends Controller
         
         $this->clearTeste1Folder();
         $slugify = new \Cocur\Slugify\Slugify();
-        $stateSlug = 'sao-paulo';
-        $citySlug = 'sao-jose-do-rio-preto';
-        $url = 'https://www.travesticomlocal.com.br/sao-jose-do-rio-preto/';
+        $stateSlug = 'distrito-federal';
+        $citySlug = 'brasilia';
+        $url = 'https://www.travesticomlocal.com.br/brasilia-df/';
 
         $stateFind = $stateModel->where('slug', $stateSlug)->first();
         $cityFind = $cityModel->where('slug', $citySlug)->where('state_id', $stateFind->id)->first();
@@ -294,7 +294,10 @@ class ToolsController extends Controller
                 
                 // file_put_contents($img, file_get_contents($imgSrc));
 
-                copy($imgSrc, $img);
+                if ($imgSrc && $img) {
+                    copy($imgSrc, $img);
+                }
+                
 
                 dump($img);
                 
