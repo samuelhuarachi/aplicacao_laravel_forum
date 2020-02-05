@@ -27,8 +27,8 @@ Route::get('/', function () {
     
 
 
-Route::get('/sitemap/generate', [
-    'uses' => 'SitemapController@generate']);
+// Route::get('/sitemap/generate', [
+//     'uses' => 'SitemapController@generate']);
 
 Route::group(['prefix' => 'forum/travesti'],
 function() {
