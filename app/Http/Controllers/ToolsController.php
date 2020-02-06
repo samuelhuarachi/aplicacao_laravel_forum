@@ -134,8 +134,8 @@ class ToolsController extends Controller
         $this->clearTeste1Folder();
         $slugify = new \Cocur\Slugify\Slugify();
         $stateSlug = 'minas-gerais';
-        $citySlug = 'uberaba';
-        $url = 'https://www.travesticomlocal.com.br/uberaba/';
+        $citySlug = 'divinopolis';
+        $url = 'https://www.travesticomlocal.com.br/divinopolis/';
 
         $stateFind = $stateModel->where('slug', $stateSlug)->first();
         $cityFind = $cityModel->where('slug', $citySlug)->where('state_id', $stateFind->id)->first();
@@ -287,8 +287,7 @@ class ToolsController extends Controller
         foreach($imageTags as $imageTag) {
             $imgSrc = $imageTag->getAttribute('src');
             
-            if ($imgSrc !== 'https://www.travesticomlocal.com.br/wp-content/uploads/2015/05/cropped-cropped-acompanhantes-travestis-de-programa-com-local.png') {
-                
+            if ($imgSrc !== 'https://www.travesticomlocal.com.br/wp-content/uploads/2015/05/cropped-cropped-acompanhantes-travestis-de-programa-com-local.png' && $imgSrc !== 'https://www.travesticomlocal.com.br/wp-content/uploads/2020/02/cropped-cropped-acompanhantes-travestis-de-programa-com-local.png') {
                 
                 $img = storage_path('logs') . '/foto-da-travesti-'.$trannySlug.'-'.$count.'.webp';
                 
