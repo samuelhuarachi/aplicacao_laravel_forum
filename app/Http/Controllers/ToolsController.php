@@ -111,7 +111,7 @@ class ToolsController extends Controller
             
             $ext = pathinfo($imgSrc, PATHINFO_EXTENSION);
             
-            dump($imgSrc);
+            //dump($imgSrc);
 
             $url = $imgSrc;
             $img = 'teste1/foto-da-travesti-kely-couto-'.$count.'.webp';
@@ -120,7 +120,7 @@ class ToolsController extends Controller
             $count = $count + 1;
         }
 
-        dump("fim");
+        //dump("fim");
 
         //var_dump our array of images.
         // dump($extractedImages);
@@ -134,8 +134,8 @@ class ToolsController extends Controller
         $this->clearTeste1Folder();
         $slugify = new \Cocur\Slugify\Slugify();
         $stateSlug = 'parana';
-        $citySlug = 'maringa';
-        $url = 'https://www.travesticomlocal.com.br/maringa/';
+        $citySlug = 'foz-do-iguacu';
+        $url = 'https://www.travesticomlocal.com.br/foz-do-iguacu/';
 
         $stateFind = $stateModel->where('slug', $stateSlug)->first();
         $cityFind = $cityModel->where('slug', $citySlug)->where('state_id', $stateFind->id)->first();
@@ -171,7 +171,7 @@ class ToolsController extends Controller
 
                 if ($class == 'whatsapp-phone') {
                     $findPhone = trim(str_replace('- SÓ CONTATO PROFISSIONAL OU SERÁ BLOQUEADO','',trim($h6->textContent)));
-                    dump($findPhone);
+                    //dump($findPhone);
                 }
             }
 
@@ -193,7 +193,7 @@ class ToolsController extends Controller
             }
 
             if ($findPhone == "" || $findName == "") {
-                dump("nao encontrei todas as informacoes nesse link " . $link);
+                // dump("nao encontrei todas as informacoes nesse link " . $link);
             } else {
 
                 $slug = $slugify->slugify($findName);
@@ -298,7 +298,7 @@ class ToolsController extends Controller
                 }
                 
 
-                dump($img);
+                //dump($img);
                 
                 $count = $count + 1;
             }
