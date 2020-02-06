@@ -134,8 +134,8 @@ class ToolsController extends Controller
         $this->clearTeste1Folder();
         $slugify = new \Cocur\Slugify\Slugify();
         $stateSlug = 'parana';
-        $citySlug = 'foz-do-iguacu';
-        $url = 'https://www.travesticomlocal.com.br/foz-do-iguacu/';
+        $citySlug = 'ponta-grossa';
+        $url = 'https://www.travesticomlocal.com.br/ponta-grossa/';
 
         $stateFind = $stateModel->where('slug', $stateSlug)->first();
         $cityFind = $cityModel->where('slug', $citySlug)->where('state_id', $stateFind->id)->first();
