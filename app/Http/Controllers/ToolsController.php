@@ -200,32 +200,32 @@ class ToolsController extends Controller
                 $justNumbersPhone = preg_replace('/\D/', '', $findPhone);
 
                 
-                if (str_len((string)$justNumbersPhone) == 11) {
+                if (strlen((string)$justNumbersPhone) == 11) {
                     $numberFormarted = vsprintf("(%s%s) %s%s%s%s%s-%s%s%s%s", str_split($justNumbersPhone));
                 
                     $findTopic = $topic->where('cellphone', $numberFormarted)
                                         ->where('city_id', $cityFind->id)
                                         ->first();
-                }
-                
-                if (!$findTopic) {
-                    $this->createNewTopic($cityFind->id, 1, $findName, $slug, $numberFormarted);
-                }
+                    
+                    if (!$findTopic) {
+                        $this->createNewTopic($cityFind->id, 1, $findName, $slug, $numberFormarted);
+                    }
 
-                $findCellphone = $cellphoneModel->where('cellphone', $numberFormarted)->first();
-                if (!$findCellphone) {
-                    $newCellphone = new CellPhone;
-                    $newCellphone->cellphone = $numberFormarted;
-                    $newCellphone->about = $descritption;
-                    $newCellphone->save();
-                }
+                    $findCellphone = $cellphoneModel->where('cellphone', $numberFormarted)->first();
+                    if (!$findCellphone) {
+                        $newCellphone = new CellPhone;
+                        $newCellphone->cellphone = $numberFormarted;
+                        $newCellphone->about = $descritption;
+                        $newCellphone->save();
+                    }
 
 
-                $checkIfExistsInS3 = $this->isExistsImagesInS3Folder($stateSlug, $citySlug, $slug);
-                if (!$checkIfExistsInS3) {
-                    $this->clearTeste1Folder();
-                    $this->saveImagesInTeste1Folder($slug, $link);
-                    $this->saveImagesInS3($stateSlug, $citySlug, $slug);
+                    $checkIfExistsInS3 = $this->isExistsImagesInS3Folder($stateSlug, $citySlug, $slug);
+                    if (!$checkIfExistsInS3) {
+                        $this->clearTeste1Folder();
+                        $this->saveImagesInTeste1Folder($slug, $link);
+                        $this->saveImagesInS3($stateSlug, $citySlug, $slug);
+                    }
                 }
             }
         }
