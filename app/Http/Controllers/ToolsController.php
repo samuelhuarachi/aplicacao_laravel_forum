@@ -133,9 +133,9 @@ class ToolsController extends Controller
         
         $this->clearTeste1Folder();
         $slugify = new \Cocur\Slugify\Slugify();
-        $stateSlug = 'mato-grosso';
-        $citySlug = 'cuiaba';
-        $url = 'https://www.travesticomlocal.com.br/cuiaba/';
+        $stateSlug = 'alagoas';
+        $citySlug = 'campo-grande';
+        $url = 'https://www.travesticomlocal.com.br/campo-grande/';
 
         $stateFind = $stateModel->where('slug', $stateSlug)->first();
         $cityFind = $cityModel->where('slug', $citySlug)->where('state_id', $stateFind->id)->first();
@@ -198,6 +198,8 @@ class ToolsController extends Controller
 
                 $slug = $slugify->slugify($findName);
                 $justNumbersPhone = preg_replace('/\D/', '', $findPhone);
+
+                dump(str_len((string)$justNumbersPhone));
 
                 $numberFormarted = vsprintf("(%s%s) %s%s%s%s%s-%s%s%s%s", str_split($justNumbersPhone));
                 
