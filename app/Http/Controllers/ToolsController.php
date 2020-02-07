@@ -199,13 +199,14 @@ class ToolsController extends Controller
                 $slug = $slugify->slugify($findName);
                 $justNumbersPhone = preg_replace('/\D/', '', $findPhone);
 
-                dump(str_len((string)$justNumbersPhone));
-
-                $numberFormarted = vsprintf("(%s%s) %s%s%s%s%s-%s%s%s%s", str_split($justNumbersPhone));
                 
-                $findTopic = $topic->where('cellphone', $numberFormarted)
-                                    ->where('city_id', $cityFind->id)
-                                    ->first();
+                if (str_len((string)$justNumbersPhone) == 11) {
+                    $numberFormarted = vsprintf("(%s%s) %s%s%s%s%s-%s%s%s%s", str_split($justNumbersPhone));
+                
+                    $findTopic = $topic->where('cellphone', $numberFormarted)
+                                        ->where('city_id', $cityFind->id)
+                                        ->first();
+                }
                 
                 if (!$findTopic) {
                     $this->createNewTopic($cityFind->id, 1, $findName, $slug, $numberFormarted);
