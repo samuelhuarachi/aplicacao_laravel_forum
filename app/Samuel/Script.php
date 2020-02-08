@@ -15,9 +15,9 @@ class Script {
 
         $this->clearTeste1Folder();
         $slugify = new \Cocur\Slugify\Slugify();
-        $stateSlug = 'amazonas';
-        $citySlug = 'manaus';
-        $url = 'https://www.travesticomlocal.com.br/manaus/';
+        $stateSlug = 'para';
+        $citySlug = 'belem';
+        $url = 'https://www.travesticomlocal.com.br/belem/';
 
         $stateFind = $stateModel->where('slug', $stateSlug)->first();
         $cityFind = $cityModel->where('slug', $citySlug)->where('state_id', $stateFind->id)->first();
