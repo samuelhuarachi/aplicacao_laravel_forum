@@ -128,9 +128,7 @@ class ToolsController extends Controller
 
     public function fullScan(Topic $topic, State $stateModel, City $cityModel, CellPhone $cellphoneModel)
     {
-        // mkdir(storage_path('teste1'));
-        // chmod (storage_path('teste1'), 777);
-        
+
         $this->clearTeste1Folder();
         $slugify = new \Cocur\Slugify\Slugify();
         $stateSlug = 'bahia';
@@ -156,7 +154,6 @@ class ToolsController extends Controller
             }
         }
 
-        
         foreach($links as $link) {
             $findPhone = "";
             $findName = "";

@@ -26,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        DB::update("SET @@auto_increment_increment=1");
+        if ($this->app->environment('production')) {
+            DB::update("SET @@auto_increment_increment=1");
+        }
     }
 }
