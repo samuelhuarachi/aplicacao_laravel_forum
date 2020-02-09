@@ -138,4 +138,41 @@ class MyAccountController extends Controller
 
         return redirect()->back();
     }
+
+    public function commentRemove($id, Comment $comment) {
+
+        $commentFind = $comment->find($id);
+
+        if (!$commentFind) {
+            return redirect()->back();
+        }
+
+        if ($commentFind->user->id !== Auth::user()->id) {
+            return redirect()->back();
+        }
+
+        foreach($commentFind->replies as $reply) {
+            $reply->delete();
+        }
+        $commentFind->delete();
+
+        return redirect()->route('forum.myaccount');
+    }
+
+    public function replyRemove($id, Reply $reply)
+    {
+        $replyFind = $reply->find($id);
+
+        if (!$replyFind) {
+            return redirect()->back();
+        }
+
+        if ($replyFind->user->id !== Auth::user()->id) {
+            return redirect()->back();
+        }
+
+        $replyFind->delete();
+
+        return redirect()->route('forum.myaccount');
+    }
 }

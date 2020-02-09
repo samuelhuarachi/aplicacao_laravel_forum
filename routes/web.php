@@ -96,6 +96,14 @@ function() {
             Route::put('reply/update', [
                 'uses' => 'MyAccountController@updateReply'])
                 ->name('forum.reply.update');
+
+            Route::get('comment/{id}/remove', [
+                'uses' => 'MyAccountController@commentRemove'])
+                ->name('forum.comment.remove');
+
+            Route::get('reply/{id}/remove', [
+                'uses' => 'MyAccountController@replyRemove'])
+                ->name('forum.reply.remove');
     });
 });
 
