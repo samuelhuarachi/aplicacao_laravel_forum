@@ -7,10 +7,12 @@ use App\State;
 use App\Topic;
 use App\CellPhone;
 use \Aws\S3\S3Client;
+use App\Samuel\ReplySoul;
 use App\Samuel\TopicSoul;
 use App\Samuel\CommentSoul;
 use Illuminate\Http\Request;
 use App\Samuel\GoogleRecaptcha;
+use App\Http\Requests\ReplyRequest;
 use App\Http\Requests\TopicRequest;
 use App\Http\Requests\CommentRequest;
 
@@ -122,13 +124,12 @@ class IndexController extends Controller
             return redirect()->back()->withErrors(['Captcha inválido']);
         }
 
-        $response = $topicSoul->save($data, $request);
-
-        if ($response) {
-
+        try {
+            $response = $topicSoul->save($data, $request);
+            return redirect()->route('forum.index');
+        } catch(\Exception $e) {
+            return redirect()->back()->withErrors($e->getMessage());
         }
-
-        return redirect()->route('forum.index');
     }
 
     public function topicDetails($state, $city, $slug,
@@ -220,4 +221,20 @@ class IndexController extends Controller
 
         return redirect()->back();
     }
+
+    public function newReply(ReplyRequest $replyRequest, 
+                        ReplySoul $replySoul,
+                        GoogleRecaptcha $googleRecaptcha)
+    {
+        $data = $replyRequest->all();
+        $recaptchaResponse = $data['g-recaptcha-response'];
+        if (!$googleRecaptcha->isvalid($recaptchaResponse)) {
+            return redirect()->back()->withErrors(['Captcha inválido']);
+        }
+
+        $replySoul->save($data);
+        return redirect()->back();
+    }
+
+    
 }

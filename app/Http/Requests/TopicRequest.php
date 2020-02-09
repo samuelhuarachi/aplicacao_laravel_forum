@@ -24,7 +24,8 @@ class TopicRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required'
+            'title' => 'required',
+            'cellphone' => 'required|regex:/\(\d{2,}\) \d{4,}\-\d{4}/'
         ];
     }
 }

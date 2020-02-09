@@ -20,4 +20,9 @@ class Comment extends Model
     {
         return $this->belongsTo('App\Topic');
     }
+
+    public function replies()
+    {
+        return $this->hasMany('App\Reply');
+    }
 }

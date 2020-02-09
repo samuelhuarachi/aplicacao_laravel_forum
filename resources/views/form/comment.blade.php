@@ -41,7 +41,6 @@
 
     <div class="col-md-6">
 
-
         @error('comment')
             {!! Form::textarea('comment', null, ['id' => 'textareaComment', 'style' => 'height:200px;', 'class' => 'form-control is-invalid', 'maxlength' => '2999', 'autocomplete' => 'new-comment']) !!}
         @else

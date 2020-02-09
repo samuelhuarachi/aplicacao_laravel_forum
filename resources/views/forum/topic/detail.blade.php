@@ -58,7 +58,7 @@
                 data-target="#exampleModal"
             >
                                 
-                        <i class="icon-plus"></i> Novo relato ou comentário</a>
+                <i class="icon-plus"></i> Novo relato ou comentário</a>
                         <br><br>
             @if ($topicFind->comments->count() == 0)
                 <div class="card">
@@ -68,7 +68,7 @@
                 </div>
             @else
                 @foreach($topicFind->comments as $comment)
-                    <div class="card mt-2">
+                    <div class="card mt-3">
                         <div class="card-header">
                             <span class="float-right">
                                     {{ date('d/m/Y H:i:s', strtotime($comment->created_at)) }}</span>
@@ -100,18 +100,48 @@
                             <div class="card">
                                 <div class="card-body">
                                     <figure>
-                                        <img style="width:80px;" class="float-right border border-danger" src="{{ asset('images/vader.png') }}" alt="Imagem do avatar do forum">
+                                        <img style="width:80px;" class="float-right" src="{{ asset('images/avatar.jpg') }}" alt="Avatar">
                                     </figure>
 
                                     @if (Auth::check())
                                         @if($comment->user->id == Auth::user()->id)
                                             <a class="btn btn-outline-primary btn-sm" 
                                                 href="{{ route('forum.myaccount.comment.update', $comment->id) }}">
-                                                Editar</a>
+                                                <i class="icon-edit"></i> Editar</a>
                                             <br><br>
                                         @endif
                                     @endif
-                                    {{ $comment->comment }}
+
+                                    <div>
+                                        {{ $comment->comment }}
+                                    </div>
+                                    <br>
+                                    <a class="btn btn-primary replyButton" href="#"
+                                                        data-commentID="{{ $comment->id }}"
+                                                        data-toggle="modal" 
+                                                        data-target="#replyModal"
+                                    ><i class="icon-reply"></i>  Responder</a>
+                                    
+                                    @if($comment->replies)
+                                        @foreach($comment->replies as $reply)
+                                            <div style="margin-top:10px;" class="card">
+                                                <div class="card-body">
+                                                    <i class="float-right">{{ date("d/m/Y", strtotime($reply->created_at)) }}</i>
+                                                    <i>{{ $reply->user->name }} respondeu esse relato/comentário</i>
+                                                    <br><br>
+                                                    <div class="reply-style p-2">
+                                                        {{ $reply->reply }}
+                                                    </div>
+                                                    
+                                                    @if($reply->user->id == Auth::user()->id)
+                                                        <br>
+                                                        <a class="btn btn-outline-primary btn-sm" 
+                                                                href="{{ route('forum.reply.edit', $reply->id) }}">Editar Resposta</a>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -125,7 +155,6 @@
     </div>
 </div>
 
-<!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -155,6 +184,37 @@
   </div>
 </div>
 
+<!-- Reply modal -->
+<div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+    {!! Form::open([
+                'route' => 'forum.reply.new',
+                'class' => 'form', 
+                'method' => 'post']) !!}
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Responder</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <input type="hidden" id="commentID" name="comment_id" value="0"> 
+        @include('form.reply')
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button type="submit" class="btn btn-danger">
+                        {{ __('Responder') }}
+                    </button>
+      </div>
+      {!! Form::close() !!}
+    </div>
+  </div>
+</div>
+
 @endsection
 
 @section('footer')
@@ -165,6 +225,10 @@
 <script>
 
 $( document ).ready(function() {
+
+    $('.replyButton').click(function ($this) {
+        $('#commentID').val($this.currentTarget.dataset.commentid);
+    });
 
     if ($('#tdno').is(':checked')) {
         $('#positiveComment').hide();
@@ -193,6 +257,11 @@ $( document ).ready(function() {
             autoStart : true
         }
     });
+
+    $("#textareaReply").keyup(function() {
+        $("#commentCountReply").text("Caracteres " + $(this).val().length + ". Máximo 2999.");
+    });
+    $("#commentCountReply").text("Caracteres 0. Máximo 2999.");
     
 });
 

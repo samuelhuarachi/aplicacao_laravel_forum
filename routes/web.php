@@ -64,6 +64,9 @@ function() {
                 'uses' => 'IndexController@commentInsert'])
                 ->name('forum.topic.comment.insert');
 
+            Route::post('reply/new', [
+                'uses' => 'IndexController@newReply'])
+                ->name('forum.reply.new');
         });
     
     Route::group(['prefix' => 'minha-conta', 
@@ -85,11 +88,16 @@ function() {
             Route::put('comentario/atualizar', [
                 'uses' => 'MyAccountController@updateCommentRequest'])
                 ->name('forum.myaccount.comment.update.request');
+
+            Route::get('reply/{id}/edit', [
+                'uses' => 'MyAccountController@editReply'])
+                ->name('forum.reply.edit');
+
+            Route::put('reply/update', [
+                'uses' => 'MyAccountController@updateReply'])
+                ->name('forum.reply.update');
     });
 });
-
-
-
 
 
 Auth::routes(['verify' => true]);

@@ -41,6 +41,12 @@ class TopicSoul {
             $count = $count + 1;
         }
 
+        $findSameTopic = $this->topic->where('city_id', $cityID)->where('cellphone', $data['cellphone'])->first();
+
+        if ($findSameTopic) {
+            throw new \Exception("Já existe um tópico para esse celular, nessa cidade");
+        }
+
         $this->topic->city_id = $cityID;
         $this->topic->user_id = $user->id;
         $this->topic->title = $data['title'];

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Reply;
 use App\Comment;
 use App\Samuel\CommentSoul;
 use Illuminate\Http\Request;
 use App\Samuel\GoogleRecaptcha;
+use App\Http\Requests\ReplyRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CommentRequest;
 
@@ -87,6 +89,52 @@ class MyAccountController extends Controller
         }
 
         $commentSaved = $commentSoul->update($data);
+
+        return redirect()->back();
+    }
+
+    public function editReply($id, Reply $reply)
+    {
+        $replyID = $id;
+        $replyFind = $reply->find($id);
+        if (!$replyFind) {
+            return redirect()->back();
+        }
+
+        if ($replyFind->user->id !== Auth::user()->id) {
+            return redirect()->back();
+        }
+
+        return view('my-account.reply.edit', compact('replyFind'));
+    }
+
+    public function updateReply(
+                ReplyRequest $replyRequest, 
+                Reply $reply,
+                GoogleRecaptcha $googleRecaptcha)
+    {
+        $data = $replyRequest->all();
+        $recaptchaResponse = $data['g-recaptcha-response'];
+
+        if (!$googleRecaptcha->isvalid($recaptchaResponse)) {
+            return redirect()->back()->withInput()->withErrors(['Captcha inválido']);
+        }
+
+        $replyID = $data['reply_id'];
+
+        $replyFind = $reply->find($replyID);
+
+        if (!$replyFind) {
+            return redirect()->back();
+        }
+
+        if ($replyFind->user->id !== Auth::user()->id) {
+            return redirect()->back();
+        }
+
+        $replyFind->update([
+            'reply' => $data['reply']
+        ]);
 
         return redirect()->back();
     }

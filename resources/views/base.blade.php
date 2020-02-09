@@ -202,9 +202,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .card {
-    -webkit-box-shadow: 8px 8px 8px -6px rgba(171,171,171,1);
+    /* -webkit-box-shadow: 8px 8px 8px -6px rgba(171,171,171,1);
     -moz-box-shadow: 8px 8px 8px -6px rgba(171,171,171,1);
-    box-shadow: 8px 8px 8px -6px rgba(171,171,171,1);
+    box-shadow: 8px 8px 8px -6px rgba(171,171,171,1); */
 }
 
 #menu ul {
@@ -213,6 +213,10 @@ h1, h2, h3, h4, h5, h6 {
 #menu ul li { display: inline;
 margin-right:5px; }
 
+.reply-style {
+    background: #f4f4f4;
+    border-radius: 4px;
+}
 </style>
 
     <script

@@ -68,4 +68,15 @@ class CommentSoul {
 
         return $commentFinded;
     }
+
+    public function isExists($id)
+    {
+        $commentFind = $this->commentModel->find($id);
+
+        if ($commentFind) {
+            return true;
+        }
+
+        return null;
+    }
 }
