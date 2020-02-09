@@ -45,11 +45,11 @@
     </div>
 </main>
 
-<div id="user-info">
+<!-- <div id="user-info">
     <audio controls autoplay loop>
         <source src="{{ asset('music/queen-under-pressure.mp3') }}" type="audio/mp3">
     </audio>
-</div>
+</div> -->
 
 @endsection
 

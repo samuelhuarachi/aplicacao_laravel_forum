@@ -161,10 +161,10 @@
                 </figure>
             @endif
             
-            <img class="mb-1" style="width:100%" src="{{ asset('images/iwant.jpg') }}" alt="">
+            <!-- <img class="mb-1" style="width:100%" src="{{ asset('images/iwant.jpg') }}" alt="">
             <img class="mb-1" style="width:100%" src="{{ asset('images/war2.jpg') }}" alt="">
             <img class="mb-1" style="width:100%" src="{{ asset('images/freddie.jpg') }}" alt="">
-            
+             -->
         </div>
     </div>
 </div>
