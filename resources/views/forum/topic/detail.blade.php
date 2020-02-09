@@ -26,16 +26,6 @@
                 <p>Celular {{ $topicFind->cellphone }}</p>
             @endif
 
-            @if($findedCellphone && trim($findedCellphone->about) !== "")
-
-                <div class="card">
-                    <div style="column-count: 2; column-gap: 40px; column-rule-style: solid;" class="card-body">
-                        {{ $findedCellphone->about }}
-                    </div>
-                </div>
-                <br><br>
-            @endif
-
             @if($photos)
                 <h2>Fotos</h2>
                 <div class="card">
@@ -51,6 +41,18 @@
                 </div>
                 <br><br>
             @endif
+
+            @if($findedCellphone && trim($findedCellphone->about) !== "")
+
+                <div class="card">
+                    <div style="column-count: 2; column-gap: 40px; column-rule-style: solid;" class="card-body">
+                        {{ $findedCellphone->about }}
+                    </div>
+                </div>
+                <br><br>
+            @endif
+
+            
             
             <h2>Relatos</h2>
             <a  class="btn btn-danger" href="#"
