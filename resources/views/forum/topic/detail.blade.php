@@ -133,10 +133,12 @@
                                                         {{ $reply->reply }}
                                                     </div>
                                                     
-                                                    @if($reply->user->id == Auth::user()->id)
-                                                        <br>
-                                                        <a class="btn btn-outline-primary btn-sm" 
-                                                                href="{{ route('forum.reply.edit', $reply->id) }}">Editar Resposta</a>
+                                                    @if(Auth::check())
+                                                        @if($reply->user->id == Auth::user()->id)
+                                                            <br>
+                                                            <a class="btn btn-outline-primary btn-sm" 
+                                                                    href="{{ route('forum.reply.edit', $reply->id) }}">Editar Resposta</a>
+                                                        @endif
                                                     @endif
                                                 </div>
                                             </div>
