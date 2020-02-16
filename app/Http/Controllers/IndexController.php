@@ -54,6 +54,7 @@ class IndexController extends Controller
 
         $coversList  = Cache::remember($stateFounded->slug . '-' . $cityFounded->slug . '-covers', 604800, function () use($stateFounded, $cityFounded, $s3Soul) {
             $photosList = [];
+            set_time_limit(30);
             foreach($cityFounded->topics as $topic)
             {
                 $photoFinded = $s3Soul->findOnePhotoTranny($stateFounded->slug, $cityFounded->slug, $topic->slug);
