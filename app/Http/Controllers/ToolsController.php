@@ -7,11 +7,13 @@ use App\State;
 use App\Topic;
 use App\CellPhone;
 use \Aws\S3\S3Client;
+use App\Samuel\General;
 use App\Samuel\TopicSoul;
 use \Cocur\Slugify\Slugify;
 use App\Samuel\CommentSoul;
 use Illuminate\Http\Request;
 use App\Samuel\GoogleRecaptcha;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\TopicRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CommentRequest;
@@ -226,6 +228,16 @@ class ToolsController extends Controller
                 }
             }
         }
+    }
+
+    public function getCityAvailable(
+        Topic $topic, 
+        City $city, 
+        State $state,
+        General $general)
+    {
+        $citysAvailable = $general->getCitysAvailableFromCache();
+        $general->generateSchemaScanCityState($citysAvailable);
     }
 
     public function createNewTopic($cityID, $userID, $trannyName, $trannySlug, $cellphone)

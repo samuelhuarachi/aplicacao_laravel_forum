@@ -25,6 +25,9 @@ Route::get('/', function () {
 // Route::get('tools/full-scan', [
 //     'uses' => 'ToolsController@fullScan']);
 
+Route::get('tools/get-city-and-state-topics-available', [
+    'uses' => 'ToolsController@getCityAvailable']);
+
 // Route::get('/sitemap/generate', [
 //     'uses' => 'SitemapController@generate']);
 
