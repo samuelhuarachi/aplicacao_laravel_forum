@@ -43,14 +43,14 @@ class GenerateTrannyCoverThumbs extends Command
         
         $s3Soul = new S3Soul();
         $city = new City();
-        $cityFounded = $city->find(3828);
+        $cityFounded = $city->find(3241);
 
-        $coversList  = Cache::remember('sao-paulo' . '-' . 'sao-paulo' . '-covers', 604800, function () use($s3Soul, $cityFounded) {
+        $coversList  = Cache::remember('rio-de-janeiro' . '-' . 'rio-de-janeiro' . '-covers', 604800, function () use($s3Soul, $cityFounded) {
             $photosList = [];
 
             foreach($cityFounded->topics as $topic)
             {
-                $photoFinded = $s3Soul->findOnePhotoTranny('sao-paulo', 'sao-paulo', $topic->slug);
+                $photoFinded = $s3Soul->findOnePhotoTranny('rio-de-janeiro', 'rio-de-janeiro', $topic->slug);
                 if ($photoFinded) {
                     $photosList[$topic->slug] = $photoFinded;
                 }
