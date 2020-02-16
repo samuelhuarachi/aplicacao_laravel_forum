@@ -24,7 +24,7 @@ class FullScan extends Command
      *
      * @var string
      */
-    protected $description = 'Faz o scaneamento completo de uma pagina de cidade do site travesti com local, e sobe para produção';
+    protected $description = 'Faz o scaneamento completo de uma pagina de cidade do site travesti com local, e sobe para producao';
 
     /**
      * Create a new command instance.
