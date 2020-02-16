@@ -108,6 +108,11 @@ figure {
     margin: 0px !important;
 }
 
+.tranny-cover-thumb {
+    max-height: 110px;
+    margin-right: 20px;
+}
+
 .traveti-title {
     background: #333;
     padding-top: 30px;

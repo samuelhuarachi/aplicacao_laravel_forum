@@ -96,10 +96,16 @@
                         <p class="mb-0">Não foi encontrado nenhum tópico para a cidade {{ $cityFounded->title }}</p>
                     @else
                         @foreach($cityFounded->topics->reverse() as $topic)
-                            <div class="card mt-2">
+
+                            <div class="card mt-3">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-sm">
+                                            @if (isset($coversList[$topic->slug]))
+                                                <a href="{{ route('forum.topic.details', [$stateFounded->slug, $cityFounded->slug, $topic->slug]) }}">
+                                                    <img class="float-left tranny-cover-thumb" src="{{ $coversList[$topic->slug] }}" alt="Foto de capa da travesti {{ $topic->title }}">
+                                                </a>
+                                            @endif
                                             <a href="{{ route('forum.topic.details', [$stateFounded->slug, $cityFounded->slug, $topic->slug]) }}">{{ $topic->title }}</a>
                                             <br>
                                             <small>{{ $topic->comments->count() }} relatos</small>

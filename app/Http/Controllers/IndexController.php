@@ -7,6 +7,7 @@ use App\State;
 use App\Topic;
 use App\CellPhone;
 use \Aws\S3\S3Client;
+use App\Samuel\S3Soul;
 use App\Samuel\ReplySoul;
 use App\Samuel\TopicSoul;
 use App\Samuel\CommentSoul;
@@ -15,6 +16,7 @@ use App\Samuel\GoogleRecaptcha;
 use App\Http\Requests\ReplyRequest;
 use App\Http\Requests\TopicRequest;
 use App\Http\Requests\CommentRequest;
+use Illuminate\Support\Facades\Cache;
 
 class IndexController extends Controller
 {
@@ -24,7 +26,11 @@ class IndexController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(Request $request, State $state, City $city)
+    public function index(
+        Request $request, 
+        State $state, 
+        City $city,
+        S3Soul $s3Soul)
     {
         $states = $state->all();
 
@@ -44,11 +50,27 @@ class IndexController extends Controller
         $stateFounded = $state->find($stateT);
         $allCities = $city->where('state_id', $stateT)->get();
 
+        // findOnePhotoTranny
+
+        $coversList  = Cache::remember($stateFounded->slug . '-' . $cityFounded->slug . '-covers', 604800, function () use($stateFounded, $cityFounded, $s3Soul) {
+            $photosList = [];
+            foreach($cityFounded->topics as $topic)
+            {
+                $photoFinded = $s3Soul->findOnePhotoTranny($stateFounded->slug, $cityFounded->slug, $topic->slug);
+                if ($photoFinded) {
+                    $photosList[$topic->slug] = $photoFinded;
+                }
+            }
+            return $photosList;
+        });
+
         return view('index', compact(
                     'states',
                     'stateFounded',
                     'cityFounded',
-                    'allCities'));
+                    'allCities',
+                    's3Soul',
+                    'coversList'));
     }
 
     public function setNewState($id, State $state, City $city, Request $request)
