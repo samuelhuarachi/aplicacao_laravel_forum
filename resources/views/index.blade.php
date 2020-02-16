@@ -24,7 +24,7 @@
                 </h1>
 
                 @if (env('REMOVE_PORN')!='true') 
-                    <p>O maior forum de travesti do Brasil</p>
+                    <p>Forum com relatos das mais belas travestis brasileiras</p>
                 @endif
             </div>
         </div>
@@ -37,13 +37,12 @@
         <div class="col-md-12">
                 <a href="{{ route('login') }}">
                 <button type="button" class="btn btn-light">
-                <i class="icon-fire"></i> Entrar na minha conta</button>
+                <i class="icon-user"></i> Login</button>
             </a>
             
             <a href="{{ route('register') }}">
-                <button type="button" class="btn btn-dark float-right">
-                    <i class="icon-sign-blank"></i> 
-                        Sou novo, fazer meu cadastro rápido</button>
+                <button type="button" class="btn btn-primary float-right">
+                        Cadastrar no forum</button>
             </a>
         </div>
     </div>

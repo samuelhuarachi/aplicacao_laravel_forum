@@ -43,30 +43,38 @@
 
 <div class="container mb-3">
     <div class="row">
-        <nav id="menu" class="col-md-12 mb-3">
-            <div class="row mb-3">
-                <div class="col-md-12">
+        <div  class="col-md-12 mb-3">
+            <img style="max-height: 130px;" width="100%" src="{{ asset('images/travesti-capa.jpg') }}" alt="banner propagando do topo da página">
+        </div>
+        <div class="col-md-12 mb-3">
+            <nav id="menu">
+
                 @auth
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                        {{ csrf_field() }}
-                        <button class="float-right" type="submit">Sair do forum</button>
-                    </form>
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                        
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                {{ csrf_field() }}
+                                <button class="float-right" type="submit">Sair do forum</button>
+                            </form>
+                        
+                        </div>
+                    </div>
                 @endauth
-                </div>
-            </div>
-            <div class="text-center">
+
+
                 <ul id="top-menu">
                     
                     <li>
-                        <a href="/">Página Inicial</a>
+                        <a class="btn btn-danger" href="/">Página Inicial</a>
                     </li>
                     
                     <li>
-                        <a href="{{ route('forum.index') }}">Forum</a>
+                        <a class="btn btn-danger" href="{{ route('forum.index') }}">Forum</a>
                     </li>
                     
                     <li>
-                        <a href="#">Blog</a>
+                        <a class="btn btn-danger" href="#">Blog</a>
                     </li>
                     @auth
                         <li>
@@ -75,8 +83,8 @@
                         </li>
                     @endauth
                 </ul>
-            </div>
-        </nav>
+            </nav>
+        </div>
     </div>
 </div>
 
@@ -101,10 +109,18 @@ figure {
 }
 
 .traveti-title {
-    background: #bfffea;
+    background: #333;
     padding-top: 30px;
     padding-bottom: 0px;
     margin-bottom: 30px;
+}
+
+.traveti-title h1 {
+    color: #fff;
+}
+
+.traveti-title p {
+    color: #fff;
 }
 
 footer {
@@ -120,9 +136,9 @@ footer p {
 }
 
 #top-menu {
-    background: #fff;
+    /* background: #fff;
     padding:10px;
-    border: 1px solid rgb(227, 43, 43);
+    border: 1px solid rgb(227, 43, 43); */
 }
 
 body {
@@ -133,9 +149,9 @@ body {
 
 a  {
     color: #333;
-    background: #f2f2f2;
-    padding-right:5px;
-    padding-left:5px;
+    // background: #f2f2f2;
+    /* padding-right:5px;
+    padding-left:5px; */
 }
 
 .dropdown-item.active, .dropdown-item:active {
@@ -209,6 +225,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #menu ul {
     list-style:none;
+    padding: 0px;
 }
 #menu ul li { display: inline;
 margin-right:5px; }

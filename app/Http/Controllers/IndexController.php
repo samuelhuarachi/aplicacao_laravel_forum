@@ -134,7 +134,8 @@ class IndexController extends Controller
 
     public function topicDetails($state, $city, $slug,
                         State $stateModel, City $cityModel,
-                        Topic $topic, CellPhone $cellPhoneModel)
+                        Topic $topic, CellPhone $cellPhoneModel,
+                        Request $request)
     {
         
         $stateFind = $stateModel->where('slug', $state)->first();
@@ -163,6 +164,9 @@ class IndexController extends Controller
             // redirecion para a 404
             return redirect()->route('forum.index');
         }
+
+        $request->session()->put('stateT', $stateFounded->id);
+        $request->session()->put('cityT', $cityFounded->id);
 
         $photos = [];
         if ($topicFind->cellphone && trim($topicFind->cellphone) !== "") {
