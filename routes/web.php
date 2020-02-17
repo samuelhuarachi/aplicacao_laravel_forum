@@ -28,8 +28,8 @@ Route::get('/', function () {
 Route::get('tools/get-city-and-state-topics-available', [
     'uses' => 'ToolsController@getCityAvailable']);
 
-Route::get('tools/fill-photos', [
-    'uses' => 'ToolsController@fillPhotos']);
+// Route::get('tools/fill-photos', [
+//     'uses' => 'ToolsController@fillPhotos']);
 
 // Route::get('/sitemap/generate', [
 //     'uses' => 'SitemapController@generate']);

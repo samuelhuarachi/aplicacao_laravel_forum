@@ -39,6 +39,6 @@ class FillPhotoTable extends Command
     public function handle()
     {
         $script = new Script();
-        $script->tempFillPhotoTable();
+        // $script->tempFillPhotoTable();
     }
 }
