@@ -33,8 +33,8 @@
                         @foreach($photos as $photo)
                             <a 
                             data-caption="Fotos da travesti {{ ucwords($topicFind->title) }}"
-                            data-fancybox="gallery" href="{{ $photo }}">
-                                <img width="40px" src="{{ $photo }}" alt="Fotos da travesti {{ ucwords($topicFind->title) }}">
+                            data-fancybox="gallery" href="{{ $photo->photo }}">
+                                <img width="40px" src="{{ $photo->photo }}" alt="Fotos da travesti {{ ucwords($topicFind->title) }}">
                             </a>
                         @endforeach
                     </div>

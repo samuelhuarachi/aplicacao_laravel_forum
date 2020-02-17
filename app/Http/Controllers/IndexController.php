@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\City;
+use App\Photo;
 use App\State;
 use App\Topic;
 use App\CellPhone;
@@ -156,7 +157,8 @@ class IndexController extends Controller
     public function topicDetails($state, $city, $slug,
                         State $stateModel, City $cityModel,
                         Topic $topic, CellPhone $cellPhoneModel,
-                        Request $request)
+                        Request $request,
+                        Photo $photoModel)
     {
         
         $stateFind = $stateModel->where('slug', $state)->first();
@@ -191,31 +193,7 @@ class IndexController extends Controller
 
         $photos = [];
         if ($topicFind->cellphone && trim($topicFind->cellphone) !== "") {
-            $s3Client = S3Client::factory([
-                            'credentials' => [
-                                'key' => ' AKIAJZ2ERZ5NLDUOLEKA',
-                                'secret' => ' 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'
-                            ],
-                            'version' => 'latest',
-                            'region' => 'sa-east-1'
-                        ]);
-
-            $folder2 = env("APP_ENV").'/'.$stateFounded->slug.'/'.$cityFounded->slug.'/'.$topicFind->slug.'/photos/';
-            
-            $objects = $s3Client->getIterator('ListObjects', array(
-                'Bucket' => 'forumttt',
-                'Prefix' => $folder2
-            ));
-
-            foreach($objects as $object) {
-
-                if ($object['Size'] !== "0") {
-                    $photo = 'https://forumttt.s3-sa-east-1.amazonaws.com/'.$object['Key'];
-
-                    $photos[] = $photo;
-                }
-                
-            }
+            $photos = $photoModel->where('cellphone', $topicFind->cellphone)->get();
         }
 
         $findedCellphone = $cellPhoneModel->where('cellphone', $topicFind->cellphone)->first();
