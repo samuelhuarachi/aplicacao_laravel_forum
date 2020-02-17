@@ -2,29 +2,24 @@
 
 namespace App\Console\Commands;
 
-use App\City;
-use App\State;
-use App\Topic;
-use App\CellPhone;
-use Aws\S3\S3Client;
 use App\Samuel\Script;
 use Illuminate\Console\Command;
 
-class FullScan extends Command
+class FillPhotoTable extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'traveco:fullscan';
+    protected $signature = 'traveco:fill-photo-table';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Faz ';
+    protected $description = 'Command description';
 
     /**
      * Create a new command instance.
@@ -44,6 +39,6 @@ class FullScan extends Command
     public function handle()
     {
         $script = new Script();
-        $script->fullScan(new Topic, new State, new City, new CellPhone);
+        $script->tempFillPhotoTable();
     }
 }
