@@ -7,6 +7,7 @@ use App\State;
 use App\Topic;
 use App\CellPhone;
 use \Aws\S3\S3Client;
+use App\Samuel\Script;
 use App\Samuel\General;
 use App\Samuel\TopicSoul;
 use \Cocur\Slugify\Slugify;
@@ -368,6 +369,11 @@ class ToolsController extends Controller
         }
 
         return null;
+    }
+
+    public function fillPhotos(Script $script)
+    {
+        $script->tempFillPhotoTable();
     }
 
 }

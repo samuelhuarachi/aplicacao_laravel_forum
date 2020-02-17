@@ -300,6 +300,13 @@ class General
                 'state_id' => 7,
                 'city_id' => 5564
             ],
+            [
+                'url' => 'https://www.travesticomlocal.com.br/cuiaba/',
+                'state_id' => 13,
+                'city_id' => 5214
+            ],
+
+            
         ];
     }
 }

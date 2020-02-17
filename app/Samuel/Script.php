@@ -3,6 +3,7 @@
 namespace App\Samuel;
 
 use App\City;
+use App\Photo;
 use App\State;
 use App\Topic;
 use App\CellPhone;
@@ -241,4 +242,58 @@ class Script {
         return null;
     }
 
+    function getPhotos($stateSlug, $citySlug, $trannhySlug)
+    {
+        $folder2 = env("APP_ENV").'/'.$stateSlug.'/'.$citySlug.'/'.$trannhySlug.'/photos/';
+        
+        $s3Client = S3Client::factory([
+            'credentials' => [
+                'key' => ' AKIAJZ2ERZ5NLDUOLEKA',
+                'secret' => ' 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'
+            ],
+            'version' => 'latest',
+            'region' => 'sa-east-1'
+        ]);
+
+        $objects = $s3Client->getIterator('ListObjects', array(
+            'Bucket' => 'forumttt',
+            'Prefix' => $folder2
+        ));
+        
+        $photos = [];
+        foreach($objects as $object) {
+            if ($object["Size"] > 0) {
+                $photos[] = 'https://forumttt.s3-sa-east-1.amazonaws.com/'.$object['Key'];
+            }
+        }
+
+        return $photos;
+    }
+
+    public function tempFillPhotoTable()
+    {
+
+        $topic = new Topic();
+        $city = new City();
+        $state = new State();
+
+        $topicFind = $topic
+                ->where('cellphone', '!=', "")
+                ->whereNotNull('cellphone')->get();
+        
+        foreach($topicFind as $topic) {
+            $cityID = $topic->city_id;
+            $cityFind = $city->find($cityID);
+            $stateFind = $state->find($cityFind->state_id);
+
+            $photos = $this->getPhotos($stateFind->slug, $cityFind->slug, $topic->slug);
+            foreach($photos as $photo) {
+                $photoModel = new Photo();
+                $photoModel->cellphone = $topic->cellphone;
+                $photoModel->photo = $photo;
+                $photoModel->save();
+            }
+        }
+        dump("FIM");
+    }
 }
