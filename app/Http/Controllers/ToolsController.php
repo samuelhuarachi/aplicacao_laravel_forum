@@ -22,6 +22,12 @@ use App\Http\Requests\CommentRequest;
 class ToolsController extends Controller
 {
 
+    /**
+     * Ach oque vou precisar mais usar
+     *
+     * @param Topic $topic
+     * @return void
+     */
     public function createS3FoldersOfGirls(Topic $topic)
     {
         echo "Ok";
@@ -76,6 +82,9 @@ class ToolsController extends Controller
         
     }
 
+
+
+
     public function extractImagesFromWebSite()
     {
         //This will return the HTML source of the page as a string.
@@ -129,6 +138,21 @@ class ToolsController extends Controller
         // dump($extractedImages);
     }
 
+
+    public function routineScan(Script $script)
+    {
+        $script->routineScan();
+    }
+
+    /**
+     * Acho que nao vou precisar mais usar
+     *
+     * @param Topic $topic
+     * @param State $stateModel
+     * @param City $cityModel
+     * @param CellPhone $cellphoneModel
+     * @return void
+     */
     public function fullScan(Topic $topic, State $stateModel, City $cityModel, CellPhone $cellphoneModel)
     {
 

@@ -15,7 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 // Route::get('tools/folders', [
 //     'uses' => 'ToolsController@createS3FoldersOfGirls']);
 
@@ -25,8 +24,13 @@ Route::get('/', function () {
 // Route::get('tools/full-scan', [
 //     'uses' => 'ToolsController@fullScan']);
 
-Route::get('tools/get-city-and-state-topics-available', [
-    'uses' => 'ToolsController@getCityAvailable']);
+
+
+// Route::get('tools/get-city-and-state-topics-available', [
+//     'uses' => 'ToolsController@getCityAvailable']);
+
+// Route::get('tools/routine-scan', [
+//     'uses' => 'ToolsController@routineScan']);
 
 // Route::get('tools/fill-photos', [
 //     'uses' => 'ToolsController@fillPhotos']);
@@ -36,7 +40,6 @@ Route::get('tools/get-city-and-state-topics-available', [
 
 Route::group(['prefix' => 'forum/travesti'],
 function() {
-
 
     Route::get('', [
         'uses' => 'IndexController@index'])

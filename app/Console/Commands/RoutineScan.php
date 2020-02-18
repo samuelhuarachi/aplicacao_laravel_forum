@@ -2,17 +2,16 @@
 
 namespace App\Console\Commands;
 
-use App\Samuel\Script;
 use Illuminate\Console\Command;
 
-class FillLastSeeTable extends Command
+class RoutineScan extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'traveco:fill-lastsee-table';
+    protected $signature = 'traveco:routine-scan';
 
     /**
      * The console command description.
@@ -41,6 +40,6 @@ class FillLastSeeTable extends Command
      */
     public function handle()
     {
-        // $this->scriptService->tempFillLasSee();
+        $this->scriptService->routineScan();
     }
 }

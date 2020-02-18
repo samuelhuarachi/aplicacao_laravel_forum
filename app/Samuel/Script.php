@@ -40,9 +40,6 @@ class Script {
 
     public function routineScan()
     {
-        $this->tempFillLasSee();
-        dd("LDLDL");
-
         $slugify = new \Cocur\Slugify\Slugify();
         $this->createLogFile();
         $listOfLinks = $this->generalService->travestiComLocalMap();
@@ -438,8 +435,8 @@ class Script {
                 
 
                 if ($imgSrc && $img) {
-                    file_put_contents($img, file_get_contents($imgSrc));
-                //    copy($imgSrc, $img);
+                //    file_put_contents($img, file_get_contents($imgSrc));
+                   copy($imgSrc, $img);
                 }
                 
 
