@@ -21,14 +21,17 @@ class FillLastSeeTable extends Command
      */
     protected $description = 'Command description';
 
+    protected $scriptService;
+
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Script $script)
     {
         parent::__construct();
+        $this->scriptService = $script;
     }
 
     /**
@@ -38,7 +41,6 @@ class FillLastSeeTable extends Command
      */
     public function handle()
     {
-        $script = new Script();
-        $script->tempFillLasSee();
+        $this->scriptService->tempFillLasSee();
     }
 }
