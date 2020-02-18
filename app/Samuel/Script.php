@@ -76,6 +76,7 @@ class Script {
 
                     if (count($topicsFounded) == 0) {
                         $this->writeInLog("Nova travesti URL: " . $linkTranny);
+                        dump("Nova travesti URL: " . $linkTranny);
                         $newTopic = $this->createNewTopic($cityID, 1, $trannyName, $trannySlug, $cellphone);
                         $this->saveTrannyDescription($cellphone, $description);
 
@@ -91,26 +92,77 @@ class Script {
                         }
                     } else {
                         $topicFounded = $this->findTopicByCellphoneAndCity($cellphone, $cityID);
+                        
                         if (!$topicFounded) {
                             $this->writeInLog("Mudou de cidade URL: " . $linkTranny);
+                            dump("Mudou de cidade URL: " . $linkTranny);
                             $this->createNewTopic($cityID, 1, $trannyName, $trannySlug, $cellphone);
+                        }
+
+                        $issetPhotos = $this->isIssetPhotos($cellphone);
+                        if (!$issetPhotos) {
+                            $issetInS3 = $this->isIssetPhotosInS3($topicsFounded);
+
+                            if (!$issetInS3) {
+                                $stateFounded = $this->stateModel->find($stateID);
+                                $cityFounded = $this->cityModel->find($cityID);
+
+                                $this->clearTeste1Folder();
+                                $this->saveImagesInTeste1Folder($topicsFounded[0]->slug, $linkTranny);
+                                $this->saveImagesInS3($stateFounded->slug, $cityFounded->slug, $topicsFounded[0]->slug);
+                                $this->savePhotosInDB($stateFounded->slug, $cityFounded->slug, $topicsFounded[0]->slug, $cellphone);
+
+                                dump("criou fotos no s3, jogou no BD");
+                            } else {
+                                foreach($issetInS3 as $photo) {
+                                    $this->saveOnePhotoInDB($cellphone, $photo);
+                                }
+                                dump("nao criou fotos no s3, jogou no BD, pois nao exisita");
+                            }
                         }
                     }
                     $this->updateLastSee($cellphone, $cityID);
+                    dump("*************************************");
                 }
             }
         }
+    }
+
+    protected function isIssetPhotosInS3($topics)
+    {
+        foreach($topics as $topic) {
+            $cityID = $topic->city_id;
+            $cityFounded = $this->cityModel->find($cityID);
+            $stateFounded = $this->stateModel->find($cityFounded->state_id);
+
+            $photos = $this->getPhotos($stateFounded->slug, $cityFounded->slug, $topic->slug);
+            if (count($photos) > 0) {
+                return $photos;
+            }
+        }
+        return null;
+    }
+
+    protected function isIssetPhotos($cellphone)
+    {
+        $photoModel = new Photo();
+        return $photoModel->where('cellphone', $cellphone)->first();
     }
 
     protected function savePhotosInDB($stateSlug, $citySlug, $topicSlug, $cellphone)
     {
         $photos = $this->getPhotos($stateSlug, $citySlug, $topicSlug);
         foreach($photos as $photo) {
-            $photoModel = new Photo();
-            $photoModel->cellphone = $cellphone;
-            $photoModel->photo = $photo;
-            $photoModel->save();
+            $this->saveOnePhotoInDB($cellphone, $photo);
         }
+    }
+
+    protected function saveOnePhotoInDB($cellphone, $urlPhoto)
+    {
+        $photoModel = new Photo();
+        $photoModel->cellphone = $cellphone;
+        $photoModel->photo = $urlPhoto;
+        $photoModel->save();
     }
 
     protected function saveTrannyDescription($cellphone, $description)
