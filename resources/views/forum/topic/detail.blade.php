@@ -54,7 +54,7 @@
             @endif
 
             @if($findedCellphone && trim($findedCellphone->about) !== "")
-
+                <h2 class="mt-3">Descrição</h2>
                 <div class="card">
                     <div style="column-count: 2; column-gap: 40px; column-rule-style: solid;" class="card-body">
                         {{ $findedCellphone->about }}
