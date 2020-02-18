@@ -1,3 +1,6 @@
+tarefa rolando
+heroku logs --app calm-peak-78581 --dyno run.1223
+
 ######## ==> - quando acessa uma pagina, setar a regiao para aquela :)
 - SEO
 - colocar uma lista de cidades cadastradas no site
