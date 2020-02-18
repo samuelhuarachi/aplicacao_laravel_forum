@@ -6,6 +6,7 @@ use App\City;
 use App\Photo;
 use App\State;
 use App\Topic;
+use App\LastSee;
 use App\CellPhone;
 use \Aws\S3\S3Client;
 use App\Samuel\S3Soul;
@@ -65,13 +66,38 @@ class IndexController extends Controller
         // });
 
         $photosList = [];
+        $lastSeeList = [];
+        $lastSee = new LastSee();
+        $photoModel = new Photo();
         foreach($cityFounded->topics as $topic)
         {
-            $photoModel = new Photo();
             $photoFounded = $photoModel->where('cellphone', $topic->cellphone)->first();
             
             if ($photoFounded) {
                 $photosList[$topic->slug] = $photoFounded->photo;
+            }
+
+            $lastSeeFounded = $lastSee->where('cellphone', $topic->cellphone)->where('city_id', $topic->city_id)->first();
+            if ($lastSeeFounded) {
+
+                if ($lastSeeFounded->current == 0) {
+                    $findTrannyLocation = $lastSee->where('cellphone', $topic->cellphone)->where('current', 1)->first();
+                    if ($findTrannyLocation) {
+                        $findCity = $city->find($findTrannyLocation->city_id);
+                        
+                        if ($findCity) {
+                            $lastSeeList[$topic->cellphone] = [
+                                'location' => $findCity->title,
+                                'data' => $lastSeeFounded->toArray()
+                            ];
+                            continue;
+                        }
+                    }
+                }
+
+                $lastSeeList[$topic->cellphone] = [
+                    'data' => $lastSeeFounded->toArray()
+                ];
             }
         }
         $coversList = $photosList;
@@ -82,7 +108,8 @@ class IndexController extends Controller
                     'cityFounded',
                     'allCities',
                     's3Soul',
-                    'coversList'));
+                    'coversList',
+                    'lastSeeList'));
     }
 
     public function setNewState($id, State $state, City $city, Request $request)

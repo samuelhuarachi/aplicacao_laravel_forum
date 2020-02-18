@@ -1,5 +1,5 @@
 tarefa rolando
-heroku logs --app calm-peak-78581 --dyno run.1223
+heroku logs --app calm-peak-78581 --dyno run.4397
 
 ######## ==> - quando acessa uma pagina, setar a regiao para aquela :)
 - SEO

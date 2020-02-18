@@ -98,6 +98,26 @@
                         @foreach($cityFounded->topics->reverse() as $topic)
 
                             <div class="card mt-3">
+                                <div class="card-header">
+                                    @if (isset($lastSeeList[$topic->cellphone]))
+                                        Vista a última vez: {{ date('d/m/Y', strtotime($lastSeeList[$topic->cellphone]['data']['lastsee'])) }}
+
+                                        @if ($lastSeeList[$topic->cellphone]['data']['current'] == 0)
+
+                                            @if (isset($lastSeeList[$topic->cellphone]['location']))
+                                                <span class="float-right">Mudou de cidade, está em {{ $lastSeeList[$topic->cellphone]['location'] }}</span>
+                                            @else
+                                                <span class="float-right">Mudou de cidade</span>
+                                            @endif
+                                        @else
+                                            <span class="float-right"><img width="10" src="{{ asset('images/green.png') }}" /> Disponível nessa cidade</span>
+                                        @endif
+                                        
+                                    @else
+
+                                    @endif
+                                   
+                                </div>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-sm">
