@@ -133,13 +133,14 @@ class Script {
                                 ->where('city_id', $cityID)
                                 ->first();
         if (!$lastSeeFounded) {
-            $this->lastSeeModel->cellphone = $cellphone;
-            $this->lastSeeModel->city_id = $cityID;
-            $this->lastSeeModel->lastsee = date('Y-m-d');
-            $this->lastSeeModel->current = true;
-            $this->lastSeeModel->created_at = date('Y-m-d H:i:s');
-            $this->lastSeeModel->updated_at = date('Y-m-d H:i:s');
-            $this->lastSeeModel->save();
+            $lastSeeModel = new LastSee();
+            $lastSeeModel->cellphone = $cellphone;
+            $lastSeeModel->city_id = $cityID;
+            $lastSeeModel->lastsee = date('Y-m-d');
+            $lastSeeModel->current = true;
+            $lastSeeModel->created_at = date('Y-m-d H:i:s');
+            $lastSeeModel->updated_at = date('Y-m-d H:i:s');
+            $lastSeeModel->save();
         } else {
             $this->lastSeeModel->where('cellphone', $cellphone)
                              ->where('city_id', $cityID)
@@ -571,5 +572,18 @@ class Script {
             $lastSee->save();
         }
         dump("FIM LAST SEE");
+    }
+
+    public function normalizeLastSee()
+    {
+        $topic = new Topic();
+        $topicFind = $topic
+                ->where('cellphone', '!=', "")
+                ->whereNotNull('cellphone')->get();
+        
+        foreach($topicFind as $topic) {
+            $this->updateLastSee($topic->cellphone, $topic->city_id);
+        }
+        dump("FIM");
     }
 }
