@@ -178,13 +178,15 @@ class Script {
 
     protected function updateLastSee($cellphone, $cityID)
     {
-        $this->lastSeeModel->where('cellphone', $cellphone)
-                            ->update(['current' => false]);
-
         $lastSeeFounded = $this->lastSeeModel->where('cellphone', $cellphone)
                                 ->where('city_id', $cityID)
+                                ->where('current', 1)
                                 ->first();
+
         if (!$lastSeeFounded) {
+            $this->lastSeeModel->where('cellphone', $cellphone)
+                ->update(['current' => false]);
+
             $lastSeeModel = new LastSee();
             $lastSeeModel->cellphone = $cellphone;
             $lastSeeModel->city_id = $cityID;

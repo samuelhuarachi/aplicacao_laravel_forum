@@ -114,7 +114,7 @@
                                         @endif
                                         
                                     @else
-
+                                        Não temos dados de frequencia no momento
                                     @endif
                                    
                                 </div>

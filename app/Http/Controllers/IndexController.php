@@ -8,7 +8,6 @@ use App\State;
 use App\Topic;
 use App\LastSee;
 use App\CellPhone;
-use \Aws\S3\S3Client;
 use App\Samuel\S3Soul;
 use App\Samuel\ReplySoul;
 use App\Samuel\TopicSoul;
@@ -19,6 +18,7 @@ use App\Http\Requests\ReplyRequest;
 use App\Http\Requests\TopicRequest;
 use App\Http\Requests\CommentRequest;
 use Illuminate\Support\Facades\Cache;
+use App\Samuel\Statistic\StatisticSingle;
 
 class IndexController extends Controller
 {
@@ -32,6 +32,7 @@ class IndexController extends Controller
         Request $request, 
         State $state, 
         City $city,
+        StatisticSingle $statisticSingle,
         S3Soul $s3Soul)
     {
         $states = $state->all();
@@ -101,6 +102,14 @@ class IndexController extends Controller
             }
         }
         $coversList = $photosList;
+
+
+        $listt = [];
+        foreach($cityFounded->topics as $topic)
+        {
+            $statisticSingle->setCellphone($topic->cellphone);
+            $listt[$topic->cellphone] = $statisticSingle->get();
+        }
 
         return view('index', compact(
                     'states',
@@ -197,6 +206,7 @@ class IndexController extends Controller
                         State $stateModel, City $cityModel,
                         Topic $topic, CellPhone $cellPhoneModel,
                         Request $request,
+                        StatisticSingle $statisticSingle,
                         Photo $photoModel)
     {
         
@@ -237,12 +247,17 @@ class IndexController extends Controller
 
         $findedCellphone = $cellPhoneModel->where('cellphone', $topicFind->cellphone)->first();
 
+
+        $statisticSingle->setCellphone($topicFind->cellphone);
+        $statistic = $statisticSingle->get();
+        
         return view('forum.topic.detail', 
                         compact(
                             'topicFind', 
                             'stateFounded', 
                             'cityFounded',
                             'photos',
+                            'statistic',
                             'findedCellphone'));
     }
 
