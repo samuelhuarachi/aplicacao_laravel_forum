@@ -50,7 +50,6 @@
                         @endforeach
                     </div>
                 </div>
-                <br><br>
             @endif
 
             @if($findedCellphone && trim($findedCellphone->about) !== "")
@@ -60,12 +59,11 @@
                         {{ $findedCellphone->about }}
                     </div>
                 </div>
-                <br><br>
             @endif
 
             
             
-            <h2>Relatos</h2>
+            <h2 class="mt-3">Relatos</h2>
             <a  class="btn btn-danger" href="#"
                 data-toggle="modal" 
                 data-target="#exampleModal"
