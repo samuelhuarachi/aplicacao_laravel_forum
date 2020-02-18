@@ -51,18 +51,30 @@ class IndexController extends Controller
         $stateFounded = $state->find($stateT);
         $allCities = $city->where('state_id', $stateT)->get();
 
+        // $coversList  = Cache::remember($stateFounded->slug . '-' . $cityFounded->slug . '-covers', 604800, function () use($stateFounded, $cityFounded, $s3Soul) {
+        //     $photosList = [];
+        //     foreach($cityFounded->topics as $topic)
+        //     {
+        //         $photoFinded = $s3Soul->findOnePhotoTranny($stateFounded->slug, $cityFounded->slug, $topic->slug);
+                
+        //         if ($photoFinded) {
+        //             $photosList[$topic->slug] = $photoFinded;
+        //         }
+        //     }
+        //     return $photosList;
+        // });
 
-        $coversList  = Cache::remember($stateFounded->slug . '-' . $cityFounded->slug . '-covers', 604800, function () use($stateFounded, $cityFounded, $s3Soul) {
-            $photosList = [];
-            foreach($cityFounded->topics as $topic)
-            {
-                $photoFinded = $s3Soul->findOnePhotoTranny($stateFounded->slug, $cityFounded->slug, $topic->slug);
-                if ($photoFinded) {
-                    $photosList[$topic->slug] = $photoFinded;
-                }
+        $photosList = [];
+        foreach($cityFounded->topics as $topic)
+        {
+            $photoModel = new Photo();
+            $photoFounded = $photoModel->where('cellphone', $topic->cellphone)->first();
+            
+            if ($photoFounded) {
+                $photosList[$topic->slug] = $photoFounded->photo;
             }
-            return $photosList;
-        });
+        }
+        $coversList = $photosList;
 
         return view('index', compact(
                     'states',
