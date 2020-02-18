@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Samuel\Script;
 use Illuminate\Console\Command;
 
 class RoutineScan extends Command
