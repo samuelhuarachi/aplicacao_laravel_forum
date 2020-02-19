@@ -100,7 +100,7 @@
                             <div class="card mt-3">
                                 <div class="card-header">
                                     @if (isset($lastSeeList[$topic->cellphone]))
-                                        Vista a última vez: {{ date('d/m/Y', strtotime($lastSeeList[$topic->cellphone]['data']['lastsee'])) }}
+                                        Vista última vez: {{ date('d/m/Y', strtotime($lastSeeList[$topic->cellphone]['data']['lastsee'])) }}
 
                                         @if ($lastSeeList[$topic->cellphone]['data']['current'] == 0)
 
