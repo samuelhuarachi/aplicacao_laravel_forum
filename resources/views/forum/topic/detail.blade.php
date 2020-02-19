@@ -36,20 +36,26 @@
             
             <h1>Travesti {{ ucwords($topicFind->title) }}</h1>
 
-            @if ($topicFind->cellphone !== null)
-                <b>Celular {{ $topicFind->cellphone }}</b><br>
-            @endif
 
-            @if ($statistic['current-city-title']) 
-                Ela, provavelmente, está em {{ $statistic['current-city-title'] }}<br>
-            @endif
+            <div class="card">
+                <div class="card-body">
+                    @if ($topicFind->cellphone !== null)
+                        <b>Celular {{ $topicFind->cellphone }}</b><br>
+                    @endif
 
-            @if (count($statistic['track-city']) > 0)
-                @foreach($statistic['track-city'] as $cityHistory)
-                    Passou por {{ $cityHistory['city_title'] }}, que fica no estado de {{ $cityHistory['state_title'] }}, 
-                            em {{ date('d/m/Y',strtotime($cityHistory['firstsee'])) }} até {{ date('d/m/Y', strtotime($cityHistory['lastsee'])) }}.<br>
-                @endforeach
-            @endif
+                    @if ($statistic['current-city-title']) 
+                        Ela, provavelmente, está em {{ $statistic['current-city-title'] }}<br>
+                    @endif
+
+                    @if (count($statistic['track-city']) > 0)
+                        @foreach($statistic['track-city'] as $cityHistory)
+                            &rarr; Passou por {{ $cityHistory['city_title'] }}, que fica no estado de {{ $cityHistory['state_title'] }}, 
+                                    em {{ date('d/m/Y',strtotime($cityHistory['firstsee'])) }} até {{ date('d/m/Y', strtotime($cityHistory['lastsee'])) }}.<br>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
+            
 
             @if($photos)
                 <h2 class="mt-3">Fotos</h2>
