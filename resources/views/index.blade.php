@@ -12,29 +12,12 @@
     <b>{{ $stateFounded->title }}</b> / <b>{{ $cityFounded->title }}</b>
 </div>
 
-<div class="container-fluid traveti-title">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>
-                @if (env('REMOVE_PORN')!='true') 
-                Boneca
-                @endif
-                Forum
-                </h1>
-
-                @if (env('REMOVE_PORN')!='true') 
-                    <p>Forum com relatos das mais belas travestis brasileiras</p>
-                @endif
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="container">
     
     <div class="row mb-3">
         <div class="col-md-12">
+
+            <h1>Acompanhantes Travestis de {{ $cityFounded->title }}</h1>
                 <a href="{{ route('login') }}">
                 <button type="button" class="btn btn-light">
                 <i class="icon-user"></i> Login</button>
@@ -48,7 +31,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <h2>{{ $stateFounded->title }} / {{ $cityFounded->title }}</h2>
             <div class="card">
                 <div class="card-header">
@@ -153,44 +136,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2">
-            
-            @if (env('REMOVE_PORN')!='true')
-                
-                <figure>
-                    <img 
-                        class="mb-1"
-                        style="width:100%"
-                        src="{{ asset('images/travesti-titulo.jpeg') }}" alt="travesti mostrando o pênis">
-                </figure>
-
-                <figure>
-                    <img 
-                        class="mb-1"
-                        style="width:100%"
-                        src="{{ asset('images/travesti-ativa.jpeg') }}" alt="travesti ativa comendo homem">
-                </figure>
-                
-                <figure>
-                    <img 
-                        class="mb-1"
-                        style="width:100%"
-                        src="{{ asset('images/travesti-2.jpg') }}" alt="travesti com a mão no pau">
-                </figure>
-                
-                <figure>
-                    <img 
-                        class="mb-1"
-                        style="width:100%"
-                        src="{{ asset('images/travesti-ativa-2.jpeg') }}" alt="travesti ativa comendo homem">
-                </figure>
-            @endif
-            
-            <!-- <img class="mb-1" style="width:100%" src="{{ asset('images/iwant.jpg') }}" alt="">
-            <img class="mb-1" style="width:100%" src="{{ asset('images/war2.jpg') }}" alt="">
-            <img class="mb-1" style="width:100%" src="{{ asset('images/freddie.jpg') }}" alt="">
-             -->
-        </div>
+        <!-- <div class="col-md-2">
+        </div> -->
     </div>
 </div>
 

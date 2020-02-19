@@ -15,12 +15,26 @@
 
 <div class="container">
     <div class="row">
-        
         <div class="col-md-12">
-            <a href="{{ route('forum.index') }}">
+
+        <a href="{{ route('forum.index') }}">
                     <i class="icon-chevron-left"></i>  Voltar a página inicial do forum</a>
             <br><br>
-            <h1>{{ ucwords($topicFind->title) }}</h1>
+                <a href="{{ route('login') }}">
+                <button type="button" class="btn btn-light">
+                <i class="icon-user"></i> Login</button>
+            </a>
+
+            <a href="{{ route('register') }}">
+                <button type="button" class="btn btn-primary float-right">
+                        Cadastrar no forum</button>
+            </a>
+            <br><br>
+        </div>
+        
+        <div class="col-md-12">
+            
+            <h1>Travesti {{ ucwords($topicFind->title) }}</h1>
 
             @if ($topicFind->cellphone !== null)
                 <b>Celular {{ $topicFind->cellphone }}</b><br>

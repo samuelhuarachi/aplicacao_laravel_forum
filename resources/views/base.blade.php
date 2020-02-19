@@ -7,7 +7,6 @@
 
     @if(\Request::route()->getName() == 'forum.topic.details')
 
-        
         @if ($topicFind->cellphone && trim($topicFind->cellphone) !== '')
             <title>Boneca Forum | Travesti {{ ucwords($topicFind->title) }} {{ $topicFind->cellphone }}</title>
         @else
@@ -15,7 +14,7 @@
         @endif
             
     @else 
-            <title>Boneca Forum | Forum de relato das experiência dos usuários, com travestis</title>
+        <title>Boneca Forum | Forum de relato das experiência dos usuários, com travestis</title>
     @endif
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
@@ -28,6 +27,8 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     <link href="https://fonts.googleapis.com/css?family=Arsenal|Great+Vibes&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css?family=Baloo&display=swap" rel="stylesheet">
 
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137662022-2"></script>
@@ -38,71 +39,23 @@
     gtag('config', 'UA-137662022-2');
     </script>
 
-</head>
-<body>
-
-<div class="container mb-3">
-    <div class="row">
-        <div  class="col-md-12 mb-3">
-            <img style="max-height: 130px;" width="100%" src="{{ asset('images/travesti-capa.jpg') }}" alt="banner propagando do topo da página">
-        </div>
-        <div class="col-md-12 mb-3">
-            <nav id="menu">
-
-                @auth
-                    <div class="row mb-3">
-                        <div class="col-md-12">
-                        
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                                {{ csrf_field() }}
-                                <button class="float-right" type="submit">Sair do forum</button>
-                            </form>
-                        
-                        </div>
-                    </div>
-                @endauth
-
-
-                <ul id="top-menu">
-                    
-                    <li>
-                        <a class="btn btn-danger" href="/">Página Inicial</a>
-                    </li>
-                    
-                    <li>
-                        <a class="btn btn-danger" href="{{ route('forum.index') }}">Forum</a>
-                    </li>
-                    
-                    <li>
-                        <a class="btn btn-danger" href="#">Blog</a>
-                    </li>
-                    @auth
-                        <li>
-                            <a href="{{ route('forum.myaccount') }}">
-                                <i class="icon-user"></i> Minha Conta</a>
-                        </li>
-                    @endauth
-                </ul>
-            </nav>
-        </div>
-    </div>
-</div>
-
-@yield('content')
-
-
-<footer class="text-muted">
-    <div class="container">
-        <p class="float-right">
-            <a href="#">Ir para o topo</a>
-        </p>
-        @if (env('REMOVE_PORN')!='true')
-            <p>Maior forum de relatos de travesti do Brasil</p>
-        @endif
-    </div>
-</footer>
-
 <style>
+
+.logo {
+    line-height: 1;
+    margin-bottom: 0;
+}
+
+.logo a{
+    font-size: 69px;
+    font-family: 'Baloo', cursive;
+    color: #dc3545;
+}
+
+.logo-description {
+    font-weight: bold;
+    color: #333;
+}
 
 figure {
     margin: 0px !important;
@@ -129,11 +82,12 @@ figure {
 }
 
 footer {
-    background: #fff;
+    background: #000;
     padding-top: 3rem;
     padding-bottom: 4rem;
     margin-top:100px;
     margin-bottom:0px;
+    color: #fff;
 }
 
 footer p {
@@ -240,6 +194,69 @@ margin-right:5px; }
     border-radius: 4px;
 }
 </style>
+
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div  class="col-md-12 mb-3">
+            <p class="logo"><a href="/">Boneca Fórum</a></p>
+            <p class="logo-description">Encontre as mais belas travestis da sua cidade</p>
+        </div>
+        <div class="col-md-12 mb-3">
+            <nav id="menu">
+
+                @auth
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                        
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                {{ csrf_field() }}
+                                <button class="float-right" type="submit">Sair do forum</button>
+                            </form>
+                        
+                        </div>
+                    </div>
+                @endauth
+
+
+                <ul id="top-menu">
+                    
+                    <li>
+                        <a class="btn btn-danger" href="{{ route('forum.index') }}">Forum</a>
+                    </li>
+                    
+                    <li>
+                        <a class="btn btn-danger" href="#">Blog</a>
+                    </li>
+                    @auth
+                        <li>
+                            <a href="{{ route('forum.myaccount') }}">
+                                <i class="icon-user"></i> Minha Conta</a>
+                        </li>
+                    @endauth
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+@yield('content')
+
+
+<footer>
+    <div class="container">
+        <p class="float-right">
+            <a href="#">Ir para o topo</a>
+        </p>
+        @if (env('REMOVE_PORN')!='true')
+            <p>Boneca Fórum - Relatos, acompanhantes travestis no Brasil</p>
+        @endif
+    </div>
+</footer>
+
+
 
     <script
 			  src="https://code.jquery.com/jquery-3.4.1.min.js"
