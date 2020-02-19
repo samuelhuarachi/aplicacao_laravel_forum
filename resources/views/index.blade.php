@@ -17,7 +17,7 @@
     <div class="row mb-3">
         <div class="col-md-12">
 
-            <h1>Acompanhantes Travestis de {{ $cityFounded->title }}</h1>
+            <h1>Acompanhantes Travestis em {{ $cityFounded->title }}</h1>
                 <a href="{{ route('login') }}">
                 <button type="button" class="btn btn-light">
                 <i class="icon-user"></i> Login</button>
