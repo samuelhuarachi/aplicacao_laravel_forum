@@ -20,12 +20,12 @@
             <h1>Acompanhantes Travestis em {{ $cityFounded->title }}</h1>
                 <a href="{{ route('login') }}">
                 <button type="button" class="btn btn-light">
-                <i class="icon-user"></i> Login</button>
+                <i class="icon-user"></i> Entrar</button>
             </a>
             
             <a href="{{ route('register') }}">
                 <button type="button" class="btn btn-primary float-right">
-                        Cadastrar no forum</button>
+                        Cadastre para deixar seu relato</button>
             </a>
         </div>
     </div>
@@ -65,7 +65,7 @@
                 </div>
             </div>
 
-            <div class="card mt-5">
+            <div id="tranny-list" class="card mt-5">
                 <div class="card-header">
                     <b>Relatos, sobre experiencias dos nossos usuários, com travestis, encontrados:</b>
                 </div>

@@ -54,6 +54,14 @@
 
 <style>
 
+.image-in-gallery {
+
+    width: 50px;
+    height: 50px;
+    margin-bottom:3px;
+    margin-right: 3px;
+}
+
 .logo {
     line-height: 1;
     margin-bottom: 0;
@@ -237,12 +245,9 @@ margin-right:5px; }
                 <ul id="top-menu">
                     
                     <li>
-                        <a class="btn btn-danger" href="{{ route('forum.index') }}">Forum</a>
+                        <a class="btn btn-danger" href="{{ route('forum.index') }}/#tranny-list">Veja mais travestis na sua cidade</a>
                     </li>
                     
-                    <li>
-                        <a class="btn btn-danger" href="#">Blog</a>
-                    </li>
                     @auth
                         <li>
                             <a href="{{ route('forum.myaccount') }}">

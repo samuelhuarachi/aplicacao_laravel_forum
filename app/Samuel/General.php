@@ -44,6 +44,15 @@ class General
 
     public function travestiComLocalMap()
     {
+        // return [
+        //     [
+        //         'url' => 'https://www.travesticomlocal.com.br/campinas/',
+        //         'state_id' => 26,
+        //         'city_id' => 3374
+        //     ]
+        // ];
+
+
         return [
             [
                 'url' => 'https://www.travesticomlocal.com.br/porto-velho/',

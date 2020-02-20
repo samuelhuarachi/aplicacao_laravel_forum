@@ -17,17 +17,17 @@
     <div class="row">
         <div class="col-md-12">
 
-        <a href="{{ route('forum.index') }}">
+        {{-- <a href="{{ route('forum.index') }}">
                     <i class="icon-chevron-left"></i>  Voltar a página inicial do forum</a>
-            <br><br>
+            <br><br> --}}
                 <a href="{{ route('login') }}">
                 <button type="button" class="btn btn-light">
-                <i class="icon-user"></i> Login</button>
+                <i class="icon-user"></i> Entrar</button>
             </a>
 
             <a href="{{ route('register') }}">
                 <button type="button" class="btn btn-primary float-right">
-                        Cadastrar no forum</button>
+                        Cadastre para deixar seu relato</button>
             </a>
             <br><br>
         </div>
@@ -61,11 +61,12 @@
                 <h2 class="mt-3">Fotos</h2>
                 <div class="card">
                     <div class="card-body">
+                        <small>Clique para ampliar</small><br>
                         @foreach($photos as $photo)
                             <a 
                             data-caption="Fotos da travesti {{ ucwords($topicFind->title) }}"
                             data-fancybox="gallery" href="{{ $photo->photo }}">
-                                <img width="40px" src="{{ $photo->photo }}" alt="Fotos da travesti {{ ucwords($topicFind->title) }}">
+                                <img class="image-in-gallery" src="{{ $photo->photo }}" alt="Fotos da travesti {{ ucwords($topicFind->title) }}">
                             </a>
                         @endforeach
                     </div>
