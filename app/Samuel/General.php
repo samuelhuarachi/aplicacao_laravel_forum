@@ -46,9 +46,9 @@ class General
     {
         // return [
         //     [
-        //         'url' => 'https://www.travesticomlocal.com.br/campinas/',
-        //         'state_id' => 26,
-        //         'city_id' => 3374
+        //         'url' => 'https://www.travesticomlocal.com.br/brasilia-df/',
+        //         'state_id' => 7,
+        //         'city_id' => 5564
         //     ]
         // ];
 
