@@ -78,7 +78,11 @@ class IndexController extends Controller
                 $photosList[$topic->slug] = $photoFounded->photo;
             }
 
-            $lastSeeFounded = $lastSee->where('cellphone', $topic->cellphone)->where('city_id', $topic->city_id)->first();
+            $lastSeeFounded = $lastSee
+                            ->where('cellphone', $topic->cellphone)
+                            ->where('city_id', $topic->city_id)
+                            ->orderBy('created_at', 'desc')
+                            ->first();
             if ($lastSeeFounded) {
 
                 if ($lastSeeFounded->current == 0) {

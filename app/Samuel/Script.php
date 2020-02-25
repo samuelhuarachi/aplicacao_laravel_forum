@@ -181,6 +181,7 @@ class Script {
         $lastSeeFounded = $this->lastSeeModel->where('cellphone', $cellphone)
                                 ->where('city_id', $cityID)
                                 ->where('current', 1)
+                                ->orderBy('created_at', 'desc')
                                 ->first();
 
         if (!$lastSeeFounded) {
@@ -196,12 +197,19 @@ class Script {
             $lastSeeModel->updated_at = date('Y-m-d H:i:s');
             $lastSeeModel->save();
         } else {
+            // $this->lastSeeModel->where('cellphone', $cellphone)
+            //                  ->where('city_id', $cityID)
+            //                 ->update([
+            //                     'lastsee' => date('Y-m-d'),
+            //                     'current' => true
+            //                     ]);
+
             $this->lastSeeModel->where('cellphone', $cellphone)
-                             ->where('city_id', $cityID)
-                            ->update([
+                ->update(['current' => false]);
+            $lastSeeFounded->update([
                                 'lastsee' => date('Y-m-d'),
                                 'current' => true
-                                ]);
+                            ]);
         }
     }
 
