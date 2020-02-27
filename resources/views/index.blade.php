@@ -83,7 +83,21 @@
                             <div class="card mt-3">
                                 <div class="card-header">
                                     @if (isset($lastSeeList[$topic->cellphone]))
-                                        Vista última vez: {{ date('d/m/Y', strtotime($lastSeeList[$topic->cellphone]['data']['lastsee'])) }}
+
+                                        @php
+
+                                        $datetime1 = new DateTime($lastSeeList[$topic->cellphone]['data']['lastsee']);
+                                        $datetime2 = new DateTime(date('Y-m-d'));
+                                        $interval = $datetime1->diff($datetime2)->days;
+
+                                        @endphp
+
+                                        @if($interval > 0)
+                                            Passou por aqui há {{ $interval }} dias ({{ date('d/m/Y', strtotime($lastSeeList[$topic->cellphone]['data']['lastsee'])) }})
+                                        @else
+                                            Vista última vez em {{ date('d/m/Y', strtotime($lastSeeList[$topic->cellphone]['data']['lastsee'])) }}
+                                        @endif
+                                        
 
                                         @if ($lastSeeList[$topic->cellphone]['data']['current'] == 0)
 
@@ -93,7 +107,12 @@
                                                 <span class="float-right">Mudou de cidade</span>
                                             @endif
                                         @else
-                                            <span class="float-right"><img width="10" src="{{ asset('images/green.png') }}" /> Disponível nessa cidade</span>
+                                            
+                                            @if($interval == 0)
+                                                <span class="float-right"><img width="10" src="{{ asset('images/green.png') }}" /> Disponível nessa cidade</span>
+                                            @else
+                                                <span class="float-right"><img width="10" src="{{ asset('images/gray.png') }}" /> Não localizada hoje</span>
+                                            @endif
                                         @endif
                                         
                                     @else
