@@ -132,8 +132,14 @@ class IndexController extends Controller
             return redirect()->route('forum.index');
         }
 
-        $cityFind = $city->where('state_id', $stateFind->id)->first();
-
+        if ($stateFind->slug == 'sao-paulo') {
+            $cityFind = $city->where('slug', 'sao-paulo')->first();
+        }elseif($stateFind->slug == 'rio-de-janeiro') {
+            $cityFind = $city->where('slug', 'rio-de-janeiro')->first();
+        }else {
+            $cityFind = $city->where('state_id', $stateFind->id)->first();
+        }
+        
         $request->session()->put('stateT', $stateFind->id);
         $request->session()->put('cityT', $cityFind->id);
 
