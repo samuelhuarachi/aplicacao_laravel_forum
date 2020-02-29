@@ -32,11 +32,16 @@ class StatisticSingle {
         $this->cellphone = $cellphone;
     }
     
-    public function get() {
+    public function get($currentCity = true, $track = true) {
         
-        $this->currentCityTitle();
-        $this->track();
-
+        if ($currentCity) {
+            $this->currentCityTitle();
+        }
+        
+        if ($track) {
+            $this->track();
+        }
+        
         return [
             'find' => $this->find,
             'current-city-title' => $this->currentCityTitle,

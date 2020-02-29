@@ -117,7 +117,7 @@ class IndexController extends Controller
         foreach($cityFounded->topics as $topic)
         {
             $statisticSingle->setCellphone($topic->cellphone);
-            $listt[$topic->cellphone] = $statisticSingle->get();
+            $listt[$topic->cellphone] = $statisticSingle->get(true, null);
         }
 
         return view('index', compact(
