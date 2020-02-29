@@ -72,17 +72,23 @@ class IndexController extends Controller
         $photoModel = new Photo();
         foreach($cityFounded->topics as $topic)
         {
-            $photoFounded = $photoModel->where('cellphone', $topic->cellphone)->first();
+            // Defenindo foto de capa
+            $photoFounded = Cache::rememberForever('foto-de-capa-'.$topic->cellphone, function () use($topic, $photoModel) {
+                return $photoModel->where('cellphone', $topic->cellphone)->first();
+            });
             
             if ($photoFounded) {
                 $photosList[$topic->slug] = $photoFounded->photo;
             }
 
+
+            // Definin ultima vez vista
             $lastSeeFounded = $lastSee
                             ->where('cellphone', $topic->cellphone)
                             ->where('city_id', $topic->city_id)
                             ->orderBy('created_at', 'desc')
                             ->first();
+            
             if ($lastSeeFounded) {
 
                 if ($lastSeeFounded->current == 0) {
@@ -90,13 +96,12 @@ class IndexController extends Controller
                     if ($findTrannyLocation) {
                         $findCity = $city->find($findTrannyLocation->city_id);
                         
-                        if ($findCity) {
-                            $lastSeeList[$topic->cellphone] = [
-                                'location' => $findCity->title,
-                                'data' => $lastSeeFounded->toArray()
-                            ];
-                            continue;
-                        }
+                        $lastSeeList[$topic->cellphone] = [
+                            'location' => $findCity->title,
+                            'data' => $lastSeeFounded->toArray()
+                        ];
+                        continue;
+                    
                     }
                 }
 
