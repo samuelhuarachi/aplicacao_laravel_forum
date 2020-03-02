@@ -101,8 +101,8 @@
 
                                         @if ($lastSeeList[$topic->cellphone]['data']['current'] == 0)
 
-                                            @if (isset($lastSeeList[$topic->cellphone]['location']))
-                                                <span class="float-right">Mudou de cidade, está em {{ $lastSeeList[$topic->cellphone]['location'] }}</span>
+                                            @if (isset($listt[$topic->cellphone]))
+                                                <span class="float-right">Mudou de cidade, está em {{ $listt[$topic->cellphone]['current-city-title'] }}</span>
                                             @else
                                                 <span class="float-right">Mudou de cidade</span>
                                             @endif

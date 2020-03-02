@@ -91,19 +91,19 @@ class IndexController extends Controller
             
             if ($lastSeeFounded) {
 
-                if ($lastSeeFounded->current == 0) {
-                    $findTrannyLocation = $lastSee->where('cellphone', $topic->cellphone)->where('current', 1)->first();
-                    if ($findTrannyLocation) {
-                        $findCity = $city->find($findTrannyLocation->city_id);
+                // if ($lastSeeFounded->current == 0) {
+                //     $findTrannyLocation = $lastSee->where('cellphone', $topic->cellphone)->where('current', 1)->first();
+                //     if ($findTrannyLocation) {
+                //         $findCity = $city->find($findTrannyLocation->city_id);
                         
-                        $lastSeeList[$topic->cellphone] = [
-                            'location' => $findCity->title,
-                            'data' => $lastSeeFounded->toArray()
-                        ];
-                        continue;
+                //         $lastSeeList[$topic->cellphone] = [
+                //             'location' => $findCity->title,
+                //             'data' => $lastSeeFounded->toArray()
+                //         ];
+                //         continue;
                     
-                    }
-                }
+                //     }
+                // }
 
                 $lastSeeList[$topic->cellphone] = [
                     'data' => $lastSeeFounded->toArray()
@@ -111,7 +111,6 @@ class IndexController extends Controller
             }
         }
         $coversList = $photosList;
-
 
         $listt = [];
         foreach($cityFounded->topics as $topic)
@@ -126,6 +125,7 @@ class IndexController extends Controller
                     'cityFounded',
                     'allCities',
                     's3Soul',
+                    'listt',
                     'coversList',
                     'lastSeeList'));
     }
