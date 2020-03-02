@@ -44,14 +44,6 @@ class General
 
     public function travestiComLocalMap()
     {
-        // return [
-        //     [
-        //         'url' => 'https://www.travesticomlocal.com.br/brasilia-df/',
-        //         'state_id' => 7,
-        //         'city_id' => 5564
-        //     ]
-        // ];
-
 
         return [
             [

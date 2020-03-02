@@ -16,9 +16,9 @@
     @else 
         <title>Boneca Forum | Forum de relato das experiência dos usuários, com travestis</title>
     @endif
-    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
     
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
     <meta name="description" content="Forum travesti tras relatos de usuários sobre experiencias com as travestis no Brasil."> 
     <meta name="og:title" property="og:title" content="Forum bonecas tem relatos de experiencias de pessoas com travetis no Brasil"> 
     <meta name="robots" content="index, follow"> 
@@ -27,7 +27,6 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     <link href="https://fonts.googleapis.com/css?family=Arsenal|Great+Vibes&display=swap" rel="stylesheet">
-    
     <link href="https://fonts.googleapis.com/css?family=Baloo&display=swap" rel="stylesheet">
 
 
@@ -50,171 +49,6 @@
             a.appendChild(r);
         })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
     </script>
-
-
-<style>
-
-.image-in-gallery {
-
-    width: 50px;
-    height: 50px;
-    margin-bottom:3px;
-    margin-right: 3px;
-}
-
-.logo {
-    line-height: 1;
-    margin-bottom: 0;
-}
-
-.logo a{
-    font-size: 69px;
-    font-family: 'Baloo', cursive;
-    color: #dc3545;
-}
-
-.logo-description {
-    font-weight: bold;
-    color: #333;
-}
-
-figure {
-    margin: 0px !important;
-}
-
-.tranny-cover-thumb {
-    max-height: 110px;
-    margin-right: 20px;
-}
-
-.traveti-title {
-    background: #333;
-    padding-top: 30px;
-    padding-bottom: 0px;
-    margin-bottom: 30px;
-}
-
-.traveti-title h1 {
-    color: #fff;
-}
-
-.traveti-title p {
-    color: #fff;
-}
-
-footer {
-    background: #000;
-    padding-top: 3rem;
-    padding-bottom: 4rem;
-    margin-top:100px;
-    margin-bottom:0px;
-    color: #fff;
-}
-
-footer p {
-  margin-bottom: .25rem;
-}
-
-#top-menu {
-    /* background: #fff;
-    padding:10px;
-    border: 1px solid rgb(227, 43, 43); */
-}
-
-body {
-    padding-top: 50px;
-    background: #f2f2f2;
-    font-family: 'Arsenal', sans-serif;
-}
-
-a  {
-    color: #333;
-    // background: #f2f2f2;
-    /* padding-right:5px;
-    padding-left:5px; */
-}
-
-.dropdown-item.active, .dropdown-item:active {
-    background-color: #dc3545;
-}
-
-a:hover {
-    color: red;
-    text-decoration: none;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Great Vibes', cursive;
-}
-
-.card {
-    border: 1px solid rgb(227, 43, 43);
-    border-radius: 0px;
-}
-
-.card-header:first-child {
-    border-radius: 0px;
-}
-
-.card-header {
-    border-bottom: 1px solid rgb(227, 43, 43);
-    background-color: #dc3545;
-    color: #fff;
-}
-
-#user-info {
-    position: fixed;
-    background: #000;
-    bottom: 0px;
-    color: #fff;
-    z-index: 999;
-    padding-right: 10px;
-    padding-left: 10px;
-    width: 100%;
-    text-align: right;
-}
-
-#top-info {
-    position: fixed;
-    background: #000;
-    top: 0px;
-    color: #fff;
-    z-index: 999;
-    padding-right: 10px;
-    padding-left: 10px;
-    width: 100%;
-}
-
-#travesti-dancando {
-    position: fixed;
-    bottom:20px;
-    right:0px;
-}
-
-#travesti-loira-dancando {
-    position: fixed;
-    bottom:20px;
-    left:0px;
-}
-
-.card {
-    /* -webkit-box-shadow: 8px 8px 8px -6px rgba(171,171,171,1);
-    -moz-box-shadow: 8px 8px 8px -6px rgba(171,171,171,1);
-    box-shadow: 8px 8px 8px -6px rgba(171,171,171,1); */
-}
-
-#menu ul {
-    list-style:none;
-    padding: 0px;
-}
-#menu ul li { display: inline;
-margin-right:5px; }
-
-.reply-style {
-    background: #f4f4f4;
-    border-radius: 4px;
-}
-</style>
 
 </head>
 <body>
@@ -240,10 +74,7 @@ margin-right:5px; }
                         </div>
                     </div>
                 @endauth
-
-
                 <ul id="top-menu">
-                    
                     <li>
                         <a class="btn btn-danger" href="{{ route('forum.index') }}/#tranny-list">Veja mais travestis na sua cidade</a>
                     </li>
@@ -274,14 +105,13 @@ margin-right:5px; }
     </div>
 </footer>
 
-
-
     <script
 			  src="https://code.jquery.com/jquery-3.4.1.min.js"
 			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 			  crossorigin="anonymous"></script>
               <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    
+    <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://canvas-gauges.com/download/latest/all/gauge.min.js"></script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
@@ -290,7 +120,6 @@ margin-right:5px; }
     <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
-    
     @include('_message-error')
 
     @yield('footer')

@@ -11,6 +11,8 @@
 |
 */
 
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -115,6 +117,11 @@ function() {
                 ->name('forum.reply.remove');
     });
 });
+
+
+
+// Route::get('chat/client', 'Chat\ChatController@client');
+// Route::get('chat/analist', 'Chat\ChatController@analist');
 
 
 Auth::routes(['verify' => true]);
