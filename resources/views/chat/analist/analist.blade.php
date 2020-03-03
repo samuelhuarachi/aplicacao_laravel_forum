@@ -2,6 +2,15 @@
 
 @section('content')
 
+
+<div id="isOnline"></div>
+<button class="btn btn-success" id="onlineButton">Ficar Online</button>
+
+<br>
+<br>
+<br>
+<br>
+
 <p>Analista ID</p>
 <textarea id="analistID" cols="60" rows="10"></textarea>
 <br>

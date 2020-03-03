@@ -2,6 +2,15 @@
 
 @section('content')
 
+<div id="isOnline"></div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<hr>
 <p>Analista ID</p>
 <textarea id="analistID" cols="60" rows="10"></textarea>
 <br>
@@ -37,7 +46,10 @@
     //     messageBox.html(messageBox.html() + "<br>" + message);
     // })
 
-    
+    // socket.on('connect', function() {
+    //     // $("#msg").append("connectd: " + socket.id + "<br>");
+    //     socket.emit('msg', 'I am connected ' + socket.id);
+    // })
 
 </script>
 

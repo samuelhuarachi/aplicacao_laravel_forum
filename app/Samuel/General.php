@@ -18,11 +18,9 @@ class General
 
     public function getCitysAvailableFromCache()
     {
-    
         return Cache::remember('citys-available', 604800, function () {
             return DB::table('topics')->select('city_id')->distinct()->get();
         });
-
     }
 
     public function generateSchemaScanCityState($citysAvailable)
