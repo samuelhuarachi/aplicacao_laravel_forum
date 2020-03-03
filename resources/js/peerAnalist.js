@@ -20,7 +20,12 @@ navigator.getUserMedia({video: true, audio: false}, function(stream) {
     var peer = new Peer({
         initiator: true,
         trickle: false,
-        stream: stream
+        stream: stream,
+        iceServers: [
+            {
+                urls: 'stun:stun.l.google.com:19302'
+            }
+        ]
     })
 
     peer.on('signal', function (data) {

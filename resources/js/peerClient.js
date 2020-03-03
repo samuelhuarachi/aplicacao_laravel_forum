@@ -21,6 +21,11 @@ navigator.getUserMedia = (navigator.getUserMedia
     var peer = new Peer({
         initiator: false,
         trickle: false,
+        iceServers: [
+            {
+                urls: 'stun:stun.l.google.com:19302'
+            }
+        ]
     })
 
     peer.on('signal', function (data) {

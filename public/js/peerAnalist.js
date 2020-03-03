@@ -12328,7 +12328,7 @@ function _isUint8Array(obj) {
 /*<replacement>*/
 
 
-var debugUtil = __webpack_require__(/*! util */ 3);
+var debugUtil = __webpack_require__(/*! util */ 4);
 
 var debug;
 
@@ -14562,7 +14562,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var _require = __webpack_require__(/*! buffer */ "./node_modules/buffer/index.js"),
     Buffer = _require.Buffer;
 
-var _require2 = __webpack_require__(/*! util */ 4),
+var _require2 = __webpack_require__(/*! util */ 5),
     inspect = _require2.inspect;
 
 var custom = inspect && inspect.custom || 'inspect';
@@ -18716,7 +18716,10 @@ navigator.getUserMedia({
   var peer = new Peer({
     initiator: true,
     trickle: false,
-    stream: stream
+    stream: stream,
+    iceServers: [{
+      urls: 'stun:stun.l.google.com:19302'
+    }]
   });
   peer.on('signal', function (data) {
     console.log("foi");
@@ -18784,7 +18787,7 @@ module.exports = __webpack_require__(/*! /home/samuel/dev/forumt/forum/resources
 
 /***/ }),
 
-/***/ 3:
+/***/ 4:
 /*!**********************!*\
   !*** util (ignored) ***!
   \**********************/
@@ -18795,7 +18798,7 @@ module.exports = __webpack_require__(/*! /home/samuel/dev/forumt/forum/resources
 
 /***/ }),
 
-/***/ 4:
+/***/ 5:
 /*!**********************!*\
   !*** util (ignored) ***!
   \**********************/
