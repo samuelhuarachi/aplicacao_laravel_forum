@@ -18,11 +18,9 @@ navigator.getUserMedia = (navigator.getUserMedia
     || navigator.mozGetUserMedia 
     || navigator.msgGetUserMedia);
 
-navigator.getUserMedia({video: true, audio: false}, function(stream) {
     var peer = new Peer({
         initiator: false,
         trickle: false,
-        stream: stream
     })
 
     peer.on('signal', function (data) {
@@ -44,18 +42,6 @@ navigator.getUserMedia({video: true, audio: false}, function(stream) {
         document.getElementById('messages').textContent += data + '\n'
     })
 
-    peer.on('stream', function(stream) {
-        var video = document.createElement('video')
-        document.body.appendChild(video)
-
-        // video.src = window.URL.createObjectURL(stream)
-        video.srcObject = stream
-        video.play()
-    })
-
-}, function(err) {
-    console.error(err)
-})
 
 
 function verifyStatus()
