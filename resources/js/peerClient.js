@@ -18,14 +18,13 @@ navigator.getUserMedia = (navigator.getUserMedia
     || navigator.mozGetUserMedia 
     || navigator.msgGetUserMedia);
 
+navigator.getUserMedia({video: true, audio: false}, function(stream) {
     var peer = new Peer({
         initiator: false,
         trickle: false,
-        iceServers: [
-            {
-                urls: 'stun:stun.l.google.com:19302'
-            }
-        ]
+        config: {
+            iceServers: [{ 'url': 'stun:stun.l.google.com:19302' }]
+        }
     })
 
     peer.on('signal', function (data) {
@@ -46,7 +45,17 @@ navigator.getUserMedia = (navigator.getUserMedia
     peer.on('data', function(data) {
         document.getElementById('messages').textContent += data + '\n'
     })
+    peer.on('stream', function(stream) {
+        var video = document.createElement('video')
+        document.body.appendChild(video)
 
+        
+        video.srcObject = stream
+        video.play()
+    })
+}, function(err) {
+    console.error(err)
+})
 
 
 function verifyStatus()

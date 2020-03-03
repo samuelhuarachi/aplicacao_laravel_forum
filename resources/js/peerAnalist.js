@@ -21,11 +21,9 @@ navigator.getUserMedia({video: true, audio: false}, function(stream) {
         initiator: true,
         trickle: false,
         stream: stream,
-        iceServers: [
-            {
-                urls: 'stun:stun.l.google.com:19302'
-            }
-        ]
+        config: {
+            iceServers: [{ 'url': 'stun:stun.l.google.com:19302' }]
+        }
     })
 
     peer.on('signal', function (data) {
