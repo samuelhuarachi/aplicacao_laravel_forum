@@ -9,6 +9,7 @@ const { ConfigureIsOnline } = require('./common')
 console.log(location);
 location.hash === '#init'
 
+
 // navigator.getUserMedia = (navigator.getUserMedia 
 //     || navigator.webkitGetUserMedia 
 //     || navigator.mozGetUserMedia 
