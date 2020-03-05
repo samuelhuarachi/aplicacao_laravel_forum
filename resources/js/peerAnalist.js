@@ -1,6 +1,5 @@
 const BASEURL = 'http://localhost:3001';
 
-
 import io from 'socket.io-client';
 var Peer = require('simple-peer')
 const socket = io(BASEURL);
@@ -66,17 +65,25 @@ socket.on('connect', function() {
 
 var url = BASEURL + '/analist/(19)%2092323-1300';
 axios.get(url)
-    .then(response => {
-        ConfigureIsOnline(response.data.isOnline)
-        console.log(response.data.isOnline)
-    })
-    .catch(function (error) {
-        // handle error
-        console.log(error);
-    })
-
-
-
-$("#onlineButton").click(function() {
-    socket.emit('make-online', 'onlinedd v')
+.then(response => {
+    // ConfigureIsOnline(response.data.isOnline)
+    console.log(response.data.isOnline)
 })
+.catch(function (error) {
+    // handle error
+    console.log(error);
+})
+
+// $("#onlineButton").click(function() {
+//     socket.emit('make-online', 'onlinedd v')
+// })
+
+/**
+ * 
+ * ddddddddddddddddddddddddddddddddddddddddddddddd
+ * 
+ */
+
+
+
+

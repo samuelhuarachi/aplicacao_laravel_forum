@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -12328,7 +12328,7 @@ function _isUint8Array(obj) {
 /*<replacement>*/
 
 
-var debugUtil = __webpack_require__(/*! util */ 4);
+var debugUtil = __webpack_require__(/*! util */ 3);
 
 var debug;
 
@@ -14562,7 +14562,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var _require = __webpack_require__(/*! buffer */ "./node_modules/buffer/index.js"),
     Buffer = _require.Buffer;
 
-var _require2 = __webpack_require__(/*! util */ 5),
+var _require2 = __webpack_require__(/*! util */ 4),
     inspect = _require2.inspect;
 
 var custom = inspect && inspect.custom || 'inspect';
@@ -18710,27 +18710,42 @@ socket.on('send-status', function (message) {
   messageBox.html(message);
 });
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msgGetUserMedia;
-var peer = new Peer({
-  initiator: false,
-  trickle: false,
-  iceServers: [{
-    urls: 'stun:stun.l.google.com:19302'
-  }]
-});
-peer.on('signal', function (data) {
-  console.log("foi");
-  document.getElementById('analistID').value = JSON.stringify(data);
-});
-document.getElementById('connect').addEventListener('click', function () {
-  var otherID = JSON.parse(document.getElementById('clientID').value);
-  peer.signal(otherID);
-});
-document.getElementById('send').addEventListener('click', function () {
-  var yourMessage = document.getElementById('yourMessage').value;
-  peer.send(yourMessage);
-});
-peer.on('data', function (data) {
-  document.getElementById('messages').textContent += data + '\n';
+navigator.getUserMedia({
+  video: true,
+  audio: false
+}, function (stream) {
+  var peer = new Peer({
+    initiator: false,
+    trickle: false,
+    config: {
+      iceServers: [{
+        'url': 'stun:stun.l.google.com:19302'
+      }]
+    }
+  });
+  peer.on('signal', function (data) {
+    console.log("foi");
+    document.getElementById('analistID').value = JSON.stringify(data);
+  });
+  document.getElementById('connect').addEventListener('click', function () {
+    var otherID = JSON.parse(document.getElementById('clientID').value);
+    peer.signal(otherID);
+  });
+  document.getElementById('send').addEventListener('click', function () {
+    var yourMessage = document.getElementById('yourMessage').value;
+    peer.send(yourMessage);
+  });
+  peer.on('data', function (data) {
+    document.getElementById('messages').textContent += data + '\n';
+  });
+  peer.on('stream', function (stream) {
+    var video = document.createElement('video');
+    document.body.appendChild(video);
+    video.srcObject = stream;
+    video.play();
+  });
+}, function (err) {
+  console.error(err);
 });
 
 function verifyStatus() {
@@ -18760,14 +18775,13 @@ verifyStatus();
 /***/ }),
 
 /***/ 3:
-/*!******************************************!*\
-  !*** multi ./resources/js/peerClient.js ***!
-  \******************************************/
+/*!**********************!*\
+  !*** util (ignored) ***!
+  \**********************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-module.exports = __webpack_require__(/*! /home/samuel/dev/forumt/forum/resources/js/peerClient.js */"./resources/js/peerClient.js");
-
+/* (ignored) */
 
 /***/ }),
 
@@ -18783,13 +18797,14 @@ module.exports = __webpack_require__(/*! /home/samuel/dev/forumt/forum/resources
 /***/ }),
 
 /***/ 5:
-/*!**********************!*\
-  !*** util (ignored) ***!
-  \**********************/
+/*!******************************************!*\
+  !*** multi ./resources/js/peerClient.js ***!
+  \******************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-/* (ignored) */
+module.exports = __webpack_require__(/*! /home/samuel/dev/forumt/forum/resources/js/peerClient.js */"./resources/js/peerClient.js");
+
 
 /***/ })
 
