@@ -131,15 +131,15 @@ var database = firebase.database().ref();
     || navigator.webkitGetUserMedia 
     || navigator.mozGetUserMedia 
     || navigator.msgGetUserMedia);
-    
-        navigator.mediaDevices.getUserMedia({audio:true, video:true})
+
+        navigator.mediaDevices.getUserMedia({audio:false, video:true})
         .then(stream => yourVideo.srcObject = stream)
         .then(stream => pc.addStream(stream));
         
     }
 
     function showFriendsFace() {
-        console.log("friend my face");
+        console.log("friend my facesdafsee");
         pc.createOffer()
         .then(offer => pc.setLocalDescription(offer) )
         .then(() => sendMessage(yourId, JSON.stringify({'sdp': pc.localDescription})) );
