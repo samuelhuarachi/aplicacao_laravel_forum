@@ -127,6 +127,11 @@ var database = firebase.database().ref();
 
     function showMyFace() {
         console.log("show my face");
+        navigator.getUserMedia = (navigator.getUserMedia 
+    || navigator.webkitGetUserMedia 
+    || navigator.mozGetUserMedia 
+    || navigator.msgGetUserMedia);
+    
         navigator.mediaDevices.getUserMedia({audio:true, video:true})
         .then(stream => yourVideo.srcObject = stream)
         .then(stream => pc.addStream(stream));
