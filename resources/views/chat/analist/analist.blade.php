@@ -98,16 +98,41 @@ var database = firebase.database().ref();
         {'urls': 'stun:stun.l.google.com:19302'}, 
         {'urls': 'turn:numb.viagenie.ca','credential': 'sempre123','username': 'samuel.huarachi@gmail.com'}]};
     var pc = new RTCPeerConnection(servers);
+
     pc.onicecandidate = (
-        event => event.candidate?sendMessage(yourId, JSON.stringify({'ice': event.candidate})):console.log("Sent All Ice") );
+        event => event.candidate ? sendMessage
+        (yourId, JSON.stringify({'ice': event.candidate}))
+        :
+        console.log("Sent All Ice") 
+        
+        );
+
+    // pc.onicecandidate = function(event) {
+
+    //     if (event.candidate) {
+    //         sendMessage(yourId, JSON.stringify({'ice': event.candidate}))
+    //     } else {}
+    //     event.candidate ? 
+    //     :
+    //     console.log("Sent All Ice") 
+        
+    //     );
+    // }
+    
     pc.onaddstream = (event => friendsVideo.srcObject = event.stream);
 
     function sendMessage(senderId, data) {
+        console.log("executing function: sendMessage");
         var msg = database.push({ sender: senderId, message: data });
         msg.remove();
     }
 
     function readMessage(data) {
+        console.log("function readMessage")
+        console.log(data.val().message);
+        console.log("Other ID " + data.val().sender);
+        console.log("My ID " + yourId)
+
         var msg = JSON.parse(data.val().message);
         var sender = data.val().sender;
         if (sender != yourId) {
@@ -142,7 +167,11 @@ var database = firebase.database().ref();
         console.log("friend my facesdafsee");
         pc.createOffer()
         .then(offer => pc.setLocalDescription(offer) )
-        .then(() => sendMessage(yourId, JSON.stringify({'sdp': pc.localDescription})) );
+        .then(() => sendMessage(
+                        yourId, 
+                        JSON.stringify({'sdp': pc.localDescription})
+                    )
+                );
     }
 
     showMyFace();

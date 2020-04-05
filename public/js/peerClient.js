@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -6702,7 +6702,7 @@ if (typeof WebSocket !== 'undefined') {
 
 if (typeof window === 'undefined') {
   try {
-    NodeWebSocket = __webpack_require__(/*! ws */ 2);
+    NodeWebSocket = __webpack_require__(/*! ws */ 3);
   } catch (e) { }
 }
 
@@ -12328,7 +12328,7 @@ function _isUint8Array(obj) {
 /*<replacement>*/
 
 
-var debugUtil = __webpack_require__(/*! util */ 3);
+var debugUtil = __webpack_require__(/*! util */ 4);
 
 var debug;
 
@@ -14562,7 +14562,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var _require = __webpack_require__(/*! buffer */ "./node_modules/buffer/index.js"),
     Buffer = _require.Buffer;
 
-var _require2 = __webpack_require__(/*! util */ 4),
+var _require2 = __webpack_require__(/*! util */ 5),
     inspect = _require2.inspect;
 
 var custom = inspect && inspect.custom || 'inspect';
@@ -18764,20 +18764,21 @@ verifyStatus();
 /***/ }),
 
 /***/ 2:
-/*!********************!*\
-  !*** ws (ignored) ***!
-  \********************/
+/*!******************************************!*\
+  !*** multi ./resources/js/peerClient.js ***!
+  \******************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-/* (ignored) */
+module.exports = __webpack_require__(/*! /home/samuel/dev/forumt/forum/resources/js/peerClient.js */"./resources/js/peerClient.js");
+
 
 /***/ }),
 
 /***/ 3:
-/*!**********************!*\
-  !*** util (ignored) ***!
-  \**********************/
+/*!********************!*\
+  !*** ws (ignored) ***!
+  \********************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -18797,14 +18798,13 @@ verifyStatus();
 /***/ }),
 
 /***/ 5:
-/*!******************************************!*\
-  !*** multi ./resources/js/peerClient.js ***!
-  \******************************************/
+/*!**********************!*\
+  !*** util (ignored) ***!
+  \**********************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-module.exports = __webpack_require__(/*! /home/samuel/dev/forumt/forum/resources/js/peerClient.js */"./resources/js/peerClient.js");
-
+/* (ignored) */
 
 /***/ })
 
