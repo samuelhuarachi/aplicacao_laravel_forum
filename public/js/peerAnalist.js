@@ -10866,8 +10866,8 @@ socket.on('receiveClientICE', function (data) {
 
 socket.on('generateAnalistOffer', function (clientId) {
   myConnections[clientId] = new RTCPeerConnection(servers);
-  var pc = myConnections[clientId]; // pc.iceTransports = 'relay'
-  // navigator.mediaDevices.getUserMedia({audio:false, video:true})
+  var pc = myConnections[clientId];
+  pc.iceTransports = 'relay'; // navigator.mediaDevices.getUserMedia({audio:false, video:true})
   // .then(stream => {});
   //console.log(stream)
 
