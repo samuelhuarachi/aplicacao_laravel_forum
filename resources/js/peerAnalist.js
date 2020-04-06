@@ -73,29 +73,30 @@ socket.on('generateAnalistOffer', function(clientId) {
     myConnections[clientId] = new RTCPeerConnection(servers);
     let pc = myConnections[clientId];
 
-    navigator.mediaDevices.getUserMedia({audio:false, video:true})
-    .then(stream => {
-        console.log(stream)
-        console.log(saveActiveStream)
-        console.log(pc)
-        pc.addStream(saveActiveStream)
-        console.log(pc)
-    });
+    // navigator.mediaDevices.getUserMedia({audio:false, video:true})
+    // .then(stream => {});
+
+    console.log(stream)
+    console.log(saveActiveStream)
+    console.log(pc)
+    pc.addStream(saveActiveStream)
+    console.log(pc)
+    pc.createOffer()
+        .then(offer => pc.setLocalDescription(offer))
+        .then(() => {
+            // console.log(pc.localDescription) 
+            // storageMySDPInServer(
+            //     JSON.stringify({'id': yourId, 'sdp': pc.localDescription}))
+
+            socket.emit('sendNewAnalistOffer', 
+                JSON.stringify({'clientId': clientId, 'sdp': pc.localDescription}))
+        })
 
 
     setTimeout(function(){
         console.log("gerou a oferta")
         console.log(pc)
-        pc.createOffer()
-            .then(offer => pc.setLocalDescription(offer))
-            .then(() => {
-                // console.log(pc.localDescription) 
-                // storageMySDPInServer(
-                //     JSON.stringify({'id': yourId, 'sdp': pc.localDescription}))
-
-                socket.emit('sendNewAnalistOffer', 
-                    JSON.stringify({'clientId': clientId, 'sdp': pc.localDescription}))
-            })
+        
     }, 5000)
 });
 
