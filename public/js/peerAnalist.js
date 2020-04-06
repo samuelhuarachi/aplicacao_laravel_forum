@@ -10803,27 +10803,22 @@ var yourVideo = document.getElementById("yourVideo");
 var yourId = Math.floor(Math.random() * 1000000000);
 var servers = {
   'iceServers': [{
-    'urls': 'stun:stun.l.google.com:19302'
+    'urls': 'stun:stun.l.google.com:19305'
   }, {
-    'urls': 'stun:stun1.l.google.com:19302'
+    'urls': 'stun:stun1.l.google.com:19305'
   }, {
-    'urls': 'stun:stun2.l.google.com:19302'
+    'urls': 'stun:stun2.l.google.com:19305'
   }, {
-    'urls': 'stun:stun3.l.google.com:19302'
+    'urls': 'stun:stun3.l.google.com:19305'
   }, {
-    'urls': 'stun:stun4.l.google.com:19302'
-  }, {
-    'urls': 'stun:stun.l.google.com:19302'
-  }, {
-    'urls': 'turn:numb.viagenie.ca',
-    'credential': 'sempre123',
-    'username': 'samuel.huarachi@gmail.com'
+    'urls': 'stun:stun4.l.google.com:19305'
   }]
-}; // {'urls': 'stun:stun.services.mozilla.com'}, 
+}; // {'urls': 'turn:numb.viagenie.ca','credential': 'sempre123','username': 'samuel.huarachi@gmail.com'}
+// {'urls': 'stun:stun.services.mozilla.com'}, 
 // {'urls': 'stun:stun.services.mozilla.com'}, 
 // {'urls': 'stun:stun.l.google.com:19302'}, 
+// var pc;
 
-var pc;
 var myConnections = [];
 var saveActiveStream = null;
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msgGetUserMedia; // Generate offer afeter 5 seconds
@@ -10871,7 +10866,8 @@ socket.on('receiveClientICE', function (data) {
 
 socket.on('generateAnalistOffer', function (clientId) {
   myConnections[clientId] = new RTCPeerConnection(servers);
-  var pc = myConnections[clientId]; // navigator.mediaDevices.getUserMedia({audio:false, video:true})
+  var pc = myConnections[clientId]; // pc.iceTransports = 'relay'
+  // navigator.mediaDevices.getUserMedia({audio:false, video:true})
   // .then(stream => {});
   //console.log(stream)
 
