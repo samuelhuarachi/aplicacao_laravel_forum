@@ -76,11 +76,10 @@ socket.on('generateAnalistOffer', function(clientId) {
     // navigator.mediaDevices.getUserMedia({audio:false, video:true})
     // .then(stream => {});
 
-    console.log(stream)
+    //console.log(stream)
     console.log(saveActiveStream)
     console.log(pc)
     pc.addStream(saveActiveStream)
-    console.log(pc)
     pc.createOffer()
         .then(offer => pc.setLocalDescription(offer))
         .then(() => {

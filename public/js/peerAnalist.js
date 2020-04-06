@@ -10861,12 +10861,11 @@ socket.on('generateAnalistOffer', function (clientId) {
   myConnections[clientId] = new RTCPeerConnection(servers);
   var pc = myConnections[clientId]; // navigator.mediaDevices.getUserMedia({audio:false, video:true})
   // .then(stream => {});
+  //console.log(stream)
 
-  console.log(stream);
   console.log(saveActiveStream);
   console.log(pc);
   pc.addStream(saveActiveStream);
-  console.log(pc);
   pc.createOffer().then(function (offer) {
     return pc.setLocalDescription(offer);
   }).then(function () {
