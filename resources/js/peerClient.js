@@ -1,4 +1,5 @@
-const BASEURL = 'https://quiet-beach-73356.herokuapp.com';
+// const BASEURL = 'https://quiet-beach-73356.herokuapp.com';
+const BASEURL = 'http://localhost:3001'
 
 import io from 'socket.io-client';
 //const { ConfigureIsOnline } = require('./common')

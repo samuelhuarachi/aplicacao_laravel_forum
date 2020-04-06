@@ -1,4 +1,5 @@
-const BASEURL = 'https://quiet-beach-73356.herokuapp.com';
+// const BASEURL = 'https://quiet-beach-73356.herokuapp.com';
+const BASEURL = 'http://localhost:3001'
 
  import io from 'socket.io-client';
 const socket = io(BASEURL);
@@ -13,6 +14,7 @@ var servers = {'iceServers': [
 
 var pc;
 var myConnections = [];
+let saveActiveStream = null;
 
 
 navigator.getUserMedia = (navigator.getUserMedia 
@@ -35,7 +37,10 @@ setTimeout(function(){
 }, 5000);
 
 navigator.mediaDevices.getUserMedia({audio:false, video:true})
-    .then(stream => yourVideo.srcObject = stream)
+    .then(stream => {
+        yourVideo.srcObject = stream
+        saveActiveStream = stream
+    })
 
 
 function storageMySDPInServer(data) {
@@ -70,11 +75,17 @@ socket.on('generateAnalistOffer', function(clientId) {
 
     navigator.mediaDevices.getUserMedia({audio:false, video:true})
     .then(stream => {
-        pc.addStream(stream)
+        console.log(stream)
+        console.log(saveActiveStream)
+        console.log(pc)
+        pc.addStream(saveActiveStream)
+        console.log(pc)
     });
+
 
     setTimeout(function(){
         console.log("gerou a oferta")
+        console.log(pc)
         pc.createOffer()
             .then(offer => pc.setLocalDescription(offer))
             .then(() => {

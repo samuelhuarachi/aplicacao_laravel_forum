@@ -10795,7 +10795,8 @@ module.exports = yeast;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/lib/index.js");
 /* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(socket_io_client__WEBPACK_IMPORTED_MODULE_0__);
-var BASEURL = 'https://quiet-beach-73356.herokuapp.com';
+// const BASEURL = 'https://quiet-beach-73356.herokuapp.com';
+var BASEURL = 'http://localhost:3001';
 
 var socket = socket_io_client__WEBPACK_IMPORTED_MODULE_0___default()(BASEURL);
 var yourVideo = document.getElementById("yourVideo");
@@ -10813,6 +10814,7 @@ var servers = {
 };
 var pc;
 var myConnections = [];
+var saveActiveStream = null;
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msgGetUserMedia; // Generate offer afeter 5 seconds
 
 setTimeout(function () {
@@ -10829,7 +10831,8 @@ navigator.mediaDevices.getUserMedia({
   audio: false,
   video: true
 }).then(function (stream) {
-  return yourVideo.srcObject = stream;
+  yourVideo.srcObject = stream;
+  saveActiveStream = stream;
 });
 
 function storageMySDPInServer(data) {
@@ -10861,10 +10864,15 @@ socket.on('generateAnalistOffer', function (clientId) {
     audio: false,
     video: true
   }).then(function (stream) {
-    pc.addStream(stream);
+    console.log(stream);
+    console.log(saveActiveStream);
+    console.log(pc);
+    pc.addStream(saveActiveStream);
+    console.log(pc);
   });
   setTimeout(function () {
     console.log("gerou a oferta");
+    console.log(pc);
     pc.createOffer().then(function (offer) {
       return pc.setLocalDescription(offer);
     }).then(function () {
