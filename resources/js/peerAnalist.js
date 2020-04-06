@@ -1,8 +1,95 @@
-// const BASEURL = 'http://localhost:3001';
+const BASEURL = 'http://localhost:3001';
 
-// import io from 'socket.io-client';
-// //var Peer = require('simple-peer')
-// const socket = io(BASEURL);
+ import io from 'socket.io-client';
+const socket = io(BASEURL);
+
+
+var yourVideo = document.getElementById("yourVideo");
+var yourId = Math.floor(Math.random()*1000000000);
+var servers = {'iceServers': [
+    {'urls': 'stun:stun.services.mozilla.com'}, 
+    {'urls': 'stun:stun.l.google.com:19302'}, 
+    {'urls': 'turn:numb.viagenie.ca','credential': 'sempre123','username': 'samuel.huarachi@gmail.com'}]};
+
+var pc;
+var myConnections = [];
+
+
+navigator.getUserMedia = (navigator.getUserMedia 
+    || navigator.webkitGetUserMedia 
+    || navigator.mozGetUserMedia 
+    || navigator.msgGetUserMedia);
+
+
+
+// Generate offer afeter 5 seconds
+setTimeout(function(){
+    // pc.createOffer()
+    // .then(offer => pc.setLocalDescription(offer))
+    // .then(() => {
+    //     console.log(pc.localDescription) 
+    //     storageMySDPInServer(
+    //         JSON.stringify({'id': yourId, 'sdp': pc.localDescription})) 
+    // })
+    console.log("beleza passou 5 seg")
+}, 5000);
+
+navigator.mediaDevices.getUserMedia({audio:false, video:true})
+    .then(stream => yourVideo.srcObject = stream)
+
+
+function storageMySDPInServer(data) {
+    console.log(data)
+    socket.emit('analistSDPandID', data)
+}
+
+// Answers aacho que eh aqui
+socket.on('receiveClientSDP', function(data) {
+    let msg = JSON.parse(data)
+    let pc = myConnections[msg.clientId];
+    console.log(myConnections)
+    pc.setRemoteDescription(new RTCSessionDescription(msg.sdp));
+})
+
+
+socket.on('receiveClientICE', function(data) {
+    let msg = JSON.parse(data)
+    let pc = myConnections[msg.clientId];
+    pc.addIceCandidate(new RTCIceCandidate(msg.ice));
+    console.log("ICE FOI")
+})
+
+// socket.on('connect', function() {
+//     const analistSessionID = socket.socket.sessionid;
+//     socket.emit('sendAnalistSessionID', analistSessionID)
+// });
+
+socket.on('generateAnalistOffer', function(clientId) {
+    myConnections[clientId] = new RTCPeerConnection(servers);
+    let pc = myConnections[clientId];
+
+    navigator.mediaDevices.getUserMedia({audio:false, video:true})
+    .then(stream => {
+        pc.addStream(stream)
+    });
+
+    setTimeout(function(){
+        console.log("gerou a oferta")
+        pc.createOffer()
+            .then(offer => pc.setLocalDescription(offer))
+            .then(() => {
+                // console.log(pc.localDescription) 
+                // storageMySDPInServer(
+                //     JSON.stringify({'id': yourId, 'sdp': pc.localDescription}))
+
+                socket.emit('sendNewAnalistOffer', 
+                    JSON.stringify({'clientId': clientId, 'sdp': pc.localDescription}))
+            })
+    }, 5000)
+});
+
+
+
 // const axios = require('axios');
 // const { ConfigureIsOnline } = require('./common')
 
