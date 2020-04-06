@@ -24,7 +24,7 @@ class FullScan extends Command
      *
      * @var string
      */
-    protected $description = 'Faz ';
+    protected $description = 'Faz o scaneamento';
 
     /**
      * Create a new command instance.

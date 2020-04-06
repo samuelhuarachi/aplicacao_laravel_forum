@@ -53,6 +53,8 @@ class Script {
             $trannyLinkFounded = $this->findTrannyLinksOnThisCity($URL);
             foreach($trannyLinkFounded as $linkTranny)
             {
+                // $linkTranny = 'https://www.travesticomlocal.com.br/acompanhante/patricia-silva/';
+                
                 dump($linkTranny);
                 $this->linkTranny = $linkTranny;
 
@@ -64,6 +66,7 @@ class Script {
 
                 $cellphone = $this->getTrannyCellPhone();
                 $isCellphoneValid = $this->isCellphoneValid($cellphone);
+
                 if ($isCellphoneValid) {
                     $cellphone = $this->formatCellPhoneNumber($cellphone);
 
@@ -122,6 +125,10 @@ class Script {
                         }
                     }
                     $this->updateLastSee($cellphone, $cityID);
+                    dump("*************************************");
+                } else {
+                    $this->writeInLog("Celular inválido".PHP_EOL."URL: ". $this->linkTranny);
+                    dump("Celular inválido: " . $linkTranny);
                     dump("*************************************");
                 }
             }
@@ -265,11 +272,31 @@ class Script {
     protected function isCellphoneValid($cellphone)
     {
         if ($cellphone == "") {
+            $this->writeInLog("Número de celular inválido, vazio".PHP_EOL."URL: ".$this->linkTranny .PHP_EOL."Cellphone: ".$cellphone);
+            return null;
+        }
+
+        $telExplode = explode(' ', $cellphone);
+
+        if (count($telExplode) !== 2) {
+            dump("Número de celular inválido, falha no explode".PHP_EOL."URL: ".$this->linkTranny .PHP_EOL."Cellphone: ".$cellphone);
             $this->writeInLog("Número de celular inválido".PHP_EOL."URL: ".$this->linkTranny .PHP_EOL."Cellphone: ".$cellphone);
             return null;
         }
 
+        $ddd = $telExplode[0];
+        $numberCellPhone = $telExplode[1];
+
+        if (strlen($ddd) !== 3) {
+            dump("Número de celular inválido, falha no ddd".PHP_EOL."URL: ".$this->linkTranny .PHP_EOL."Cellphone: ".$cellphone);
+            return null;
+        }
+
+        $ddd = substr($ddd, 1, 2);
+        $cellphone = $ddd . $numberCellPhone;
+
         $justNumbersPhone = preg_replace('/\D/', '', $cellphone);
+
         if (strlen((string)$justNumbersPhone) != 11) {
             $this->writeInLog("Número de celular inválido".PHP_EOL."URL: ".$this->linkTranny .PHP_EOL."Cellphone: ".$cellphone);
             return null;
@@ -279,9 +306,22 @@ class Script {
 
     protected function getTrannyCellPhone()
     {
+        $cellphoneFinded = null;
         $htmlString = file_get_contents($this->linkTranny);
         $dom = new \DOMDocument;
         @$dom->loadHTML($htmlString);
+
+        $allDivs = $dom->getElementsByTagName('div');
+        foreach($allDivs as $div) {
+            $divClass = $div->getAttribute('class');
+            if ($divClass == 'job_listing-phone') {
+                $allA = $div->getElementsByTagName('a');
+                foreach($allA as $a) {
+                    return $cellphoneFinded = $a->textContent;
+                }
+            }
+        }
+
         $allHeaders6 = $dom->getElementsByTagName('h6');
         foreach($allHeaders6 as $h6) {
             $class = $h6->getAttribute('class');
