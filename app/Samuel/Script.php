@@ -265,6 +265,12 @@ class Script {
 
     protected function formatCellPhoneNumber($cellphone)
     {
+        $telExplode = explode(' ', $cellphone);
+        $ddd = $telExplode[0];
+        $numberCellPhone = $telExplode[1];
+        $ddd = substr($ddd, 1, 2);
+        $cellphone = $ddd . $numberCellPhone;
+
         $justNumbersPhone = preg_replace('/\D/', '', $cellphone);
         return vsprintf("(%s%s) %s%s%s%s%s-%s%s%s%s", str_split($justNumbersPhone));
     }
