@@ -1,4 +1,4 @@
-const BASEURL = 'http://localhost:3001';
+const BASEURL = 'https://quiet-beach-73356.herokuapp.com';
 
  import io from 'socket.io-client';
 const socket = io(BASEURL);

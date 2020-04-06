@@ -10795,7 +10795,7 @@ module.exports = yeast;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/lib/index.js");
 /* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(socket_io_client__WEBPACK_IMPORTED_MODULE_0__);
-var BASEURL = 'http://localhost:3001';
+var BASEURL = 'https://quiet-beach-73356.herokuapp.com';
 
 var socket = socket_io_client__WEBPACK_IMPORTED_MODULE_0___default()(BASEURL);
 var yourVideo = document.getElementById("yourVideo");
