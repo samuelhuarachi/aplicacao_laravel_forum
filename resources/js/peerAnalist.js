@@ -1,5 +1,5 @@
-// const BASEURL = 'https://quiet-beach-73356.herokuapp.com';
-const BASEURL = 'http://localhost:3001'
+const BASEURL = 'https://quiet-beach-73356.herokuapp.com';
+// const BASEURL = 'http://localhost:3001'
 
  import io from 'socket.io-client';
 const socket = io(BASEURL);
@@ -8,9 +8,18 @@ const socket = io(BASEURL);
 var yourVideo = document.getElementById("yourVideo");
 var yourId = Math.floor(Math.random()*1000000000);
 var servers = {'iceServers': [
-    {'urls': 'stun:stun.services.mozilla.com'}, 
-    {'urls': 'stun:stun.l.google.com:19302'}, 
-    {'urls': 'turn:numb.viagenie.ca','credential': 'sempre123','username': 'samuel.huarachi@gmail.com'}]};
+    {'urls': 'stun:stun.l.google.com:19302'},
+    {'urls': 'stun:stun1.l.google.com:19302'},
+    {'urls': 'stun:stun2.l.google.com:19302'},
+    {'urls': 'stun:stun3.l.google.com:19302'},
+    {'urls': 'stun:stun4.l.google.com:19302'},
+    {'urls': 'stun:stun.l.google.com:19302'},
+    {'urls': 'turn:numb.viagenie.ca','credential': 'sempre123','username': 'samuel.huarachi@gmail.com'}
+]};
+
+// {'urls': 'stun:stun.services.mozilla.com'}, 
+    // {'urls': 'stun:stun.services.mozilla.com'}, 
+    // {'urls': 'stun:stun.l.google.com:19302'}, 
 
 var pc;
 var myConnections = [];
@@ -50,16 +59,19 @@ function storageMySDPInServer(data) {
 
 // Answers aacho que eh aqui
 socket.on('receiveClientSDP', function(data) {
+
+    console.log("receive SDP client")
     let msg = JSON.parse(data)
     let pc = myConnections[msg.clientId];
-    console.log(myConnections)
     pc.setRemoteDescription(new RTCSessionDescription(msg.sdp));
 })
-
 
 socket.on('receiveClientICE', function(data) {
     let msg = JSON.parse(data)
     let pc = myConnections[msg.clientId];
+
+    console.log(msg.ice)
+
     pc.addIceCandidate(new RTCIceCandidate(msg.ice));
     console.log("ICE FOI")
 })
@@ -77,25 +89,23 @@ socket.on('generateAnalistOffer', function(clientId) {
     // .then(stream => {});
 
     //console.log(stream)
-    console.log(saveActiveStream)
-    console.log(pc)
+    
     pc.addStream(saveActiveStream)
-    pc.createOffer()
+    
+    setTimeout(function(){
+        pc.createOffer()
         .then(offer => pc.setLocalDescription(offer))
         .then(() => {
             // console.log(pc.localDescription) 
             // storageMySDPInServer(
             //     JSON.stringify({'id': yourId, 'sdp': pc.localDescription}))
 
+            console.log(pc.localDescription)
+
             socket.emit('sendNewAnalistOffer', 
                 JSON.stringify({'clientId': clientId, 'sdp': pc.localDescription}))
         })
-
-
-    setTimeout(function(){
         console.log("gerou a oferta")
-        console.log(pc)
-        
     }, 5000)
 });
 

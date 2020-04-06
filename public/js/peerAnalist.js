@@ -10795,15 +10795,23 @@ module.exports = yeast;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/lib/index.js");
 /* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(socket_io_client__WEBPACK_IMPORTED_MODULE_0__);
-// const BASEURL = 'https://quiet-beach-73356.herokuapp.com';
-var BASEURL = 'http://localhost:3001';
+var BASEURL = 'https://quiet-beach-73356.herokuapp.com'; // const BASEURL = 'http://localhost:3001'
+
 
 var socket = socket_io_client__WEBPACK_IMPORTED_MODULE_0___default()(BASEURL);
 var yourVideo = document.getElementById("yourVideo");
 var yourId = Math.floor(Math.random() * 1000000000);
 var servers = {
   'iceServers': [{
-    'urls': 'stun:stun.services.mozilla.com'
+    'urls': 'stun:stun.l.google.com:19302'
+  }, {
+    'urls': 'stun:stun1.l.google.com:19302'
+  }, {
+    'urls': 'stun:stun2.l.google.com:19302'
+  }, {
+    'urls': 'stun:stun3.l.google.com:19302'
+  }, {
+    'urls': 'stun:stun4.l.google.com:19302'
   }, {
     'urls': 'stun:stun.l.google.com:19302'
   }, {
@@ -10811,7 +10819,10 @@ var servers = {
     'credential': 'sempre123',
     'username': 'samuel.huarachi@gmail.com'
   }]
-};
+}; // {'urls': 'stun:stun.services.mozilla.com'}, 
+// {'urls': 'stun:stun.services.mozilla.com'}, 
+// {'urls': 'stun:stun.l.google.com:19302'}, 
+
 var pc;
 var myConnections = [];
 var saveActiveStream = null;
@@ -10842,14 +10853,15 @@ function storageMySDPInServer(data) {
 
 
 socket.on('receiveClientSDP', function (data) {
+  console.log("receive SDP client");
   var msg = JSON.parse(data);
   var pc = myConnections[msg.clientId];
-  console.log(myConnections);
   pc.setRemoteDescription(new RTCSessionDescription(msg.sdp));
 });
 socket.on('receiveClientICE', function (data) {
   var msg = JSON.parse(data);
   var pc = myConnections[msg.clientId];
+  console.log(msg.ice);
   pc.addIceCandidate(new RTCIceCandidate(msg.ice));
   console.log("ICE FOI");
 }); // socket.on('connect', function() {
@@ -10863,23 +10875,21 @@ socket.on('generateAnalistOffer', function (clientId) {
   // .then(stream => {});
   //console.log(stream)
 
-  console.log(saveActiveStream);
-  console.log(pc);
   pc.addStream(saveActiveStream);
-  pc.createOffer().then(function (offer) {
-    return pc.setLocalDescription(offer);
-  }).then(function () {
-    // console.log(pc.localDescription) 
-    // storageMySDPInServer(
-    //     JSON.stringify({'id': yourId, 'sdp': pc.localDescription}))
-    socket.emit('sendNewAnalistOffer', JSON.stringify({
-      'clientId': clientId,
-      'sdp': pc.localDescription
-    }));
-  });
   setTimeout(function () {
+    pc.createOffer().then(function (offer) {
+      return pc.setLocalDescription(offer);
+    }).then(function () {
+      // console.log(pc.localDescription) 
+      // storageMySDPInServer(
+      //     JSON.stringify({'id': yourId, 'sdp': pc.localDescription}))
+      console.log(pc.localDescription);
+      socket.emit('sendNewAnalistOffer', JSON.stringify({
+        'clientId': clientId,
+        'sdp': pc.localDescription
+      }));
+    });
     console.log("gerou a oferta");
-    console.log(pc);
   }, 5000);
 }); // const axios = require('axios');
 // const { ConfigureIsOnline } = require('./common')

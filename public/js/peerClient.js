@@ -12608,8 +12608,8 @@ module.exports = yeast;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/lib/index.js");
 /* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(socket_io_client__WEBPACK_IMPORTED_MODULE_0__);
-// const BASEURL = 'https://quiet-beach-73356.herokuapp.com';
-var BASEURL = 'http://localhost:3001';
+var BASEURL = 'https://quiet-beach-73356.herokuapp.com'; // const BASEURL = 'http://localhost:3001'
+
  //const { ConfigureIsOnline } = require('./common')
 
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
@@ -12617,24 +12617,41 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 var socket = socket_io_client__WEBPACK_IMPORTED_MODULE_0___default()(BASEURL);
 var friendsVideo = document.getElementById("friendsVideo");
 var clientId = uuidv4();
+var time = 0;
 var servers = {
   'iceServers': [{
+    'urls': 'stun:stun.l.google.com:19302'
+  }, {
+    'urls': 'stun:stun1.l.google.com:19302'
+  }, {
+    'urls': 'stun:stun2.l.google.com:19302'
+  }, {
+    'urls': 'stun:stun3.l.google.com:19302'
+  }, {
+    'urls': 'stun:stun4.l.google.com:19302'
+  }, {
     'urls': 'turn:numb.viagenie.ca',
     'credential': 'sempre123',
     'username': 'samuel.huarachi@gmail.com'
-  }, {
-    'urls': 'stun:stun.services.mozilla.com'
-  }, {
-    'urls': 'stun:stun.l.google.com:19302'
   }]
-};
+}; // {'urls': 'stun:stun.services.mozilla.com'},  
+// {'urls': 'turn:numb.viagenie.ca','credential': 'sempre123','username': 'samuel.huarachi@gmail.com'}
+// {'urls': 'stun:stun.services.mozilla.com'}, 
+// {'urls': 'stun:stun.l.google.com:19302'}
+
 var pc = new RTCPeerConnection(servers);
+pc.iceTransports = 'relay'; // pc.config.peerConnectionConfig.iceTransports = 'relay'
 
 pc.onicecandidate = function (event) {
-  return event.candidate ? socket.emit('sendClientICE', JSON.stringify({
-    'clientId': clientId,
-    'ice': event.candidate
-  })) : console.log("Sent All Ice");
+  if (event.candidate) {
+    console.log(event.candidate);
+    socket.emit('sendClientICE', JSON.stringify({
+      'clientId': clientId,
+      'ice': event.candidate
+    }));
+  } else {
+    console.log("Sent All Ice");
+  }
 };
 
 var url = BASEURL + '/analist/(19)%2092323-1300';
@@ -12661,10 +12678,11 @@ setTimeout(function () {
 socket.on('sendAnalistOfferToClient', function (data) {
   var msg = data;
   msg = JSON.parse(msg);
+  console.log("2x ????");
   console.log(clientId);
   console.log(msg.clientId);
 
-  if (msg.clientId == clientId) {
+  if (msg.clientId == clientId && time == 0) {
     console.log(msg.sdp);
     pc.setRemoteDescription(new RTCSessionDescription(msg.sdp)).then(function () {
       return pc.createAnswer();
@@ -12676,6 +12694,7 @@ socket.on('sendAnalistOfferToClient', function (data) {
         'sdp': pc.localDescription
       }));
     });
+    time = 1;
   }
 });
 

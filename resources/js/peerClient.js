@@ -1,5 +1,5 @@
-// const BASEURL = 'https://quiet-beach-73356.herokuapp.com';
-const BASEURL = 'http://localhost:3001'
+const BASEURL = 'https://quiet-beach-73356.herokuapp.com';
+// const BASEURL = 'http://localhost:3001'
 
 import io from 'socket.io-client';
 //const { ConfigureIsOnline } = require('./common')
@@ -8,22 +8,40 @@ const socket = io(BASEURL);
 var friendsVideo = document.getElementById("friendsVideo");
 
 const clientId = uuidv4();
+let time = 0;
 
 var servers = {'iceServers': [
-        {'urls': 'turn:numb.viagenie.ca','credential': 'sempre123','username': 'samuel.huarachi@gmail.com'},
-        {'urls': 'stun:stun.services.mozilla.com'}, 
-        {'urls': 'stun:stun.l.google.com:19302'}
+        {'urls': 'stun:stun.l.google.com:19302'},
+        {'urls': 'stun:stun1.l.google.com:19302'},
+        {'urls': 'stun:stun2.l.google.com:19302'},
+        {'urls': 'stun:stun3.l.google.com:19302'},
+        {'urls': 'stun:stun4.l.google.com:19302'},
+        {'urls': 'turn:numb.viagenie.ca','credential': 'sempre123','username': 'samuel.huarachi@gmail.com'}
     ]};
+
+
+    // {'urls': 'stun:stun.services.mozilla.com'},  
+// {'urls': 'turn:numb.viagenie.ca','credential': 'sempre123','username': 'samuel.huarachi@gmail.com'}
+    // {'urls': 'stun:stun.services.mozilla.com'}, 
+    // {'urls': 'stun:stun.l.google.com:19302'}
+
+
 var pc = new RTCPeerConnection(servers);
 
+pc.iceTransports = 'relay'
+
+// pc.config.peerConnectionConfig.iceTransports = 'relay'
 
 pc.onicecandidate = (
-    event => event.candidate ? 
-        socket.emit('sendClientICE', 
+    event => {
+        if (event.candidate) {
+            console.log(event.candidate)
+            socket.emit('sendClientICE', 
                 JSON.stringify({'clientId': clientId,'ice': event.candidate}))
-        :
-        console.log("Sent All Ice"));
-
+        } else {
+            console.log("Sent All Ice")
+        }
+    });
 
 var url = BASEURL + '/analist/(19)%2092323-1300';
 axios.get(url)
@@ -53,15 +71,19 @@ socket.on('sendAnalistOfferToClient', data => {
     var msg = data;
     msg = JSON.parse(msg)
 
+    console.log("2x ????")
     console.log(clientId)
     console.log(msg.clientId)
-    if (msg.clientId == clientId) {
+
+    if (msg.clientId == clientId && time == 0) {
         console.log(msg.sdp)
         pc.setRemoteDescription(new RTCSessionDescription(msg.sdp))
                     .then(() => pc.createAnswer())
                     .then(answer => pc.setLocalDescription(answer))
                     .then(() => socket.emit('sendClientSDP',
                             JSON.stringify({'clientId': clientId,'sdp': pc.localDescription})))
+
+        time = 1;
     }
 })
 
