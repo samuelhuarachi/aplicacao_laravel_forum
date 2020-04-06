@@ -86,7 +86,20 @@ socket.on('generateAnalistOffer', function(clientId) {
     myConnections[clientId] = new RTCPeerConnection(servers);
     let pc = myConnections[clientId];
 
-    pc.iceTransports = 'relay'
+    // pc.iceTransports = 'relay'
+
+    pc.onicecandidate = (
+        event => {
+            console.log("My ICE Analist, client ID " + clientId)
+            console.log(event.candidate);
+
+            if (event.candidate) {
+                socket.emit('sendAnalistICE', 
+                    JSON.stringify({'clientId': clientId,'ice': event.candidate}))
+            } else {
+                console.log("Sent all Analist ice")
+            }
+        });
 
     // navigator.mediaDevices.getUserMedia({audio:false, video:true})
     // .then(stream => {});

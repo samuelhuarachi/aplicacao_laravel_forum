@@ -12671,8 +12671,8 @@ var servers = {
 // s2.voipstation.jp          113.32.111.127:3478
 // https://gist.github.com/zziuni/3741933
 
-var pc = new RTCPeerConnection(servers);
-pc.iceTransports = 'relay'; // pc.config.peerConnectionConfig.iceTransports = 'relay'
+var pc = new RTCPeerConnection(servers); // pc.iceTransports = 'relay'
+// pc.config.peerConnectionConfig.iceTransports = 'relay'
 
 pc.onicecandidate = function (event) {
   if (event.candidate) {
@@ -12707,6 +12707,15 @@ setTimeout(function () {
   console.log("request analist offer");
   socket.emit('INeedAnalistOffer', clientId);
 }, 3000);
+socket.on('receiveAnalistICE', function (data) {
+  var msg = JSON.parse(data); // let pc = myConnections[msg.clientId];
+  // console.log(msg.ice)
+
+  if (msg.clientId == clientId) {
+    pc.addIceCandidate(new RTCIceCandidate(msg.ice));
+    console.log("ICE analist receive");
+  }
+});
 socket.on('sendAnalistOfferToClient', function (data) {
   var msg = data;
   msg = JSON.parse(msg);

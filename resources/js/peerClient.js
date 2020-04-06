@@ -68,7 +68,7 @@ var servers = {'iceServers': [
 
 var pc = new RTCPeerConnection(servers);
 
-pc.iceTransports = 'relay'
+// pc.iceTransports = 'relay'
 
 // pc.config.peerConnectionConfig.iceTransports = 'relay'
 
@@ -106,6 +106,23 @@ setTimeout(function() {
     console.log("request analist offer")
     socket.emit('INeedAnalistOffer', clientId);
 }, 3000);
+
+
+
+
+
+socket.on('receiveAnalistICE', function(data) {
+    let msg = JSON.parse(data)
+
+    // let pc = myConnections[msg.clientId];
+    // console.log(msg.ice)
+
+    if (msg.clientId == clientId) {
+        pc.addIceCandidate(new RTCIceCandidate(msg.ice));
+        console.log("ICE analist receive")
+    }
+})
+
 
 socket.on('sendAnalistOfferToClient', data => {
     var msg = data;
