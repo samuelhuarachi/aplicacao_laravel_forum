@@ -12619,13 +12619,13 @@ var friendsVideo = document.getElementById("friendsVideo");
 var clientId = uuidv4();
 var servers = {
   'iceServers': [{
-    'urls': 'stun:stun.services.mozilla.com'
-  }, {
-    'urls': 'stun:stun.l.google.com:19302'
-  }, {
     'urls': 'turn:numb.viagenie.ca',
     'credential': 'sempre123',
     'username': 'samuel.huarachi@gmail.com'
+  }, {
+    'urls': 'stun:stun.services.mozilla.com'
+  }, {
+    'urls': 'stun:stun.l.google.com:19302'
   }]
 };
 var pc = new RTCPeerConnection(servers);
