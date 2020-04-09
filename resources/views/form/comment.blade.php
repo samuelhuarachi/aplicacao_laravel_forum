@@ -47,11 +47,11 @@
         {!! Form::textarea('comment', null, ['id' => 'textareaComment', 'style' => 'height:200px;', 'class' => 'form-control', 'maxlength' => '2999', 'autocomplete' => 'new-comment']) !!}
         @enderror
         
-        @error('comment')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
+        <div class = "alert alert-error">                      
+            @foreach ($errors->all('<p>:message</p>') as $input_error)
+                {{ $input_error }}
+            @endforeach 
+        </div> 
 
         <div id="commentCount"></div>
     </div>

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
-    <meta name="robots" content="index, follow"> 
+    <meta name="robots" content="index, follow">
     <style>
     .image-in-gallery {
         width: 50px;
@@ -20,7 +20,7 @@
         margin-bottom: 0;
     }
 
-    .logo a{
+    .logo a {
         font-size: 69px;
         font-family: 'Baloo', cursive;
         color: #dc3545;
@@ -183,7 +183,7 @@
     @yield('client')
 
     <style>
-    video {
+    /* video {
         border:1px solid #333;
         height: 300px;
     
@@ -191,7 +191,7 @@
     canvas {
         border: 1px solid red;
         height: 300px;
-    }
+    } */
     </style>
 </body>
 </html>

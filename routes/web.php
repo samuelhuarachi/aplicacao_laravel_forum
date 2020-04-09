@@ -119,8 +119,15 @@ function() {
 });
 
 
-Route::get('chat/client', 'Chat\ChatController@client');
-Route::get('chat/analist', 'Chat\ChatController@analist');
+Route::get('chat/analist/login', 'Chat\ChatController@analistLogin');
+Route::post('chat/analist/authenticate', 'Chat\ChatController@authenticate')
+                ->name('chat.analist.authenticate');
+Route::get('chat/analist/{slug}', 'Chat\ChatController@analist')
+                ->name('chat.analist');
+
+                
+Route::get('chat/client/{slug}', 'Chat\ChatController@client')
+                        ->name('chat.client');
 
 
 Auth::routes(['verify' => true]);

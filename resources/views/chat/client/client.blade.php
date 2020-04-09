@@ -2,35 +2,6 @@
 
 @section('content')
 
-<div id="isOnline"></div>
-
-<br>
-<br>
-<br>
-<br>
-<br>
-
-<hr>
-<p>Analista ID</p>
-<textarea id="analistID" cols="60" rows="10"></textarea>
-<br>
-<textarea id="clientID" cols="30" rows="10"></textarea>
-<br>
-<button id="connect">connect</button>
-<br>
-<input type="text" name="yourMessage" id="yourMessage">
-<br>
-<button id="send">send</button>
-<div id="messages"></div>
-<br>
-<br>
-
-
-<img id="play">
-<div id="message-received"></div>
-<hr />
-<h3>Friends Video</h3>
-<video id="yourVideo" autoplay muted></video>
 <video id="friendsVideo" autoplay></video>
 
 @endsection

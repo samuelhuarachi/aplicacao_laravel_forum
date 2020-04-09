@@ -2,71 +2,90 @@
 
 @section('content')
 
-<!-- <script
-            src="https://code.jquery.com/jquery-3.4.1.min.js"
-            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-            crossorigin="anonymous"></script> -->
+<h2>{{ $myData->name }} {{ $myData->lastname }}</h2>
 
-<button onClick="createAnalistOffer" type="button" 
-    class="btn btn-primary">
-    <span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span> 
-    Criar minha oferta</button>
-<br><br>
+<img width="10" src="{{ asset('images/green.png') }}" alt=""> <small>Ao vivo</small>
 
-<div id="isOnline"></div>
-<button class="btn btn-success" id="onlineButton">Ficar Online</button>
+<button class="btn btn-danger btn-sm">Sair</button>
 
-<br>
-<br>
-<br>
-<br>
+<div class="workspace">
 
-<p>Analista ID</p>
-<textarea id="analistID" cols="60" rows="10"></textarea>
-<br>
-<textarea id="clientID" cols="30" rows="10"></textarea>
-<br>
-<button id="connect">connect</button>
-<br>
-<input type="text" name="yourMessage" id="yourMessage">
-<br>
-<button id="send">send</button>
-<div id="messages"></div>
-<br>
-<br>
+    <video id="analistVideo" autoplay muted></video>
 
-<video src="" id="video" autoplay="true"></video>
-<canvas id="preview"></canvas>
-<div id="logger"></div>
-
-<section id="messge">
-    <input type="text" id="message-text" name="messge-text">
-    <button id="send-message">Enviar</button>
-</section>
-
-<br>
-<br>
-<br>
-<br>
-<hr>
-
-<video id="yourVideo" autoplay muted></video>
-<video id="friendsVideo" autoplay></video>
-<br />
-<button onClick="showFriendsFace()" type="button" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span> Call</button>
-
-
+    <div class="chat">
+        <div class="history"></div>
+        <div class="message">
+            <small>Digite sua mensagem</small> <br>
+            <input type="text" id="message" name="message">
+            <br>
+            <br>
+            <button id="btnSend" class="btn btn-sm btn-primary btn-block" type="button">Enviar</button> 
+        </div>
+    </div>
+</div>
 
 
 <style>
-canvas {
-    display:none;
+
+html, body { height: 100%;}
+
+#btnSend {
+
 }
+
+#message {
+    width: 100%;
+}
+
+
+.workspace {
+    height: 100%;
+    width: 100%;
+    border: 1px solid #333;
+    display: inline-flex;
+}
+
+video {
+    width: 50%;
+    border: 1px solid red;
+    background: #000;
+}
+
+.chat {
+    height: 100%;
+    border: 1px solid blue;
+    width: 50%;
+}
+
+.history {
+    border: 2px solid #696969;
+    height: 70%;
+}
+
+.message {
+    height: 30%;
+    border: 2px solid red;
+    padding-left: 5%;
+    padding-right: 5%;
+    background: #dc3545;
+    color: #fff;
+}
+
+input {
+    border: 1px solid #dc3545;
+    padding: 2px;
+    font-size: small;
+}
+
 </style>
 
 @endsection
 
 @section('analist')
+<script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
@@ -79,6 +98,9 @@ canvas {
 <script src="{{ asset('js/peerAnalist.js') }}"></script>
 
 <script type="text/javascript">
+
+let token = '{{ $token }}';
+let slug = '{{ $myData->slug }}';
 
 // var firebaseConfig = {
 //     apiKey: "AIzaSyDwK0hFJ_RaYCf71CX_j9pDDTZP-_HG71U",

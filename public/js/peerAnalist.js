@@ -10798,8 +10798,9 @@ __webpack_require__.r(__webpack_exports__);
 var BASEURL = 'https://quiet-beach-73356.herokuapp.com'; // const BASEURL = 'http://localhost:3001'
 
 
-var socket = socket_io_client__WEBPACK_IMPORTED_MODULE_0___default()(BASEURL);
-var yourVideo = document.getElementById("yourVideo");
+var socket = null;
+connectSocket();
+var analistVideo = document.getElementById("analistVideo");
 var yourId = Math.floor(Math.random() * 1000000000);
 var servers = {
   'iceServers': [{
@@ -10810,34 +10811,21 @@ var servers = {
     'urls': 'stun:stun2.l.google.com:19305'
   }, {
     'urls': 'stun:stun3.l.google.com:19305'
-  }, {
-    'urls': 'stun:stun4.l.google.com:19305'
   }]
-}; // {'urls': 'turn:numb.viagenie.ca','credential': 'sempre123','username': 'samuel.huarachi@gmail.com'}
-// {'urls': 'stun:stun.services.mozilla.com'}, 
-// {'urls': 'stun:stun.services.mozilla.com'}, 
-// {'urls': 'stun:stun.l.google.com:19302'}, 
-// var pc;
+}; // var pc;
 
 var myConnections = [];
 var saveActiveStream = null;
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msgGetUserMedia; // Generate offer afeter 5 seconds
 
 setTimeout(function () {
-  // pc.createOffer()
-  // .then(offer => pc.setLocalDescription(offer))
-  // .then(() => {
-  //     console.log(pc.localDescription) 
-  //     storageMySDPInServer(
-  //         JSON.stringify({'id': yourId, 'sdp': pc.localDescription})) 
-  // })
   console.log("beleza passou 5 seg");
 }, 5000);
 navigator.mediaDevices.getUserMedia({
   audio: false,
   video: true
 }).then(function (stream) {
-  yourVideo.srcObject = stream;
+  analistVideo.srcObject = stream;
   saveActiveStream = stream;
 });
 
@@ -10848,123 +10836,70 @@ function storageMySDPInServer(data) {
 
 
 socket.on('receiveClientSDP', function (data) {
-  console.log("receive SDP client");
   var msg = JSON.parse(data);
   var pc = myConnections[msg.clientId];
+  console.log("Registrando a responsta de " + msg.clientId);
   pc.setRemoteDescription(new RTCSessionDescription(msg.sdp));
 });
 socket.on('receiveClientICE', function (data) {
-  var msg = JSON.parse(data);
-  var pc = myConnections[msg.clientId];
-  console.log(msg.ice);
-  pc.addIceCandidate(new RTCIceCandidate(msg.ice));
-  console.log("ICE FOI");
-}); // socket.on('connect', function() {
-//     const analistSessionID = socket.socket.sessionid;
-//     socket.emit('sendAnalistSessionID', analistSessionID)
-// });
+  // console.log(data)
+  // let msg = JSON.parse(data)
+  var pc = myConnections[data.clientId]; //console.log(msg.ice)
 
+  pc.addIceCandidate(new RTCIceCandidate(data.ice)); //console.log("ICE FOI")
+});
 socket.on('generateAnalistOffer', function (clientId) {
   myConnections[clientId] = new RTCPeerConnection(servers);
-  var pc = myConnections[clientId]; // pc.iceTransports = 'relay'
+  var pc = myConnections[clientId];
 
   pc.onicecandidate = function (event) {
-    console.log("My ICE Analist, client ID " + clientId);
-    console.log(event.candidate);
-
+    // console.log("My ICE Analist, client ID " + clientId)
+    // console.log(event.candidate);
     if (event.candidate) {
       socket.emit('sendAnalistICE', JSON.stringify({
         'clientId': clientId,
         'ice': event.candidate
       }));
-    } else {
-      console.log("Sent all Analist ice");
+    } else {//console.log("Sent all Analist ice")
     }
-  }; // navigator.mediaDevices.getUserMedia({audio:false, video:true})
-  // .then(stream => {});
-  //console.log(stream)
-
+  };
 
   pc.addStream(saveActiveStream);
   setTimeout(function () {
+    console.log("Gerando oferta para " + clientId);
     pc.createOffer().then(function (offer) {
       return pc.setLocalDescription(offer);
     }).then(function () {
-      // console.log(pc.localDescription) 
-      // storageMySDPInServer(
-      //     JSON.stringify({'id': yourId, 'sdp': pc.localDescription}))
-      console.log(pc.localDescription);
       socket.emit('sendNewAnalistOffer', JSON.stringify({
         'clientId': clientId,
         'sdp': pc.localDescription
       }));
     });
-    console.log("gerou a oferta");
+    console.log("Oferta enviada");
   }, 5000);
-}); // const axios = require('axios');
-// const { ConfigureIsOnline } = require('./common')
-// console.log(location);
-// location.hash === '#init'
-// // navigator.getUserMedia = (navigator.getUserMedia 
-// //     || navigator.webkitGetUserMedia 
-// //     || navigator.mozGetUserMedia 
-// //     || navigator.msgGetUserMedia);
-// // navigator.getUserMedia({video: true, audio: false}, function(stream) {
-// //     var peer = new Peer({
-// //         initiator: true,
-// //         trickle: false,
-// //         stream: stream,
-// //         config: {
-// //             iceServers: [{ 'url': 'stun:stun.l.google.com:19302' }]
-// //         }
-// //     })
-//     // peer.on('signal', function (data) {
-//     //     console.log("foi");
-//     //     document.getElementById('analistID').value = JSON.stringify(data)
-//     //     socket.emit('analist-id', JSON.stringify(data))
-//     // })
-//     // document.getElementById('connect').addEventListener('click', function() {
-//     //     var otherID = JSON.parse(document.getElementById('clientID').value)
-//     //     peer.signal(otherID)
-//     // })
-//     // document.getElementById('send').addEventListener('click', function() {
-//     //     var yourMessage = document.getElementById('yourMessage').value
-//     //     peer.send(yourMessage)
-//     // })
-//     // peer.on('data', function(data) {
-//     //     document.getElementById('messages').textContent += data + '\n'
-//     // })
-//     // peer.on('stream', function(stream) {
-//     //     var video = document.createElement('video')
-//     //     document.body.appendChild(video)
-//     //     video.srcObject = stream
-//     //     video.play()
-//     // })
-// // }, function(err) {
-// //     console.error(err)
-// // })
-// socket.on('connect', function() {
-//     // $("#msg").append("connectd: " + socket.id + "<br>");
-//     socket.emit('msg', 'I am connected ' + socket.id);
-// })
-// var url = BASEURL + '/analist/(19)%2092323-1300';
-// axios.get(url)
-// .then(response => {
-//     // ConfigureIsOnline(response.data.isOnline)
-//     console.log(response.data.isOnline)
-// })
-// .catch(function (error) {
-//     // handle error
-//     console.log(error);
-// })
-// // $("#onlineButton").click(function() {
-// //     socket.emit('make-online', 'onlinedd v')
-// // })
-// /**
-//  * 
-//  * ddddddddddddddddddddddddddddddddddddddddddddddd
-//  * 
-//  */
+}); // socket.on('connect', function() {
+//     const sessionID = socket.socket.sessionid
+//     console.log(sessionID)
+// });
+// ######################################################################
+
+function connectSocket() {
+  if (!socket) {
+    socket = socket_io_client__WEBPACK_IMPORTED_MODULE_0___default()(BASEURL).connect();
+  }
+
+  socket.on('connect', function () {
+    var analistID = socket.id; // socket.emit('sendAnalistSessionID', analistSessionID)
+
+    console.log(analistID);
+    console.log("entrou na sala"); // socket.emit('join-in-room', slug)
+
+    socket.emit('registerAnalist', JSON.stringify({
+      'id': analistID,
+      'slug': slug
+    }));
+  });
+}
 
 /***/ }),
 

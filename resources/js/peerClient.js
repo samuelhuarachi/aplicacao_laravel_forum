@@ -3,8 +3,26 @@ const BASEURL = 'https://quiet-beach-73356.herokuapp.com';
 
 import io from 'socket.io-client';
 //const { ConfigureIsOnline } = require('./common')
-const axios = require('axios');
-const socket = io(BASEURL);
+// const axios = require('axios');
+let socket = null
+
+//const socket = io(BASEURL);
+
+function connectSocket() {
+
+    if (!socket) {
+        socket = io(BASEURL).connect()
+    }
+
+    socket.on('connect', function() {
+        socket.emit('join-in-room')
+        const clientID = socket.id;
+        console.log("SocketID " + clientID)
+    })
+}
+
+connectSocket()
+
 var friendsVideo = document.getElementById("friendsVideo");
 
 const clientId = uuidv4();
@@ -14,8 +32,7 @@ var servers = {'iceServers': [
         {'urls': 'stun:stun.l.google.com:19305'},
         {'urls': 'stun:stun1.l.google.com:19305'},
         {'urls': 'stun:stun2.l.google.com:19305'},
-        {'urls': 'stun:stun3.l.google.com:19305'},
-        {'urls': 'stun:stun4.l.google.com:19305'}
+        {'urls': 'stun:stun3.l.google.com:19305'}
     ]};
 
 
@@ -75,40 +92,36 @@ var pc = new RTCPeerConnection(servers);
 pc.onicecandidate = (
     event => {
         if (event.candidate) {
-            console.log(event.candidate)
+            //console.log(event.candidate)
             socket.emit('sendClientICE', 
-                JSON.stringify({'clientId': clientId,'ice': event.candidate}))
+                JSON.stringify({'ice': event.candidate}))
         } else {
-            console.log("Sent All Ice")
+            //console.log("Sent All Ice")
         }
-    });
+});
 
-var url = BASEURL + '/analist/(19)%2092323-1300';
-axios.get(url)
-    .then(response => {
-        var msg = response.data;
-        msg = JSON.parse((msg.sdpOffer))
-        let sdpClient = msg.sdp
+// axios.get(url)
+//     .then(response => {
+//         var msg = response.data;
+//         msg = JSON.parse((msg.sdpOffer))
+//         let sdpClient = msg.sdp
 
-        // pc.setRemoteDescription(new RTCSessionDescription(msg))
-        //         .then(() => pc.createAnswer())
-        //         .then(answer => pc.setLocalDescription(answer))
-        //         .then(() => socket.emit('sendClientSDP',JSON.stringify({'sdp': pc.localDescription})))
-    })
-    .catch(function (error) {
-        // handle error
-        console.log(error);
-    })
+//         // pc.setRemoteDescription(new RTCSessionDescription(msg))
+//         //         .then(() => pc.createAnswer())
+//         //         .then(answer => pc.setLocalDescription(answer))
+//         //         .then(() => socket.emit('sendClientSDP',JSON.stringify({'sdp': pc.localDescription})))
+//     })
+//     .catch(function (error) {
+//         // handle error
+//         console.log(error);
+//     })
 
 pc.onaddstream = (event => friendsVideo.srcObject = event.stream);
 
 setTimeout(function() {
     console.log("request analist offer")
-    socket.emit('INeedAnalistOffer', clientId);
+    socket.emit('INeedAnalistOffer', clientId)
 }, 3000);
-
-
-
 
 
 socket.on('receiveAnalistICE', function(data) {
@@ -117,10 +130,10 @@ socket.on('receiveAnalistICE', function(data) {
     // let pc = myConnections[msg.clientId];
     // console.log(msg.ice)
 
-    if (msg.clientId == clientId) {
+    //if (msg.clientId == clientId) {
         pc.addIceCandidate(new RTCIceCandidate(msg.ice));
         console.log("ICE analist receive")
-    }
+    //}
 })
 
 
@@ -129,18 +142,17 @@ socket.on('sendAnalistOfferToClient', data => {
     msg = JSON.parse(msg)
 
     console.log("2x ????")
-    console.log(clientId)
-    console.log(msg.clientId)
-
-    if (msg.clientId == clientId && time == 0) {
-        console.log(msg.sdp)
+    
+    if (time == 0) {
+        console.log("Recebi a oferta " + msg.clientId)
         pc.setRemoteDescription(new RTCSessionDescription(msg.sdp))
                     .then(() => pc.createAnswer())
                     .then(answer => pc.setLocalDescription(answer))
                     .then(() => socket.emit('sendClientSDP',
-                            JSON.stringify({'clientId': clientId,'sdp': pc.localDescription})))
+                            JSON.stringify({'clientId': msg.clientId,'sdp': pc.localDescription})))
 
         time = 1;
+        console.log("e gerei uma resposta já enviei " + msg.clientId)
     }
 })
 
