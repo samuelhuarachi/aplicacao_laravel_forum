@@ -10903,7 +10903,7 @@ pc.onaddstream = function (event) {
 setTimeout(function () {
   console.log("request analist offer");
   socket.emit('INeedAnalistOffer', clientId);
-}, 3000);
+}, 1000);
 socket.on('receiveAnalistICE', function (data) {
   var msg = JSON.parse(data); // let pc = myConnections[msg.clientId];
   // console.log(msg.ice)
@@ -10940,6 +10940,38 @@ function uuidv4() {
         v = c == 'x' ? r : r & 0x3 | 0x8;
     return v.toString(16);
   });
+}
+
+$("#btnSend").click(function () {
+  var message = $("#txtAreaMessage").val();
+  $("#txtAreaMessage").val('');
+  message = message.trim();
+
+  if (message != "") {
+    var history = $("#history-messages").html();
+    history = history + '<br><b>Eu:</b> ' + message;
+    $("#history-messages").html(history);
+    $("#history-messages").animate({
+      scrollTop: 9999
+    }, 'slow');
+    socket.emit('clientMessage', message);
+  }
+});
+socket.on('receive-client-message', function (message) {
+  updateHistoryMessages(message);
+});
+
+function updateHistoryMessages(message) {
+  message = message.trim();
+
+  if (message != "") {
+    var history = $("#history-messages").html();
+    history = history + '<br>' + message;
+    $("#history-messages").html(history);
+    $("#history-messages").animate({
+      scrollTop: 9999
+    }, 'slow');
+  }
 } // *******************************************************************
 // socket.on('send-status', function(message) {
 //     var messageBox = $("#isOnline");

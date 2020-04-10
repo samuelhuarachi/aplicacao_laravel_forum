@@ -10817,12 +10817,12 @@ var servers = {
 var myConnections = [];
 var saveActiveStream = null;
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msgGetUserMedia; // Generate offer afeter 5 seconds
+// setTimeout(function(){
+//     console.log("beleza passou 5 seg")
+// }, 5000);
 
-setTimeout(function () {
-  console.log("beleza passou 5 seg");
-}, 5000);
 navigator.mediaDevices.getUserMedia({
-  audio: true,
+  audio: false,
   video: true
 }).then(function (stream) {
   analistVideo.srcObject = stream;
@@ -10876,10 +10876,51 @@ socket.on('generateAnalistOffer', function (clientId) {
       }));
     });
     console.log("Oferta enviada");
-  }, 5000);
+  }, 1000);
 });
 socket.on('onlineClients', function (onlineClients) {
   $("#socketOnlineClients").html(onlineClients + " usuários online");
+});
+socket.on('disconnectClient', function (clientId) {
+  var pc = myConnections[clientId];
+  pc.close();
+  pc.onicecandidate = null;
+  pc.onaddstream = null;
+});
+socket.on('client-message', function (message) {
+  updateHistoryMessages(message);
+});
+
+function updateHistoryMessages(message) {
+  message = message.trim();
+
+  if (message != "") {
+    var history = $("#history-messages").html();
+    history = history + '<br>' + message;
+    $("#history-messages").html(history);
+    $("#history-messages").animate({
+      scrollTop: 9999
+    }, 'slow');
+  }
+}
+
+$("#btnSend").click(function () {
+  var message = $("#txtAreaMessage").val();
+  $("#txtAreaMessage").val('');
+  message = message.trim();
+
+  if (message != "") {
+    var history = $("#history-messages").html();
+    history = history + '<br><b class="analistHistory">' + analistName + ' ' + analistLastname + ':</b> ' + message;
+    $("#history-messages").html(history);
+    $("#history-messages").animate({
+      scrollTop: 9999
+    }, 'slow');
+    socket.emit('analistMessage', JSON.stringify({
+      token: token,
+      message: message
+    }));
+  }
 }); // socket.on('connect', function() {
 //     const sessionID = socket.socket.sessionid
 //     console.log(sessionID)

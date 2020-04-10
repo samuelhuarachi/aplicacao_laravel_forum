@@ -67,7 +67,7 @@ body {
 }
 
 #live-info {
-  bottom: -14px;
+  bottom: 0px;
   right: 0px;
   position: absolute;
 }
@@ -81,22 +81,12 @@ p {
   margin-bottom: 0px;
 }
 
-#analistVideo {
+#friendsVideo {
   margin: 0px auto;
 }
 
-video {
-  width: 52%;
-  background: #000;
-}
-
-.chat {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  height: 100%;
-  width: 17%;
-  padding-right: 5px;
+.analistHistory {
+  color: blue;
 }
 
 .history {
@@ -115,12 +105,25 @@ video {
   padding-left: 5px;
 }
 
+video {
+  width: 52%;
+  background: #000;
+}
+
+.chat {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  height: 100%;
+  width: 17%;
+  padding-right: 5px;
+}
+
 .message {
   position: relative;
   height: 25vh;
   bottom: 0px;
   right: 0px;
-  padding-right: 1px;
 }
 
 .message textarea {
@@ -134,8 +137,15 @@ video {
   width: 100%;
 }
 
-.analistHistory {
-  color: blue;
+#btnCredits {
+  background: #737272;
+  border: 1px solid #737272;
+  color: #f7cc4c;
+  font-weight: bold !important;
+}
+
+.btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0) !important;
 }
 
 input {

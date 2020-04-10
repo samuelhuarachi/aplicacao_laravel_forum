@@ -1,6 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/chat/analist.css": "/css/chat/analist.css",
+    "/css/chat/client.css": "/css/chat/client.css",
     "/css/app.css": "/css/app.css",
     "/js/peerAnalist.js": "/js/peerAnalist.js",
     "/js/peerClient.js": "/js/peerClient.js"

@@ -48,13 +48,17 @@
 </div>
 
 <div class="chat">
-    <div class="history"></div>
+    <div id="history-messages" class="history">
+        <!-- <div id="history-messages">
+            sdfsafdsaf <br>
+            sadfsafa
+        </div> -->
+    </div>
     <div class="message">
-        <small>Digite sua mensagem</small> <br>
-        <input type="text" id="message" name="message">
-        <br>
-        <br>
-        <button id="btnSend" class="btn btn-sm btn-primary btn-block" type="button">Enviar</button> 
+        <small>Digite sua mensagem</small>
+        <textarea id="txtAreaMessage" name="textarea"></textarea>
+        <button id="btnSend" class="btn btn-sm btn-primary" type="button">
+            Enviar</button> 
     </div>
 </div>
 
@@ -72,8 +76,10 @@
 <script src="{{ asset('js/peerAnalist.js') }}"></script>
 
 <script type="text/javascript">
-    let token = '{{ $token }}';
-    let slug = '{{ $myData->slug }}';
+    let token = '{{ $token }}'
+    let slug = '{{ $myData->slug }}'
+    const analistName = '{{ $myData->name }}'
+    const analistLastname = '{{ $myData->lastname }}'
 </script>
 
 @endsection

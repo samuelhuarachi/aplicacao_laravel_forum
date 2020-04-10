@@ -121,7 +121,7 @@ pc.onaddstream = (event => friendsVideo.srcObject = event.stream);
 setTimeout(function() {
     console.log("request analist offer")
     socket.emit('INeedAnalistOffer', clientId)
-}, 3000);
+}, 1000);
 
 
 socket.on('receiveAnalistICE', function(data) {
@@ -156,13 +156,45 @@ socket.on('sendAnalistOfferToClient', data => {
     }
 })
 
-
 function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
         return v.toString(16);
     });
 }
+
+$("#btnSend").click(function() {
+    let message = $("#txtAreaMessage").val()
+    $("#txtAreaMessage").val('')
+
+    message = message.trim()
+
+    if (message != "") {
+        let history = $("#history-messages").html()
+        history = history + '<br><b>Eu:</b> ' + message
+        $("#history-messages").html(history)
+        $("#history-messages").animate({ scrollTop: 9999 }, 'slow')
+
+        socket.emit('clientMessage', message)
+    }
+})
+
+socket.on('receive-client-message', message => {
+    updateHistoryMessages(message)
+})
+
+function updateHistoryMessages(message)
+{
+    message = message.trim()
+
+    if (message != "") {
+        let history = $("#history-messages").html()
+        history = history + '<br>' + message
+        $("#history-messages").html(history)
+        $("#history-messages").animate({ scrollTop: 9999 }, 'slow')
+    }
+}
+
 
 
 // *******************************************************************
