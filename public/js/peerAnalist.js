@@ -10795,8 +10795,8 @@ module.exports = yeast;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/lib/index.js");
 /* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(socket_io_client__WEBPACK_IMPORTED_MODULE_0__);
-var BASEURL = 'https://quiet-beach-73356.herokuapp.com'; // const BASEURL = 'http://localhost:3001'
-
+// const BASEURL = 'https://quiet-beach-73356.herokuapp.com'
+var BASEURL = 'http://localhost:3001';
 
 var socket = null;
 connectSocket();
@@ -10822,7 +10822,7 @@ setTimeout(function () {
   console.log("beleza passou 5 seg");
 }, 5000);
 navigator.mediaDevices.getUserMedia({
-  audio: false,
+  audio: true,
   video: true
 }).then(function (stream) {
   analistVideo.srcObject = stream;
@@ -10877,6 +10877,9 @@ socket.on('generateAnalistOffer', function (clientId) {
     });
     console.log("Oferta enviada");
   }, 5000);
+});
+socket.on('onlineClients', function (onlineClients) {
+  $("#socketOnlineClients").html(onlineClients + " usuários online");
 }); // socket.on('connect', function() {
 //     const sessionID = socket.socket.sessionid
 //     console.log(sessionID)

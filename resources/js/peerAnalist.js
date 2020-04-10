@@ -1,6 +1,6 @@
-const BASEURL = 'https://quiet-beach-73356.herokuapp.com'
+// const BASEURL = 'https://quiet-beach-73356.herokuapp.com'
 
-// const BASEURL = 'http://localhost:3001'
+const BASEURL = 'http://localhost:3001'
 
 import io from 'socket.io-client'
 let socket = null
@@ -31,7 +31,7 @@ setTimeout(function(){
     console.log("beleza passou 5 seg")
 }, 5000);
 
-navigator.mediaDevices.getUserMedia({audio:false, video:true})
+navigator.mediaDevices.getUserMedia({audio:true, video:true})
     .then(stream => {
         analistVideo.srcObject = stream
         saveActiveStream = stream
@@ -79,7 +79,7 @@ socket.on('generateAnalistOffer', function(clientId) {
             } else {
                 //console.log("Sent all Analist ice")
             }
-        });
+        })
 
     pc.addStream(saveActiveStream)
     
@@ -94,7 +94,11 @@ socket.on('generateAnalistOffer', function(clientId) {
         })
         console.log("Oferta enviada")
     }, 5000)
-});
+})
+
+socket.on('onlineClients', onlineClients => {
+    $("#socketOnlineClients").html(onlineClients + " usuários online")
+})
 
 
 // socket.on('connect', function() {
