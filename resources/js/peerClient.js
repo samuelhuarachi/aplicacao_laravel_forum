@@ -1,12 +1,28 @@
-const BASEURL = 'https://quiet-beach-73356.herokuapp.com';
+const BASEURL = 'https://quiet-beach-73356.herokuapp.com'
 // const BASEURL = 'http://localhost:3001'
+import io from 'socket.io-client'
 
-import io from 'socket.io-client';
+require('./clients/btnCredits')
+require('./clients/btnRegisterNewClient')
+require('./clients/btnLoginClient')
+
 //const { ConfigureIsOnline } = require('./common')
 // const axios = require('axios');
-let socket = null
 
-//const socket = io(BASEURL);
+// Load Recaptcha
+var onloadCallback = function() {
+    grecaptcha.render('recaptchaRegister', {
+        'sitekey' : '6LcSuugUAAAAACy-8wrNOLoQOLcL1cMxQScS-oeW'
+    })
+    
+    grecaptcha.render('recaptchaLogin', {
+        'sitekey' : '6LcSuugUAAAAACy-8wrNOLoQOLcL1cMxQScS-oeW'
+    })
+}
+
+window.onloadCallback = onloadCallback
+
+let socket = null
 
 function connectSocket() {
 
@@ -16,7 +32,7 @@ function connectSocket() {
 
     socket.on('connect', function() {
         socket.emit('join-in-room')
-        const clientID = socket.id;
+        const clientID = socket.id
         console.log("SocketID " + clientID)
     })
 }

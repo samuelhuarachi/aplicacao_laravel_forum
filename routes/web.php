@@ -129,5 +129,8 @@ Route::get('chat/analist/{slug}', 'Chat\ChatController@analist')
 Route::get('chat/client/{slug}', 'Chat\ChatController@client')
                         ->name('chat.client');
 
+Route::get('chat/client/auth/{token}', 'Chat\ClientController@authClient')
+    ->name('chat.client.auth.token');
+
 
 Auth::routes(['verify' => true]);

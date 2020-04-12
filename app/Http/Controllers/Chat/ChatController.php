@@ -26,7 +26,12 @@ class ChatController extends Controller
                             compact('message'));
         }
 
-        return view('chat.client.client');
+        $tokenClient = Session::get('clientToken');
+        if (!$tokenClient) {
+            $tokenClient = null;
+        }
+
+        return view('chat.client.client', compact('tokenClient'));
     }
 
     public function analist($slug, AnalistService $analistService)
