@@ -8,12 +8,17 @@ use App\Samuel\Chat\Authenticate;
 use App\Samuel\Chat\AnalistService;
 use Session;
 use App\Samuel\Chat\ClientService;
+use App\Samuel\Chat\Client\Auth as AuthClient;
 
 class ChatController extends Controller
 {
     
-    public function client($slug, ClientService $clientService)
+    public function client($slug, 
+                ClientService $clientService,
+                AuthClient $authClient)
     {
+        
+
         $analistExists = $clientService->getAnalistBySlug($slug);
 
         if (!$analistExists)
@@ -27,11 +32,26 @@ class ChatController extends Controller
         }
 
         $tokenClient = Session::get('clientToken');
+        $reponseAuthClient = null;
+        $analistExists = json_decode($analistExists);
+        
         if (!$tokenClient) {
             $tokenClient = null;
+        } else {
+            $reponseAuthClient = $authClient->authByToken($tokenClient);
+            if (!$reponseAuthClient) {
+                abort(403, 'Token inválido');
+            }
+            
+            
+            $reponseAuthClient = json_decode($reponseAuthClient);
+            return view('chat.client.client', 
+                        compact('tokenClient', 
+                                    'reponseAuthClient', 'analistExists'));
         }
 
-        return view('chat.client.client', compact('tokenClient'));
+        
+        return view('chat.client.client', compact('tokenClient', 'analistExists'));
     }
 
     public function analist($slug, AnalistService $analistService)
@@ -105,5 +125,31 @@ class ChatController extends Controller
         $request->session()->put('myData', $analistData);
         
         return redirect()->route('chat.analist', $analistData->slug);
+    }
+
+    public function chat(ClientService $clientService,
+                    AuthClient $authClient)
+    {
+        $analists = json_decode($clientService->getAllAnalists());
+        
+        $tokenClient = Session::get('clientToken');
+        $reponseAuthClient = null;
+        
+        if (!$tokenClient) {
+            $tokenClient = null;
+        } else {
+            $reponseAuthClient = $authClient->authByToken($tokenClient);
+            if (!$reponseAuthClient) {
+                return abort(403, 'Token inválido');
+            }
+            
+            $reponseAuthClient = json_decode($reponseAuthClient);
+            return view('chat.chat', 
+                        compact('tokenClient', 
+                                    'reponseAuthClient', 'analists'));
+        }
+
+        return view('chat.chat', compact('analists','tokenClient', 
+                                            'reponseAuthClient'));
     }
 }

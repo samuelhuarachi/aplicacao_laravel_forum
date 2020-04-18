@@ -1,16 +1,24 @@
-
+const axios = require('axios')
 let ValidationLoginClient = require('./class/ValidationLoginClient')
 
-$("#btnLoginClient").click(function() {
-
+$("#btnLoginClient").click(async function() {
+    $('#btnLoginClient').prop('disabled', true)
     let classValidationLoginClient = new ValidationLoginClient.ValidationLoginClient()
     classValidationLoginClient.setEmail($("#inputEmailLogin"))
     classValidationLoginClient.setPassword($("#inputPasswordLogin"))
 
     try {
-        classValidationLoginClient.validate()
-        grecaptcha.getResponse(1)
+        const clientData = classValidationLoginClient.validate()
         
+        const getLogin = await axios.post(BASEURL + '/api/client/auth-by-email-password', clientData)
+                           .then(function (response) {
+                              return response
+                           })
+                           .catch(function (error) {
+                              throw new Error(error.message)
+                           })
+
+        window.location.replace("/chat/client/auth/" + getLogin.data.token)
      }
      catch (error) {
         $("#div-message-login-client").show()

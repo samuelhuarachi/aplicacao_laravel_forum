@@ -1,6 +1,6 @@
 
 // const BASEURL = 'http://localhost:3001'
-const BASEURL = 'https://quiet-beach-73356.herokuapp.com'
+// const BASEURL = 'https://quiet-beach-73356.herokuapp.com'
 let ValidationRegisterNewUser = require('./class/ValidationRegisterNewUser')
 const axios = require('axios')
 
@@ -15,8 +15,7 @@ $("#registerNewClient").click(async function() {
 
     try {
         const clientData = classValidationNewClient.validate()
-        console.log(JSON.stringify(clientData))
-
+        
         response = await axios.post(BASEURL + '/api/client/new-client', clientData)
                                         .then(function (response) {
                                             return response

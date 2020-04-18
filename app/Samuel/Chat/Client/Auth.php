@@ -9,9 +9,7 @@ class Auth {
         $data = ["token" => $token];
         $data_string = json_encode($data);  
 
-        
-        $url = env("NODEAPI") . "/api/authenticate";
-        dump($url);
+        $url = env("NODEAPI") . "/api/client/auth-by-token";
         $ch = curl_init($url);
         // curl_setopt($ch, CURLOPT_HTTPHEADER, array(
         //     'Authorization: Bearer abd90df5f27a7b170cd775abf89d632b350b7c1c9d53e08b340cd9832ce52c2c'

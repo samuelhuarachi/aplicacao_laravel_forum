@@ -3,7 +3,15 @@ $("#btnCredits").click(() => {
     
     if (!token) {
         $('#modalLoginOrRegisterHTML').modal()
-        //$('#modalLoginOrRegisterHTML2').on('show.bs.modal', function (event) {})
     }
+
+    if (token && !email_verified) {
+        alert("Você precisa verificar seu e-mail antes de adquirir créditos")
+    }
+
+    if (token && email_verified) {
+        $('#modalAddCredits').modal()
+    }
+    
 })
 

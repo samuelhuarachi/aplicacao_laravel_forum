@@ -126,11 +126,32 @@ Route::get('chat/analist/{slug}', 'Chat\ChatController@analist')
                 ->name('chat.analist');
 
                 
-Route::get('chat/client/{slug}', 'Chat\ChatController@client')
-                        ->name('chat.client');
+
+
+Route::get('chat', 'Chat\ChatController@chat')
+                        ->name('chat');
 
 Route::get('chat/client/auth/{token}', 'Chat\ClientController@authClient')
     ->name('chat.client.auth.token');
 
+Route::get('chat/client/email_verified/{nickname}/{email_token}', 'Chat\ClientController@emailVerified')
+    ->name('chat.client.email_verified');
+// https://www.bonecaforum.com/chat/client/email_verified/james_obl/de803ffb-5891-4f48-b471-257d296fef0a
+
+Route::get('chat/client/resend-verified-mail/{token}', 
+                'Chat\ClientController@resendVerifiedMail')
+    ->name('chat.client.resend-verified-mail');
+
+Route::get('chat/client/logout', 'Chat\ClientController@logout')
+    ->name('chat.client.logout');
+
+Route::post('chat/client/payment', 'Chat\ClientController@payment')
+    ->name('chat.client.payment');
+
+Route::get('chat/client/transactions', 'Chat\ClientController@transactions')
+    ->name('chat.client.transactions');
+
+Route::get('chat/client/{slug}', 'Chat\ChatController@client')
+        ->name('chat.client');
 
 Auth::routes(['verify' => true]);

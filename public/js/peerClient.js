@@ -13387,6 +13387,20 @@ module.exports = yeast;
 
 /***/ }),
 
+/***/ "./resources/js/clients/btnClientAccount.js":
+/*!**************************************************!*\
+  !*** ./resources/js/clients/btnClientAccount.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$("#btnClientAccount").click(function () {
+  console.log("dlldldl");
+  $('#modalClientAccount').modal();
+});
+
+/***/ }),
+
 /***/ "./resources/js/clients/btnCredits.js":
 /*!********************************************!*\
   !*** ./resources/js/clients/btnCredits.js ***!
@@ -13396,7 +13410,15 @@ module.exports = yeast;
 
 $("#btnCredits").click(function () {
   if (!token) {
-    $('#modalLoginOrRegisterHTML').modal(); //$('#modalLoginOrRegisterHTML2').on('show.bs.modal', function (event) {})
+    $('#modalLoginOrRegisterHTML').modal();
+  }
+
+  if (token && !email_verified) {
+    alert("Você precisa verificar seu e-mail antes de adquirir créditos");
+  }
+
+  if (token && email_verified) {
+    $('#modalAddCredits').modal();
   }
 });
 
@@ -13406,24 +13428,78 @@ $("#btnCredits").click(function () {
 /*!************************************************!*\
   !*** ./resources/js/clients/btnLoginClient.js ***!
   \************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 var ValidationLoginClient = __webpack_require__(/*! ./class/ValidationLoginClient */ "./resources/js/clients/class/ValidationLoginClient.js");
 
-$("#btnLoginClient").click(function () {
-  var classValidationLoginClient = new ValidationLoginClient.ValidationLoginClient();
-  classValidationLoginClient.setEmail($("#inputEmailLogin"));
-  classValidationLoginClient.setPassword($("#inputPasswordLogin"));
+$("#btnLoginClient").click(
+/*#__PURE__*/
+_asyncToGenerator(
+/*#__PURE__*/
+_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+  var classValidationLoginClient, clientData, getLogin;
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          $('#btnLoginClient').prop('disabled', true);
+          classValidationLoginClient = new ValidationLoginClient.ValidationLoginClient();
+          classValidationLoginClient.setEmail($("#inputEmailLogin"));
+          classValidationLoginClient.setPassword($("#inputPasswordLogin"));
+          _context.prev = 4;
+          clientData = classValidationLoginClient.validate();
+          _context.next = 8;
+          return axios.post(BASEURL + '/api/client/auth-by-email-password', clientData).then(function (response) {
+            return response;
+          })["catch"](function (error) {
+            throw new Error(error.message);
+          });
 
-  try {
-    classValidationLoginClient.validate();
-    grecaptcha.getResponse(1);
-  } catch (error) {
-    $("#div-message-login-client").show();
-    $("#div-message-login-client").html(error.message);
-    $("#div-message-login-client").fadeOut(4000);
-  }
+        case 8:
+          getLogin = _context.sent;
+          window.location.replace("/chat/client/auth/" + getLogin.data.token);
+          _context.next = 17;
+          break;
+
+        case 12:
+          _context.prev = 12;
+          _context.t0 = _context["catch"](4);
+          $("#div-message-login-client").show();
+          $("#div-message-login-client").html(_context.t0.message);
+          $("#div-message-login-client").fadeOut(4000);
+
+        case 17:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, _callee, null, [[4, 12]]);
+})));
+
+/***/ }),
+
+/***/ "./resources/js/clients/btnLogoutClient.js":
+/*!*************************************************!*\
+  !*** ./resources/js/clients/btnLogoutClient.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$('#btnLogoutClient').click(function () {
+  window.location.replace("/chat/client/logout");
 });
 
 /***/ }),
@@ -13446,8 +13522,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 // const BASEURL = 'http://localhost:3001'
-var BASEURL = 'https://quiet-beach-73356.herokuapp.com';
-
+// const BASEURL = 'https://quiet-beach-73356.herokuapp.com'
 var ValidationRegisterNewUser = __webpack_require__(/*! ./class/ValidationRegisterNewUser */ "./resources/js/clients/class/ValidationRegisterNewUser.js");
 
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
@@ -13469,37 +13544,58 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
           classValidationNewClient.setPassword($("#inputPasswordRegister"));
           _context.prev = 5;
           clientData = classValidationNewClient.validate();
-          console.log(JSON.stringify(clientData));
-          _context.next = 10;
+          _context.next = 9;
           return axios.post(BASEURL + '/api/client/new-client', clientData).then(function (response) {
             return response;
           })["catch"](function (error) {
             throw new Error(error.message);
           });
 
-        case 10:
+        case 9:
           response = _context.sent;
           $('#modalLoginOrRegisterHTML').modal('hide');
           window.location.replace("/chat/client/auth/" + response.data.token);
           $('#registerNewClient').prop('disabled', false);
-          _context.next = 22;
+          _context.next = 21;
           break;
 
-        case 16:
-          _context.prev = 16;
+        case 15:
+          _context.prev = 15;
           _context.t0 = _context["catch"](5);
           $('#registerNewClient').prop('disabled', false);
           $("#div-message-register-new-client").show();
           $("#div-message-register-new-client").html(_context.t0.message);
           $("#div-message-register-new-client").fadeOut(4000);
 
-        case 22:
+        case 21:
         case "end":
           return _context.stop();
       }
     }
-  }, _callee, null, [[5, 16]]);
+  }, _callee, null, [[5, 15]]);
 })));
+
+/***/ }),
+
+/***/ "./resources/js/clients/class/PagseguroFormatCreditCard.js":
+/*!*****************************************************************!*\
+  !*** ./resources/js/clients/class/PagseguroFormatCreditCard.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var formatCreditCardNumber = function formatCreditCardNumber(number) {
+  return number.replace(/^\D+/g, '').replace(/\s/g, '');
+};
+
+var formatCreditCardExpire = function formatCreditCardExpire(expire) {
+  return expire.split("/");
+};
+
+module.exports = {
+  formatCreditCardNumber: formatCreditCardNumber,
+  formatCreditCardExpire: formatCreditCardExpire
+};
 
 /***/ }),
 
@@ -13538,7 +13634,6 @@ function () {
   }, {
     key: "validate",
     value: function validate() {
-      console.log("validando");
       var email = this.email.val().trim();
       var password = this.password.val().trim();
 
@@ -13548,6 +13643,10 @@ function () {
 
       if (!validateEmail.validate(email)) {
         throw new Error("E-mail inválido");
+      }
+
+      if (!grecaptcha.getResponse(1)) {
+        throw new Error("reCaptcha inválido");
       }
 
       email = email.trim();
@@ -13646,6 +13745,88 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./resources/js/clients/goPayment.js":
+/*!*******************************************!*\
+  !*** ./resources/js/clients/goPayment.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(".btnPayment").click(function () {
+  var value = $(this).data("value");
+  $('#modalAddCredits').modal('hide');
+  $('#modalPayment').modal('show');
+  $("#final-value").html('R$ ' + value.toString() + ' <i class="fas fa-coins">');
+});
+
+/***/ }),
+
+/***/ "./resources/js/clients/pagseguro.js":
+/*!*******************************************!*\
+  !*** ./resources/js/clients/pagseguro.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var PagseguroFormatCreditCard = __webpack_require__(/*! ./class/PagseguroFormatCreditCard */ "./resources/js/clients/class/PagseguroFormatCreditCard.js");
+
+$("#card_validate_message").hide();
+$('#card_number').mask("0000 0000 0000 0000");
+$('#card_expire').mask('00/00');
+$('#card_cvv').mask('000');
+$("#card_image").hide();
+$("#card_cpf").mask('000.000.000-00', {
+  reverse: true
+});
+$("#card_birthday").mask('00/00/0000');
+jQuery(function ($) {
+  $(document).ready(function () {
+    $('#card_number').validateCreditCard(function (result) {
+      var cardNumber = $("#card_number").val();
+      var cardNumberLength = cardNumber.length;
+
+      if (cardNumberLength < 19) {
+        $("#card_validate_message").hide();
+      }
+
+      if (cardNumberLength == 19 && (result.valid !== true || result.length_valid !== true || result.luhn_valid !== true)) {
+        $("#card_validate_message").show();
+      }
+
+      if (result.card_type !== null && (result.card_type.name == 'mastercard' || result.card_type.name == 'visa')) {
+        $("#card_image").show();
+        $("#card_image").attr("src", "/images/creditcard/" + result.card_type.name + ".png");
+      } else {
+        $("#card_image").hide();
+      }
+
+      if (result.card_type !== null) {
+        $("#card_brand").val(result.card_type.name);
+      }
+    });
+  });
+});
+$("#completeOrder").click(function () {
+  $('#completeOrder').prop('disabled', true);
+  console.log("submit formmmm");
+  var card_number = PagseguroFormatCreditCard.formatCreditCardNumber($("#card_number").val());
+  var card_expire = PagseguroFormatCreditCard.formatCreditCardExpire($('#card_expire').val());
+  var card_brand = $("#card_brand").val();
+  var card_cvv = $("#card_cvv").val();
+  var expireMonth = card_expire[0];
+  var expireYear = '20' + card_expire[1];
+  console.log(card_number);
+  console.log(card_expire);
+  console.log(card_brand);
+  console.log(card_cvv);
+  console.log(expireMonth);
+  console.log(expireYear);
+  $("#client_token").val(token);
+  $("#client-payment-form").submit();
+});
+
+/***/ }),
+
 /***/ "./resources/js/peerClient.js":
 /*!************************************!*\
   !*** ./resources/js/peerClient.js ***!
@@ -13665,18 +13846,34 @@ __webpack_require__(/*! ./clients/btnCredits */ "./resources/js/clients/btnCredi
 
 __webpack_require__(/*! ./clients/btnRegisterNewClient */ "./resources/js/clients/btnRegisterNewClient.js");
 
-__webpack_require__(/*! ./clients/btnLoginClient */ "./resources/js/clients/btnLoginClient.js"); //const { ConfigureIsOnline } = require('./common')
+__webpack_require__(/*! ./clients/btnLoginClient */ "./resources/js/clients/btnLoginClient.js");
+
+__webpack_require__(/*! ./clients/btnClientAccount */ "./resources/js/clients/btnClientAccount.js");
+
+__webpack_require__(/*! ./clients/btnLogoutClient */ "./resources/js/clients/btnLogoutClient.js");
+
+__webpack_require__(/*! ./clients/goPayment */ "./resources/js/clients/goPayment.js");
+
+__webpack_require__(/*! ./clients/pagseguro */ "./resources/js/clients/pagseguro.js"); //const { ConfigureIsOnline } = require('./common')
 // const axios = require('axios');
 // Load Recaptcha
 
 
 var onloadCallback = function onloadCallback() {
-  grecaptcha.render('recaptchaRegister', {
-    'sitekey': '6LcSuugUAAAAACy-8wrNOLoQOLcL1cMxQScS-oeW'
-  });
-  grecaptcha.render('recaptchaLogin', {
-    'sitekey': '6LcSuugUAAAAACy-8wrNOLoQOLcL1cMxQScS-oeW'
-  });
+  var recaptchaRegister = document.getElementById('recaptchaRegister');
+  var recaptchaLogin = document.getElementById('recaptchaLogin');
+
+  if (recaptchaRegister) {
+    grecaptcha.render('recaptchaRegister', {
+      'sitekey': '6LcSuugUAAAAACy-8wrNOLoQOLcL1cMxQScS-oeW'
+    });
+  }
+
+  if (recaptchaLogin) {
+    grecaptcha.render('recaptchaLogin', {
+      'sitekey': '6LcSuugUAAAAACy-8wrNOLoQOLcL1cMxQScS-oeW'
+    });
+  }
 };
 
 window.onloadCallback = onloadCallback;
@@ -13708,73 +13905,16 @@ var servers = {
   }, {
     'urls': 'stun:stun3.l.google.com:19305'
   }]
-}; // {'urls': 'stun:stun.services.mozilla.com'},  
-// {'urls': 'turn:numb.viagenie.ca','credential': 'sempre123','username': 'samuel.huarachi@gmail.com'}
-// {'urls': 'stun:stun.services.mozilla.com'}, 
-// {'urls': 'stun:stun.l.google.com:19302'}
-// {'urls': 'turn:numb.viagenie.ca','credential': 'sempre123','username': 'samuel.huarachi@gmail.com'}
-//     stun.l.google.com:19305
-// stun1.l.google.com:19305
-// stun2.l.google.com:19305
-// stun3.l.google.com:19305
-// stun4.l.google.com:19305
-//     stun.l.google.com:19302
-// stun1.l.google.com:19302
-// stun2.l.google.com:19302
-// stun3.l.google.com:19302
-// stun4.l.google.com:19302
-// stun01.sipphone.com
-// stun.ekiga.net
-// stun.fwdnet.net
-// stun.ideasip.com
-// stun.iptel.org
-// stun.rixtelecom.se
-// stun.schlund.de
-// stunserver.org
-// stun.softjoys.com
-// stun.voiparound.com
-// stun.voipbuster.com
-// stun.voipstunt.com
-// stun.voxgratia.org
-// stun.xten.com
-// slow repsonde
-// stun01.sipphone.com
-// stun.fwdnet.net
-// stun.voxgratia.org
-// stun.xten.com
-// japan stun
-// s1.taraba.net          203.183.172.196:3478
-// s2.taraba.net          203.183.172.196:3478 
-// s1.voipstation.jp          113.32.111.126:3478
-// s2.voipstation.jp          113.32.111.127:3478
-// https://gist.github.com/zziuni/3741933
-
-var pc = new RTCPeerConnection(servers); // pc.iceTransports = 'relay'
-// pc.config.peerConnectionConfig.iceTransports = 'relay'
+};
+var pc = new RTCPeerConnection(servers);
 
 pc.onicecandidate = function (event) {
   if (event.candidate) {
-    //console.log(event.candidate)
     socket.emit('sendClientICE', JSON.stringify({
       'ice': event.candidate
     }));
-  } else {//console.log("Sent All Ice")
-  }
-}; // axios.get(url)
-//     .then(response => {
-//         var msg = response.data;
-//         msg = JSON.parse((msg.sdpOffer))
-//         let sdpClient = msg.sdp
-//         // pc.setRemoteDescription(new RTCSessionDescription(msg))
-//         //         .then(() => pc.createAnswer())
-//         //         .then(answer => pc.setLocalDescription(answer))
-//         //         .then(() => socket.emit('sendClientSDP',JSON.stringify({'sdp': pc.localDescription})))
-//     })
-//     .catch(function (error) {
-//         // handle error
-//         console.log(error);
-//     })
-
+  } else {}
+};
 
 pc.onaddstream = function (event) {
   return friendsVideo.srcObject = event.stream;
@@ -13785,12 +13925,8 @@ setTimeout(function () {
   socket.emit('INeedAnalistOffer', clientId);
 }, 1000);
 socket.on('receiveAnalistICE', function (data) {
-  var msg = JSON.parse(data); // let pc = myConnections[msg.clientId];
-  // console.log(msg.ice)
-  //if (msg.clientId == clientId) {
-
+  var msg = JSON.parse(data);
   pc.addIceCandidate(new RTCIceCandidate(msg.ice));
-  console.log("ICE analist receive"); //}
 });
 socket.on('sendAnalistOfferToClient', function (data) {
   var msg = data;
@@ -13852,61 +13988,7 @@ function updateHistoryMessages(message) {
       scrollTop: 9999
     }, 'slow');
   }
-} // *******************************************************************
-// socket.on('send-status', function(message) {
-//     var messageBox = $("#isOnline");
-//     messageBox.html(message);
-// })
-// navigator.getUserMedia = (navigator.getUserMedia 
-//     || navigator.webkitGetUserMedia 
-//     || navigator.mozGetUserMedia 
-//     || navigator.msgGetUserMedia);
-// navigator.getUserMedia({video: true, audio: false}, function(stream) {
-//     var peer = new Peer({
-//         initiator: false,
-//         trickle: false,
-//         config: {
-//             iceServers: [{ 'url': 'stun:stun.l.google.com:19302' }]
-//         }
-//     })
-//     peer.on('signal', function (data) {
-//         console.log("foi");
-//         document.getElementById('analistID').value = JSON.stringify(data)
-//     })
-//     document.getElementById('connect').addEventListener('click', function() {
-//         var otherID = JSON.parse(document.getElementById('clientID').value)
-//         peer.signal(otherID)
-//     })
-//     document.getElementById('send').addEventListener('click', function() {
-//         var yourMessage = document.getElementById('yourMessage').value
-//         peer.send(yourMessage)
-//     })
-//     peer.on('data', function(data) {
-//         document.getElementById('messages').textContent += data + '\n'
-//     })
-//     peer.on('stream', function(stream) {
-//         var video = document.createElement('video')
-//         document.body.appendChild(video)
-//         video.srcObject = stream
-//         video.play()
-//     })
-// }, function(err) {
-//     console.error(err)
-// })
-// function verifyStatus()
-// {
-//     var url = BASEURL + '/analist/(19)%2092323-1300';
-//     axios.get(url)
-//         .then(response => {
-//             ConfigureIsOnline(response.data.isOnline)
-//             console.log(response.data.isOnline)
-//         })
-//         .catch(function (error) {
-//             // handle error
-//             console.log(error);
-//         })
-// }
-// verifyStatus()
+}
 
 /***/ }),
 

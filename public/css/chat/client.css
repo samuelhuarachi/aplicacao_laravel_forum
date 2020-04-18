@@ -27,12 +27,62 @@ body {
   font-family: "Arsenal", sans-serif !important;
 }
 
+.creditsvaluesbox {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.creditvalue {
+  font-size: 27px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.creditsvaluesbox .fa-coins {
+  color: #ecdd67 !important;
+}
+
+#modalAddCredits .modal-body {
+  background-color: #202020;
+}
+
+#modalAddCredits h3 {
+  color: #fff !important;
+}
+
+#final-value {
+  font-size: 35px;
+}
+
+#modalAddCredits button {
+  border-radius: 5px !important;
+}
+
+.btn-link.focus,
+.btn-link:focus,
+.btn-link:hover {
+  text-decoration: none !important;
+}
+
+.alert {
+  border-radius: 0px !important;
+  font-size: small !important;
+}
+
+#menu-area > .btn-link {
+  color: #fff !important;
+}
+
 #analist-header {
   width: 80%;
   padding-left: 5px;
   display: block ruby;
   position: relative;
   height: 100%;
+}
+
+.column80 {
+  width: 80%;
 }
 
 .workspace {

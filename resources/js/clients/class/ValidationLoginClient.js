@@ -11,7 +11,6 @@ class ValidationLoginClient
     }
 
     validate() {
-        console.log("validando")
         let email = this.email.val().trim()
         let password = this.password.val().trim()
 
@@ -21,6 +20,10 @@ class ValidationLoginClient
 
         if (!validateEmail.validate(email)) {
             throw new Error("E-mail inválido") 
+        }
+
+        if (!grecaptcha.getResponse(1)) {
+            throw new Error("reCaptcha inválido") 
         }
 
         email = email.trim()
