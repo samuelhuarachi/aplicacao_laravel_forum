@@ -91,7 +91,8 @@ class ClientController extends Controller
         $info = $responsePagseguroService["info"];
         $responsePagseguro = json_decode($responsePagseguroService["response"]);
         
-        
+        dump($inf);
+        dd($responsePagseguro);
         if ($info["http_code"] !== 201) {
             $errorPagseguroMessage = "";
             foreach($responsePagseguro->error_messages as $message) {
