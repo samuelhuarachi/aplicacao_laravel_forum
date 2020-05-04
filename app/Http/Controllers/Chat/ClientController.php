@@ -94,17 +94,18 @@ class ClientController extends Controller
         $info = $responsePagseguroService["info"];
         $responsePagseguro = json_decode($responsePagseguroService["response"]);
         
-        dump($responsePagseguroService);
-        dd($info["http_code"]);
         if ($info["http_code"] !== 201) {
             $errorPagseguroMessage = "";
-            foreach($responsePagseguro->error_messages as $message) {
-                $code = $message->code;
-                $description = $message->description;
-                $parameter_name = $message->parameter_name;
-                $errorPagseguroMessage = $errorPagseguroMessage . 
-                $code . " " . $description. " " . $parameter_name . " * ";
+            if (isset($responsePagseguro->error_messages)) {
+                foreach($responsePagseguro->error_messages as $message) {
+                    $code = $message->code;
+                    $description = $message->description;
+                    $parameter_name = $message->parameter_name;
+                    $errorPagseguroMessage = $errorPagseguroMessage . 
+                    $code . " " . $description. " " . $parameter_name . " * ";
+                }
             }
+            
             return redirect()
                     ->route('chat')
                     ->withErrors([$errorPagseguroMessage . 
