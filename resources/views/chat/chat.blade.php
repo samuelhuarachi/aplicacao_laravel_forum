@@ -21,7 +21,7 @@
             <hr>
             
             <div>
-            @foreach($analists as $analist)
+                @foreach($analists as $analist)
                     <figure class="figure">
                         <a href="{{ route('chat.client', $analist->slug) }}">
                             <img 
@@ -33,7 +33,7 @@
                             <figcaption class="figure-caption">{{ $analist->name }} {{ $analist->lastname }}</figcaption>
                         </a>
                     </figure>
-            @endforeach
+                @endforeach
             </div>
         </div>
     </div>
