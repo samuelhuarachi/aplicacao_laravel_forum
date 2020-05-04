@@ -2,17 +2,17 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
-@import 'variables';
+//@import 'variables';
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+//@import '~bootstrap/scss/bootstrap';
 
 
 .image-in-gallery {
 
     width: 50px;
     height: 50px;
-    margin-bottom:3px;
+    margin-bottom: 3px;
     margin-right: 3px;
 }
 
@@ -21,7 +21,7 @@
     margin-bottom: 0;
 }
 
-.logo a{
+.logo a {
     font-size: 69px;
     font-family: 'Baloo', cursive;
     color: #dc3545;
@@ -60,13 +60,13 @@ footer {
     background: #000;
     padding-top: 3rem;
     padding-bottom: 4rem;
-    margin-top:100px;
-    margin-bottom:0px;
+    margin-top: 100px;
+    margin-bottom: 0px;
     color: #fff;
 }
 
 footer p {
-  margin-bottom: .25rem;
+    margin-bottom: .25rem;
 }
 
 #top-menu {
@@ -79,16 +79,25 @@ body {
     padding-top: 50px;
     background: #f2f2f2;
     font-family: 'Arsenal', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 1.6;
+    text-align: left;
 }
 
-a  {
+.btn {
+    font-size: 0.9rem !important;
+}
+
+a {
     color: #333;
     // background: #f2f2f2;
     /* padding-right:5px;
     padding-left:5px; */
 }
 
-.dropdown-item.active, .dropdown-item:active {
+.dropdown-item.active,
+.dropdown-item:active {
     background-color: #dc3545;
 }
 
@@ -97,7 +106,12 @@ a:hover {
     text-decoration: none;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: 'Great Vibes', cursive;
 }
 
@@ -141,14 +155,14 @@ h1, h2, h3, h4, h5, h6 {
 
 #travesti-dancando {
     position: fixed;
-    bottom:20px;
-    right:0px;
+    bottom: 20px;
+    right: 0px;
 }
 
 #travesti-loira-dancando {
     position: fixed;
-    bottom:20px;
-    left:0px;
+    bottom: 20px;
+    left: 0px;
 }
 
 .card {
@@ -158,11 +172,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #menu ul {
-    list-style:none;
+    list-style: none;
     padding: 0px;
 }
-#menu ul li { display: inline;
-margin-right:5px; }
+
+#menu ul li {
+    display: inline;
+    margin-right: 5px;
+}
 
 .reply-style {
     background: #f4f4f4;

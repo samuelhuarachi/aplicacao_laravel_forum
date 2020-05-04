@@ -146,7 +146,7 @@ class PagseguroService {
     public function newOrder($data, $userData)
     {
         // PAGSEGURO_TOKEN
-        // PAGSEGURO_URL_API 
+        // PAGSEGURO_URL_API
 
         $date = explode("/", $data['card_expire']);
 
@@ -156,7 +156,7 @@ class PagseguroService {
             "reference_id": "CRE1",
             "description": "Credito bonecaforum.com",
             "amount": {
-              "value": 100,
+              "value": '.$data['credits_total'].'00,
               "currency": "BRL"
             },
             "payment_method": {

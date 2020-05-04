@@ -86,13 +86,14 @@ class ClientController extends Controller
 
         $userData = \json_decode($response);
 
+        /**
+         * crio uma ordem na api do pagseguro
+         */
         $responsePagseguroService = $pagseguroService->newOrder($data, $userData);
         
         $info = $responsePagseguroService["info"];
         $responsePagseguro = json_decode($responsePagseguroService["response"]);
         
-        dump($info);
-        dd($responsePagseguro);
         if ($info["http_code"] !== 201) {
             $errorPagseguroMessage = "";
             foreach($responsePagseguro->error_messages as $message) {
@@ -110,8 +111,15 @@ class ClientController extends Controller
                             env('SUPPORT_EMAIL')]);
         }
 
+        /**
+         * registra a ordem na minha api
+         */
         $registerNew = $pagseguroService->registerNewOrderInApi($clientToken, $responsePagseguroService["response"]);
 
+        // dump($responsePagseguroService["response"]);
+
+        Session::flash('flash_message','Obrigado pela sua transacao. Ela sera creditada, assim que recebermos a confirmacao. Voce podera acompanhar o status dela em "transacoes" no menu. Caso tenha algum problema, com alguma transacao, enviar um email para o suporte ' . env('SUPPORT_EMAIL'));
+        return redirect()->route('chat');
     }
 
     public function transactions(

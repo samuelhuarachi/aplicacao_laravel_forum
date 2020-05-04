@@ -30,6 +30,11 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
     'sparkpost' => [
-        'secret' => '20e20b506fa102d4d282368d672add1ef770466a',
+        'secret' => '76b158727b8958b037dbc5c9614cb4b747e8501f',
     ],
+    
+    'loggly' => [
+        'key' => env('LOGGLY_KEY'),
+        'tag' => str_replace(' ', '_', env('APP_NAME') . '_' . env('APP_ENV')),
+    ]
 ];

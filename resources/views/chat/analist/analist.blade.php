@@ -33,6 +33,16 @@
                 <video id="analistVideo" autoplay muted></video>
 
             </div>
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <div id="control-buttons">
+                <button id="btnStopPrivateSession"
+                        class="btn btn-secondary btn-sm float-right">
+                                Encerrar privado</button>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -73,13 +83,13 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
 
-<script src="{{ asset('js/peerAnalist.js') }}"></script>
-
 <script type="text/javascript">
     let token = '{{ $token }}'
     let slug = '{{ $myData->slug }}'
     const analistName = '{{ $myData->name }}'
     const analistLastname = '{{ $myData->lastname }}'
+    let socket = null
 </script>
+<script src="{{ asset('js/peerAnalist.js') }}"></script>
 
 @endsection

@@ -17,7 +17,18 @@ class ChatController extends Controller
                 ClientService $clientService,
                 AuthClient $authClient)
     {
-        
+        $tokenClient = Session::get('clientToken');
+        if ($tokenClient) {
+            $checkActiveRoom = $clientService->checkActiveRoom($tokenClient);
+            if ($checkActiveRoom) {
+                $message = '<i class="fas fa-exclamation"></i> Identificamos que já existe uma sessao ativa para essa modelo. Caso o problema persista, entre em contato com o suporte atraves do e-mail: ' . env('SUPPORT_EMAIL');
+                    // return view('chat.analist.message',
+                    //             compact('message'));
+
+                Session::flash('flash_message', $message);
+                return redirect()->route('chat');
+            }
+        }
 
         $analistExists = $clientService->getAnalistBySlug($slug);
 
@@ -26,25 +37,27 @@ class ChatController extends Controller
         
         $isAvailable = $clientService->checkRoomIsAvailable($slug);
         if (!$isAvailable) {
-            $message = "Parece que a modelo não está mais online :(";
-                return view('chat.analist.message',
-                            compact('message'));
+            $message = '<i class="fas fa-exclamation"></i> Parece que a modelo não está mais online <i class="far fa-sad-cry"></i>';
+            Session::flash('flash_message', $message);
+                return redirect()->route('chat');
         }
 
-        $tokenClient = Session::get('clientToken');
+        
         $reponseAuthClient = null;
         $analistExists = json_decode($analistExists);
         
         if (!$tokenClient) {
             $tokenClient = null;
         } else {
+            
+
             $reponseAuthClient = $authClient->authByToken($tokenClient);
             if (!$reponseAuthClient) {
                 abort(403, 'Token inválido');
             }
             
-            
             $reponseAuthClient = json_decode($reponseAuthClient);
+
             return view('chat.client.client', 
                         compact('tokenClient', 
                                     'reponseAuthClient', 'analistExists'));
@@ -70,15 +83,18 @@ class ChatController extends Controller
 
         $analistFind = $analistService->sessionOpenedBySlug($slug);
 
-        if ($analistFind) {
-            $analistFind  = json_decode($analistFind);
-            if ($analistFind->findAnalist) {
-                $message = "Identificamos que existe uma sessão aberta para você. 
-                <br>Caso não consiga solucionar o problema, entrar em contato com suporte.";
-                return view('chat.analist.message',
-                            compact('message'));
-            }
-        }
+        /**
+         * revisar esse codigo abaixo
+         */
+        // if ($analistFind) {
+        //     $analistFind  = json_decode($analistFind);
+        //     if ($analistFind->findAnalist) {
+        //         $message = "Identificamos que existe uma sessão aberta para você. 
+        //         <br>Caso não consiga solucionar o problema, entrar em contato com suporte.";
+        //         return view('chat.analist.message',
+        //                     compact('message'));
+        //     }
+        // }
         
         return view('chat.analist.analist', 
                     compact('myData', 'token'));
@@ -144,6 +160,8 @@ class ChatController extends Controller
             }
             
             $reponseAuthClient = json_decode($reponseAuthClient);
+
+            
             return view('chat.chat', 
                         compact('tokenClient', 
                                     'reponseAuthClient', 'analists'));
