@@ -12,8 +12,7 @@
 
 <script>
 
-// const BASEURL = 'https://quiet-beach-73356.herokuapp.com'
-const BASEURL = 'http://localhost:3001'
+const BASEURL = '{{ env("NODEAPI") }}'
 
 @if($tokenClient)
 const token = '{{ $tokenClient }}'

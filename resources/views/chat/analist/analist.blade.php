@@ -84,6 +84,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
 
 <script type="text/javascript">
+
+    const BASEURL = '{{ env("NODEAPI") }}';
     let token = '{{ $token }}'
     let slug = '{{ $myData->slug }}'
     const analistName = '{{ $myData->name }}'
