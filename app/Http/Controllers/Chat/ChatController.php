@@ -133,6 +133,9 @@ class ChatController extends Controller
         $authenticate->setPass($data['password3']);
 
         $token = $authenticate->verify();
+
+
+        dd($token);
         if (!$token) {
             return redirect()
                             ->back()
