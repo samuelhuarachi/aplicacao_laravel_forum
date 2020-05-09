@@ -153,7 +153,7 @@ class PagseguroService {
         $card_number = str_replace(' ', '', $data['card_number']);
 
         $json_creditcard = '{
-            "reference_id": "'.generateRandomString().'",
+            "reference_id": "'. $this->generateRandomString() .'",
             "description": "Credito bonecaforum.com",
             "amount": {
               "value": '.$data['credits_total'].'00,
