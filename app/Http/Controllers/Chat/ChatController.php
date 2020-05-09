@@ -134,8 +134,6 @@ class ChatController extends Controller
 
         $token = $authenticate->verify();
 
-
-        dd($token);
         if (!$token) {
             return redirect()
                             ->back()

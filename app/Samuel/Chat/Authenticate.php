@@ -19,8 +19,6 @@ class Authenticate {
         $data = ["username" => $this->login, "password" => $this->pass];
         $data_string = json_encode($data);  
 
-        dump(env("NODEAPI"));
-        
         $url = env("NODEAPI") . "/api/authenticate";
         $ch = curl_init($url);
         // curl_setopt($ch, CURLOPT_HTTPHEADER, array(
