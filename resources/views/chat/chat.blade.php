@@ -22,6 +22,7 @@
             
             <div>
                 @foreach($analists as $analist)
+
                     <figure class="figure">
                         <a href="{{ route('chat.client', $analist->slug) }}">
                             <img 

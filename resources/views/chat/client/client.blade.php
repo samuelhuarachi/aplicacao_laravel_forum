@@ -9,11 +9,10 @@
 
 @include('chat._message-toast')
 
+@include('chat.client._menu')
 
 <div class="container">
-    <div class="row">
-         @include('chat.client._menu')
-    </div>
+    
 
     <div class="row">
         <div class="col-md-12 mb-3">
