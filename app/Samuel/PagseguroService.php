@@ -162,7 +162,7 @@ class PagseguroService {
             "payment_method": {
               "type": "CREDIT_CARD",
               "installments": 1,
-              "capture": false,
+              "capture": true,
               "card": {
                 "number": "'.$card_number.'",
                 "exp_month": "'.$date[0].'",
