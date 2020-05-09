@@ -1,8 +1,6 @@
 <?php
 namespace App\Samuel\Chat;
 
-
-
 class ClientService {
 
     public function checkRoomIsAvailable($slug)
@@ -166,9 +164,9 @@ class ClientService {
         return $response;
     }
 
-    public function checkActiveRoom($token)
+    public function checkActiveRoom($token, $slug)
     {
-        $data = ["token" => $token];
+        $data = ["token" => $token, "slug" => $slug];
         $data_string = json_encode($data);
 
         $url = env("NODEAPI") . "/api/client/check-chat-room";
@@ -180,6 +178,24 @@ class ClientService {
             'Content-Type: application/json',
             'Content-Length: ' . strlen($data_string))
         );
+        $response = curl_exec($ch);
+        $info = curl_getinfo($ch);
+        curl_close($ch);
+
+        if ($info['http_code'] !== 200) {
+            return null;
+        }
+
+        return $response;
+    }
+
+    public function isAnalistInPrivateSession($slug)
+    {
+        $url = env("NODEAPI") . "/api/client/analist-is-in-private-session/" . $slug;
+        $ch = curl_init($url);
+        
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        
         $response = curl_exec($ch);
         $info = curl_getinfo($ch);
         curl_close($ch);

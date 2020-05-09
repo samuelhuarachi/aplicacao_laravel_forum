@@ -63,7 +63,19 @@ socket.on("private-session-started", function (clientSocketIDRequestedPrivate) {
     // habilita botao de encerrar sessao
     $("#btnStopPrivateSession").css("display", "block")
     $('#btnStopPrivateSession').prop('disabled', false)
+    listenerAnalistIsOnline()
 });
+
+let listenerAnalistIsOnlineInterval = null
+let listenerAnalistIsOnline = function () {
+    clearInterval(listenerAnalistIsOnlineInterval)
+    listenerAnalistIsOnlineInterval = setInterval(function () {
+        // Avisa o sistema que o analista esta online
+        socket.emit("analist-listener-is-online", {
+            token
+        })
+    }, 20000)
+}
 
 /**
  * 
@@ -84,10 +96,12 @@ function disconnectAllFromPrivateSession(clientSocketIDRequestedPrivate) {
 
 socket.on("client-request-stop-session", () => {
     $("#btnStopPrivateSession").css("display", "none")
+    clearInterval(listenerAnalistIsOnlineInterval)
 });
 
 socket.on("analist-stop-session", () => {
     $("#btnStopPrivateSession").css("display", "none")
+    clearInterval(listenerAnalistIsOnlineInterval)
 });
 
 // Answers aacho que eh aqui

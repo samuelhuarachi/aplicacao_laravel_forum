@@ -192,6 +192,10 @@ class PagseguroService {
         $info = curl_getinfo($ch);
         curl_close($ch);
 
+
+        dump($response);
+        dd($$json_creditcard);
+
         return ["info" => $info, "response" => $response];
     }
 

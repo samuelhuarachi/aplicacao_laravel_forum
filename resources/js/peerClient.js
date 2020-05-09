@@ -170,16 +170,35 @@ socket.on('client-private-session-started', response => {
         $('#btnPrivateSession').css('display', 'none')
         // habilita o botao de encerrar a live
         $('#btnStopPrivateSession').css('display', 'block')
+        listenerClientIsOnline()
     }
 })
+
+let listenerClientIsOnlineInterval = null
+let listenerClientIsOnline = function () {
+    clearInterval(listenerClientIsOnlineInterval)
+    listenerClientIsOnlineInterval = setInterval(function () {
+        // Avisa o sistema que o client esta online
+        socket.emit("client-listener-is-online", {
+            token
+        })
+    }, 20000)
+}
 
 socket.on('client-stop-session', () => {
     $('#btnPrivateSession').css('display', 'block')
     $('#btnStopPrivateSession').css('display', 'none')
     $('#btnPrivateSession').prop('disabled', false)
+    clearInterval(listenerClientIsOnline)
 })
 
-
+socket.on("analist-request-stop-session", function () {
+    $('#btnStopPrivateSession').prop('disabled', true)
+    $("#btnStopPrivateSession").css("display", "none")
+    $('#btnPrivateSession').prop('disabled', false)
+    $("#btnPrivateSession").css("display", "block")
+    clearInterval(listenerClientIsOnline)
+})
 
 function updateHistoryMessages(message) {
     message = message.trim()
@@ -202,11 +221,4 @@ socket.on("message-default-to-client", message => {
 
 $("#message-default-client").click(function () {
     $("#message-default-client").css("display", "none")
-})
-
-socket.on("analist-request-stop-session", function () {
-    $('#btnStopPrivateSession').prop('disabled', true)
-    $("#btnStopPrivateSession").css("display", "none")
-    $('#btnPrivateSession').prop('disabled', false)
-    $("#btnPrivateSession").css("display", "block")
 })

@@ -18,8 +18,29 @@ class ChatController extends Controller
                 AuthClient $authClient)
     {
         $tokenClient = Session::get('clientToken');
+
+        /**
+         * Verifica se o slug existe
+         */
+        $analistExists = $clientService->getAnalistBySlug($slug);
+        if (!$analistExists)
+            abort(404);
+
+        /**
+         * verifica se a analista esta em sessao privada
+         */
+        $isAnalistInPrivateSession = $clientService->isAnalistInPrivateSession($slug);
+        if (!$tokenClient && $isAnalistInPrivateSession) {
+            Session::flash('flash_message', '<i class="fas fa-exclamation"></i> A garota esta em uma sessão privada no momento');
+            return redirect()->route('chat');
+        }
+        
+
+        /**
+         * verifica se voce ja tem um sessao ativa com esse analista
+         */
         if ($tokenClient) {
-            $checkActiveRoom = $clientService->checkActiveRoom($tokenClient);
+            $checkActiveRoom = $clientService->checkActiveRoom($tokenClient, $slug);
             if ($checkActiveRoom) {
                 $message = '<i class="fas fa-exclamation"></i> Identificamos que já existe uma sessao ativa para essa modelo. Caso o problema persista, entre em contato com o suporte atraves do e-mail: ' . env('SUPPORT_EMAIL');
                     // return view('chat.analist.message',
@@ -30,10 +51,7 @@ class ChatController extends Controller
             }
         }
 
-        $analistExists = $clientService->getAnalistBySlug($slug);
-
-        if (!$analistExists)
-            abort(404);
+        
         
         $isAvailable = $clientService->checkRoomIsAvailable($slug);
         if (!$isAvailable) {
@@ -49,8 +67,6 @@ class ChatController extends Controller
         if (!$tokenClient) {
             $tokenClient = null;
         } else {
-            
-
             $reponseAuthClient = $authClient->authByToken($tokenClient);
             if (!$reponseAuthClient) {
                 abort(403, 'Token inválido');
