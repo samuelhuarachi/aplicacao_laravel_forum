@@ -153,7 +153,7 @@ class PagseguroService {
         $card_number = str_replace(' ', '', $data['card_number']);
 
         $json_creditcard = '{
-            "reference_id": "CRE1",
+            "reference_id": "'.generateRandomString().'",
             "description": "Credito bonecaforum.com",
             "amount": {
               "value": '.$data['credits_total'].'00,
@@ -197,6 +197,16 @@ class PagseguroService {
         dd($json_creditcard);
 
         return ["info" => $info, "response" => $response];
+    }
+
+    function generateRandomString($length = 10) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 
     public function registerNewOrderInApi($token, $response)
