@@ -194,7 +194,7 @@ class PagseguroService {
 
 
         dump($response);
-        dd($$json_creditcard);
+        dd($json_creditcard);
 
         return ["info" => $info, "response" => $response];
     }
