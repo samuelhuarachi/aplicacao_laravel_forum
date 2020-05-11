@@ -12,9 +12,10 @@
                 @if($tokenClient)
                 <button id="btnClientAccount" type="button" class="btn btn-link btn-sm">
                     Minha Conta</button>
-
+                <button id="btnSessions" type="button" class="btn btn-link btn-sm">
+                    Sessões</button>
                 <button id="btnTransactions" type="button" class="btn btn-link btn-sm">
-                    Transacoes</button>
+                    Transações</button>
 
                 <button id="btnLogoutClient" class="btn btn-link btn-sm">
                     Sair</button>

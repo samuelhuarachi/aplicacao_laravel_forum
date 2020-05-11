@@ -26,6 +26,16 @@ body {
     width: 100%;
 }
 
+#live-circle {
+    color: #7bc48d;
+}
+
+#client-info-panel i {
+    color: #bdbdbd !important;
+}
+
+
+
 #menu-area {
     display: block ruby;
     width: 80%;
@@ -106,6 +116,7 @@ body {
     width: 80%;
     display: inline-flex;
     background: #333;
+    //border: 1px solid #e860ad;
 }
 
 #statistic {
@@ -229,16 +240,16 @@ p {
     position: relative;
     height: 75vh;
     background: #fff;
-    border-left: thin solid #bd2130;
-    border-bottom: thin solid #bd2130;
-    border-right: thin solid #bd2130;
+    border-left: 1px solid #e860ad;
+    border-bottom: 1px solid #e860ad;
+    border-right: 1px solid #e860ad;
     padding: 0px;
-
     overflow: scroll;
     overflow-x: hidden;
     word-break: break-all;
     font-size: small;
     padding-left: 5px;
+    color: #000;
 }
 
 
@@ -270,10 +281,14 @@ video {
     resize: none;
     font-size: small;
     padding: 5px;
+    border: 1px solid #e860ad;
+    background: #fff;
 }
 
 #btnSend {
     width: 100%;
+    background: #641d55;
+    border: 0px;
 }
 
 
@@ -299,14 +314,15 @@ video {
 }
 
 .figure {
-    border: 3px solid #e8e8e8;
+    border: 1px solid #2b2b2b;
     padding: 10px;
-    border-radius: 15px;
-    background: #fff;
+    background: #1e1e1e;
 }
 
 .figure-caption {
-    color: #131313;
+    color: #fff;
+    background: #2f2f2f;
+    padding: 2px;
 }
 
 .figure:hover {
@@ -385,10 +401,11 @@ footer p {
 }
 
 body {
-    background: #f2f2f2;
+    background: #131313;
     font-family: 'Arsenal', sans-serif;
     margin-left: 5px;
     font-size: small;
+    color: #fff;
 }
 
 a {

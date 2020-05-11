@@ -13,17 +13,11 @@
 
 <div class="container">
     
-
     <div class="row">
         <div class="col-md-12 mb-3">
             <div class="column80">
-
-
-                <div id="message-default-client" class="alert alert-info" role="alert">
-                    safsasafsafdsa
-                </div>
+                <div id="message-default-client" class="alert alert-info" role="alert"></div>
                 
-
                 <!-- se tiver token, se tiver autenticado, se tiver credito -->
                 @if($tokenClient && isset($reponseAuthClient) && $reponseAuthClient->nickname &&
                 $reponseAuthClient->credits > 0)
@@ -44,15 +38,22 @@
             <div id="analist-header">
 
                 <div class="float-right" id="live-info">
-                    <img width="10" src="{{ asset('images/green.png') }}" alt="">
+                    <i id="live-circle" class="fas fa-circle"></i>
                     Live
                 </div>
+
+                @if($tokenClient && isset($reponseAuthClient) && $reponseAuthClient->nickname)
+                    <div id="client-info-panel">
+                        <span><i class="fas fa-user mr-1"></i> {{ $reponseAuthClient->nickname }}</span>
+                        <span class="ml-3"><i class="fas fa-donate mr-1"></i> {{ $reponseAuthClient->credits }}</span>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-12 mb-3">
+        <div class="col-md-12">
 
             <div class="workspace">
 
@@ -60,17 +61,13 @@
 
             </div>
         </div>
-        <div class="col-md-12 mb-3">
+        <div class="col-sm">
 
             @if ($tokenClient && isset($reponseAuthClient) && $reponseAuthClient->email_verified == false)
                 @include('chat.client.components.messages.verifiedemail')
-                @endif
-                @if($tokenClient && isset($reponseAuthClient) && $reponseAuthClient->nickname)
-                Nickname: {{ $reponseAuthClient->nickname }} <br>
-                E-mail: {{ $reponseAuthClient->email }} <br>
-                Créditos {{ $reponseAuthClient->credits }} <br>
-                <br>
             @endif
+
+            
         </div>
     </div>
 

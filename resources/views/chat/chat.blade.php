@@ -50,9 +50,9 @@
 @endif
 
 @if($tokenClient && isset($reponseAuthClient) && $reponseAuthClient->email_verified == true)
-        @include('chat.client.components.modal.modalAddCredits')
-        @include('chat.client.components.modal.modalPayment')
-        @include('chat.client.components.modal.modalTransactions')
+    @include('chat.client.components.modal.modalAddCredits')
+    @include('chat.client.components.modal.modalPayment')
+    @include('chat.client.components.modal.modalTransactions')
 @endif
 
 <style>
