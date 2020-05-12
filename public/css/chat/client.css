@@ -144,6 +144,10 @@ body {
   position: absolute;
 }
 
+.modal {
+  color: #000;
+}
+
 .modal-content {
   border-radius: 0px !important;
 }

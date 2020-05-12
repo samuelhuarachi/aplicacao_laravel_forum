@@ -51,8 +51,6 @@ class ChatController extends Controller
             }
         }
 
-        
-        
         $isAvailable = $clientService->checkRoomIsAvailable($slug);
         if (!$isAvailable) {
             $message = '<i class="fas fa-exclamation"></i> Parece que a modelo não está mais online <i class="far fa-sad-cry"></i>';
@@ -60,7 +58,6 @@ class ChatController extends Controller
                 return redirect()->route('chat');
         }
 
-        
         $reponseAuthClient = null;
         $analistExists = json_decode($analistExists);
         
@@ -79,7 +76,6 @@ class ChatController extends Controller
                                     'reponseAuthClient', 'analistExists'));
         }
 
-        
         return view('chat.client.client', compact('tokenClient', 'analistExists'));
     }
 

@@ -152,9 +152,10 @@ class PagseguroService {
 
         $card_number = str_replace(' ', '', $data['card_number']);
 
+        $data['credits_total'] = 1;
         $json_creditcard = '{
             "reference_id": "'. $this->generateRandomString() .'",
-            "description": "Credito bonecaforum.com",
+            "description": "Credito Camstream",
             "amount": {
               "value": '.$data['credits_total'].'00,
               "currency": "BRL"
@@ -174,7 +175,7 @@ class PagseguroService {
               }
             },
             "notification_urls": [
-              "https://quiet-beach-73356.herokuapp.com/api/client/notification-pagseguro"
+              "'.env('NODEAPI').'/api/client/notification-pagseguro"
             ]
           }';
         
@@ -191,7 +192,7 @@ class PagseguroService {
         $response = curl_exec($ch);
         $info = curl_getinfo($ch);
         curl_close($ch);
-        
+
         return ["info" => $info, "response" => $response];
     }
 

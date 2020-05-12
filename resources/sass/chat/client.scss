@@ -10,7 +10,12 @@ body {
 #btnStopPrivateSession {
     display: none;
 
-    background: linear-gradient(180deg, rgba(208, 208, 208, 1) 0%, rgba(226, 225, 225, 1) 51%, rgba(208, 208, 208, 1) 100%);
+    background: linear-gradient(
+        180deg,
+        rgba(208, 208, 208, 1) 0%,
+        rgba(226, 225, 225, 1) 51%,
+        rgba(208, 208, 208, 1) 100%
+    );
     color: #868686;
     border: 6px solid #d0d0d0;
     padding: 3px 26px;
@@ -33,8 +38,6 @@ body {
 #client-info-panel i {
     color: #bdbdbd !important;
 }
-
-
 
 #menu-area {
     display: block ruby;
@@ -83,7 +86,6 @@ body {
     border-radius: 5px !important;
 }
 
-
 .btn-link.focus,
 .btn-link:focus,
 .btn-link:hover {
@@ -95,7 +97,7 @@ body {
     font-size: small !important;
 }
 
-#menu-area>.btn-link {
+#menu-area > .btn-link {
     color: #fff !important;
 }
 
@@ -127,7 +129,6 @@ body {
     background: #fff;
 }
 
-
 #logo-live {
     height: 100%;
     display: initial;
@@ -151,6 +152,9 @@ body {
     position: absolute;
 }
 
+.modal {
+    color: #000;
+}
 
 .modal-content {
     border-radius: 0px !important;
@@ -162,7 +166,7 @@ body {
 }
 
 .form-control:focus {
-    box-shadow: 0 0 0 .2rem rgba(0, 123, 255, 0) !important;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0) !important;
     border-color: #bd2130 !important;
 }
 
@@ -172,39 +176,49 @@ body {
 }
 
 #btnPrivateSession {
-    background: linear-gradient(180deg, rgb(91, 197, 238) 0%, rgb(150, 216, 242) 51%, rgb(91, 197, 238) 100%);
+    background: linear-gradient(
+        180deg,
+        rgb(91, 197, 238) 0%,
+        rgb(150, 216, 242) 51%,
+        rgb(91, 197, 238) 100%
+    );
     color: #fff;
     border: 6px solid #91d3f2;
     padding: 3px 26px;
     border-radius: 21px !important;
 }
 
-
-
-
 .alert-success {
     color: #43842c;
     border: 5px solid #a1e1b0;
     font-weight: bold;
-    background: linear-gradient(180deg, rgb(180, 234, 193) 0%, rgb(211, 246, 220) 51%, rgb(180, 234, 193) 100%);
-    border-radius: 27px !important;
-    padding: 10px 33px;
+    background: linear-gradient(
+        180deg,
+        rgb(180, 234, 193) 0%,
+        rgb(211, 246, 220) 51%,
+        rgb(180, 234, 193) 100%
+    );
+    border-radius: 0px !important;
+    padding: 1px 7px;
 }
 
 #message-default-client {
     color: #464646;
     border: 3px solid #ccc;
     font-weight: bold;
-    background: linear-gradient(180deg, rgba(212, 212, 212, 1) 0%, rgba(230, 230, 230, 1) 51%, rgba(212, 212, 212, 1) 100%);
+    background: linear-gradient(
+        180deg,
+        rgba(212, 212, 212, 1) 0%,
+        rgba(230, 230, 230, 1) 51%,
+        rgba(212, 212, 212, 1) 100%
+    );
     border-radius: 27px !important;
     padding: 7px 30px;
 }
 
-
 label {
     margin-bottom: 0px !important;
 }
-
 
 button {
     border-radius: 0px !important;
@@ -233,8 +247,6 @@ p {
     color: blue;
 }
 
-
-
 .history {
     overflow: scroll;
     position: relative;
@@ -252,7 +264,6 @@ p {
     color: #000;
 }
 
-
 video {
     width: 52%;
     background: #000;
@@ -266,8 +277,6 @@ video {
     width: 17%;
     padding-right: 5px;
 }
-
-
 
 .message {
     position: relative;
@@ -291,7 +300,6 @@ video {
     border: 0px;
 }
 
-
 #btnCredits {
     background: #737272;
     border: 1px solid #737272;
@@ -299,9 +307,8 @@ video {
     font-weight: bold !important;
 }
 
-
 .btn:focus {
-    box-shadow: 0 0 0 .2rem rgba(255, 255, 255, 0) !important;
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0) !important;
 }
 
 .btn {
@@ -348,7 +355,7 @@ video {
 
 .logo a {
     font-size: 69px;
-    font-family: 'Baloo', cursive;
+    font-family: "Baloo", cursive;
     color: #dc3545;
 }
 
@@ -391,7 +398,7 @@ footer {
 }
 
 footer p {
-    margin-bottom: .25rem;
+    margin-bottom: 0.25rem;
 }
 
 #top-menu {
@@ -402,7 +409,7 @@ footer p {
 
 body {
     background: #131313;
-    font-family: 'Arsenal', sans-serif;
+    font-family: "Arsenal", sans-serif;
     margin-left: 5px;
     font-size: small;
     color: #fff;
@@ -431,7 +438,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Great Vibes', cursive;
+    font-family: "Great Vibes", cursive;
     margin-bottom: 0px !important;
 }
 
