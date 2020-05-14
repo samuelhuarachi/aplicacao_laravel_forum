@@ -31,7 +31,7 @@ $("#btnRedefinePassword").click(async () => {
         $("#div-message-redefine-password-client").html(messageReponse)
         $("#div-message-redefine-password-client").fadeOut(4000)
 
-        window.location.replace("/chat");
+        window.location.replace("/camstream");
 
     } catch (error) {
         $("#div-message-redefine-password-client").show()

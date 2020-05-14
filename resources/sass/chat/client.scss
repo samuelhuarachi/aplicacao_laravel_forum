@@ -10,10 +10,12 @@ body {
 #btnStopPrivateSession {
     display: none;
 
-    background: linear-gradient(180deg,
-            rgba(208, 208, 208, 1) 0%,
-            rgba(226, 225, 225, 1) 51%,
-            rgba(208, 208, 208, 1) 100%);
+    background: linear-gradient(
+        180deg,
+        rgba(208, 208, 208, 1) 0%,
+        rgba(226, 225, 225, 1) 51%,
+        rgba(208, 208, 208, 1) 100%
+    );
     color: #868686;
     border: 6px solid #d0d0d0;
     padding: 3px 26px;
@@ -96,7 +98,7 @@ body {
     padding: 1px 7px !important;
 }
 
-#menu-area>.btn-link {
+#menu-area > .btn-link {
     color: #fff !important;
 }
 
@@ -162,6 +164,8 @@ body {
 .form-control {
     border-radius: 0px !important;
     padding: 5px !important;
+    font-size: small;
+    height: calc(1.5em + 0.75rem + -1px) !important;
 }
 
 .form-control:focus {
@@ -183,10 +187,12 @@ body {
 }
 
 #btnPrivateSession {
-    background: linear-gradient(180deg,
-            rgb(91, 197, 238) 0%,
-            rgb(150, 216, 242) 51%,
-            rgb(91, 197, 238) 100%);
+    background: linear-gradient(
+        180deg,
+        rgb(91, 197, 238) 0%,
+        rgb(150, 216, 242) 51%,
+        rgb(91, 197, 238) 100%
+    );
     color: #fff;
     border: 6px solid #91d3f2;
     padding: 3px 26px;
@@ -197,10 +203,12 @@ body {
     color: #43842c;
     border: 5px solid #a1e1b0;
     font-weight: bold;
-    background: linear-gradient(180deg,
-            rgb(180, 234, 193) 0%,
-            rgb(211, 246, 220) 51%,
-            rgb(180, 234, 193) 100%);
+    background: linear-gradient(
+        180deg,
+        rgb(180, 234, 193) 0%,
+        rgb(211, 246, 220) 51%,
+        rgb(180, 234, 193) 100%
+    );
     border-radius: 0px !important;
     padding: 1px 7px;
 }
@@ -209,10 +217,12 @@ body {
     color: #464646;
     border: 3px solid #ccc;
     font-weight: bold;
-    background: linear-gradient(180deg,
-            rgba(212, 212, 212, 1) 0%,
-            rgba(230, 230, 230, 1) 51%,
-            rgba(212, 212, 212, 1) 100%);
+    background: linear-gradient(
+        180deg,
+        rgba(212, 212, 212, 1) 0%,
+        rgba(230, 230, 230, 1) 51%,
+        rgba(212, 212, 212, 1) 100%
+    );
     border-radius: 27px !important;
     padding: 4px 20px;
 }

@@ -119,44 +119,43 @@ function() {
 });
 
 
-Route::get('chat/analist/login', 'Chat\ChatController@analistLogin');
-Route::post('chat/analist/authenticate', 'Chat\ChatController@authenticate')
-                ->name('chat.analist.authenticate');
-Route::get('chat/analist/{slug}', 'Chat\ChatController@analist')
-                ->name('chat.analist');
+Route::group(['prefix' => 'camstream'],
+function() {
+    Route::get('analist/login', 'Chat\ChatController@analistLogin');
+    Route::post('analist/authenticate', 'Chat\ChatController@authenticate')
+                    ->name('chat.analist.authenticate');
+    Route::get('analist/{slug}', 'Chat\ChatController@analist')
+                    ->name('chat.analist');
 
-                
+    Route::get('', 'Chat\ChatController@chat')
+                            ->name('chat');
 
+    Route::get('client/auth/{token}', 'Chat\ClientController@authClient')
+        ->name('chat.client.auth.token');
 
-Route::get('chat', 'Chat\ChatController@chat')
-                        ->name('chat');
+    Route::get('client/email_verified/{nickname}/{email_token}', 'Chat\ClientController@emailVerified')
+        ->name('chat.client.email_verified');
 
-Route::get('chat/client/auth/{token}', 'Chat\ClientController@authClient')
-    ->name('chat.client.auth.token');
+    Route::get('client/forgot_email/{nickname}/{token}', 
+                    'Chat\ClientController@forgotEmail')
+        ->name('chat.client.forgot_email');
 
-Route::get('chat/client/email_verified/{nickname}/{email_token}', 'Chat\ClientController@emailVerified')
-    ->name('chat.client.email_verified');
+    Route::get('client/resend-verified-mail/{token}', 
+                    'Chat\ClientController@resendVerifiedMail')
+        ->name('chat.client.resend-verified-mail');
 
-Route::get('chat/client/forgot_email/{nickname}/{token}', 
-                'Chat\ClientController@forgotEmail')
-    ->name('chat.client.forgot_email');
+    Route::get('client/logout', 'Chat\ClientController@logout')
+        ->name('chat.client.logout');
 
-Route::get('chat/client/resend-verified-mail/{token}', 
-                'Chat\ClientController@resendVerifiedMail')
-    ->name('chat.client.resend-verified-mail');
+    Route::post('client/payment', 'Chat\ClientController@payment')
+        ->name('chat.client.payment');
 
-Route::get('chat/client/logout', 'Chat\ClientController@logout')
-    ->name('chat.client.logout');
+    Route::get('client/transactions', 'Chat\ClientController@transactions')
+        ->name('chat.client.transactions');
 
-Route::post('chat/client/payment', 'Chat\ClientController@payment')
-    ->name('chat.client.payment');
+    Route::get('client/{slug}', 'Chat\ChatController@client')
+            ->name('chat.client');
+});
 
-Route::get('chat/client/transactions', 'Chat\ClientController@transactions')
-    ->name('chat.client.transactions');
-
-
-
-Route::get('chat/client/{slug}', 'Chat\ChatController@client')
-        ->name('chat.client');
 
 Auth::routes(['verify' => true]);

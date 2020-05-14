@@ -1,7 +1,3 @@
-
-
-
-
-$('#btnLogoutClient').click(function() {
-    window.location.replace("/chat/client/logout")
+$('#btnLogoutClient').click(function () {
+    window.location.replace("/camstream/client/logout")
 })
