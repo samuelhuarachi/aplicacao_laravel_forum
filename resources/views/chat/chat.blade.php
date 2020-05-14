@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-        
+
             @include('_message-success')
             @include('_message-error2')
             @if ($tokenClient && isset($reponseAuthClient) && $reponseAuthClient->email_verified == false)
@@ -44,6 +44,8 @@
 
 @if(!$tokenClient)
     @include('chat.client.components.modal.registerandlogin')
+    @include('chat.client.components.modal.forgotPassword')
+    
 @endif
 
 @if($tokenClient)

@@ -14,7 +14,7 @@
 
 const BASEURL = '{{ env("NODEAPI") }}'
 
-@if($tokenClient)
+@if(isset($tokenClient) && $tokenClient)
 const token = '{{ $tokenClient }}'
 @else
 const token = null

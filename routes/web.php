@@ -136,7 +136,10 @@ Route::get('chat/client/auth/{token}', 'Chat\ClientController@authClient')
 
 Route::get('chat/client/email_verified/{nickname}/{email_token}', 'Chat\ClientController@emailVerified')
     ->name('chat.client.email_verified');
-// https://www.bonecaforum.com/chat/client/email_verified/james_obl/de803ffb-5891-4f48-b471-257d296fef0a
+
+Route::get('chat/client/forgot_email/{nickname}/{token}', 
+                'Chat\ClientController@forgotEmail')
+    ->name('chat.client.forgot_email');
 
 Route::get('chat/client/resend-verified-mail/{token}', 
                 'Chat\ClientController@resendVerifiedMail')
@@ -150,6 +153,8 @@ Route::post('chat/client/payment', 'Chat\ClientController@payment')
 
 Route::get('chat/client/transactions', 'Chat\ClientController@transactions')
     ->name('chat.client.transactions');
+
+
 
 Route::get('chat/client/{slug}', 'Chat\ChatController@client')
         ->name('chat.client');

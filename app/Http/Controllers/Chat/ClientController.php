@@ -48,6 +48,14 @@ class ClientController extends Controller
         return redirect()->route('chat');
     }
 
+    public function forgotEmail($nickname, $token)
+    {
+        
+        return view('chat.client.redefine-password', 
+                        compact('nickname', 
+                                    'token'));
+    }
+
     public function logout()
     {
         Session::forget('clientToken');

@@ -9,7 +9,7 @@
                     title="Ao adicionar crédito, voce podera iniciar uma sessao privada. Os creditos serao descontados proporcionalmente ao tempo permanecido, de acordo com o valor/hora da garota.">
                     <i class="fas fa-coins"></i> Créditos <i class="fas fa-plus"></i></button>
 
-                @if($tokenClient)
+                @if(isset($tokenClient) && $tokenClient)
                 <button id="btnClientAccount" type="button" class="btn btn-link btn-sm">
                     Minha Conta</button>
                 <button id="btnSessions" type="button" class="btn btn-link btn-sm">

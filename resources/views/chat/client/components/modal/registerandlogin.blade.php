@@ -34,7 +34,7 @@
                             
                                 <div id="div-message-login-client"></div>
 
-                                <a href="#">Esqueci minha senha</a>
+                                <a id="linkForgotPassword" href="#">Esqueci minha senha</a>
                             </form>
                         </div>
                     </div>

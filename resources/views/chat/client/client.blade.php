@@ -31,10 +31,14 @@
                     Encerrar privado</button>
                 @endif
 
-                <h2 class="float-left">{{ $analistExists->name }} {{ $analistExists->lastname }}</h2>
+                <h2 class="mt-4">{{ $analistExists->name }} {{ $analistExists->lastname }}</h2>
+                @if ($tokenClient && isset($reponseAuthClient) && $reponseAuthClient->email_verified == false)
+                    <br><br>
+                    @include('chat.client.components.messages.verifiedemail')
+                @endif
             </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12 mt-3">
             <div id="analist-header">
 
                 <div class="float-right" id="live-info">
@@ -53,21 +57,13 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 ">
 
             <div class="workspace">
 
                 <video id="friendsVideo" autoplay></video>
 
             </div>
-        </div>
-        <div class="col-sm">
-
-            @if ($tokenClient && isset($reponseAuthClient) && $reponseAuthClient->email_verified == false)
-                @include('chat.client.components.messages.verifiedemail')
-            @endif
-
-            
         </div>
     </div>
 
@@ -98,19 +94,16 @@
 
 @if(!$tokenClient)
     @include('chat.client.components.modal.registerandlogin')
+    @include('chat.client.components.modal.forgotPassword')
 @endif
 
 @if($tokenClient)
     @include('chat.client.components.modal.account')
 
     @if($tokenClient && isset($reponseAuthClient) && $reponseAuthClient->email_verified == true)
-
-
         @include('chat.client.components.modal.modalAddCredits')
         @include('chat.client.components.modal.modalPayment')
         @include('chat.client.components.modal.modalTransactions')
-
-
     @endif
 @endif
 

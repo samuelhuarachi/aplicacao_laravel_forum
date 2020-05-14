@@ -151,8 +151,7 @@ class PagseguroService {
         $date = explode("/", $data['card_expire']);
 
         $card_number = str_replace(' ', '', $data['card_number']);
-
-        $data['credits_total'] = 1;
+        
         $json_creditcard = '{
             "reference_id": "'. $this->generateRandomString() .'",
             "description": "Credito Camstream",

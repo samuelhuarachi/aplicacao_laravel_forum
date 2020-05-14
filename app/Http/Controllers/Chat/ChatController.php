@@ -60,7 +60,7 @@ class ChatController extends Controller
 
         $reponseAuthClient = null;
         $analistExists = json_decode($analistExists);
-        
+
         if (!$tokenClient) {
             $tokenClient = null;
         } else {

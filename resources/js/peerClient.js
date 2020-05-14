@@ -11,6 +11,10 @@ require('./clients/goPayment')
 require('./clients/pagseguro')
 require('./clients/btnStopPrivateSession')
 require('./clients/btnTransactions')
+require('./clients/linkForgotPassword')
+require('./clients/btnForgotLogin')
+require('./clients/btnRedefinePassword')
+require('./clients/linkForgotPasswordBack')
 
 
 //const { ConfigureIsOnline } = require('./common')
@@ -23,6 +27,8 @@ var onloadCallback = function () {
 
     const recaptchaRegister = document.getElementById('recaptchaRegister')
     const recaptchaLogin = document.getElementById('recaptchaLogin')
+    const recaptchaForgotLogin = document.getElementById('recaptchaForgotLogin')
+    const redefinePassword = document.getElementById('redefinePassword')
 
     if (recaptchaRegister) {
         grecaptcha.render('recaptchaRegister', {
@@ -32,6 +38,18 @@ var onloadCallback = function () {
 
     if (recaptchaLogin) {
         grecaptcha.render('recaptchaLogin', {
+            'sitekey': '6LcSuugUAAAAACy-8wrNOLoQOLcL1cMxQScS-oeW'
+        })
+    }
+
+    if (recaptchaForgotLogin) {
+        grecaptcha.render('recaptchaForgotLogin', {
+            'sitekey': '6LcSuugUAAAAACy-8wrNOLoQOLcL1cMxQScS-oeW'
+        })
+    }
+
+    if (redefinePassword) {
+        grecaptcha.render('redefinePassword', {
             'sitekey': '6LcSuugUAAAAACy-8wrNOLoQOLcL1cMxQScS-oeW'
         })
     }
