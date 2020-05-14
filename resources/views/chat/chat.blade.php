@@ -6,6 +6,11 @@
 
 <div class="container">
     <div class="row">
+
+        <div id="header-camstream">
+            <h1>Camstream - Garotas ao vivo</h1>
+        </div>
+
         <div class="col-md-12">
 
             @include('_message-success')
@@ -14,9 +19,9 @@
                 @include('chat.client.components.messages.verifiedemail')
             @endif
             <br>
+
+
             <center>
-                <h1>Garotas</h1>
-                <br>
                 Confiras as melhores garotas da BonecaForum/GarotaForum CamStream
             </center>
             <hr>

@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div id="full-menu" class="col-md-12 mb-3">
+        <div id="full-menu" class="col-md-12">
             <div id="menu-area">
                 <div id="logo-live"><i style="margin-right: 10px;" class="fas fa-stream"></i> <a style="color: #fff" href="{{ route('chat') }}">Boneca Forum - Cam stream</a>
                 </div>
