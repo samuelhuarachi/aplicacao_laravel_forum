@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Arsenal|Great+Vibes&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Baloo&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/chat/analist.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <title>Boneca Forum - Cam stream</title>
 </head>
 <body>

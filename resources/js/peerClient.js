@@ -15,6 +15,8 @@ require('./clients/linkForgotPassword')
 require('./clients/btnForgotLogin')
 require('./clients/btnRedefinePassword')
 require('./clients/linkForgotPasswordBack')
+const updateCreditsValue = require('./clients/updateCreditsValue')
+
 
 
 //const { ConfigureIsOnline } = require('./common')
@@ -208,6 +210,7 @@ socket.on('client-stop-session', () => {
     $('#btnStopPrivateSession').css('display', 'none')
     $('#btnPrivateSession').prop('disabled', false)
     clearInterval(listenerClientIsOnline)
+    updateCreditsValue.go()
 })
 
 socket.on("analist-request-stop-session", function () {
@@ -216,6 +219,7 @@ socket.on("analist-request-stop-session", function () {
     $('#btnPrivateSession').prop('disabled', false)
     $("#btnPrivateSession").css("display", "block")
     clearInterval(listenerClientIsOnline)
+    updateCreditsValue.go()
 })
 
 function updateHistoryMessages(message) {
@@ -240,3 +244,12 @@ socket.on("message-default-to-client", message => {
 $("#message-default-client").click(function () {
     $("#message-default-client").css("display", "none")
 })
+
+socket.on('reconnect', function () {
+    if (typeof (clientRoom) != "undefined" && clientRoom) {
+        socket.emit('join-in-room', {
+            token,
+            clientRoom
+        })
+    }
+});

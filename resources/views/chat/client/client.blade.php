@@ -49,7 +49,7 @@
                 @if($tokenClient && isset($reponseAuthClient) && $reponseAuthClient->nickname)
                     <div id="client-info-panel">
                         <span><i class="fas fa-user mr-1"></i> {{ $reponseAuthClient->nickname }}</span>
-                        <span class="ml-3"><i class="fas fa-donate mr-1"></i> {{ $reponseAuthClient->credits }}</span>
+                        <span id="creditsTopStreamVideo" class="ml-3"><i class="fas fa-donate mr-1"></i> {{ $reponseAuthClient->credits }}</span>
                     </div>
                 @endif
             </div>
@@ -66,17 +66,6 @@
             </div>
         </div>
     </div>
-
-    <!-- <div class="row">
-        <div  class="col-md-12 mb-3">
-            <div id="statistic">
-                <h2>Dados</h2>
-                <p>
-                    sdafsafdsafds
-                </p>
-            </div>
-        </div>
-    </div> -->
 
 </div>
 

@@ -121,12 +121,23 @@ function() {
 
 Route::group(['prefix' => 'camstream'],
 function() {
-    Route::get('analist/login', 'Chat\ChatController@analistLogin');
+
+    /**
+     * Analist
+     */
+    Route::get('analist/login', 'Chat\ChatController@analistLogin')->name('analist.login');
     Route::post('analist/authenticate', 'Chat\ChatController@authenticate')
                     ->name('chat.analist.authenticate');
+    
+    Route::get('analist/logout', 'Chat\AnalistController@logout')
+        ->name('chat.analist.logout');
     Route::get('analist/{slug}', 'Chat\ChatController@analist')
                     ->name('chat.analist');
 
+
+    /**
+     * client
+     */
     Route::get('', 'Chat\ChatController@chat')
                             ->name('chat');
 

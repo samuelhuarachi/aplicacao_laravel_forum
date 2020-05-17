@@ -66,7 +66,8 @@ class ChatController extends Controller
         } else {
             $reponseAuthClient = $authClient->authByToken($tokenClient);
             if (!$reponseAuthClient) {
-                abort(403, 'Token inválido');
+                Session::forget('clientToken');
+                return redirect()->route('chat');
             }
             
             $reponseAuthClient = json_decode($reponseAuthClient);
@@ -160,7 +161,7 @@ class ChatController extends Controller
                     AuthClient $authClient)
     {
         $analists = json_decode($clientService->getAllAnalists());
-        
+
         $tokenClient = Session::get('clientToken');
         $reponseAuthClient = null;
         
@@ -169,7 +170,8 @@ class ChatController extends Controller
         } else {
             $reponseAuthClient = $authClient->authByToken($tokenClient);
             if (!$reponseAuthClient) {
-                return abort(403, 'Token inválido');
+                Session::forget('clientToken');
+                return redirect()->route('chat');
             }
             
             $reponseAuthClient = json_decode($reponseAuthClient);

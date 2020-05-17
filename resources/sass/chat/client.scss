@@ -163,7 +163,7 @@ body {
     background: linear-gradient(276deg, rgba(50, 3, 42, 1) 0%, rgba(140, 28, 123, 1) 50%, rgba(140, 28, 123, 1) 56%, rgba(50, 3, 42, 1) 100%);
     width: 100%;
     padding: 50px 30px;
-    margin-bottom: 30px;
+    margin-bottom: 2px;
 }
 
 .form-control {
@@ -204,14 +204,14 @@ body {
 
 .alert-success {
     color: #43842c;
-    border: 5px solid #a1e1b0;
+    border: 1px solid #23863a;
     font-weight: bold;
     background: linear-gradient(180deg,
             rgb(180, 234, 193) 0%,
             rgb(211, 246, 220) 51%,
             rgb(180, 234, 193) 100%);
     border-radius: 0px !important;
-    padding: 1px 7px;
+    padding: 3px 7px;
 }
 
 #message-default-client {
@@ -339,7 +339,7 @@ video {
 .figure-caption {
     color: #fff;
     background: #2f2f2f;
-    padding: 2px;
+    padding: 2px 8px;
 }
 
 .figure:hover {

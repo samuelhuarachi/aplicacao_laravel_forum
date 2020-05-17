@@ -7,10 +7,13 @@ import io from "socket.io-client";
 connectSocket();
 
 require('./analist/btnStopPrivateSession')
-
+const listOfClientsActiveInYourChatFunction = require("./analist/listOfClientsActiveInYourChatFunction")
+const showQuantityOnlineClients = require("./analist/showQuantityOnlineClients")
+const alertNewClientInRoom = require("./analist/alertNewClientsInRoom")
+const gainstUpdate = require("./analist/gainstUpdate")
 
 var analistVideo = document.getElementById("analistVideo");
-var yourId = Math.floor(Math.random() * 1000000000);
+//var yourId = Math.floor(Math.random() * 1000000000);
 var servers = {
     iceServers: [{
             urls: "stun:stun.l.google.com:19305"
@@ -63,8 +66,27 @@ socket.on("private-session-started", function (clientSocketIDRequestedPrivate) {
     // habilita botao de encerrar sessao
     $("#btnStopPrivateSession").css("display", "block")
     $('#btnStopPrivateSession').prop('disabled', false)
+    $('#private-session-message').css("display", "contents")
     listenerAnalistIsOnline()
 });
+
+// Mostra  os clientes ativos
+// para a analista
+socket.on("send-current-clients-active-in-room-to-analist", function (listClientsInMyRoom) {
+
+    /**
+     * se entrar um cliente a mais na sala
+     * ele emite um som
+     */
+    if (listClientsInMyRoom.length > globalQuantityOnlineClients && document.getElementById("optionAlertWhenNewClientComming").checked == true) {
+        alertNewClientInRoom.alertNewClientInRoom()
+    }
+
+    globalQuantityOnlineClients = listClientsInMyRoom.length
+    showQuantityOnlineClients.showQuantityOnlineClients(listClientsInMyRoom)
+    listOfClientsActiveInYourChatFunction.listOfClientsActiveInYourChatFunction(listClientsInMyRoom)
+})
+
 
 let listenerAnalistIsOnlineInterval = null
 let listenerAnalistIsOnline = function () {
@@ -96,37 +118,38 @@ function disconnectAllFromPrivateSession(clientSocketIDRequestedPrivate) {
 
 socket.on("client-request-stop-session", () => {
     $("#btnStopPrivateSession").css("display", "none")
+    $('#private-session-message').css("display", "none")
     clearInterval(listenerAnalistIsOnlineInterval)
+    gainstUpdate.gainstUpdate()
 });
 
 socket.on("analist-stop-session", () => {
     $("#btnStopPrivateSession").css("display", "none")
+    $('#private-session-message').css("display", "none")
     clearInterval(listenerAnalistIsOnlineInterval)
+    gainstUpdate.gainstUpdate()
 });
 
 // Answers aacho que eh aqui
 socket.on("receiveClientSDP", function (data) {
     let msg = JSON.parse(data);
     let pc = myConnections[msg.clientId];
-
-    console.log("Registrando a responsta de " + msg.clientId);
     pc.setRemoteDescription(new RTCSessionDescription(msg.sdp));
 });
 
 socket.on("receiveClientICE", function (data) {
-    // console.log(data)
-    // let msg = JSON.parse(data)
     let pc = myConnections[data.clientId];
-
-    //console.log(msg.ice)
-
     pc.addIceCandidate(new RTCIceCandidate(data.ice));
-    //console.log("ICE FOI")
 });
 
 socket.on("generateAnalistOffer", function (clientId) {
+    let pc = myConnections[clientId]
+    if (pc) {
+        disconnectPeerByClientSocketID(clientId)
+    }
+
     myConnections[clientId] = new RTCPeerConnection(servers);
-    let pc = myConnections[clientId];
+    pc = myConnections[clientId];
 
     pc.onicecandidate = event => {
         // console.log("My ICE Analist, client ID " + clientId)
@@ -166,9 +189,9 @@ socket.on("generateAnalistOffer", function (clientId) {
 });
 
 
-socket.on("onlineClients", onlineClients => {
-    $("#socketOnlineClients").html(onlineClients + " usuários online");
-});
+// socket.on("onlineClients", onlineClients => {
+//     $("#socketOnlineClients").html(onlineClients + " usuários online");
+// });
 
 socket.on("disconnectClient", clientId => {
     let pc = myConnections[clientId];

@@ -35,8 +35,20 @@ body {
     height: 100%;
 }
 
+.fa-coins {
+    color: #f0b05e;
+}
+
 #btnStopPrivateSession {
     display: none;
+}
+
+#private-session-message {
+    display: none;
+}
+
+#analistGainsInfo {
+    float: right;
 }
 
 .workspace {
@@ -53,15 +65,17 @@ body {
 #statistic {
     width: 80%;
     border: thin solid #bd2130;
-    padding: 5px;
-    padding-left: 20px;
+    padding: 11px;
     background: #fff;
 }
 
 #control-buttons {
-    width: 80%;
+    // margin-bottom: 10px;
 }
 
+.percent80 {
+    width: 80%;
+}
 
 #logo-live {
     height: 100%;
