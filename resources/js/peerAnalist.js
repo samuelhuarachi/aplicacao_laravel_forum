@@ -6,7 +6,11 @@ import io from "socket.io-client";
 
 connectSocket();
 
+
 require('./analist/btnStopPrivateSession')
+require('./analist/btnShowSessionsMenu')
+
+
 const listOfClientsActiveInYourChatFunction = require("./analist/listOfClientsActiveInYourChatFunction")
 const showQuantityOnlineClients = require("./analist/showQuantityOnlineClients")
 const alertNewClientInRoom = require("./analist/alertNewClientsInRoom")
@@ -15,9 +19,10 @@ const gainstUpdate = require("./analist/gainstUpdate")
 var analistVideo = document.getElementById("analistVideo");
 //var yourId = Math.floor(Math.random() * 1000000000);
 var servers = {
-    iceServers: [{
-            urls: "stun:stun.l.google.com:19305"
-        },
+    iceServers: [
+        // {
+        //     urls: "stun:stun.l.google.com:19305"
+        // },
         {
             urls: "stun:stun1.l.google.com:19305"
         },
@@ -26,6 +31,11 @@ var servers = {
         },
         {
             urls: "stun:stun3.l.google.com:19305"
+        },
+        {
+            urls: 'turn:numb.viagenie.ca:3478',
+            credential: 'abc123321',
+            username: 'batman.batmann@gmail.com'
         }
     ]
 };
@@ -34,11 +44,11 @@ var servers = {
 var myConnections = [];
 let saveActiveStream = null;
 
-navigator.getUserMedia =
-    navigator.getUserMedia ||
-    navigator.webkitGetUserMedia ||
-    navigator.mozGetUserMedia ||
-    navigator.msgGetUserMedia;
+// navigator.getUserMedia =
+//     navigator.getUserMedia ||
+//     navigator.webkitGetUserMedia ||
+//     navigator.mozGetUserMedia ||
+//     navigator.msgGetUserMedia;
 
 // Generate offer afeter 5 seconds
 // setTimeout(function(){
@@ -135,22 +145,51 @@ socket.on("receiveClientSDP", function (data) {
     let msg = JSON.parse(data);
     let pc = myConnections[msg.clientId];
     pc.setRemoteDescription(new RTCSessionDescription(msg.sdp));
-});
 
+    /**
+     * 
+     * avisa no server que precisamos dos ices
+     */
+    // socket.emit(
+    //     "analist_need_client_ice",
+    //     JSON.stringify({
+    //         clientId: msg.clientId
+    //     })
+    // )
+
+    // listCheckIceReceived[msg.clientId] = false
+})
+
+// socket.on("client_send_ice_to_analist", function (data) {
+//     let msg = JSON.parse(data)
+
+//     listCheckIceReceived[msg.clientId] = true
+
+//     console.log(msg)
+// })
+
+
+/**
+ * recebe o ice do cliente
+ */
 socket.on("receiveClientICE", function (data) {
-    let pc = myConnections[data.clientId];
-    pc.addIceCandidate(new RTCIceCandidate(data.ice));
+    console.log("receive ice client")
+    let pc = myConnections[data.clientId]
+    pc.addIceCandidate(new RTCIceCandidate(data.ice))
 });
 
+/**
+ * gero a oferta
+ */
 socket.on("generateAnalistOffer", function (clientId) {
     let pc = myConnections[clientId]
     if (pc) {
-        disconnectPeerByClientSocketID(clientId)
+        console.log("putzz achei um pc aqui")
+        //disconnectPeerByClientSocketID(clientId)
     }
 
     myConnections[clientId] = new RTCPeerConnection(servers);
     pc = myConnections[clientId];
-
     pc.onicecandidate = event => {
         // console.log("My ICE Analist, client ID " + clientId)
         // console.log(event.candidate);
@@ -162,7 +201,7 @@ socket.on("generateAnalistOffer", function (clientId) {
                     clientId: clientId,
                     ice: event.candidate
                 })
-            );
+            )
         } else {
             //console.log("Sent all Analist ice")
         }
@@ -171,8 +210,6 @@ socket.on("generateAnalistOffer", function (clientId) {
     pc.addStream(saveActiveStream);
 
     setTimeout(function () {
-        console.log("Gerando oferta para " + clientId);
-
         pc.createOffer()
             .then(offer => pc.setLocalDescription(offer))
             .then(() => {
@@ -184,14 +221,10 @@ socket.on("generateAnalistOffer", function (clientId) {
                     })
                 );
             });
-        console.log("Oferta enviada");
     }, 1000);
 });
 
 
-// socket.on("onlineClients", onlineClients => {
-//     $("#socketOnlineClients").html(onlineClients + " usuários online");
-// });
 
 socket.on("disconnectClient", clientId => {
     let pc = myConnections[clientId];

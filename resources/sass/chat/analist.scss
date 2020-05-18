@@ -55,16 +55,21 @@ body {
     height: 100%;
     width: 80%;
     display: inline-flex;
-    background: #333;
+    background: #eaeaea;
+}
+
+#menu-area .btn {
+    margin-right: 1px;
 }
 
 .btn {
     font-size: small !important;
+    border-radius: 0px !important;
 }
 
 #statistic {
     width: 80%;
-    border: thin solid #bd2130;
+    border: 1px solid #e8e8e8;
     padding: 11px;
     background: #fff;
 }
@@ -133,9 +138,9 @@ video {
     position: relative;
     height: 75vh;
     background: #fff;
-    border-left: thin solid #bd2130;
-    border-bottom: thin solid #bd2130;
-    border-right: thin solid #bd2130;
+    border-left: 1px solid #e8e8e8;
+    border-bottom: 1px solid #e8e8e8;
+    border-right: 1px solid #e8e8e8;
     padding: 0px;
 
     overflow: scroll;
@@ -158,6 +163,7 @@ video {
     resize: none;
     font-size: small;
     padding: 5px;
+    border: 1px solid #e8e8e8;
 }
 
 #btnSend {
@@ -348,4 +354,8 @@ h6 {
 .reply-style {
     background: #f4f4f4;
     border-radius: 4px;
+}
+
+.modal-body {
+    padding: 1.8rem
 }

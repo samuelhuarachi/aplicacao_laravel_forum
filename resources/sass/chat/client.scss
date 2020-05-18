@@ -72,6 +72,10 @@ body {
     background-color: #202020;
 }
 
+.modal-body {
+    padding: 1.8rem;
+}
+
 #modalAddCredits h3 {
     color: #fff !important;
 }
@@ -239,9 +243,12 @@ p {
     margin-bottom: 0px;
 }
 
-#friendsVideo {
+#friendsVideo,
+#streamAnalist {
     margin: 0px auto;
 }
+
+
 
 #history-messages {
     // position: absolute;
@@ -331,7 +338,7 @@ video {
 }
 
 .figure {
-    border: 1px solid #2b2b2b;
+    border: 1px solid #222;
     padding: 10px;
     background: #1e1e1e;
 }

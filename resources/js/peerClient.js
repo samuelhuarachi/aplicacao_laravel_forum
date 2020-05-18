@@ -1,5 +1,7 @@
 // const BASEURL = 'https://quiet-beach-73356.herokuapp.com'
 // const BASEURL = 'http://localhost:3001'
+let pc = null
+
 import io from 'socket.io-client'
 
 require('./clients/btnCredits')
@@ -15,9 +17,9 @@ require('./clients/linkForgotPassword')
 require('./clients/btnForgotLogin')
 require('./clients/btnRedefinePassword')
 require('./clients/linkForgotPasswordBack')
+require('./clients/btnSessions')
+
 const updateCreditsValue = require('./clients/updateCreditsValue')
-
-
 
 //const { ConfigureIsOnline } = require('./common')
 // const axios = require('axios');
@@ -78,53 +80,106 @@ if (typeof (clientRoom) != "undefined" && clientRoom) {
 
 require('./clients/_client-recept-error')
 
-var friendsVideo = document.getElementById("friendsVideo");
 
+let friendsVideo = document.getElementById("friendsVideo")
+
+/**
+ * cria objeto de video
+ */
+// let streamAnalistVideo = document.createElement('video');
+// document.getElementById('streamAnalist').appendChild(streamAnalistVideo)
+
+/**
+ * essa variavel acho que precisa tirar, ela se torna inutil pelo m
+ * meu ver
+ */
 const clientId = uuidv4();
 let time = 0;
 
-var servers = {
-    'iceServers': [{
-            'urls': 'stun:stun.l.google.com:19305'
+let servers = {
+    'iceServers': [
+        // {
+        //     urls: 'stun:stun.l.google.com:19305'
+        // },
+        {
+            urls: 'stun:stun1.l.google.com:19305'
         },
         {
-            'urls': 'stun:stun1.l.google.com:19305'
+            urls: 'stun:stun2.l.google.com:19305'
         },
         {
-            'urls': 'stun:stun2.l.google.com:19305'
+            urls: 'stun:stun3.l.google.com:19305'
         },
         {
-            'urls': 'stun:stun3.l.google.com:19305'
+            urls: 'turn:numb.viagenie.ca:3478',
+            credential: 'abc123321',
+            username: 'batman.batmann@gmail.com'
         }
     ]
 };
 
-var pc = new RTCPeerConnection(servers);
+
+pc = new RTCPeerConnection(servers)
 
 pc.onicecandidate = (
     event => {
         if (event.candidate) {
-            socket.emit('sendClientICE',
-                JSON.stringify({
-                    'ice': event.candidate
-                }))
+            //iceList.push(event.candidate)
+            // socket.emit('sendClientICE',
+            //     JSON.stringify({
+            //         'ice': event.candidate
+            //     }))
         } else {
-
+            //iceReady = true
         }
-    });
+    }
+)
+
+// setInterval(function () {
+//     console.log(iceList)
+// }, 5000);
 
 
-pc.onaddstream = (event => friendsVideo.srcObject = event.stream);
+// socket.on('analist_need_client_ice', function (data) {
+//     if (iceReady) {
+//         socket.emit('client_send_ice_to_analist',
+//             JSON.stringify({
+//                 iceList
+//             }))
+//     }
+// })
+
+// pc.onaddstream = (event => {
+//     console.log(event)
+//     friendsVideo.srcObject = event.stream
+// })
+
+let inboundStream = null;
+pc.ontrack = ev => {
+    if (ev.streams && ev.streams[0]) {
+        if (friendsVideo.srcObject) return;
+        friendsVideo.srcObject = ev.streams[0];
+    } else {
+        if (!inboundStream) {
+            inboundStream = new MediaStream();
+            friendsVideo.srcObject = inboundStream;
+        }
+        inboundStream.addTrack(ev.track);
+    }
+}
+
 
 setTimeout(function () {
     if (typeof (clientRoom) != "undefined" && clientRoom) {
         socket.emit('INeedAnalistOffer', clientId)
     }
-}, 1000);
+}, 500);
 
 
 socket.on('receiveAnalistICE', function (data) {
     let msg = JSON.parse(data)
+    //console.log(pc)
+    // console.log(msg)
     pc.addIceCandidate(new RTCIceCandidate(msg.ice))
 })
 

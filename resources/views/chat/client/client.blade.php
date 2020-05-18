@@ -62,7 +62,6 @@
             <div class="workspace">
 
                 <video id="friendsVideo" autoplay></video>
-
             </div>
         </div>
     </div>
@@ -93,6 +92,7 @@
         @include('chat.client.components.modal.modalAddCredits')
         @include('chat.client.components.modal.modalPayment')
         @include('chat.client.components.modal.modalTransactions')
+        @include('chat.client.components.modal.modalSessions')
     @endif
 @endif
 

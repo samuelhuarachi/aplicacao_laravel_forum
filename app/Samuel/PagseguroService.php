@@ -152,6 +152,8 @@ class PagseguroService {
 
         $card_number = str_replace(' ', '', $data['card_number']);
         
+
+        $data['credits_total'] = 1; // remover essa linha em prod
         $json_creditcard = '{
             "reference_id": "'. $this->generateRandomString() .'",
             "description": "Credito Camstream",

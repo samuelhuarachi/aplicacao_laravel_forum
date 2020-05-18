@@ -13,7 +13,13 @@
         <div id="full-menu" class="col-md-12 mb-3">
             <div id="menu-area">
                 <div id="logo-live">Boneca Forum - Cam stream</div>
-                <a href="{{ route('chat.analist.logout') }}" class="btn btn-danger btn-sm float-right">Sair</a>
+
+                <a href="{{ route('chat.analist.logout') }}" 
+                    class="btn btn-danger btn-sm float-right">Sair</a>
+
+                <a id="btnShowSessionsMenu"
+                    class="btn btn-danger btn-sm float-right">Sessões</a>
+                
             </div>
         </div>
     </div>
@@ -86,6 +92,9 @@
             Enviar</button>
     </div>
 </div>
+
+
+@include('chat.analist.modal.sessions')
 
 @endsection
 
