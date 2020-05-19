@@ -31,6 +31,9 @@ var servers = {
         {
             urls: "stun:stun3.l.google.com:19305"
         },
+        {
+            urls: "stun:stun4.l.google.com:19305"
+        }
         //     {
         //         urls: 'turn:numb.viagenie.ca:3478',
         //         credential: 'abc123321',

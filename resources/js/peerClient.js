@@ -145,6 +145,9 @@ let servers = {
         {
             urls: "stun:stun3.l.google.com:19305"
         },
+        {
+            urls: "stun:stun4.l.google.com:19305"
+        }
         // {
         //     urls: "turn:numb.viagenie.ca:3478",
         //     credential: "abc123321",
@@ -158,10 +161,10 @@ let pc = new RTCPeerConnection(servers);
 pc.onicecandidate = event => {
     if (event.candidate) {
         //iceList.push(event.candidate)
-        // socket.emit('sendClientICE',
-        //     JSON.stringify({
-        //         'ice': event.candidate
-        //     }))
+        socket.emit('sendClientICE',
+            JSON.stringify({
+                'ice': event.candidate
+            }))
     } else {
         //iceReady = true
     }
