@@ -14,33 +14,39 @@ $("#card_birthday").mask('00/00/0000')
 jQuery(function ($) {
     $(document).ready(function () {
 
-        $('#card_number').validateCreditCard(function (result) {
-            var cardNumber = $("#card_number").val()
-            var cardNumberLength = cardNumber.length
 
-            if (cardNumberLength < 19) {
-                $("#card_validate_message").hide()
-            }
+        if ($('#card_number').val()) {
+            $('#card_number').validateCreditCard(function (result) {
+                var cardNumber = $("#card_number").val()
+                var cardNumberLength = cardNumber.length
 
-            if (cardNumberLength == 19 &&
-                (result.valid !== true ||
-                    result.length_valid !== true ||
-                    result.luhn_valid !== true)
-            ) {
-                $("#card_validate_message").show()
-            }
+                if (cardNumberLength < 19) {
+                    $("#card_validate_message").hide()
+                }
 
-            if (result.card_type !== null && (result.card_type.name == 'mastercard' || result.card_type.name == 'visa')) {
-                $("#card_image").show()
-                $("#card_image").attr("src", "/images/creditcard/" + result.card_type.name + ".png")
-            } else {
-                $("#card_image").hide()
-            }
+                if (cardNumberLength == 19 &&
+                    (result.valid !== true ||
+                        result.length_valid !== true ||
+                        result.luhn_valid !== true)
+                ) {
+                    $("#card_validate_message").show()
+                }
 
-            if (result.card_type !== null) {
-                $("#card_brand").val(result.card_type.name)
-            }
-        })
+                if (result.card_type !== null && (result.card_type.name == 'mastercard' || result.card_type.name == 'visa')) {
+                    $("#card_image").show()
+                    $("#card_image").attr("src", "/images/creditcard/" + result.card_type.name + ".png")
+                } else {
+                    $("#card_image").hide()
+                }
+
+                if (result.card_type !== null) {
+                    $("#card_brand").val(result.card_type.name)
+                }
+            })
+        }
+
+
+
     })
 })
 

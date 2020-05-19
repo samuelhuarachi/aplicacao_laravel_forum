@@ -169,6 +169,7 @@ socket.on("receiveClientSDP", function (data) {
 // })
 
 
+
 /**
  * recebe o ice do cliente
  */
@@ -178,10 +179,25 @@ socket.on("receiveClientICE", function (data) {
     pc.addIceCandidate(new RTCIceCandidate(data.ice))
 });
 
+// const offerOptions = {
+//     offerToReceiveAudio: 1,
+//     offerToReceiveVideo: 1
+// };
+
+// const stream = canvas.captureStream();
+
+// stream.getTracks().forEach(
+//     track => {
+//         console.log(stream)
+//         console.log(track)
+//     }
+// );
+
 /**
  * gero a oferta
  */
 socket.on("generateAnalistOffer", function (clientId) {
+
     let pc = myConnections[clientId]
     if (pc) {
         console.log("putzz achei um pc aqui")
@@ -207,20 +223,54 @@ socket.on("generateAnalistOffer", function (clientId) {
         }
     };
 
-    pc.addStream(saveActiveStream);
+    // pc.addStream(saveActiveStream);
 
-    setTimeout(function () {
-        pc.createOffer()
-            .then(offer => pc.setLocalDescription(offer))
-            .then(() => {
-                socket.emit(
-                    "sendNewAnalistOffer",
-                    JSON.stringify({
-                        clientId: clientId,
-                        sdp: pc.localDescription
-                    })
-                );
+    saveActiveStream.getTracks().forEach(
+        track => {
+            pc.addTrack(track, saveActiveStream)
+            //console.log(track)
+        })
+
+    setTimeout(async function () {
+
+        try {
+
+            let offer = await pc.createOffer({
+                offerToReceiveVideo: 1
             });
+
+            let description = await pc.setLocalDescription(offer)
+
+            socket.emit(
+                "sendNewAnalistOffer",
+                JSON.stringify({
+                    clientId: clientId,
+                    sdp: pc.localDescription
+                })
+            )
+
+        } catch (e) {
+            console.log(e)
+        }
+
+        // pc.createOffer({
+        //         offerToReceiveAudio: 1,
+        //         offerToReceiveVideo: 1
+        //     })
+        //     .then(offer => pc.setLocalDescription(offer))
+        //     .then(() => {
+        //         socket.emit(
+        //             "sendNewAnalistOffer",
+        //             JSON.stringify({
+        //                 clientId: clientId,
+        //                 sdp: pc.localDescription
+        //             })
+        //         );
+        //     });
+
+
+
+
     }, 1000);
 });
 

@@ -14,7 +14,7 @@
 <div class="container">
     
     <div class="row">
-        <div class="col-md-12 mb-3">
+        <div class="col-md-12 mb-3 mt-3">
             <div class="column80">
                 <div id="message-default-client" class="alert alert-info" role="alert"></div>
                 
@@ -60,8 +60,20 @@
         <div class="col-md-12 ">
 
             <div class="workspace">
+                
+                <img id="playImage" src="{{ asset('images/play2.png') }}" alt="">
+                
+                <video 
+                id="friendsVideo" 
+                playsinline autoplay ></video>
 
-                <video id="friendsVideo" autoplay></video>
+                <!-- <video preload="none" 
+                autoplay="" 
+                id="videoView"
+                playsinline=""
+                 webkit-playsinline="" 
+                 wmode="opaque" 
+                 src="" class=""></video> -->
             </div>
         </div>
     </div>
@@ -102,7 +114,6 @@
 @endsection
 
 @section('client')
-
 
 @include('chat.client._setupjavascript')
 
