@@ -19,10 +19,9 @@ const gainstUpdate = require("./analist/gainstUpdate")
 var analistVideo = document.getElementById("analistVideo");
 //var yourId = Math.floor(Math.random() * 1000000000);
 var servers = {
-    iceServers: [
-        // {
-        //     urls: "stun:stun.l.google.com:19305"
-        // },
+    iceServers: [{
+            urls: "stun:stun.l.google.com:19305"
+        },
         {
             urls: "stun:stun1.l.google.com:19305"
         },
@@ -32,11 +31,11 @@ var servers = {
         {
             urls: "stun:stun3.l.google.com:19305"
         },
-        {
-            urls: 'turn:numb.viagenie.ca:3478',
-            credential: 'abc123321',
-            username: 'batman.batmann@gmail.com'
-        }
+        //     {
+        //         urls: 'turn:numb.viagenie.ca:3478',
+        //         credential: 'abc123321',
+        //         username: 'batman.batmann@gmail.com'
+        //     }
     ]
 };
 
@@ -223,50 +222,45 @@ socket.on("generateAnalistOffer", function (clientId) {
         }
     };
 
-    // pc.addStream(saveActiveStream);
+    pc.addStream(saveActiveStream);
 
-    saveActiveStream.getTracks().forEach(
-        track => {
-            pc.addTrack(track, saveActiveStream)
-            //console.log(track)
-        })
+    // saveActiveStream.getTracks().forEach(
+    //     track => {
+    //         pc.addTrack(track, saveActiveStream)
+    //         //console.log(track)
+    //     })
 
     setTimeout(async function () {
 
-        try {
+        // try {
 
-            let offer = await pc.createOffer({
-                offerToReceiveVideo: 1
+        //     let offer = await pc.createOffer();
+
+        //     let description = await pc.setLocalDescription(offer)
+
+        //     socket.emit(
+        //         "sendNewAnalistOffer",
+        //         JSON.stringify({
+        //             clientId: clientId,
+        //             sdp: pc.localDescription
+        //         })
+        //     )
+
+        // } catch (e) {
+        //     console.log(e)
+        // }
+
+        pc.createOffer()
+            .then(offer => pc.setLocalDescription(offer))
+            .then(() => {
+                socket.emit(
+                    "sendNewAnalistOffer",
+                    JSON.stringify({
+                        clientId: clientId,
+                        sdp: pc.localDescription
+                    })
+                );
             });
-
-            let description = await pc.setLocalDescription(offer)
-
-            socket.emit(
-                "sendNewAnalistOffer",
-                JSON.stringify({
-                    clientId: clientId,
-                    sdp: pc.localDescription
-                })
-            )
-
-        } catch (e) {
-            console.log(e)
-        }
-
-        // pc.createOffer({
-        //         offerToReceiveAudio: 1,
-        //         offerToReceiveVideo: 1
-        //     })
-        //     .then(offer => pc.setLocalDescription(offer))
-        //     .then(() => {
-        //         socket.emit(
-        //             "sendNewAnalistOffer",
-        //             JSON.stringify({
-        //                 clientId: clientId,
-        //                 sdp: pc.localDescription
-        //             })
-        //         );
-        //     });
 
 
 

@@ -45,21 +45,20 @@ const {
 let helperInstace = new Helper
 helperInstace.ajustPlayButton()
 
-if (browserGlobal == "Firefox") {
-    $("#playImage").hide()
-}
+$("#playImage").hide()
 
-if (browserGlobal !== "Firefox") {
-    window.addEventListener("resize", function () {
-        helperInstace.ajustPlayButton()
-    });
-}
+// if (browserGlobal == "Firefox") {
+//     $("#playImage").hide()
+// }
+
+// if (browserGlobal !== "Firefox") {
+//     window.addEventListener("resize", function () {
+//         helperInstace.ajustPlayButton()
+//     });
+// }
 
 
 const updateCreditsValue = require("./clients/updateCreditsValue");
-
-//const { ConfigureIsOnline } = require('./common')
-// const axios = require('axios');
 
 $(".toast").toast("show");
 
@@ -134,10 +133,9 @@ const clientId = uuidv4();
 let time = 0;
 
 let servers = {
-    iceServers: [
-        // {
-        //     urls: 'stun:stun.l.google.com:19305'
-        // },
+    iceServers: [{
+            urls: 'stun:stun.l.google.com:19305'
+        },
         {
             urls: "stun:stun1.l.google.com:19305"
         },
@@ -147,11 +145,11 @@ let servers = {
         {
             urls: "stun:stun3.l.google.com:19305"
         },
-        {
-            urls: "turn:numb.viagenie.ca:3478",
-            credential: "abc123321",
-            username: "batman.batmann@gmail.com"
-        }
+        // {
+        //     urls: "turn:numb.viagenie.ca:3478",
+        //     credential: "abc123321",
+        //     username: "batman.batmann@gmail.com"
+        // }
     ]
 };
 
@@ -203,15 +201,23 @@ $("#playImage").click(function () {
 
 });
 
+pc.onaddstream = (event => {
+    if (event.stream) {
+        streamRemoteSave = event.stream
+        friendsVideo.srcObject = event.stream
+        // if (browserGlobal == "Firefox") {
+        //     friendsVideo.srcObject = event.stream
+        // }
+    }
+})
+
 pc.ontrack = ev => {
     if (ev.streams && ev.streams[0]) {
-
+        streamRemoteSave = ev.streams[0];
         if (browserGlobal == "Firefox") {
-            if (friendsVideo.srcObject) return;
+            //if (friendsVideo.srcObject) return;
             friendsVideo.srcObject = ev.streams[0];
         }
-
-        streamRemoteSave = ev.streams[0];
     }
     // } else {
     //     if (!inboundStream) {
