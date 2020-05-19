@@ -19,9 +19,10 @@ const gainstUpdate = require("./analist/gainstUpdate")
 var analistVideo = document.getElementById("analistVideo");
 //var yourId = Math.floor(Math.random() * 1000000000);
 var servers = {
-    iceServers: [{
-            urls: "stun:stun.l.google.com:19305"
-        },
+    iceServers: [
+        // {
+        //     urls: "stun:stun.l.google.com:19305"
+        // },
         {
             urls: "stun:stun1.l.google.com:19305"
         },

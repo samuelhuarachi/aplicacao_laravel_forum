@@ -42,20 +42,20 @@ const {
 } = require("./clients/Helper")
 
 
-// let helperInstace = new Helper
-// helperInstace.ajustPlayButton()
+let helperInstace = new Helper
+helperInstace.ajustPlayButton()
 
-// $("#playImage").hide()
+$("#playImage").hide()
 
-// if (browserGlobal == "Firefox") {
-//     $("#playImage").hide()
-// }
+if (browserGlobal == "Firefox") {
+    $("#playImage").hide()
+}
 
-// if (browserGlobal !== "Firefox") {
-//     window.addEventListener("resize", function () {
-//         helperInstace.ajustPlayButton()
-//     });
-// }
+if (browserGlobal !== "Firefox") {
+    window.addEventListener("resize", function () {
+        helperInstace.ajustPlayButton()
+    });
+}
 
 
 const updateCreditsValue = require("./clients/updateCreditsValue");
@@ -133,9 +133,10 @@ const clientId = uuidv4();
 let time = 0;
 
 let servers = {
-    iceServers: [{
-            urls: 'stun:stun.l.google.com:19305'
-        },
+    iceServers: [
+        // {
+        //     urls: 'stun:stun.l.google.com:19305'
+        // },
         {
             urls: "stun:stun1.l.google.com:19305"
         },
@@ -191,45 +192,45 @@ pc.onicecandidate = event => {
 let inboundStream = null;
 let streamRemoteSave = null;
 
-// $("#playImage").click(function () {
-//     $("#playImage").fadeOut()
-//     let tryVideo = setInterval(function () {
-//         if (streamRemoteSave) {
-//             friendsVideo.srcObject = streamRemoteSave
-//             clearInterval(tryVideo)
-//         } else {
-//             console.log("tentando")
-//         }
-//     }, 500)
+$("#playImage").click(function () {
+    $("#playImage").fadeOut()
+    let tryVideo = setInterval(function () {
+        if (streamRemoteSave) {
+            friendsVideo.srcObject = streamRemoteSave
+            clearInterval(tryVideo)
+        } else {
+            //console.log("tentando")
+        }
+    }, 500)
 
-// });
+});
 
 pc.onaddstream = (event => {
     if (event.stream) {
         streamRemoteSave = event.stream
-        friendsVideo.srcObject = event.stream
-        // if (browserGlobal == "Firefox") {
-        //     friendsVideo.srcObject = event.stream
-        // }
+        //friendsVideo.srcObject = event.stream
+        if (browserGlobal == "Firefox") {
+            friendsVideo.srcObject = event.stream
+        }
     }
 })
 
-pc.ontrack = ev => {
-    if (ev.streams && ev.streams[0]) {
-        streamRemoteSave = ev.streams[0];
-        if (browserGlobal == "Firefox") {
-            //if (friendsVideo.srcObject) return;
-            friendsVideo.srcObject = ev.streams[0];
-        }
-    }
-    // } else {
-    //     if (!inboundStream) {
-    //         inboundStream = new MediaStream();
-    //         friendsVideo.srcObject = inboundStream;
-    //     }
-    //     inboundStream.addTrack(ev.track);
-    // }
-};
+// pc.ontrack = ev => {
+//     if (ev.streams && ev.streams[0]) {
+//         streamRemoteSave = ev.streams[0];
+//         if (browserGlobal == "Firefox") {
+//             //if (friendsVideo.srcObject) return;
+//             friendsVideo.srcObject = ev.streams[0];
+//         }
+//     }
+//     // } else {
+//     //     if (!inboundStream) {
+//     //         inboundStream = new MediaStream();
+//     //         friendsVideo.srcObject = inboundStream;
+//     //     }
+//     //     inboundStream.addTrack(ev.track);
+//     // }
+// };
 
 setTimeout(function () {
     if (typeof clientRoom != "undefined" && clientRoom) {

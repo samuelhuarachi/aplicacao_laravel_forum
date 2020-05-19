@@ -61,8 +61,8 @@
 
             <div class="workspace">
                 
-                <!-- <img id="playImage" src="{{ asset('images/play2.png') }}" alt="">
-                 -->
+                <img id="playImage" src="{{ asset('images/play2.png') }}" alt="">
+                
                 <video 
                 id="friendsVideo" 
                 playsinline autoplay ></video>
