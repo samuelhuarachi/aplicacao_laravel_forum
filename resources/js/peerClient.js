@@ -42,10 +42,10 @@ const {
 } = require("./clients/Helper")
 
 
-let helperInstace = new Helper
-helperInstace.ajustPlayButton()
+// let helperInstace = new Helper
+// helperInstace.ajustPlayButton()
 
-$("#playImage").hide()
+// $("#playImage").hide()
 
 // if (browserGlobal == "Firefox") {
 //     $("#playImage").hide()
