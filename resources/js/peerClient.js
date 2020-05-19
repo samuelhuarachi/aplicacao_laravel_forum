@@ -45,7 +45,6 @@ const {
 let helperInstace = new Helper
 helperInstace.ajustPlayButton()
 
-$("#playImage").hide()
 
 if (browserGlobal == "Firefox") {
     $("#playImage").hide()
