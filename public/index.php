@@ -1,10 +1,10 @@
 <?php
 
-if ($_SERVER['HTTP_CF_VISITOR'] === '{"scheme":"http"}') {
-    // header('HTTP/1.1 301 Moved Permanently');
-    header('Location: https://www.bonecaforum.com' . $_SERVER['REQUEST_URI']);
-    exit;
-}
+// if ($_SERVER['HTTP_CF_VISITOR'] === '{"scheme":"http"}') {
+//     // header('HTTP/1.1 301 Moved Permanently');
+//     header('Location: https://www.bonecaforum.com' . $_SERVER['REQUEST_URI']);
+//     exit;
+// }
 
 
 // header("Access-Control-Allow-Origin: http://localhost:3001/");
