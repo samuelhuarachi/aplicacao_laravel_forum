@@ -188,18 +188,18 @@ pc.onicecandidate = event => {
 let inboundStream = null;
 let streamRemoteSave = null;
 
-$("#playImage").click(function () {
-    $("#playImage").fadeOut()
-    let tryVideo = setInterval(function () {
-        if (streamRemoteSave) {
-            friendsVideo.srcObject = streamRemoteSave
-            clearInterval(tryVideo)
-        } else {
-            console.log("tentando")
-        }
-    }, 500)
+// $("#playImage").click(function () {
+//     $("#playImage").fadeOut()
+//     let tryVideo = setInterval(function () {
+//         if (streamRemoteSave) {
+//             friendsVideo.srcObject = streamRemoteSave
+//             clearInterval(tryVideo)
+//         } else {
+//             console.log("tentando")
+//         }
+//     }, 500)
 
-});
+// });
 
 pc.onaddstream = (event => {
     if (event.stream) {
