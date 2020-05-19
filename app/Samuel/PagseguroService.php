@@ -149,7 +149,6 @@ class PagseguroService {
         // PAGSEGURO_URL_API
 
         $date = explode("/", $data['card_expire']);
-
         $card_number = str_replace(' ', '', $data['card_number']);
         
         $data['credits_total'] = 1; // remover essa linha em prod
