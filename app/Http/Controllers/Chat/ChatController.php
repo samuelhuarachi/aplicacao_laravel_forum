@@ -9,6 +9,7 @@ use App\Samuel\Chat\AnalistService;
 use Session;
 use App\Samuel\Chat\ClientService;
 use App\Samuel\Chat\Client\Auth as AuthClient;
+use Twilio\Rest\Client;
 
 class ChatController extends Controller
 {
@@ -95,6 +96,16 @@ class ChatController extends Controller
         $token = Session::get('myToken');
 
         $analistFind = $analistService->sessionOpenedBySlug($slug);
+
+        // $sid    = "AC1d69bbc1f0c36469e49e4bb9d57ac350";
+        // $token2  = "dc0c1a20b57ef9fef382a3ac42bc736f";
+        // $twilio = new Client($sid, $token2);
+
+        // $token2 = $twilio->tokens
+        //                 ->create();
+
+        // dump($token2);
+        // dump($token2->username);
 
         /**
          * revisar esse codigo abaixo

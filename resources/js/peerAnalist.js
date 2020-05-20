@@ -32,14 +32,19 @@ var servers = {
         {
             urls: "stun:stun3.l.google.com:19305"
         },
-        {
-            urls: "stun:stun4.l.google.com:19305"
-        }
+        // {
+        //     urls: "stun:stun4.l.google.com:19305"
+        // }
         //     {
         //         urls: 'turn:numb.viagenie.ca:3478',
         //         credential: 'abc123321',
         //         username: 'batman.batmann@gmail.com'
         //     }
+        {
+            urls: 'turn:global.turn.twilio.com:3478?transport=tcp',
+            credential: 'mSvKTrMLm+71NtAH1IxKcGorSv/wYN4J7dpoBImUFgg=',
+            username: '420708da7be43194a4148c7c4320ee5cb477e53fd5ad5e067e5d417bd9536ac9'
+        }
     ]
 };
 
