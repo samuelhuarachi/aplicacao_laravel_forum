@@ -15,6 +15,8 @@
 
 <script>
 
+
+
 $('[data-fancybox="gallery"]').fancybox({
     thumbs : {
         autoStart : true

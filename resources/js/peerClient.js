@@ -36,51 +36,46 @@ require("./clients/linkForgotPassword");
 require("./clients/btnForgotLogin");
 require("./clients/btnRedefinePassword");
 require("./clients/linkForgotPasswordBack");
-require("./clients/btnSessions")
-const DisplayCostSessionEstimate = require("./clients/class/DisplayCostSessionEstimate")
-const DisplayTimeEstimate = require("./clients/class/DisplayTimeEstimate")
-let displayCostSessionEstimate = new DisplayCostSessionEstimate.DisplayCostSessionEstimate(analistPricePerHourGlobal)
-let displayTimeEstimate = new DisplayTimeEstimate.DisplayTimeEstimate()
-const {
-    CamgirlTabs
-} = require("./clients/class/CamgirlTabs")
+require("./clients/btnSessions");
+const DisplayCostSessionEstimate = require("./clients/class/DisplayCostSessionEstimate");
+const DisplayTimeEstimate = require("./clients/class/DisplayTimeEstimate");
+let displayCostSessionEstimate = new DisplayCostSessionEstimate.DisplayCostSessionEstimate(
+    analistPricePerHourGlobal
+);
+let displayTimeEstimate = new DisplayTimeEstimate.DisplayTimeEstimate();
+const { CamgirlTabs } = require("./clients/class/CamgirlTabs");
 
-new CamgirlTabs()
+new CamgirlTabs();
 
-const {
-    Helper
-} = require("./clients/Helper")
+const { Helper } = require("./clients/Helper");
 
-
-let helperInstace = new Helper
-helperInstace.ajustPlayButton()
-
+let helperInstace = new Helper();
+helperInstace.ajustPlayButton();
 
 if (browserGlobal == "Firefox") {
-    $("#playImage").hide()
+    $("#playImage").hide();
 }
 
 if (browserGlobal !== "Firefox") {
-    window.addEventListener("resize", function () {
-        helperInstace.ajustPlayButton()
+    window.addEventListener("resize", function() {
+        helperInstace.ajustPlayButton();
     });
 }
 
-$("#message-default-client").click(function () {
+$("#message-default-client").click(function() {
     $("#message-default-client").css("display", "none");
 });
 
-$(".alert").click(function () {
-    $(this).hide()
-})
-
+$(".alert").click(function() {
+    $(this).hide();
+});
 
 const updateCreditsValue = require("./clients/updateCreditsValue");
 
 $(".toast").toast("show");
 
 // Load Recaptcha
-var onloadCallback = function () {
+var onloadCallback = function() {
     const recaptchaRegister = document.getElementById("recaptchaRegister");
     const recaptchaLogin = document.getElementById("recaptchaLogin");
     const recaptchaForgotLogin = document.getElementById(
@@ -119,7 +114,7 @@ function connectSocket() {
     if (!socket) {
         socket = io(BASEURL).connect();
     }
-    socket.on("connect", function () {
+    socket.on("connect", function() {
         socket.emit("join-in-room", {
             token,
             clientRoom
@@ -152,15 +147,15 @@ let servers = {
         // {
         //     urls: 'stun:stun.l.google.com:19305'
         // },
-        {
-            urls: "stun:stun1.l.google.com:19305"
-        },
-        {
-            urls: "stun:stun2.l.google.com:19305"
-        },
-        {
-            urls: "stun:stun3.l.google.com:19305"
-        },
+        // {
+        //     urls: "stun:stun1.l.google.com:19305"
+        // },
+        // {
+        //     urls: "stun:stun2.l.google.com:19305"
+        // },
+        // {
+        //     urls: "stun:stun3.l.google.com:19305"
+        // },
         // {
         //     urls: "stun:stun4.l.google.com:19305"
         // }
@@ -170,9 +165,25 @@ let servers = {
         //     username: "batman.batmann@gmail.com"
         // }
         {
-            urls: 'turn:global.turn.twilio.com:3478?transport=tcp',
-            credential: 'mSvKTrMLm+71NtAH1IxKcGorSv/wYN4J7dpoBImUFgg=',
-            username: '420708da7be43194a4148c7c4320ee5cb477e53fd5ad5e067e5d417bd9536ac9'
+            urls: "stun:global.stun.twilio.com:3478?transport=udp"
+        },
+        {
+            urls: "turn:global.turn.twilio.com:3478?transport=udp",
+            credential: "/f5kC5ZjPnwFwHKJzTGLkGbmgdhgFZRpwFsiAgf0Zxc=",
+            username:
+                "5fe6df6fc0112c24f0f0e2954d2a17ac5c400eef396f6eb2c20cf17b71c0a24f"
+        },
+        {
+            urls: "turn:global.turn.twilio.com:3478?transport=tcp",
+            credential: "/f5kC5ZjPnwFwHKJzTGLkGbmgdhgFZRpwFsiAgf0Zxc=",
+            username:
+                "5fe6df6fc0112c24f0f0e2954d2a17ac5c400eef396f6eb2c20cf17b71c0a24f"
+        },
+        {
+            urls: "turn:global.turn.twilio.com:443?transport=tcp",
+            credential: "/f5kC5ZjPnwFwHKJzTGLkGbmgdhgFZRpwFsiAgf0Zxc=",
+            username:
+                "5fe6df6fc0112c24f0f0e2954d2a17ac5c400eef396f6eb2c20cf17b71c0a24f"
         }
     ]
 };
@@ -182,10 +193,12 @@ let pc = new RTCPeerConnection(servers);
 pc.onicecandidate = event => {
     if (event.candidate) {
         //iceList.push(event.candidate)
-        socket.emit('sendClientICE',
+        socket.emit(
+            "sendClientICE",
             JSON.stringify({
-                'ice': event.candidate
-            }))
+                ice: event.candidate
+            })
+        );
     } else {
         //iceReady = true
     }
@@ -212,28 +225,27 @@ pc.onicecandidate = event => {
 let inboundStream = null;
 let streamRemoteSave = null;
 
-$("#playImage").click(function () {
-    $("#playImage").fadeOut()
-    let tryVideo = setInterval(function () {
+$("#playImage").click(function() {
+    $("#playImage").fadeOut();
+    let tryVideo = setInterval(function() {
         if (streamRemoteSave) {
-            friendsVideo.srcObject = streamRemoteSave
-            clearInterval(tryVideo)
+            friendsVideo.srcObject = streamRemoteSave;
+            clearInterval(tryVideo);
         } else {
             //console.log("tentando")
         }
-    }, 500)
-
+    }, 500);
 });
 
-pc.onaddstream = (event => {
+pc.onaddstream = event => {
     if (event.stream) {
-        streamRemoteSave = event.stream
+        streamRemoteSave = event.stream;
         //friendsVideo.srcObject = event.stream
         if (browserGlobal == "Firefox") {
-            friendsVideo.srcObject = event.stream
+            friendsVideo.srcObject = event.stream;
         }
     }
-})
+};
 
 // pc.ontrack = ev => {
 //     if (ev.streams && ev.streams[0]) {
@@ -252,27 +264,23 @@ pc.onaddstream = (event => {
 //     // }
 // };
 
-setTimeout(function () {
+setTimeout(function() {
     if (typeof clientRoom != "undefined" && clientRoom) {
         socket.emit("INeedAnalistOffer", clientId);
     }
 }, 500);
 
-
-
 require("./clients/btnPrivateSession");
 
-
-
 function uuidv4() {
-    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
         var r = (Math.random() * 16) | 0,
             v = c == "x" ? r : (r & 0x3) | 0x8;
         return v.toString(16);
     });
 }
 
-$("#btnSend").click(function () {
+$("#btnSend").click(function() {
     let message = $("#txtAreaMessage").val();
 
     $("#txtAreaMessage").val("");
@@ -283,7 +291,8 @@ $("#btnSend").click(function () {
         let history = $("#history-messages").html();
         history = history + "<br><b>Eu:</b> " + escapeHtml(message);
         $("#history-messages").html(history);
-        $("#history-messages").animate({
+        $("#history-messages").animate(
+            {
                 scrollTop: 9999
             },
             "slow"
@@ -305,7 +314,8 @@ function updateHistoryMessages(message) {
         let history = $("#history-messages").html();
         history = history + "<br>" + escapeHtml(message);
         $("#history-messages").html(history);
-        $("#history-messages").animate({
+        $("#history-messages").animate(
+            {
                 scrollTop: 9999
             },
             "slow"
@@ -322,20 +332,16 @@ function escapeHtml(unsafe) {
         .replace(/'/g, "&#039;");
 }
 
-
-
-
 let listenerClientIsOnlineInterval = null;
-let listenerClientIsOnline = function () {
+let listenerClientIsOnline = function() {
     clearInterval(listenerClientIsOnlineInterval);
-    listenerClientIsOnlineInterval = setInterval(function () {
+    listenerClientIsOnlineInterval = setInterval(function() {
         // Avisa o sistema que o client esta online
         socket.emit("client-listener-is-online", {
             token
         });
     }, 20000);
 };
-
 
 // const aproximateCostLoad = () => {
 //     $("#session_cost_aproximate").show()
@@ -369,19 +375,19 @@ if (socket) {
         $("#btnPrivateSession").prop("disabled", false);
         clearInterval(listenerClientIsOnline);
         updateCreditsValue.go();
-        displayCostSessionEstimate.stop()
-        displayTimeEstimate.stop()
+        displayCostSessionEstimate.stop();
+        displayTimeEstimate.stop();
     });
 
-    socket.on("analist-request-stop-session", function () {
+    socket.on("analist-request-stop-session", function() {
         $("#btnStopPrivateSession").prop("disabled", true);
         $("#btnStopPrivateSession").css("display", "none");
         $("#btnPrivateSession").prop("disabled", false);
         $("#btnPrivateSession").css("display", "block");
         clearInterval(listenerClientIsOnline);
         updateCreditsValue.go();
-        displayCostSessionEstimate.stop()
-        displayTimeEstimate.stop()
+        displayCostSessionEstimate.stop();
+        displayTimeEstimate.stop();
     });
 
     socket.on("sendAnalistOfferToClient", data => {
@@ -410,12 +416,12 @@ if (socket) {
         $("#message-default-client").css("display", "block");
         $("#message-default-client").html(
             message +
-            '<button style="margin-top:3px;" type="button" class="close"><span aria-hidden="true">&times;</span></button>'
+                '<button style="margin-top:3px;" type="button" class="close"><span aria-hidden="true">&times;</span></button>'
         );
         //$("#message-default-client").alert()
     });
 
-    socket.on("reconnect", function () {
+    socket.on("reconnect", function() {
         if (typeof clientRoom != "undefined" && clientRoom) {
             socket.emit("join-in-room", {
                 token,
@@ -424,7 +430,7 @@ if (socket) {
         }
     });
 
-    socket.on("receiveAnalistICE", function (data) {
+    socket.on("receiveAnalistICE", function(data) {
         let msg = JSON.parse(data);
         //console.log(pc)
         // console.log(msg)
@@ -442,8 +448,8 @@ if (socket) {
             // habilita o botao de encerrar a live
             $("#btnStopPrivateSession").css("display", "block");
             listenerClientIsOnline();
-            displayCostSessionEstimate.start()
-            displayTimeEstimate.start()
+            displayCostSessionEstimate.start();
+            displayTimeEstimate.start();
         }
     });
 }
