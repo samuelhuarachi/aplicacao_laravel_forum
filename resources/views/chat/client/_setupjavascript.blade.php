@@ -10,7 +10,16 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
 <script src="{{ asset('js/jquery.creditCardValidator.js') }}"></script>
 <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
 <script>
+
+$('[data-fancybox="gallery"]').fancybox({
+    thumbs : {
+        autoStart : true
+    }
+})
 
 const BASEURL = '{{ env("NODEAPI") }}'
 
@@ -24,6 +33,11 @@ const token = null
 const email_verified = true
 @else
 const email_verified = false
+@endif
+
+let analistPricePerHourGlobal = null
+@if (isset($analistExists) && $analistExists->pricePerHour)
+    analistPricePerHourGlobal = {{ $analistExists->pricePerHour }}
 @endif
 
 let socket = null

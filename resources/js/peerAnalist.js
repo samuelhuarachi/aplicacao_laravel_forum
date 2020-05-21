@@ -15,9 +15,13 @@ const listOfClientsActiveInYourChatFunction = require("./analist/listOfClientsAc
 const showQuantityOnlineClients = require("./analist/showQuantityOnlineClients")
 const alertNewClientInRoom = require("./analist/alertNewClientsInRoom")
 const gainstUpdate = require("./analist/gainstUpdate")
-
+const DisplayCostSessionEstimate = require("./analist/DisplayCostSessionEstimate")
+const DisplayTimeEstimate = require("./clients/class/DisplayTimeEstimate")
 var analistVideo = document.getElementById("analistVideo");
-//var yourId = Math.floor(Math.random() * 1000000000);
+let displayCostSessionEstimate = new DisplayCostSessionEstimate.DisplayCostSessionEstimate(analistPricePerHourGlobal)
+let displayTimeEstimate = new DisplayTimeEstimate.DisplayTimeEstimate()
+
+
 var servers = {
     iceServers: [
         // {
@@ -86,6 +90,9 @@ socket.on("private-session-started", function (clientSocketIDRequestedPrivate) {
     $('#btnStopPrivateSession').prop('disabled', false)
     $('#private-session-message').css("display", "contents")
     listenerAnalistIsOnline()
+
+    displayCostSessionEstimate.start()
+    displayTimeEstimate.start()
 });
 
 // Mostra  os clientes ativos
@@ -139,6 +146,9 @@ socket.on("client-request-stop-session", () => {
     $('#private-session-message').css("display", "none")
     clearInterval(listenerAnalistIsOnlineInterval)
     gainstUpdate.gainstUpdate()
+
+    displayCostSessionEstimate.stop()
+    displayTimeEstimate.stop()
 });
 
 socket.on("analist-stop-session", () => {
@@ -146,6 +156,9 @@ socket.on("analist-stop-session", () => {
     $('#private-session-message').css("display", "none")
     clearInterval(listenerAnalistIsOnlineInterval)
     gainstUpdate.gainstUpdate()
+
+    displayCostSessionEstimate.stop()
+    displayTimeEstimate.stop()
 });
 
 // Answers aacho que eh aqui
@@ -271,9 +284,6 @@ socket.on("generateAnalistOffer", function (clientId) {
                 );
             });
 
-
-
-
     }, 1000);
 });
 
@@ -305,15 +315,25 @@ socket.on("client-message", message => {
 });
 
 function updateHistoryMessages(message) {
+
     message = message.trim();
     if (message != "") {
         let history = $("#history-messages").html();
-        history = history + "<br>" + message;
+        history = history + "<br> " + escapeHtml(message);
         $("#history-messages").html(history);
         $("#history-messages").animate({
             scrollTop: 9999
         }, "slow");
     }
+}
+
+function escapeHtml(unsafe) {
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
 
 $("#btnSend").click(function () {
@@ -331,7 +351,7 @@ $("#btnSend").click(function () {
             " " +
             analistLastname +
             ":</b> " +
-            message;
+            escapeHtml(message);
         $("#history-messages").html(history);
         $("#history-messages").animate({
             scrollTop: 9999

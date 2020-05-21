@@ -24,29 +24,36 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12 mb-3">
+        <div class="col-md-12">
             <div id="analist-header">
-                <h2>{{ $myData->name }} {{ $myData->lastname }}</h2>
 
+
+                <div style="width: 100%">
+                    <h2>{{ $myData->name }} {{ $myData->lastname }}</h2>
+                </div>
                 <div id="analistGainsInfo">
-                    Ganhos {{ round($myData->gains, 2) }} <i class="fas fa-coins"></i>
+                    <b>Ganhos:</b> {{ round($myData->gains, 2) }} <i class="fas fa-coins"></i>
                 </div>
                 
-                <div class="float-right" id="live-info">
-                    <img width="10" src="{{ asset('images/green.png') }}" alt="">
-                    <small>Live</small>
-                </div>
-
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12 mb-1">
+        <div class="col-md-12">
+            <div id="live-info">
+                <span id="session_cost_aproximate"></span>
+                <span id="time_aproximate" class="ml-3"></span>
 
+                <div class="float-right">
+                    <img width="10" src="{{ asset('images/green.png') }}" alt="">
+                    <small>Live</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 mb-3">
+            
             <div class="workspace">
-
                 <video id="analistVideo" playsinline autoplay muted></video>
-
             </div>
 
         </div>
@@ -115,6 +122,9 @@
     const analistLastname = '{{ $myData->lastname }}'
     let socket = null
     let globalQuantityOnlineClients = 0
+
+    let analistPricePerHourGlobal = {{ $myData->pricePerHour }}
+    
 </script>
 <script src="{{ asset('js/peerAnalist.js') }}"></script>
 

@@ -1,7 +1,6 @@
 class Helper {
 
     ajustPlayButton() {
-        console.log("rsizeee")
         let workspaceHeght = $(".workspace").height()
         let workspaceWidth = $(".workspace").width()
 

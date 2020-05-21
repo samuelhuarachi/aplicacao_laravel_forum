@@ -61,7 +61,7 @@ class ChatController extends Controller
 
         $reponseAuthClient = null;
         $analistExists = json_decode($analistExists);
-
+        
         if (!$tokenClient) {
             $tokenClient = null;
         } else {
@@ -130,7 +130,9 @@ class ChatController extends Controller
         return view('chat.analist.login');
     }
 
-    
+    /**
+     * autentica o analista
+     */
     public function authenticate(Request $request,
                                 Authenticate $authenticate,
                                 AnalistService $analistService)

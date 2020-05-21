@@ -37,6 +37,16 @@ require("./clients/btnForgotLogin");
 require("./clients/btnRedefinePassword");
 require("./clients/linkForgotPasswordBack");
 require("./clients/btnSessions")
+const DisplayCostSessionEstimate = require("./clients/class/DisplayCostSessionEstimate")
+const DisplayTimeEstimate = require("./clients/class/DisplayTimeEstimate")
+let displayCostSessionEstimate = new DisplayCostSessionEstimate.DisplayCostSessionEstimate(analistPricePerHourGlobal)
+let displayTimeEstimate = new DisplayTimeEstimate.DisplayTimeEstimate()
+const {
+    CamgirlTabs
+} = require("./clients/class/CamgirlTabs")
+
+new CamgirlTabs()
+
 const {
     Helper
 } = require("./clients/Helper")
@@ -55,6 +65,14 @@ if (browserGlobal !== "Firefox") {
         helperInstace.ajustPlayButton()
     });
 }
+
+$("#message-default-client").click(function () {
+    $("#message-default-client").css("display", "none");
+});
+
+$(".alert").click(function () {
+    $(this).hide()
+})
 
 
 const updateCreditsValue = require("./clients/updateCreditsValue");
@@ -113,8 +131,6 @@ function connectSocket() {
 if (typeof clientRoom != "undefined" && clientRoom) {
     connectSocket();
 }
-
-require("./clients/_client-recept-error");
 
 let friendsVideo = document.getElementById("friendsVideo");
 
@@ -242,36 +258,11 @@ setTimeout(function () {
     }
 }, 500);
 
-socket.on("receiveAnalistICE", function (data) {
-    let msg = JSON.parse(data);
-    //console.log(pc)
-    // console.log(msg)
-    pc.addIceCandidate(new RTCIceCandidate(msg.ice));
-});
+
 
 require("./clients/btnPrivateSession");
 
-socket.on("sendAnalistOfferToClient", data => {
-    var msg = data;
-    msg = JSON.parse(msg);
 
-    if (time == 0) {
-        pc.setRemoteDescription(new RTCSessionDescription(msg.sdp))
-            .then(() => pc.createAnswer())
-            .then(answer => pc.setLocalDescription(answer))
-            .then(() =>
-                socket.emit(
-                    "sendClientSDP",
-                    JSON.stringify({
-                        clientId: msg.clientId,
-                        sdp: pc.localDescription
-                    })
-                )
-            );
-
-        time = 1;
-    }
-});
 
 function uuidv4() {
     return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
@@ -283,13 +274,14 @@ function uuidv4() {
 
 $("#btnSend").click(function () {
     let message = $("#txtAreaMessage").val();
+
     $("#txtAreaMessage").val("");
 
     message = message.trim();
 
     if (message != "") {
         let history = $("#history-messages").html();
-        history = history + "<br><b>Eu:</b> " + message;
+        history = history + "<br><b>Eu:</b> " + escapeHtml(message);
         $("#history-messages").html(history);
         $("#history-messages").animate({
                 scrollTop: 9999
@@ -306,19 +298,32 @@ $("#btnSend").click(function () {
     }
 });
 
-socket.on("receive-client-message", message => {
-    updateHistoryMessages(message);
-});
+function updateHistoryMessages(message) {
+    message = message.trim();
 
-socket.on("client-private-session-started", response => {
-    if (response) {
-        // esconder botao que inicou a sessao
-        $("#btnPrivateSession").css("display", "none");
-        // habilita o botao de encerrar a live
-        $("#btnStopPrivateSession").css("display", "block");
-        listenerClientIsOnline();
+    if (message != "") {
+        let history = $("#history-messages").html();
+        history = history + "<br>" + escapeHtml(message);
+        $("#history-messages").html(history);
+        $("#history-messages").animate({
+                scrollTop: 9999
+            },
+            "slow"
+        );
     }
-});
+}
+
+function escapeHtml(unsafe) {
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+
 
 let listenerClientIsOnlineInterval = null;
 let listenerClientIsOnline = function () {
@@ -331,56 +336,114 @@ let listenerClientIsOnline = function () {
     }, 20000);
 };
 
-socket.on("client-stop-session", () => {
-    $("#btnPrivateSession").css("display", "block");
-    $("#btnStopPrivateSession").css("display", "none");
-    $("#btnPrivateSession").prop("disabled", false);
-    clearInterval(listenerClientIsOnline);
-    updateCreditsValue.go();
-});
 
-socket.on("analist-request-stop-session", function () {
-    $("#btnStopPrivateSession").prop("disabled", true);
-    $("#btnStopPrivateSession").css("display", "none");
-    $("#btnPrivateSession").prop("disabled", false);
-    $("#btnPrivateSession").css("display", "block");
-    clearInterval(listenerClientIsOnline);
-    updateCreditsValue.go();
-});
+// const aproximateCostLoad = () => {
+//     $("#session_cost_aproximate").show()
+//     let seconds = 1;
+//     setInterval(function () {
+//         if (analistPricePerHourGlobal) {
 
-function updateHistoryMessages(message) {
-    message = message.trim();
+//             let price = 0;
+//             let pricePerSeconds = (analistPricePerHourGlobal / 60) / 60
 
-    if (message != "") {
-        let history = $("#history-messages").html();
-        history = history + "<br>" + message;
-        $("#history-messages").html(history);
-        $("#history-messages").animate({
-                scrollTop: 9999
-            },
-            "slow"
+//             if (seconds <= 60) {
+//                 price = pricePerSeconds * 60
+//                 $("#session_cost_aproximate").html("Aproximado: -" + price.toFixed(2).toString())
+//             } else {
+//                 price = seconds * pricePerSeconds
+//                 $("#session_cost_aproximate").html("Aproximado: -" + price.toFixed(2).toString())
+//             }
+
+//             seconds = seconds + 1
+//         }
+
+//     }, 1000)
+// }
+
+if (socket) {
+    require("./clients/_client-recept-error");
+
+    socket.on("client-stop-session", () => {
+        $("#btnPrivateSession").css("display", "block");
+        $("#btnStopPrivateSession").css("display", "none");
+        $("#btnPrivateSession").prop("disabled", false);
+        clearInterval(listenerClientIsOnline);
+        updateCreditsValue.go();
+        displayCostSessionEstimate.stop()
+        displayTimeEstimate.stop()
+    });
+
+    socket.on("analist-request-stop-session", function () {
+        $("#btnStopPrivateSession").prop("disabled", true);
+        $("#btnStopPrivateSession").css("display", "none");
+        $("#btnPrivateSession").prop("disabled", false);
+        $("#btnPrivateSession").css("display", "block");
+        clearInterval(listenerClientIsOnline);
+        updateCreditsValue.go();
+        displayCostSessionEstimate.stop()
+        displayTimeEstimate.stop()
+    });
+
+    socket.on("sendAnalistOfferToClient", data => {
+        var msg = data;
+        msg = JSON.parse(msg);
+
+        if (time == 0) {
+            pc.setRemoteDescription(new RTCSessionDescription(msg.sdp))
+                .then(() => pc.createAnswer())
+                .then(answer => pc.setLocalDescription(answer))
+                .then(() =>
+                    socket.emit(
+                        "sendClientSDP",
+                        JSON.stringify({
+                            clientId: msg.clientId,
+                            sdp: pc.localDescription
+                        })
+                    )
+                );
+
+            time = 1;
+        }
+    });
+
+    socket.on("message-default-to-client", message => {
+        $("#message-default-client").css("display", "block");
+        $("#message-default-client").html(
+            message +
+            '<button style="margin-top:3px;" type="button" class="close"><span aria-hidden="true">&times;</span></button>'
         );
-    }
+        //$("#message-default-client").alert()
+    });
+
+    socket.on("reconnect", function () {
+        if (typeof clientRoom != "undefined" && clientRoom) {
+            socket.emit("join-in-room", {
+                token,
+                clientRoom
+            });
+        }
+    });
+
+    socket.on("receiveAnalistICE", function (data) {
+        let msg = JSON.parse(data);
+        //console.log(pc)
+        // console.log(msg)
+        pc.addIceCandidate(new RTCIceCandidate(msg.ice));
+    });
+
+    socket.on("receive-client-message", message => {
+        updateHistoryMessages(message);
+    });
+
+    socket.on("client-private-session-started", response => {
+        if (response) {
+            // esconder botao que inicou a sessao
+            $("#btnPrivateSession").css("display", "none");
+            // habilita o botao de encerrar a live
+            $("#btnStopPrivateSession").css("display", "block");
+            listenerClientIsOnline();
+            displayCostSessionEstimate.start()
+            displayTimeEstimate.start()
+        }
+    });
 }
-
-socket.on("message-default-to-client", message => {
-    $("#message-default-client").css("display", "block");
-    $("#message-default-client").html(
-        message +
-        '<button type="button" class="close"><span aria-hidden="true">&times;</span></button>'
-    );
-    //$("#message-default-client").alert()
-});
-
-$("#message-default-client").click(function () {
-    $("#message-default-client").css("display", "none");
-});
-
-socket.on("reconnect", function () {
-    if (typeof clientRoom != "undefined" && clientRoom) {
-        socket.emit("join-in-room", {
-            token,
-            clientRoom
-        });
-    }
-});

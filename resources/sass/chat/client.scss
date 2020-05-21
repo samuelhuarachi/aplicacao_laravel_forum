@@ -10,14 +10,64 @@ body {
 #btnStopPrivateSession {
     display: none;
 
-    background: linear-gradient(180deg,
-            rgba(208, 208, 208, 1) 0%,
-            rgba(226, 225, 225, 1) 51%,
-            rgba(208, 208, 208, 1) 100%);
-    color: #868686;
-    border: 6px solid #d0d0d0;
+    background: linear-gradient(
+        180deg,
+        rgba(208, 208, 208, 1) 0%,
+        rgba(226, 225, 225, 1) 51%,
+        rgba(208, 208, 208, 1) 100%
+    );
+    color: #000;
+    border: 1px solid #d0d0d0;
     padding: 3px 26px;
-    border-radius: 21px !important;
+    border-radius: 3px !important;
+    font-family: "Arial";
+    font-weight: bold;
+}
+
+#cam_girl_description_link,
+#cam_girl_photos_link,
+#cam_girl_videos_link {
+    cursor: pointer;
+}
+
+#cam_girl_description,
+#cam_girl_photos,
+#cam_girl_videos {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#cam_girl_description p {
+    margin-bottom: 5px;
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #333;
+}
+
+.nav-tabs .nav-item {
+    margin-bottom: -3px;
+}
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+    color: #fff;
+    font-family: "Arial";
+    font-weight: bold;
+    background-color: #a63e9f;
+    border: none;
+}
+
+.nav-tabs .nav-link {
+    color: #fff;
+    font-family: "Arial";
+    font-weight: bold;
+}
+
+.nav-tabs .nav-link:focus,
+.nav-tabs .nav-link:hover {
+    border: none;
+    color: #fb5ac3;
 }
 
 .container {
@@ -39,7 +89,7 @@ body {
 
 #menu-area {
     display: block ruby;
-    width: 80%;
+    width: 83%;
     color: #fff;
     height: 100%;
 }
@@ -96,16 +146,21 @@ body {
 
 .alert {
     border-radius: 0px !important;
-    font-size: small !important;
-    padding: 1px 7px !important;
+
+    position: absolute;
+    z-index: 999;
+    width: 100%;
+    margin-left: -5px;
+    padding: 10px !important;
+    font-family: "Arial";
 }
 
-#menu-area>.btn-link {
+#menu-area > .btn-link {
     color: #fff !important;
 }
 
 #analist-header {
-    width: 80%;
+    width: 83%;
     padding-left: 5px;
     display: block ruby;
     position: relative;
@@ -113,21 +168,20 @@ body {
 }
 
 .column80 {
-    width: 80%;
+    width: 83%;
 }
 
 .workspace {
     position: relative;
     height: 100%;
-    width: 80%;
+    width: 83%;
     display: inline-flex;
     background: #333;
     //border: 1px solid #e860ad;
-
 }
 
 #statistic {
-    width: 80%;
+    width: 83%;
     border: thin solid #bd2130;
     padding: 5px;
     padding-left: 20px;
@@ -166,7 +220,13 @@ body {
 }
 
 #header-camstream {
-    background: linear-gradient(276deg, rgba(50, 3, 42, 1) 0%, rgba(140, 28, 123, 1) 50%, rgba(140, 28, 123, 1) 56%, rgba(50, 3, 42, 1) 100%);
+    background: linear-gradient(
+        276deg,
+        rgba(50, 3, 42, 1) 0%,
+        rgba(140, 28, 123, 1) 50%,
+        rgba(140, 28, 123, 1) 56%,
+        rgba(50, 3, 42, 1) 100%
+    );
     width: 100%;
     padding: 50px 30px;
     margin-bottom: 2px;
@@ -185,7 +245,19 @@ body {
 }
 
 .alert-danger {
-    border: 5px solid #fbc9d9 !important;
+    border: 0px !important;
+    background: linear-gradient(
+        0deg,
+        rgba(226, 100, 126, 1) 0%,
+        rgba(255, 169, 197, 1) 15%,
+        rgba(251, 201, 217, 1) 16%,
+        rgba(251, 201, 217, 1) 100%
+    ) !important;
+}
+
+#session_cost_aproximate,
+#time_aproximate {
+    display: none;
 }
 
 #linkForgotPasswordBack {
@@ -198,24 +270,33 @@ body {
 }
 
 #btnPrivateSession {
-    background: linear-gradient(180deg,
-            rgb(91, 197, 238) 0%,
-            rgb(150, 216, 242) 51%,
-            rgb(91, 197, 238) 100%);
+    background: linear-gradient(
+        180deg,
+        rgb(91, 197, 238) 0%,
+        rgb(150, 216, 242) 51%,
+        rgb(91, 197, 238) 100%
+    );
     color: #fff;
-    border: 6px solid #91d3f2;
+    border: 1px solid #91d3f2;
     padding: 3px 26px;
-    border-radius: 21px !important;
+    border-radius: 3px !important;
+
+    font-family: "Arial";
+    font-weight: bold;
 }
 
 .alert-success {
-    color: #43842c;
+    color: #406a3a;
     border: 1px solid #23863a;
     font-weight: bold;
-    background: linear-gradient(180deg,
-            rgb(180, 234, 193) 0%,
-            rgb(211, 246, 220) 51%,
-            rgb(180, 234, 193) 100%);
+    background: linear-gradient(
+        0deg,
+        rgba(131, 180, 148, 1) 0%,
+        rgba(154, 213, 175, 1) 15%,
+        rgba(219, 255, 217, 1) 16%,
+        rgba(219, 255, 217, 1) 100%
+    );
+
     border-radius: 0px !important;
     padding: 3px 7px;
 }
@@ -224,12 +305,22 @@ body {
     color: #464646;
     border: 3px solid #ccc;
     font-weight: bold;
-    background: linear-gradient(180deg,
-            rgba(212, 212, 212, 1) 0%,
-            rgba(230, 230, 230, 1) 51%,
-            rgba(212, 212, 212, 1) 100%);
-    border-radius: 27px !important;
-    padding: 4px 20px;
+    background: linear-gradient(
+        0deg,
+        rgba(218, 218, 218, 1) 0%,
+        rgba(218, 218, 218, 1) 15%,
+        rgba(255, 255, 255, 1) 16%,
+        rgba(238, 238, 238, 1) 100%
+    );
+
+    position: absolute;
+    z-index: 999;
+    width: 100%;
+    border: 0px;
+    padding: 10px !important;
+    margin-left: -5px;
+    font-weight: bold;
+    font-family: "Arial";
 }
 
 label {
@@ -249,8 +340,6 @@ p {
 #streamAnalist {
     margin: 0px auto;
 }
-
-
 
 #history-messages {
     // position: absolute;

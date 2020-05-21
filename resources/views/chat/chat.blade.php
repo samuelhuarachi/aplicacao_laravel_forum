@@ -2,6 +2,14 @@
 
 @section('content')
 
+@include('_message-success')
+@include('_message-error2')
+@if ($tokenClient && isset($reponseAuthClient) && $reponseAuthClient->email_verified == false)
+    @include('chat.client.components.messages.verifiedemail')
+@endif
+
+
+
 @include('chat.client._menu')
 
 <div class="container">
@@ -12,15 +20,7 @@
         </div>
 
         <div class="col-md-12">
-
-            @include('_message-success')
-            @include('_message-error2')
-            @if ($tokenClient && isset($reponseAuthClient) && $reponseAuthClient->email_verified == false)
-                @include('chat.client.components.messages.verifiedemail')
-            @endif
             <br>
-
-
             <center>
                 Confiras as melhores garotas da BonecaForum/GarotaForum CamStream
             </center>
@@ -61,6 +61,7 @@
     @include('chat.client.components.modal.modalAddCredits')
     @include('chat.client.components.modal.modalPayment')
     @include('chat.client.components.modal.modalTransactions')
+    @include('chat.client.components.modal.modalSessions')
 @endif
 
 <style>
