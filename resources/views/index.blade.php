@@ -160,5 +160,15 @@
     </div>
 </div>
 
+@include('forum.banner.online_girls')
+
+@endsection
+
+@section('footer')
+
+<script>
+const BASEURL = '{{ env("NODEAPI") }}'
+</script>
+<script src="{{ asset('js/forum.js') }}"></script>
 
 @endsection

@@ -27,6 +27,14 @@ class ChatController extends Controller
         if (!$analistExists)
             abort(404);
 
+
+        $isAvailable = $clientService->checkRoomIsAvailable($slug);
+        if (!$isAvailable) {
+            $message = '<i class="fas fa-exclamation"></i> Parece que a modelo não está mais online <i class="fas fa-sad-tear"></i>';
+            Session::flash('flash_message', $message);
+                return redirect()->route('chat');
+        }
+
         /**
          * verifica se a analista esta em sessao privada
          */
@@ -52,12 +60,7 @@ class ChatController extends Controller
             }
         }
 
-        $isAvailable = $clientService->checkRoomIsAvailable($slug);
-        if (!$isAvailable) {
-            $message = '<i class="fas fa-exclamation"></i> Parece que a modelo não está mais online <i class="far fa-sad-cry"></i>';
-            Session::flash('flash_message', $message);
-                return redirect()->route('chat');
-        }
+        
 
         $reponseAuthClient = null;
         $analistExists = json_decode($analistExists);
@@ -174,7 +177,9 @@ class ChatController extends Controller
                     AuthClient $authClient)
     {
         $analists = json_decode($clientService->getAllAnalists());
+        $onlineAnalists = $clientService->onlineAnalists($analists);
 
+        
         $tokenClient = Session::get('clientToken');
         $reponseAuthClient = null;
         
@@ -188,14 +193,9 @@ class ChatController extends Controller
             }
             
             $reponseAuthClient = json_decode($reponseAuthClient);
-
-            
-            return view('chat.chat', 
-                        compact('tokenClient', 
-                                    'reponseAuthClient', 'analists'));
         }
 
         return view('chat.chat', compact('analists','tokenClient', 
-                                            'reponseAuthClient'));
+                                            'reponseAuthClient', 'onlineAnalists'));
     }
 }

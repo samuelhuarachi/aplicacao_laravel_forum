@@ -27,16 +27,37 @@
             <hr>
             
             <div>
+
+            
                 @foreach($analists as $analist)
+
+                    @if ($onlineAnalists && isset($onlineAnalists[$analist->slug]))
+                        @php
+                            $online = true
+                        @endphp
+                    @else
+                        @php
+                            $online = null
+                        @endphp
+                    @endif
 
                     <figure class="figure">
                         <a href="{{ route('chat.client', $analist->slug) }}">
+                            @if($online)
+                                <div class="onlineFlag">
+                                    Online <span><i id="live-circle" class="fas fa-circle"></i></span>
+                                </div>
+                            @else
+                                <div class="onlineFlag">
+                                    Offline <span><i id="off-circle" class="fas fa-circle"></i></span>
+                                </div>
+                            @endif
                             <img 
                                 width="150" 
                                 src="{{ asset('images/modelos/' . $analist->photo) }}" 
                                 class="figure-img img-fluid"
                                 alt="">
-                        
+                            
                             <figcaption class="figure-caption">{{ $analist->name }} {{ $analist->lastname }}</figcaption>
                         </a>
                     </figure>
@@ -45,6 +66,8 @@
         </div>
     </div>
 </div>
+
+
 
 
 @if(!$tokenClient)

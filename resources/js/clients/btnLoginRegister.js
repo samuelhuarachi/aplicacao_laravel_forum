@@ -1,0 +1,5 @@
+$("#btnLoginRegister").click(() => {
+
+    $('#modalLoginOrRegisterHTML').modal()
+
+})

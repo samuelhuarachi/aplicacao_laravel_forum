@@ -3,6 +3,7 @@
     "/css/chat/analist.css": "/css/chat/analist.css",
     "/css/chat/client.css": "/css/chat/client.css",
     "/css/app.css": "/css/app.css",
+    "/js/forum.js": "/js/forum.js",
     "/js/peerAnalist.js": "/js/peerAnalist.js",
     "/js/peerClient.js": "/js/peerClient.js"
 }

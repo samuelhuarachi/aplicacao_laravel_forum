@@ -28,6 +28,7 @@ require("./clients/btnRegisterNewClient");
 require("./clients/btnLoginClient");
 require("./clients/btnClientAccount");
 require("./clients/btnLogoutClient");
+require("./clients/btnLoginRegister");
 require("./clients/goPayment");
 require("./clients/pagseguro");
 require("./clients/btnStopPrivateSession");
@@ -43,11 +44,15 @@ let displayCostSessionEstimate = new DisplayCostSessionEstimate.DisplayCostSessi
     analistPricePerHourGlobal
 );
 let displayTimeEstimate = new DisplayTimeEstimate.DisplayTimeEstimate();
-const { CamgirlTabs } = require("./clients/class/CamgirlTabs");
+const {
+    CamgirlTabs
+} = require("./clients/class/CamgirlTabs");
 
 new CamgirlTabs();
 
-const { Helper } = require("./clients/Helper");
+const {
+    Helper
+} = require("./clients/Helper");
 
 let helperInstace = new Helper();
 helperInstace.ajustPlayButton();
@@ -57,16 +62,16 @@ if (browserGlobal == "Firefox") {
 }
 
 if (browserGlobal !== "Firefox") {
-    window.addEventListener("resize", function() {
+    window.addEventListener("resize", function () {
         helperInstace.ajustPlayButton();
     });
 }
 
-$("#message-default-client").click(function() {
+$("#message-default-client").click(function () {
     $("#message-default-client").css("display", "none");
 });
 
-$(".alert").click(function() {
+$(".alert").click(function () {
     $(this).hide();
 });
 
@@ -75,7 +80,7 @@ const updateCreditsValue = require("./clients/updateCreditsValue");
 $(".toast").toast("show");
 
 // Load Recaptcha
-var onloadCallback = function() {
+var onloadCallback = function () {
     const recaptchaRegister = document.getElementById("recaptchaRegister");
     const recaptchaLogin = document.getElementById("recaptchaLogin");
     const recaptchaForgotLogin = document.getElementById(
@@ -114,7 +119,7 @@ function connectSocket() {
     if (!socket) {
         socket = io(BASEURL).connect();
     }
-    socket.on("connect", function() {
+    socket.on("connect", function () {
         socket.emit("join-in-room", {
             token,
             clientRoom
@@ -170,20 +175,17 @@ let servers = {
         {
             urls: "turn:global.turn.twilio.com:3478?transport=udp",
             credential: "/f5kC5ZjPnwFwHKJzTGLkGbmgdhgFZRpwFsiAgf0Zxc=",
-            username:
-                "5fe6df6fc0112c24f0f0e2954d2a17ac5c400eef396f6eb2c20cf17b71c0a24f"
+            username: "5fe6df6fc0112c24f0f0e2954d2a17ac5c400eef396f6eb2c20cf17b71c0a24f"
         },
         {
             urls: "turn:global.turn.twilio.com:3478?transport=tcp",
             credential: "/f5kC5ZjPnwFwHKJzTGLkGbmgdhgFZRpwFsiAgf0Zxc=",
-            username:
-                "5fe6df6fc0112c24f0f0e2954d2a17ac5c400eef396f6eb2c20cf17b71c0a24f"
+            username: "5fe6df6fc0112c24f0f0e2954d2a17ac5c400eef396f6eb2c20cf17b71c0a24f"
         },
         {
             urls: "turn:global.turn.twilio.com:443?transport=tcp",
             credential: "/f5kC5ZjPnwFwHKJzTGLkGbmgdhgFZRpwFsiAgf0Zxc=",
-            username:
-                "5fe6df6fc0112c24f0f0e2954d2a17ac5c400eef396f6eb2c20cf17b71c0a24f"
+            username: "5fe6df6fc0112c24f0f0e2954d2a17ac5c400eef396f6eb2c20cf17b71c0a24f"
         }
     ]
 };
@@ -225,9 +227,9 @@ pc.onicecandidate = event => {
 let inboundStream = null;
 let streamRemoteSave = null;
 
-$("#playImage").click(function() {
+$("#playImage").click(function () {
     $("#playImage").fadeOut();
-    let tryVideo = setInterval(function() {
+    let tryVideo = setInterval(function () {
         if (streamRemoteSave) {
             friendsVideo.srcObject = streamRemoteSave;
             clearInterval(tryVideo);
@@ -264,7 +266,7 @@ pc.onaddstream = event => {
 //     // }
 // };
 
-setTimeout(function() {
+setTimeout(function () {
     if (typeof clientRoom != "undefined" && clientRoom) {
         socket.emit("INeedAnalistOffer", clientId);
     }
@@ -273,14 +275,14 @@ setTimeout(function() {
 require("./clients/btnPrivateSession");
 
 function uuidv4() {
-    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
         var r = (Math.random() * 16) | 0,
             v = c == "x" ? r : (r & 0x3) | 0x8;
         return v.toString(16);
     });
 }
 
-$("#btnSend").click(function() {
+$("#btnSend").click(function () {
     let message = $("#txtAreaMessage").val();
 
     $("#txtAreaMessage").val("");
@@ -291,8 +293,7 @@ $("#btnSend").click(function() {
         let history = $("#history-messages").html();
         history = history + "<br><b>Eu:</b> " + escapeHtml(message);
         $("#history-messages").html(history);
-        $("#history-messages").animate(
-            {
+        $("#history-messages").animate({
                 scrollTop: 9999
             },
             "slow"
@@ -314,8 +315,7 @@ function updateHistoryMessages(message) {
         let history = $("#history-messages").html();
         history = history + "<br>" + escapeHtml(message);
         $("#history-messages").html(history);
-        $("#history-messages").animate(
-            {
+        $("#history-messages").animate({
                 scrollTop: 9999
             },
             "slow"
@@ -333,9 +333,9 @@ function escapeHtml(unsafe) {
 }
 
 let listenerClientIsOnlineInterval = null;
-let listenerClientIsOnline = function() {
+let listenerClientIsOnline = function () {
     clearInterval(listenerClientIsOnlineInterval);
-    listenerClientIsOnlineInterval = setInterval(function() {
+    listenerClientIsOnlineInterval = setInterval(function () {
         // Avisa o sistema que o client esta online
         socket.emit("client-listener-is-online", {
             token
@@ -379,7 +379,7 @@ if (socket) {
         displayTimeEstimate.stop();
     });
 
-    socket.on("analist-request-stop-session", function() {
+    socket.on("analist-request-stop-session", function () {
         $("#btnStopPrivateSession").prop("disabled", true);
         $("#btnStopPrivateSession").css("display", "none");
         $("#btnPrivateSession").prop("disabled", false);
@@ -416,12 +416,12 @@ if (socket) {
         $("#message-default-client").css("display", "block");
         $("#message-default-client").html(
             message +
-                '<button style="margin-top:3px;" type="button" class="close"><span aria-hidden="true">&times;</span></button>'
+            '<button style="margin-top:3px;" type="button" class="close"><span aria-hidden="true">&times;</span></button>'
         );
         //$("#message-default-client").alert()
     });
 
-    socket.on("reconnect", function() {
+    socket.on("reconnect", function () {
         if (typeof clientRoom != "undefined" && clientRoom) {
             socket.emit("join-in-room", {
                 token,
@@ -430,7 +430,7 @@ if (socket) {
         }
     });
 
-    socket.on("receiveAnalistICE", function(data) {
+    socket.on("receiveAnalistICE", function (data) {
         let msg = JSON.parse(data);
         //console.log(pc)
         // console.log(msg)

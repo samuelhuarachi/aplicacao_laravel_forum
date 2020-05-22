@@ -13,7 +13,7 @@
 
                     <input class="form-control" type="email" id="inputForgotEmail">
                     <br>
-                    <div id="recaptchaForgotLogin"></div>
+                    <div class="googleRecaptcha" id="recaptchaForgotLogin"></div>
                     <button id="btnForgotLogin" type="button" class="btn btn-sm btn-danger">
                         Enviar link de verificacao
                         <i class="fas fa-paper-plane"></i></button>

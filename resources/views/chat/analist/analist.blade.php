@@ -85,6 +85,22 @@
     
 </div>
 
+<br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+
 <div class="chat">
     <div id="history-messages" class="history">
         <!-- <div id="history-messages">

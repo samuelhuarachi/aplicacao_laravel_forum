@@ -10,15 +10,18 @@
                     <i class="fas fa-coins"></i> Créditos <i class="fas fa-plus"></i></button>
 
                 @if(isset($tokenClient) && $tokenClient)
-                <button id="btnClientAccount" type="button" class="btn btn-link btn-sm">
-                    Minha Conta</button>
-                <button id="btnSessions" type="button" class="btn btn-link btn-sm">
-                    Sessões</button>
-                <button id="btnTransactions" type="button" class="btn btn-link btn-sm">
-                    Transações</button>
+                    <button id="btnClientAccount" type="button" class="btn btn-link btn-sm">
+                        Minha Conta</button>
+                    <button id="btnSessions" type="button" class="btn btn-link btn-sm">
+                        Sessões</button>
+                    <button id="btnTransactions" type="button" class="btn btn-link btn-sm">
+                        Transações</button>
 
-                <button id="btnLogoutClient" class="btn btn-link btn-sm">
-                    Sair</button>
+                    <button id="btnLogoutClient" class="btn btn-link btn-sm">
+                        Sair</button>
+                @else
+                    <button id="btnLoginRegister" type="button" class="btn btn-link btn-sm">
+                    Login / Registrar</button>
                 @endif
             </div>
         </div>

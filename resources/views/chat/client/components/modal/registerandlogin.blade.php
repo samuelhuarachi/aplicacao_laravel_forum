@@ -27,7 +27,7 @@
                                         >
                                 </div>
 
-                                <div id="recaptchaLogin"></div>
+                                <div class="googleRecaptcha" id="recaptchaLogin"></div>
                                 <button id="btnLoginClient" type="button" 
                                     class="btn btn-sm btn-danger btn-block">
                                         Login <i class="fas fa-sign-in-alt"></i></button>
@@ -63,7 +63,7 @@
                                 </div>
                                 <!-- <div class="g-recaptcha" data-sitekey="6LcSuugUAAAAACy-8wrNOLoQOLcL1cMxQScS-oeW"></div>
                                  -->
-                                <div id="recaptchaRegister"></div>
+                                <div class="googleRecaptcha" id="recaptchaRegister"></div>
                                 <button id="registerNewClient" type="button" 
                                     class="btn btn-sm btn-danger btn-block"
                                     >

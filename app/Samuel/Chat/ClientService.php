@@ -96,6 +96,19 @@ class ClientService {
         return $response;
     }
 
+    public function onlineAnalists($analists)
+    {
+        $listOnline = [];
+        foreach($analists as $analist) {
+            $isAvailable = $this->checkRoomIsAvailable($analist->slug);
+            if ($isAvailable) {
+                $listOnline[$analist->slug] = $analist;
+            }
+        }
+
+        return $listOnline;
+    }
+
     public function sendVerifiedEmailWithToken($token)
     {
         $data = ["token" => $token];

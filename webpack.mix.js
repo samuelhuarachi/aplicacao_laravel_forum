@@ -18,3 +18,4 @@ mix.js("resources/js/app.js", "public/js")
 
 mix.js("resources/js/peerAnalist.js", "public/js");
 mix.js("resources/js/peerClient.js", "public/js");
+mix.js("resources/js/forum.js", "public/js");

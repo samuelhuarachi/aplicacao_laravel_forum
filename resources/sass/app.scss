@@ -6,10 +6,67 @@
 
 // Bootstrap
 //@import '~bootstrap/scss/bootstrap';
+#banner_online_girls {
+    background: transparent;
+    position: fixed;
+    border: 0px;
+    z-index: 999;
+    bottom: 29px;
+    margin: auto;
+
+    text-align: center;
+
+    left: 10px;
+    //transform: translate(-50%, -50%);
+
+    display: inline-flex;
+}
+
+.girl_banner1 {
+    position: relative;
+    margin-left: 9px;
+}
+
+.girl_banner1::first {
+    margin-left: 0px;
+}
+
+.banner1_icon_camera {
+    width: initial !important;
+    border-radius: initial !important;
+    border: initial !important;
+    position: absolute !important;
+    bottom: -5px;
+    left: 1px;
+}
+
+.girl_banner1 img {
+    width: 103px;
+    border-radius: 52px;
+    border: 5px solid #e33f3f;
+}
+
+.girl_banner1 span {
+    position: absolute;
+    background: #fff;
+    bottom: -14px;
+    font-size: x-small;
+    padding: 0px 10px;
+    border: 1px solid #bdbdbd;
+    border-radius: 10px;
+
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 59px;
+}
+
+.girl_banner1 span>i {
+    color: #2fc454;
+}
+
 
 
 .image-in-gallery {
-
     width: 50px;
     height: 50px;
     margin-bottom: 3px;
@@ -96,6 +153,8 @@ a {
     padding-left:5px; */
 }
 
+
+
 .dropdown-item.active,
 .dropdown-item:active {
     background-color: #dc3545;
@@ -132,7 +191,7 @@ h6 {
 
 #user-info {
     position: fixed;
-    background: #000;
+    background: #333;
     bottom: 0px;
     color: #fff;
     z-index: 999;
@@ -144,7 +203,7 @@ h6 {
 
 #top-info {
     position: fixed;
-    background: #000;
+    background: #333;
     top: 0px;
     color: #fff;
     z-index: 999;

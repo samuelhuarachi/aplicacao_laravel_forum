@@ -4,6 +4,7 @@
 @section('content')
 
 
+
 <div id="top-info">
     <b>Seja bem-vindo!</b>
 </div>
@@ -249,12 +250,20 @@
   </div>
 </div>
 
+@include('forum.banner.online_girls')
+<style>
+    body {
+        position: relative;
+    }
+</style>
+
 @endsection
 
 @section('footer')
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
 
 <script>
 
@@ -299,6 +308,10 @@ $( document ).ready(function() {
     
 });
 
+const BASEURL = '{{ env("NODEAPI") }}'
+
 </script>
+
+<script src="{{ asset('js/forum.js') }}"></script>
 
 @endsection
