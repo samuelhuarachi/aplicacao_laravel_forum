@@ -39,6 +39,17 @@
     gtag('config', 'UA-137662022-2');
     </script>
 
+     <script id="navegg" type="text/javascript">
+    (function(n,v,g){o="Navegg";if(!n[o]){
+        a=v.createElement('script');a.src=g;b=document.getElementsByTagName('script')[0];
+        b.parentNode.insertBefore(a,b);n[o]=n[o]||function(parms){
+        n[o].q=n[o].q||[];n[o].q.push([this, parms])};}})
+    (window, document, 'https://tag.navdmp.com/universal.min.js');
+    window.naveggReady = window.naveggReady||[];
+    window.nvg66267 = new Navegg({
+        acc: 66267
+    });
+    </script> 
 
 </head>
 <body>
