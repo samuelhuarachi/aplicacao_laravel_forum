@@ -17,7 +17,7 @@ async function bannerOnlineGirls() {
     let output = "";
     response.forEach(function (data) {
         let block = `<div class="girl_banner1">
-        <a href="/camstream/client/${data.slug}">
+        <a href="/camstream">
         <img class="banner1_icon_camera" src="/images/camera2.png" />
         <img src="/images/modelos/${data.photo}" />
         <span><i class="icon-circle"></i> Online</span>
