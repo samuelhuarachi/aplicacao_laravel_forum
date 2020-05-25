@@ -1,1 +1,229 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);#banner_online_girls{background:transparent;position:fixed;border:0;z-index:999;bottom:29px;margin:auto;text-align:center;left:10px;display:inline-flex}.girl_banner1{position:relative;margin-left:9px}.girl_banner1::first{margin-left:0}.banner1_icon_camera{width:auto!important;border-radius:initial!important;border:initial!important;position:absolute!important;bottom:-5px;left:1px}.girl_banner1 img{width:103px;border-radius:52px;border:5px solid #e33f3f}.girl_banner1 span{position:absolute;background:#fff;bottom:-14px;font-size:x-small;padding:0 10px;border:1px solid #bdbdbd;border-radius:10px;left:50%;transform:translate(-50%,-50%);width:59px}.girl_banner1 span>i{color:#2fc454}.image-in-gallery{width:50px;height:50px;margin-bottom:3px;margin-right:3px}.logo{line-height:1;margin-bottom:0}.logo a{font-size:69px;font-family:Baloo,cursive;color:#dc3545}.logo-description{font-weight:700;color:#333}figure{margin:0!important}.tranny-cover-thumb{max-height:110px;margin-right:20px}.traveti-title{background:#333;padding-top:30px;padding-bottom:0;margin-bottom:30px}.traveti-title h1,.traveti-title p,footer{color:#fff}footer{background:#000;padding-top:3rem;padding-bottom:4rem;margin-top:100px;margin-bottom:0}footer p{margin-bottom:.25rem}body{padding-top:50px;background:#f2f2f2;font-family:Arsenal,sans-serif;font-size:.9rem;font-weight:400;line-height:1.6;text-align:left}.btn{font-size:.9rem!important}a{color:#333}.dropdown-item.active,.dropdown-item:active{background-color:#dc3545}a:hover{color:red;text-decoration:none}h1,h2,h3,h4,h5,h6{font-family:Great Vibes,cursive}.card{border:1px solid #e32b2b;border-radius:0}.card-header:first-child{border-radius:0}.card-header{border-bottom:1px solid #e32b2b;background-color:#dc3545;color:#fff}#user-info{bottom:0;text-align:right}#top-info,#user-info{position:fixed;background:#333;color:#fff;z-index:999;padding-right:10px;padding-left:10px;width:100%}#top-info{top:0}#travesti-dancando{position:fixed;bottom:20px;right:0}#travesti-loira-dancando{position:fixed;bottom:20px;left:0}#menu ul{list-style:none;padding:0}#menu ul li{display:inline;margin-right:5px}.reply-style{background:#f4f4f4;border-radius:4px}
+@import url(https://fonts.googleapis.com/css?family=Nunito);#banner_online_girls {
+  background: transparent;
+  position: fixed;
+  border: 0px;
+  z-index: 999;
+  bottom: 29px;
+  margin: auto;
+  text-align: center;
+  left: 10px;
+  display: inline-flex;
+}
+
+.girl_banner1 {
+  position: relative;
+  margin-left: 9px;
+}
+
+.girl_banner1::first {
+  margin-left: 0px;
+}
+
+.banner1_icon_camera {
+  width: initial !important;
+  border-radius: initial !important;
+  border: initial !important;
+  position: absolute !important;
+  bottom: -5px;
+  left: 1px;
+}
+
+.girl_banner1 img {
+  width: 103px;
+  border-radius: 52px;
+  border: 5px solid #e33f3f;
+}
+
+.girl_banner1 span {
+  position: absolute;
+  background: #fff;
+  bottom: -14px;
+  font-size: x-small;
+  padding: 0px 10px;
+  border: 1px solid #bdbdbd;
+  border-radius: 10px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 59px;
+}
+
+.girl_banner1 span > i {
+  color: #2fc454;
+}
+
+.image-in-gallery {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 3px;
+  margin-right: 3px;
+}
+
+.logo {
+  line-height: 1;
+  margin-bottom: 0;
+}
+
+.logo a {
+  font-size: 69px;
+  font-family: "Baloo", cursive;
+  color: #dc3545;
+}
+
+.logo-description {
+  font-weight: bold;
+  color: #333;
+}
+
+figure {
+  margin: 0px !important;
+}
+
+.tranny-cover-thumb {
+  max-height: 110px;
+  margin-right: 20px;
+}
+
+.traveti-title {
+  background: #333;
+  padding-top: 30px;
+  padding-bottom: 0px;
+  margin-bottom: 30px;
+}
+
+.traveti-title h1 {
+  color: #fff;
+}
+
+.traveti-title p {
+  color: #fff;
+}
+
+footer {
+  background: #000;
+  padding-top: 3rem;
+  padding-bottom: 4rem;
+  margin-top: 100px;
+  margin-bottom: 0px;
+  color: #fff;
+}
+
+footer p {
+  margin-bottom: 0.25rem;
+}
+
+#top-menu {
+  /* background: #fff;
+  padding:10px;
+  border: 1px solid rgb(227, 43, 43); */
+}
+
+body {
+  padding-top: 50px;
+  background: #f2f2f2;
+  font-family: "Arsenal", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.6;
+  text-align: left;
+}
+
+.btn {
+  font-size: 0.9rem !important;
+}
+
+a {
+  color: #333;
+  /* padding-right:5px;
+  padding-left:5px; */
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+  background-color: #dc3545;
+}
+
+a:hover {
+  color: red;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Great Vibes", cursive;
+}
+
+.card {
+  border: 1px solid #e32b2b;
+  border-radius: 0px;
+}
+
+.card-header:first-child {
+  border-radius: 0px;
+}
+
+.card-header {
+  border-bottom: 1px solid #e32b2b;
+  background-color: #dc3545;
+  color: #fff;
+}
+
+#user-info {
+  position: fixed;
+  background: #333;
+  bottom: 0px;
+  color: #fff;
+  z-index: 999;
+  padding-right: 10px;
+  padding-left: 10px;
+  width: 100%;
+  text-align: right;
+}
+
+#top-info {
+  position: fixed;
+  background: #333;
+  top: 0px;
+  color: #fff;
+  z-index: 999;
+  padding-right: 10px;
+  padding-left: 10px;
+  width: 100%;
+}
+
+#travesti-dancando {
+  position: fixed;
+  bottom: 20px;
+  right: 0px;
+}
+
+#travesti-loira-dancando {
+  position: fixed;
+  bottom: 20px;
+  left: 0px;
+}
+
+.card {
+  /* -webkit-box-shadow: 8px 8px 8px -6px rgba(171,171,171,1);
+  -moz-box-shadow: 8px 8px 8px -6px rgba(171,171,171,1);
+  box-shadow: 8px 8px 8px -6px rgba(171,171,171,1); */
+}
+
+#menu ul {
+  list-style: none;
+  padding: 0px;
+}
+
+#menu ul li {
+  display: inline;
+  margin-right: 5px;
+}
+
+.reply-style {
+  background: #f4f4f4;
+  border-radius: 4px;
+}
+

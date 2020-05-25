@@ -16,7 +16,7 @@
 
                         <div class="form-group">
                             <label for="card_number">Número do Cartão</label>
-                            <input value="4563 5612 8336 2889" class="form-control" name="card_number"
+                            <input class="form-control" name="card_number"
                                 placeholder="1234 5678 9012 3456" id="card_number" type="text">
                             <input class="form-control" name="card_brand" id="card_brand" type="hidden">
                         </div>
@@ -26,7 +26,7 @@
 
                         <div class="form-group">
                             <label for="card_expire">Data de expiração</label>
-                            <input value="10/25" class="form-control" id="card_expire" name="card_expire"
+                            <input class="form-control" id="card_expire" name="card_expire"
                                 placeholder="mm/yy" type="text">
 
                         </div>
@@ -37,7 +37,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="card_cvv">CVV</label>
-                            <input value="568" class="form-control" id="card_cvv" name="card_cvv" placeholder="123"
+                            <input class="form-control" id="card_cvv" name="card_cvv" placeholder="123"
                                 type="text">
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="card_name">Nome Impresso no Cartão</label>
-                            <input value="Sarah Daniel" class="form-control" name="card_name" type="text">
+                            <input class="form-control" name="card_name" type="text">
 
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="card_cpf">CPF</label>
-                            <input id="card_cpf" value="694.196.350-66" class="form-control" name="card_cpf"
+                            <input id="card_cpf" class="form-control" name="card_cpf"
                                 placeholder="132.456.789-01" type="text">
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="card_birthday">Data aniversário</label>
-                            <input id="card_birthday" value="21/06/1987" class="form-control" name="card_birthday"
+                            <input id="card_birthday" class="form-control" name="card_birthday"
                                 placeholder="dd/mm/yyyy" type="text">
                         </div>
                     </div>
