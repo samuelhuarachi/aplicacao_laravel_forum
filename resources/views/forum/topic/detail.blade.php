@@ -9,6 +9,17 @@
     <b>Seja bem-vindo!</b>
 </div>
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 d-flex justify-content-center mb-3">
+            <a href="https://v3.machoman.life/?mcr=ANZ9025582">
+                <img id="machoman_top" src="https://forumttt.s3-sa-east-1.amazonaws.com/machoman-banner.jpg" alt="Macho Man adulto, tudo o que precisa para deixar as mulheres loucas na cama">
+            </a>
+        </div>
+    </div>
+</div>
+
+
 <div id="user-info">
     <i class="icon-circle"></i>
     <b>{{ $stateFounded->title }}</b> / <b>{{ $cityFounded->title }}</b>
