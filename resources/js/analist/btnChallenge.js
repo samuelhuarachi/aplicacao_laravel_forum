@@ -1,0 +1,5 @@
+$("#btnChallenge").click(() => {
+
+    $('#modalChallenge').modal()
+
+})

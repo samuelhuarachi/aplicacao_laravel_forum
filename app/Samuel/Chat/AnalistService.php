@@ -29,6 +29,28 @@ class AnalistService {
         return $response;
     }
 
+    public function getChellengeActive()
+    {
+        $token = Session::get('myToken');
+
+        $url = env("NODEAPI") . "/api/analist/chellenge_active";
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Authorization: Bearer ' . $token
+        ));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        
+        $response = curl_exec($ch);
+        $info = curl_getinfo($ch);
+        curl_close($ch);
+
+        if ($info['http_code'] !== 200) {
+            return null;
+        }
+
+        return $response;
+    }
+
     public function sessionOpenedBySlug(string $slug)
     {
         $token = Session::get('myToken');

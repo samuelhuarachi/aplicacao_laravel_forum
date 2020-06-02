@@ -13417,6 +13417,35 @@ function () {
       $("#playImage").css("width", playImageSize);
       $("#playImage").css("height", playImageSize);
     }
+  }, {
+    key: "isNumber",
+    value: function isNumber(value) {
+      // First: Check typeof and make sure it returns number
+      // This code coerces neither booleans nor strings to numbers,
+      // although it would be possible to do so if desired.
+      if (typeof value !== 'number') {
+        return false;
+      } // Reference for typeof:
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof
+      // Second: Check for NaN, as NaN is a number to typeof.
+      // NaN is the only JavaScript value that never equals itself.
+
+
+      if (value !== Number(value)) {
+        return false;
+      } // Reference for NaN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN
+      // Note isNaN() is a broken function, but checking for self-equality works as NaN !== NaN
+      // Alternatively check for NaN using Number.isNaN(), an ES2015 feature that works how one would expect
+      // Third: Check for Infinity and -Infinity.
+      // Realistically we want finite numbers, or there was probably a division by 0 somewhere.
+
+
+      if (value === Infinity || value === !Infinity) {
+        return false;
+      }
+
+      return true;
+    }
   }]);
 
   return Helper;
@@ -13438,6 +13467,11 @@ module.exports = {
 socket.on('_client-recept-error', function (data) {
   $("#message-default-client").css("display", "block");
   $("#message-default-client").html(data.message + '<i style="padding-top: 4px; cursor:pointer;" class="fas fa-times float-right"></i>');
+  var body = $("html, body");
+  body.stop().animate({
+    scrollTop: 0
+  }, 500, 'swing', function () {//alert("Finished animating");
+  });
 
   switch (data.type) {
     case 'INSUFICIENT_CREDITS':
@@ -13563,6 +13597,30 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
 
 /***/ }),
 
+/***/ "./resources/js/clients/btnGift.js":
+/*!*****************************************!*\
+  !*** ./resources/js/clients/btnGift.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _require = __webpack_require__(/*! ./Helper */ "./resources/js/clients/Helper.js"),
+    Helper = _require.Helper;
+
+$(".btnGift").click(function (e) {
+  var value = parseFloat(e.currentTarget.dataset.value);
+  var helper = new Helper();
+
+  if (helper.isNumber(value) && value > 0) {
+    socket.emit("send_gift", {
+      value: value,
+      token: token
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/clients/btnLoginClient.js":
 /*!************************************************!*\
   !*** ./resources/js/clients/btnLoginClient.js ***!
@@ -13660,6 +13718,38 @@ $("#btnLoginRegister").click(function () {
 
 $('#btnLogoutClient').click(function () {
   window.location.replace("/camstream/client/logout");
+});
+
+/***/ }),
+
+/***/ "./resources/js/clients/btnMaximizeChat.js":
+/*!*************************************************!*\
+  !*** ./resources/js/clients/btnMaximizeChat.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$('#btnMaximizeChat').click(function () {
+  $("#btnMinimizeChat").show();
+  $("#btnMaximizeChat").hide();
+  $('#primary_chat').addClass("showChat");
+  $('#primary_chat').removeClass("hiddenChat");
+});
+
+/***/ }),
+
+/***/ "./resources/js/clients/btnMinimizeChat.js":
+/*!*************************************************!*\
+  !*** ./resources/js/clients/btnMinimizeChat.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$('#btnMinimizeChat').click(function () {
+  $("#btnMinimizeChat").hide();
+  $("#btnMaximizeChat").show();
+  $('#primary_chat').removeClass("showChat");
+  $('#primary_chat').addClass("hiddenChat");
 });
 
 /***/ }),
@@ -14204,6 +14294,69 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./resources/js/clients/class/ListGirlTabsControl.js":
+/*!***********************************************************!*\
+  !*** ./resources/js/clients/class/ListGirlTabsControl.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var ListGirlTabsControl =
+/*#__PURE__*/
+function () {
+  function ListGirlTabsControl() {
+    _classCallCheck(this, ListGirlTabsControl);
+
+    this.cam_girl_description_link = $("#btn_woman_list");
+    this.cam_girl_photos_link = $("#btn_tranny_list");
+    this.cam_girl_description = $("#woman_list");
+    this.cam_girl_photos = $("#tranny_list");
+    this.cam_girl_description_link.click(this.camGirlDescriptionLinkClick.bind(null, this.cam_girl_description_link, this.cam_girl_photos_link, this.cam_girl_description, this.cam_girl_photos));
+    this.cam_girl_photos_link.click(this.camGirlPhotosLink.bind(null, this.cam_girl_description_link, this.cam_girl_photos_link, this.cam_girl_description, this.cam_girl_photos));
+    this.firsConfig();
+  }
+
+  _createClass(ListGirlTabsControl, [{
+    key: "firsConfig",
+    value: function firsConfig() {
+      this.cam_girl_description_link.addClass("active");
+      this.cam_girl_photos_link.removeClass("active");
+      this.cam_girl_description.show();
+      this.cam_girl_photos.hide();
+    }
+  }, {
+    key: "camGirlDescriptionLinkClick",
+    value: function camGirlDescriptionLinkClick(cam_girl_description_link, cam_girl_photos_link, cam_girl_description, cam_girl_photos) {
+      cam_girl_description_link.addClass("active");
+      cam_girl_photos_link.removeClass("active");
+      cam_girl_description.show();
+      cam_girl_photos.hide();
+    }
+  }, {
+    key: "camGirlPhotosLink",
+    value: function camGirlPhotosLink(cam_girl_description_link, cam_girl_photos_link, cam_girl_description, cam_girl_photos) {
+      cam_girl_description_link.removeClass("active");
+      cam_girl_photos_link.addClass("active");
+      cam_girl_description.hide();
+      cam_girl_photos.show();
+    }
+  }]);
+
+  return ListGirlTabsControl;
+}();
+
+module.exports = {
+  ListGirlTabsControl: ListGirlTabsControl
+};
+
+/***/ }),
+
 /***/ "./resources/js/clients/class/PagseguroFormatCreditCard.js":
 /*!*****************************************************************!*\
   !*** ./resources/js/clients/class/PagseguroFormatCreditCard.js ***!
@@ -14222,6 +14375,63 @@ var formatCreditCardExpire = function formatCreditCardExpire(expire) {
 module.exports = {
   formatCreditCardNumber: formatCreditCardNumber,
   formatCreditCardExpire: formatCreditCardExpire
+};
+
+/***/ }),
+
+/***/ "./resources/js/clients/class/UpdateChallgenteInfo.js":
+/*!************************************************************!*\
+  !*** ./resources/js/clients/class/UpdateChallgenteInfo.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var UpdateChallgenteInfo =
+/*#__PURE__*/
+function () {
+  function UpdateChallgenteInfo() {
+    _classCallCheck(this, UpdateChallgenteInfo);
+  }
+
+  _createClass(UpdateChallgenteInfo, [{
+    key: "render",
+    value: function render(challengeInfo) {
+      var price = challengeInfo.price;
+      var collected = challengeInfo.collected;
+      var status = challengeInfo.status;
+      var collectedPercent = null;
+      $("#challengeInfo").show();
+
+      if (status == -1 || status == 2) {
+        $("#challengeInfo").hide();
+        return;
+      }
+
+      if (collected > 0) {
+        collectedPercent = collected * 100 / price;
+
+        if (collectedPercent < 1) {
+          collectedPercent = 1;
+        }
+      } else {
+        collectedPercent = 1;
+      }
+
+      $("#challengeInfo").html("\n            \n            <h3>".concat(challengeInfo.do1, " por ").concat(challengeInfo.price, " <i class=\"fas fa-coins\"></i></h3>\n            <p>Recebidos ").concat(challengeInfo.collected, " at\xE9 o momento</p>\n            <div class=\"progress\">\n                <div class=\"progress-bar\" role=\"progressbar\" style=\"width: ").concat(collectedPercent, "%;\" aria-valuenow=\"").concat(collectedPercent, "\" aria-valuemin=\"0\" aria-valuemax=\"100\">").concat(collectedPercent.toFixed(2), "%</div>\n            </div>\n        "));
+    }
+  }]);
+
+  return UpdateChallgenteInfo;
+}();
+
+module.exports = {
+  UpdateChallgenteInfo: UpdateChallgenteInfo
 };
 
 /***/ }),
@@ -14653,6 +14863,17 @@ function checkBrowser() {
   return browser;
 }
 
+function listItensPublicPrice() {
+  historyMessageAdd('10 <i class="fas fa-coins"></i> => mostro os peitos <br>');
+  historyMessageAdd('30 <i class="fas fa-coins"></i> => masturbacao <br>');
+  historyMessageAdd('50 <i class="fas fa-coins"></i> => anal <br>');
+  historyMessageAdd('100 <i class="fas fa-coins"></i> => sexo <br>');
+  historyMessageAdd('200 <i class="fas fa-coins"></i> => sexo com gozada na boca <br>');
+  historyMessageAdd('300 <i class="fas fa-coins"></i> => sexo anal <br>');
+  historyMessageAdd('<hr');
+}
+
+listItensPublicPrice();
 var browserGlobal = checkBrowser();
 
 
@@ -14686,6 +14907,15 @@ __webpack_require__(/*! ./clients/linkForgotPasswordBack */ "./resources/js/clie
 
 __webpack_require__(/*! ./clients/btnSessions */ "./resources/js/clients/btnSessions.js");
 
+__webpack_require__(/*! ./clients/btnGift */ "./resources/js/clients/btnGift.js");
+
+__webpack_require__(/*! ./clients/btnMinimizeChat */ "./resources/js/clients/btnMinimizeChat.js");
+
+__webpack_require__(/*! ./clients/btnMaximizeChat */ "./resources/js/clients/btnMaximizeChat.js");
+
+var _require = __webpack_require__(/*! ./clients/class/UpdateChallgenteInfo */ "./resources/js/clients/class/UpdateChallgenteInfo.js"),
+    UpdateChallgenteInfo = _require.UpdateChallgenteInfo;
+
 var DisplayCostSessionEstimate = __webpack_require__(/*! ./clients/class/DisplayCostSessionEstimate */ "./resources/js/clients/class/DisplayCostSessionEstimate.js");
 
 var DisplayTimeEstimate = __webpack_require__(/*! ./clients/class/DisplayTimeEstimate */ "./resources/js/clients/class/DisplayTimeEstimate.js");
@@ -14693,13 +14923,18 @@ var DisplayTimeEstimate = __webpack_require__(/*! ./clients/class/DisplayTimeEst
 var displayCostSessionEstimate = new DisplayCostSessionEstimate.DisplayCostSessionEstimate(analistPricePerHourGlobal);
 var displayTimeEstimate = new DisplayTimeEstimate.DisplayTimeEstimate();
 
-var _require = __webpack_require__(/*! ./clients/class/CamgirlTabs */ "./resources/js/clients/class/CamgirlTabs.js"),
-    CamgirlTabs = _require.CamgirlTabs;
+var _require2 = __webpack_require__(/*! ./clients/class/CamgirlTabs */ "./resources/js/clients/class/CamgirlTabs.js"),
+    CamgirlTabs = _require2.CamgirlTabs;
 
 new CamgirlTabs();
 
-var _require2 = __webpack_require__(/*! ./clients/Helper */ "./resources/js/clients/Helper.js"),
-    Helper = _require2.Helper;
+var _require3 = __webpack_require__(/*! ./clients/class/ListGirlTabsControl */ "./resources/js/clients/class/ListGirlTabsControl.js"),
+    ListGirlTabsControl = _require3.ListGirlTabsControl;
+
+new ListGirlTabsControl();
+
+var _require4 = __webpack_require__(/*! ./clients/Helper */ "./resources/js/clients/Helper.js"),
+    Helper = _require4.Helper;
 
 var helperInstace = new Helper();
 helperInstace.ajustPlayButton();
@@ -14915,12 +15150,15 @@ $("#btnSend").click(function () {
   message = message.trim();
 
   if (message != "") {
-    var history = $("#history-messages").html();
-    history = history + "<br><b>Eu:</b> " + escapeHtml(message);
-    $("#history-messages").html(history);
-    $("#history-messages").animate({
-      scrollTop: 9999
-    }, "slow");
+    // let history = $("#history-messages").html();
+    // history = history + "<br><b>Eu:</b> " + escapeHtml(message);
+    // $("#history-messages").html(history);
+    // $("#history-messages").animate({
+    //         scrollTop: 9999
+    //     },
+    //     "slow"
+    // );
+    historyMessageAdd("<br><b>Eu:</b> " + escapeHtml(message));
     var messageObject = {
       message: message,
       token: token
@@ -14928,6 +15166,15 @@ $("#btnSend").click(function () {
     socket.emit("clientMessage", messageObject);
   }
 });
+
+function historyMessageAdd(message) {
+  var history = $("#history-messages").html();
+  history = history + message;
+  $("#history-messages").html(history);
+  $("#history-messages").animate({
+    scrollTop: 9999
+  }, "slow");
+}
 
 function updateHistoryMessages(message) {
   message = message.trim();
@@ -14955,7 +15202,7 @@ var listenerClientIsOnline = function listenerClientIsOnline() {
     socket.emit("client-listener-is-online", {
       token: token
     });
-  }, 20000);
+  }, 5000);
 }; // const aproximateCostLoad = () => {
 //     $("#session_cost_aproximate").show()
 //     let seconds = 1;
@@ -14976,9 +15223,18 @@ var listenerClientIsOnline = function listenerClientIsOnline() {
 // }
 
 
+if (challengeDataGlobal) {
+  var classUpdateChallgenteInfo = new UpdateChallgenteInfo();
+  classUpdateChallgenteInfo.render(challengeDataGlobal);
+}
+
 if (socket) {
   __webpack_require__(/*! ./clients/_client-recept-error */ "./resources/js/clients/_client-recept-error.js");
 
+  socket.on("challenge_info", function (data) {
+    var classUpdateChallgenteInfo = new UpdateChallgenteInfo();
+    classUpdateChallgenteInfo.render(data);
+  });
   socket.on("client-stop-session", function () {
     $("#btnPrivateSession").css("display", "block");
     $("#btnStopPrivateSession").css("display", "none");
@@ -15047,6 +15303,9 @@ if (socket) {
       displayCostSessionEstimate.start();
       displayTimeEstimate.start();
     }
+  });
+  socket.on("challengeInfoClient", function (data) {
+    $("#challangeInfo").html("\n            <div class=\"mb-3\">\n                <button class=\"btn btn-outline-primary\">enviar 10 <i class=\"fas fa-gem\"></i></button>\n                <button class=\"btn btn-outline-primary\">enviar 20 <i class=\"fas fa-gem\"></i></button>\n                <button class=\"btn btn-outline-primary\">enviar 30 <i class=\"fas fa-gem\"></i></button>\n                <button class=\"btn btn-outline-primary\">enviar 50 <i class=\"fas fa-gem\"></i></button>\n                <button class=\"btn btn-outline-primary\">enviar 100 <i class=\"fas fa-gem\"></i></button>\n                <button class=\"btn btn-outline-primary\">enviar 200 <i class=\"fas fa-gem\"></i></button>\n                <button class=\"btn btn-outline-primary\">Outro valor <i class=\"fas fa-gem\"></i></button>\n            </div>\n\n            <p>Mostro os peitos por 100 creditos (25 recebidos at\xE9 o momento)</p>\n            <div class=\"progress\">\n                <div class=\"progress-bar\" role=\"progressbar\" style=\"width: 25%;\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\">25%</div>\n            </div>\n        ");
   });
 }
 

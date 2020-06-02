@@ -11,8 +11,8 @@
     <link href="https://fonts.googleapis.com/css?family=Baloo&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/chat/client.css') }}">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-    <link rel="shortcut icon" href="{{ asset('images/favicon.jpeg') }}" />
-    <title>Boneca Forum - Cam stream</title>
+    <link rel="shortcut icon" href="{{ asset('images/icon.png') }}" />
+    <title>Boneca Forum - Garotas ao vivo na webcam</title>
 
     @yield('head')
 
@@ -34,5 +34,18 @@
     @yield('content')
 
     @yield('client')
+
+
+    <div class="container">
+        <div class="row">
+            <footer>
+                GarotaForum.com / BonecaForum.com © 2020. Todos os direitos reservados
+
+                <a class="float-right" href="{{ route('chat.termos_de_uso') }}">Termos de Uso</a>
+                <a class="float-right mr-2" href="{{ route('chat.politica_de_privacidade') }}">Política de Privacidade</a>
+                <a class="float-right mr-2" href="{{ route('chat.politica_de_cookies') }}">Política de Cookies</a>
+            </footer>
+        </div>
+    </div>
 </body>
 </html>

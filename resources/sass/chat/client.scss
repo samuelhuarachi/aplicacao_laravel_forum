@@ -49,6 +49,7 @@ body {
     padding: 3px 26px;
     border-radius: 3px !important;
     font-family: "Arial";
+    font-size: small !important;
     font-weight: bold;
 }
 
@@ -75,6 +76,26 @@ body {
 
 .nav-tabs .nav-item {
     margin-bottom: -3px;
+    cursor: pointer;
+}
+
+#btnMinimizeChat {
+    display: none;
+    padding: 0px 7px;
+    background: #641d55;
+    border: none;
+    margin-bottom: 2px;
+    border-radius: 10px !important;
+}
+
+#btnMaximizeChat {
+    display: none;
+
+    padding: 0px 7px;
+    background: #641d55;
+    border: none;
+    margin-bottom: 2px;
+    border-radius: 10px !important;
 }
 
 .nav-tabs .nav-item.show .nav-link,
@@ -151,7 +172,7 @@ body {
 }
 
 .modal-body {
-    padding: 1.8rem;
+    padding: 1rem 0.8rem !important;
 }
 
 #modalAddCredits h3 {
@@ -160,6 +181,15 @@ body {
 
 #final-value {
     font-size: 35px;
+}
+
+.nav-tabs .nav-link:focus,
+.nav-tabs .nav-link:hover {
+    border: transparent;
+    color: #fb5ac3;
+    border-bottom: 0px;
+    margin-bottom: 2px;
+
 }
 
 #modalAddCredits button {
@@ -172,6 +202,12 @@ body {
     text-decoration: none !important;
 }
 
+#challengeInfo h3 {
+    font-family: "Arial";
+    font-size: 20px;
+    font-weight: bold;
+}
+
 .alert {
     border-radius: 0px !important;
 
@@ -181,6 +217,8 @@ body {
     margin-left: -5px;
     padding: 10px !important;
     font-family: "Arial";
+
+    cursor: pointer;
 }
 
 #menu-area>.btn-link {
@@ -304,7 +342,32 @@ body {
     border-radius: 3px !important;
 
     font-family: "Arial";
+    font-size: small !important;
+    font-weight: bolder;
+}
+
+.progress {
+    background-color: #333;
+    border-radius: 0px;
+    height: 0.8rem;
+}
+
+.progress-bar {
+    background-color: #519f64;
+    font-size: x-small;
     font-weight: bold;
+}
+
+.btn-outline-dark {
+    color: #ddd !important;
+}
+
+.btn-outline-dark i {
+    color: #e1a619;
+}
+
+#challengeInfo h3 i {
+    color: #e1a619;
 }
 
 .alert-success {
@@ -312,10 +375,10 @@ body {
     border: 1px solid #23863a;
     font-weight: bold;
     background: linear-gradient(0deg,
-            rgba(131, 180, 148, 1) 0%,
-            rgba(154, 213, 175, 1) 15%,
-            rgba(219, 255, 217, 1) 16%,
-            rgba(219, 255, 217, 1) 100%);
+            #83b494 0%,
+            #9ad5af 15%,
+            #dbffd9 16%,
+            #dbffd991 100%);
 
     border-radius: 0px !important;
     padding: 3px 7px;
@@ -326,11 +389,8 @@ body {
     border: 3px solid #ccc;
     font-weight: bold;
     background: linear-gradient(0deg,
-            rgba(218, 218, 218, 1) 0%,
-            rgba(218, 218, 218, 1) 15%,
-            rgba(255, 255, 255, 1) 16%,
-            rgba(238, 238, 238, 1) 100%);
-
+            #dadada 0%, #dadada 15%,
+            white 16%, #eeeeee85 100%);
     position: absolute;
     z-index: 999;
     width: 100%;
@@ -539,11 +599,17 @@ figure {
 
 footer {
     background: #000;
-    padding-top: 3rem;
-    padding-bottom: 4rem;
-    margin-top: 100px;
+    padding-top: 10px;
+    padding-bottom: 5px;
     margin-bottom: 0px;
-    color: #fff;
+    color: #959595;
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 30px;
+}
+
+footer a {
+    color: #959595;
 }
 
 footer p {
@@ -641,6 +707,7 @@ h6 {
     left: 0px;
 }
 
+
 .card {
     /* -webkit-box-shadow: 8px 8px 8px -6px rgba(171,171,171,1);
     -moz-box-shadow: 8px 8px 8px -6px rgba(171,171,171,1);
@@ -667,8 +734,43 @@ hr {
 }
 
 #off-circle {
-    color: #b7b7b7;
+    color: #f75353;
 }
+
+@keyframes hiddenChatAnimation {
+    from {
+        bottom: 0px;
+    }
+    to {
+        bottom: -249px;
+    }
+}
+
+@keyframes showChatAnimation {
+    from {
+        bottom: -249px;
+    }
+    to {
+        bottom: 0px;
+    }
+}
+
+.hiddenChat {
+    animation-name: hiddenChatAnimation;
+    animation-duration: 1s;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}
+
+.showChat {
+    animation-name: showChatAnimation;
+    animation-duration: 1s;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}
+
+
+
 
 @media only screen and (max-width: 558px) {
     video {
@@ -677,6 +779,10 @@ hr {
 }
 
 @media only screen and (max-width: 815px) {
+    #btnMinimizeChat {
+        display: block;
+    }
+
     .chat {
         left: 0px;
         width: 100%;

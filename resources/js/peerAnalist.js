@@ -8,7 +8,19 @@ connectSocket();
 
 require("./analist/btnStopPrivateSession");
 require("./analist/btnShowSessionsMenu");
+require("./analist/btnChallenge");
+require("./analist/newChallenge");
+require("./analist/challenge/btn_challenge_accept")
+require("./analist/challenge/btn_challenge_cancel")
+require("./analist/challenge/btn_challenge_finallize")
 
+$("#challenge_control_waiting").hide()
+$("#challenge_control_finalize").hide()
+
+
+const {
+    UpdateChallgenteInfo
+} = require("./analist/class/UpdateChallgenteInfo");
 const listOfClientsActiveInYourChatFunction = require("./analist/listOfClientsActiveInYourChatFunction");
 const showQuantityOnlineClients = require("./analist/showQuantityOnlineClients");
 const alertNewClientInRoom = require("./analist/alertNewClientsInRoom");
@@ -54,20 +66,17 @@ var servers = {
         {
             urls: "turn:global.turn.twilio.com:3478?transport=udp",
             credential: "/f5kC5ZjPnwFwHKJzTGLkGbmgdhgFZRpwFsiAgf0Zxc=",
-            username:
-                "5fe6df6fc0112c24f0f0e2954d2a17ac5c400eef396f6eb2c20cf17b71c0a24f"
+            username: "5fe6df6fc0112c24f0f0e2954d2a17ac5c400eef396f6eb2c20cf17b71c0a24f"
         },
         {
             urls: "turn:global.turn.twilio.com:3478?transport=tcp",
             credential: "/f5kC5ZjPnwFwHKJzTGLkGbmgdhgFZRpwFsiAgf0Zxc=",
-            username:
-                "5fe6df6fc0112c24f0f0e2954d2a17ac5c400eef396f6eb2c20cf17b71c0a24f"
+            username: "5fe6df6fc0112c24f0f0e2954d2a17ac5c400eef396f6eb2c20cf17b71c0a24f"
         },
         {
             urls: "turn:global.turn.twilio.com:443?transport=tcp",
             credential: "/f5kC5ZjPnwFwHKJzTGLkGbmgdhgFZRpwFsiAgf0Zxc=",
-            username:
-                "5fe6df6fc0112c24f0f0e2954d2a17ac5c400eef396f6eb2c20cf17b71c0a24f"
+            username: "5fe6df6fc0112c24f0f0e2954d2a17ac5c400eef396f6eb2c20cf17b71c0a24f"
         }
     ]
 };
@@ -98,11 +107,24 @@ navigator.mediaDevices
     });
 
 function storageMySDPInServer(data) {
-    console.log(data);
     socket.emit("analistSDPandID", data);
 }
 
-socket.on("private-session-started", function(clientSocketIDRequestedPrivate) {
+/**
+ * se tiver uma challenge ativa, ele exibe
+ */
+if (challengeDataGlobal) {
+    const classUpdateChallgenteInfo = new UpdateChallgenteInfo()
+    classUpdateChallgenteInfo.render(challengeDataGlobal)
+
+}
+
+socket.on("challenge_info", function (data) {
+    const classUpdateChallgenteInfo = new UpdateChallgenteInfo()
+    classUpdateChallgenteInfo.render(data)
+})
+
+socket.on("private-session-started", function (clientSocketIDRequestedPrivate) {
     // vai desconectar todo mundo que nao faz parte da sessao privada
     disconnectAllFromPrivateSession(clientSocketIDRequestedPrivate);
     // habilita botao de encerrar sessao
@@ -117,7 +139,7 @@ socket.on("private-session-started", function(clientSocketIDRequestedPrivate) {
 
 // Mostra  os clientes ativos
 // para a analista
-socket.on("send-current-clients-active-in-room-to-analist", function(
+socket.on("send-current-clients-active-in-room-to-analist", function (
     listClientsInMyRoom
 ) {
     /**
@@ -127,7 +149,7 @@ socket.on("send-current-clients-active-in-room-to-analist", function(
     if (
         listClientsInMyRoom.length > globalQuantityOnlineClients &&
         document.getElementById("optionAlertWhenNewClientComming").checked ==
-            true
+        true
     ) {
         alertNewClientInRoom.alertNewClientInRoom();
     }
@@ -140,14 +162,14 @@ socket.on("send-current-clients-active-in-room-to-analist", function(
 });
 
 let listenerAnalistIsOnlineInterval = null;
-let listenerAnalistIsOnline = function() {
+let listenerAnalistIsOnline = function () {
     clearInterval(listenerAnalistIsOnlineInterval);
-    listenerAnalistIsOnlineInterval = setInterval(function() {
+    listenerAnalistIsOnlineInterval = setInterval(function () {
         // Avisa o sistema que o analista esta online
         socket.emit("analist-listener-is-online", {
             token
         });
-    }, 20000);
+    }, 5000);
 };
 
 /**
@@ -156,13 +178,12 @@ let listenerAnalistIsOnline = function() {
  */
 function disconnectAllFromPrivateSession(clientSocketIDRequestedPrivate) {
     const keysInMyconnections = Object.keys(myConnections);
-    keysInMyconnections.forEach(function(clientSocketID) {
+    keysInMyconnections.forEach(function (clientSocketID) {
         if (clientSocketIDRequestedPrivate !== clientSocketID) {
             disconnectPeerByClientSocketID(clientSocketID);
             socket.emit("message-default-to-client", {
                 clientSocketID,
-                message:
-                    "A garota entrou em uma sessão privada, volte mais tarde"
+                message: "A garota entrou em uma sessão privada, volte mais tarde"
             });
         }
     });
@@ -189,7 +210,7 @@ socket.on("analist-stop-session", () => {
 });
 
 // Answers aacho que eh aqui
-socket.on("receiveClientSDP", function(data) {
+socket.on("receiveClientSDP", function (data) {
     let msg = JSON.parse(data);
     let pc = myConnections[msg.clientId];
     pc.setRemoteDescription(new RTCSessionDescription(msg.sdp));
@@ -219,7 +240,7 @@ socket.on("receiveClientSDP", function(data) {
 /**
  * recebe o ice do cliente
  */
-socket.on("receiveClientICE", function(data) {
+socket.on("receiveClientICE", function (data) {
     console.log("receive ice client");
     let pc = myConnections[data.clientId];
     pc.addIceCandidate(new RTCIceCandidate(data.ice));
@@ -242,7 +263,7 @@ socket.on("receiveClientICE", function(data) {
 /**
  * gero a oferta
  */
-socket.on("generateAnalistOffer", function(clientId) {
+socket.on("generateAnalistOffer", function (clientId) {
     let pc = myConnections[clientId];
     if (pc) {
         console.log("putzz achei um pc aqui");
@@ -276,7 +297,7 @@ socket.on("generateAnalistOffer", function(clientId) {
     //         //console.log(track)
     //     })
 
-    setTimeout(async function() {
+    setTimeout(async function () {
         // try {
 
         //     let offer = await pc.createOffer();
@@ -339,8 +360,7 @@ function updateHistoryMessages(message) {
         let history = $("#history-messages").html();
         history = history + "<br> " + escapeHtml(message);
         $("#history-messages").html(history);
-        $("#history-messages").animate(
-            {
+        $("#history-messages").animate({
                 scrollTop: 9999
             },
             "slow"
@@ -357,7 +377,7 @@ function escapeHtml(unsafe) {
         .replace(/'/g, "&#039;");
 }
 
-$("#btnSend").click(function() {
+$("#btnSend").click(function () {
     let message = $("#txtAreaMessage").val();
     $("#txtAreaMessage").val("");
 
@@ -374,8 +394,7 @@ $("#btnSend").click(function() {
             ":</b> " +
             escapeHtml(message);
         $("#history-messages").html(history);
-        $("#history-messages").animate(
-            {
+        $("#history-messages").animate({
                 scrollTop: 9999
             },
             "slow"
@@ -403,7 +422,7 @@ function connectSocket() {
         socket = io(BASEURL).connect();
     }
 
-    socket.on("connect", function() {
+    socket.on("connect", function () {
         const analistID = socket.id;
 
         /**

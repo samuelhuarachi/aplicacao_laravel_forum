@@ -13427,6 +13427,19 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./resources/js/analist/btnChallenge.js":
+/*!**********************************************!*\
+  !*** ./resources/js/analist/btnChallenge.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$("#btnChallenge").click(function () {
+  $('#modalChallenge').modal();
+});
+
+/***/ }),
+
 /***/ "./resources/js/analist/btnShowSessionsMenu.js":
 /*!*****************************************************!*\
   !*** ./resources/js/analist/btnShowSessionsMenu.js ***!
@@ -13513,6 +13526,234 @@ $('#btnStopPrivateSession').click(function () {
 
 /***/ }),
 
+/***/ "./resources/js/analist/challenge/btn_challenge_accept.js":
+/*!****************************************************************!*\
+  !*** ./resources/js/analist/challenge/btn_challenge_accept.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$('#btn_challenge_accept').click(function () {
+  $('#btn_challenge_accept').prop('disabled', true);
+  socket.emit('challenge_accept', token);
+});
+
+/***/ }),
+
+/***/ "./resources/js/analist/challenge/btn_challenge_cancel.js":
+/*!****************************************************************!*\
+  !*** ./resources/js/analist/challenge/btn_challenge_cancel.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$('#btn_challenge_cancel').click(function () {
+  $('#btn_challenge_cancel').prop('disabled', true);
+  socket.emit('challenge_cancel', token);
+});
+
+/***/ }),
+
+/***/ "./resources/js/analist/challenge/btn_challenge_finallize.js":
+/*!*******************************************************************!*\
+  !*** ./resources/js/analist/challenge/btn_challenge_finallize.js ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$('#btn_challenge_finallize').click(function () {
+  $('#btn_challenge_finallize').prop('disabled', true);
+  socket.emit('challenge_finalize', token);
+});
+
+/***/ }),
+
+/***/ "./resources/js/analist/class/ListenerUpdateChallange.js":
+/*!***************************************************************!*\
+  !*** ./resources/js/analist/class/ListenerUpdateChallange.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var ListenerUpdateChallange =
+/*#__PURE__*/
+function () {
+  function ListenerUpdateChallange() {
+    _classCallCheck(this, ListenerUpdateChallange);
+  }
+
+  _createClass(ListenerUpdateChallange, [{
+    key: "activate",
+    value: function activate() {
+      console.log("ativeiiii");
+      this.listener = setInterval(function () {
+        console.log("verificando proposta ...");
+      }, 3000);
+    }
+  }, {
+    key: "stop",
+    value: function stop() {
+      clearInterval(this.listener);
+    }
+  }]);
+
+  return ListenerUpdateChallange;
+}();
+
+module.exports = {
+  ListenerUpdateChallange: ListenerUpdateChallange
+};
+
+/***/ }),
+
+/***/ "./resources/js/analist/class/UpdateChallgenteInfo.js":
+/*!************************************************************!*\
+  !*** ./resources/js/analist/class/UpdateChallgenteInfo.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var UpdateChallgenteInfo =
+/*#__PURE__*/
+function () {
+  function UpdateChallgenteInfo() {
+    _classCallCheck(this, UpdateChallgenteInfo);
+  }
+
+  _createClass(UpdateChallgenteInfo, [{
+    key: "render",
+    value: function render(challengeInfo) {
+      var price = challengeInfo.price;
+      var collected = challengeInfo.collected;
+      var status = challengeInfo.status;
+      var collectedPercent = null;
+      var statusText;
+
+      if (collected > 0) {
+        collectedPercent = collected * 100 / price;
+
+        if (collectedPercent < 1) {
+          collectedPercent = 1;
+        }
+
+        collectedPercent = collectedPercent.toFixed(2).toString();
+      } else {
+        collectedPercent = 1;
+      }
+
+      if (status == 0) {
+        statusText = "Aguardando ofertas";
+        $("#challengeInfo").show();
+        $("#challenge_control_waiting").show();
+        $("#challenge_control_finalize").hide();
+        $('#btn_challenge_accept').prop('disabled', false);
+        $('#btn_challenge_cancel').prop('disabled', false);
+        $('#btn_challenge_finallize').prop('disabled', true);
+      } else if (status == 1) {
+        statusText = "Valor atingido";
+        $("#challengeInfo").show();
+        $("#challenge_control_waiting").hide();
+        $("#challenge_control_finalize").show();
+        $('#btn_challenge_finallize').prop('disabled', false);
+        $('#btn_challenge_accept').prop('disabled', true);
+        $('#btn_challenge_cancel').prop('disabled', true);
+      } else if (status == -1 || status == 2) {
+        $("#challengeInfo").hide();
+        $("#challenge_control_waiting").hide();
+        $("#challenge_control_finalize").hide();
+        $('#btn_challenge_accept').prop('disabled', true);
+        $('#btn_challenge_cancel').prop('disabled', true);
+        $('#btn_challenge_finallize').prop('disabled', true);
+        return;
+      }
+
+      $("#challengeInfo").html("\n            \n            <h3>".concat(challengeInfo.do1, " por ").concat(challengeInfo.price, " <i class=\"fas fa-coins\"></i></h3>\n            <p>").concat(challengeInfo.collected, " at\xE9 o momento</p>\n            <div class=\"progress\">\n                <div class=\"progress-bar\" role=\"progressbar\" style=\"width: ").concat(collectedPercent, "%;\" aria-valuenow=\"").concat(collectedPercent, "\" aria-valuemin=\"0\" aria-valuemax=\"100\">").concat(collectedPercent, "%</div>\n            </div>\n            <p><b>Status:</b> ").concat(statusText, "</p>\n        "));
+    }
+  }]);
+
+  return UpdateChallgenteInfo;
+}();
+
+module.exports = {
+  UpdateChallgenteInfo: UpdateChallgenteInfo
+};
+
+/***/ }),
+
+/***/ "./resources/js/analist/class/ValidationNewChallenge.js":
+/*!**************************************************************!*\
+  !*** ./resources/js/analist/class/ValidationNewChallenge.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var ValidationNewChallenge =
+/*#__PURE__*/
+function () {
+  function ValidationNewChallenge() {
+    _classCallCheck(this, ValidationNewChallenge);
+  }
+
+  _createClass(ValidationNewChallenge, [{
+    key: "setDo",
+    value: function setDo(do1) {
+      this.do1 = do1;
+    }
+  }, {
+    key: "setPrice",
+    value: function setPrice(price) {
+      this.price = price;
+    }
+  }, {
+    key: "validate",
+    value: function validate() {
+      var do1 = this.do1.val().trim();
+      var price = this.price.val().trim();
+
+      if (!do1 || !price) {
+        throw new Error("Todos os campos do formulários são obrigatórios");
+      }
+
+      if (isNaN(price)) {
+        throw new Error("O valor precisa ser um numero");
+      }
+
+      do1 = do1.trim();
+      price = price.trim();
+      return {
+        do1: do1,
+        price: price
+      };
+    }
+  }]);
+
+  return ValidationNewChallenge;
+}();
+
+module.exports = {
+  ValidationNewChallenge: ValidationNewChallenge
+};
+
+/***/ }),
+
 /***/ "./resources/js/analist/gainstUpdate.js":
 /*!**********************************************!*\
   !*** ./resources/js/analist/gainstUpdate.js ***!
@@ -13567,6 +13808,94 @@ var listOfClientsActiveInYourChatFunction = function listOfClientsActiveInYourCh
 module.exports = {
   listOfClientsActiveInYourChatFunction: listOfClientsActiveInYourChatFunction
 };
+
+/***/ }),
+
+/***/ "./resources/js/analist/newChallenge.js":
+/*!**********************************************!*\
+  !*** ./resources/js/analist/newChallenge.js ***!
+  \**********************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var _require = __webpack_require__(/*! ./class/ValidationNewChallenge */ "./resources/js/analist/class/ValidationNewChallenge.js"),
+    ValidationNewChallenge = _require.ValidationNewChallenge;
+
+var _require2 = __webpack_require__(/*! ./class/ListenerUpdateChallange */ "./resources/js/analist/class/ListenerUpdateChallange.js"),
+    ListenerUpdateChallange = _require2.ListenerUpdateChallange;
+
+var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+
+$("#newChallenge").click(
+/*#__PURE__*/
+_asyncToGenerator(
+/*#__PURE__*/
+_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+  var classValidationNewChallenge, challengeData, responseNewChallenge;
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          $('#newChallenge').prop('disabled', true);
+          classValidationNewChallenge = new ValidationNewChallenge();
+          classValidationNewChallenge.setDo($("#inputChallengeDo"));
+          classValidationNewChallenge.setPrice($("#inputChallengePrice"));
+          _context.prev = 4;
+          challengeData = classValidationNewChallenge.validate();
+          _context.next = 8;
+          return axios.post(BASEURL + '/api/analist/new-challenge', challengeData, {
+            headers: {
+              Authorization: "Bearer " + token
+            }
+          }).then(function (response) {
+            return response;
+          })["catch"](function (error) {
+            throw new Error(error.response.data.error);
+          });
+
+        case 8:
+          responseNewChallenge = _context.sent;
+          // const classListenerUpdateChallange = new ListenerUpdateChallange()
+          // classListenerUpdateChallange.activate()
+          socket.emit("listen_for_challenge", JSON.stringify({
+            type: "analist",
+            token: token
+          }));
+          $('#modalChallenge').modal("toggle");
+          _context.next = 20;
+          break;
+
+        case 13:
+          _context.prev = 13;
+          _context.t0 = _context["catch"](4);
+          $("#div-message-new-challenge").css("color", "red");
+          $("#div-message-new-challenge").css("marginBottom", "10px");
+          $("#div-message-new-challenge").show();
+          $("#div-message-new-challenge").html(_context.t0);
+          $("#div-message-new-challenge").fadeOut(4000);
+
+        case 20:
+          _context.prev = 20;
+          $('#newChallenge').prop('disabled', false);
+          return _context.finish(20);
+
+        case 23:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, _callee, null, [[4, 13, 20, 23]]);
+})));
 
 /***/ }),
 
@@ -13682,6 +14011,22 @@ __webpack_require__(/*! ./analist/btnStopPrivateSession */ "./resources/js/anali
 
 __webpack_require__(/*! ./analist/btnShowSessionsMenu */ "./resources/js/analist/btnShowSessionsMenu.js");
 
+__webpack_require__(/*! ./analist/btnChallenge */ "./resources/js/analist/btnChallenge.js");
+
+__webpack_require__(/*! ./analist/newChallenge */ "./resources/js/analist/newChallenge.js");
+
+__webpack_require__(/*! ./analist/challenge/btn_challenge_accept */ "./resources/js/analist/challenge/btn_challenge_accept.js");
+
+__webpack_require__(/*! ./analist/challenge/btn_challenge_cancel */ "./resources/js/analist/challenge/btn_challenge_cancel.js");
+
+__webpack_require__(/*! ./analist/challenge/btn_challenge_finallize */ "./resources/js/analist/challenge/btn_challenge_finallize.js");
+
+$("#challenge_control_waiting").hide();
+$("#challenge_control_finalize").hide();
+
+var _require = __webpack_require__(/*! ./analist/class/UpdateChallgenteInfo */ "./resources/js/analist/class/UpdateChallgenteInfo.js"),
+    UpdateChallgenteInfo = _require.UpdateChallgenteInfo;
+
 var listOfClientsActiveInYourChatFunction = __webpack_require__(/*! ./analist/listOfClientsActiveInYourChatFunction */ "./resources/js/analist/listOfClientsActiveInYourChatFunction.js");
 
 var showQuantityOnlineClients = __webpack_require__(/*! ./analist/showQuantityOnlineClients */ "./resources/js/analist/showQuantityOnlineClients.js");
@@ -13760,10 +14105,22 @@ navigator.mediaDevices.getUserMedia({
 });
 
 function storageMySDPInServer(data) {
-  console.log(data);
   socket.emit("analistSDPandID", data);
 }
+/**
+ * se tiver uma challenge ativa, ele exibe
+ */
 
+
+if (challengeDataGlobal) {
+  var classUpdateChallgenteInfo = new UpdateChallgenteInfo();
+  classUpdateChallgenteInfo.render(challengeDataGlobal);
+}
+
+socket.on("challenge_info", function (data) {
+  var classUpdateChallgenteInfo = new UpdateChallgenteInfo();
+  classUpdateChallgenteInfo.render(data);
+});
 socket.on("private-session-started", function (clientSocketIDRequestedPrivate) {
   // vai desconectar todo mundo que nao faz parte da sessao privada
   disconnectAllFromPrivateSession(clientSocketIDRequestedPrivate); // habilita botao de encerrar sessao
@@ -13799,7 +14156,7 @@ var listenerAnalistIsOnline = function listenerAnalistIsOnline() {
     socket.emit("analist-listener-is-online", {
       token: token
     });
-  }, 20000);
+  }, 5000);
 };
 /**
  *

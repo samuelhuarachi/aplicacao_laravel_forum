@@ -20,6 +20,9 @@
                 <a id="btnShowSessionsMenu"
                     class="btn btn-danger btn-sm float-right">Sessões</a>
                 
+                <a id="btnChallenge"
+                    class="btn btn-danger btn-sm float-right">Proposta</a>
+                
             </div>
         </div>
     </div>
@@ -30,10 +33,12 @@
 
                 <div style="width: 100%">
                     <h2>{{ $myData->name }} {{ $myData->lastname }}</h2>
+
                 </div>
                 <div id="analistGainsInfo">
                     <b>Ganhos:</b> {{ round($myData->gains, 2) }} <i class="fas fa-coins"></i>
                 </div>
+
                 
             </div>
         </div>
@@ -41,6 +46,21 @@
     <div class="row">
         <div class="col-md-12">
             <div id="live-info">
+               
+
+                <div id="challengeInfo" class="column80 mb-3"></div>
+
+                <div id="challenge_control_waiting" class="column80 mb-3">
+                    <button id="btn_challenge_accept" class="btn btn-sm btn-outline-success">Aceitar oferta <i class="fas fa-check"></i></button>
+                    <button id="btn_challenge_cancel" class="btn btn-sm btn-outline-danger float-right">Cancelar <i class="fas fa-times"></i></button>
+                </div>
+
+                <div id="challenge_control_finalize" class="column80 mb-3">
+                    <button id="btn_challenge_finallize" 
+                            class="btn btn-sm btn-outline-primary">
+                                Finalizar <i class="far fa-calendar-check"></i></button>
+                </div>
+
                 <span id="session_cost_aproximate"></span>
                 <span id="time_aproximate" class="ml-3"></span>
 
@@ -102,12 +122,7 @@
                 <br>
 
 <div class="chat">
-    <div id="history-messages" class="history">
-        <!-- <div id="history-messages">
-            sdfsafdsaf <br>
-            sadfsafa
-        </div> -->
-    </div>
+    <div id="history-messages" class="history"></div>
     <div class="message">
         <small>Digite sua mensagem</small>
         <textarea id="txtAreaMessage" name="textarea"></textarea>
@@ -118,6 +133,8 @@
 
 
 @include('chat.analist.modal.sessions')
+@include('chat.analist.modal.modalChallenge')
+
 
 @endsection
 
@@ -141,6 +158,12 @@
 
     let analistPricePerHourGlobal = {{ $myData->pricePerHour }}
     
+    let challengeDataGlobal
+    @if(isset($challengeActive))
+        challengeDataGlobal = JSON.parse('{!! $challengeActive !!}')
+    @else
+        challengeDataGlobal = null
+    @endif
 </script>
 <script src="{{ asset('js/peerAnalist.js') }}"></script>
 

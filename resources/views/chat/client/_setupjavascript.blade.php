@@ -50,6 +50,13 @@ let socket = null
 @endif
 
 
+let challengeDataGlobal
+@if(isset($dataChallenge))
+    challengeDataGlobal = JSON.parse('{!! $dataChallenge !!}')
+@else
+    challengeDataGlobal = null
+@endif
+
 
 </script>
 

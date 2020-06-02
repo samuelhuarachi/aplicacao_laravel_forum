@@ -16,7 +16,7 @@
     <div class="row">
 
         <div id="header-camstream">
-            <h1>Camstream - Garotas ao vivo</h1>
+            <h1>Garotas ao vivo</h1>
         </div>
 
         <div class="col-md-12">
@@ -24,9 +24,19 @@
             <center>
                 Confiras as melhores garotas da BonecaForum/GarotaForum CamStream
             </center>
-            <hr>
-            
-            <div>
+
+            <ul class="nav nav-tabs mb-3">
+                <li class="nav-item">
+                    <a id="btn_woman_list" class="nav-link active">
+                        Mulheres</a>
+                </li>
+                <li class="nav-item">
+                    <a id="btn_tranny_list" class="nav-link" >
+                        Transex <i class="fas fa-transgender"></i></a>
+                </li>
+            </ul>
+    
+            <div id="woman_list">
 
             
                 @foreach($analists as $analist)
@@ -62,6 +72,23 @@
                         </a>
                     </figure>
                 @endforeach
+            </div>
+            <div id="tranny_list">
+                Não encontramos nenhuma no momento
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
             </div>
         </div>
     </div>

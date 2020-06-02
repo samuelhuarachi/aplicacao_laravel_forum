@@ -64,6 +64,11 @@ class ChatController extends Controller
 
         $reponseAuthClient = null;
         $analistExists = json_decode($analistExists);
+
+        /**
+         * pegar a proposta ativa
+         */
+        $dataChallenge = $clientService->getChallenge($slug);
         
         if (!$tokenClient) {
             $tokenClient = null;
@@ -78,10 +83,10 @@ class ChatController extends Controller
 
             return view('chat.client.client', 
                         compact('tokenClient', 
-                                    'reponseAuthClient', 'analistExists'));
+                                    'reponseAuthClient', 'analistExists', 'dataChallenge'));
         }
 
-        return view('chat.client.client', compact('tokenClient', 'analistExists'));
+        return view('chat.client.client', compact('tokenClient', 'analistExists', 'dataChallenge'));
     }
 
     public function analist($slug, AnalistService $analistService)
@@ -96,9 +101,14 @@ class ChatController extends Controller
             abort(403, 'Unauthorized');
         }
 
+
+        $myData = \json_decode($analistService->getData());
+
         $token = Session::get('myToken');
 
         $analistFind = $analistService->sessionOpenedBySlug($slug);
+
+        $challengeActive = $analistService->getChellengeActive();
 
         // $sid    = "AC1d69bbc1f0c36469e49e4bb9d57ac350";
         // $token2  = "dc0c1a20b57ef9fef382a3ac42bc736f";
@@ -124,7 +134,7 @@ class ChatController extends Controller
         // }
         
         return view('chat.analist.analist', 
-                    compact('myData', 'token'));
+                    compact('myData', 'token', 'challengeActive'));
     }
     
     public function analistLogin()

@@ -96,6 +96,24 @@ class ClientService {
         return $response;
     }
 
+    public function getChallenge($slug)
+    {
+        $url = env("NODEAPI") . "/api/client/get-challenge/" . $slug;
+        $ch = curl_init($url);
+        
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        
+        $response = curl_exec($ch);
+        $info = curl_getinfo($ch);
+        curl_close($ch);
+
+        if ($info['http_code'] !== 200) {
+            return null;
+        }
+
+        return $response;
+    }
+
     public function onlineAnalists($analists)
     {
         $listOnline = [];

@@ -19,6 +19,18 @@ function checkBrowser() {
     return browser;
 }
 
+function listItensPublicPrice() {
+    historyMessageAdd('10 <i class="fas fa-coins"></i> => mostro os peitos <br>')
+    historyMessageAdd('30 <i class="fas fa-coins"></i> => masturbacao <br>')
+    historyMessageAdd('50 <i class="fas fa-coins"></i> => anal <br>')
+    historyMessageAdd('100 <i class="fas fa-coins"></i> => sexo <br>')
+    historyMessageAdd('200 <i class="fas fa-coins"></i> => sexo com gozada na boca <br>')
+    historyMessageAdd('300 <i class="fas fa-coins"></i> => sexo anal <br>')
+    historyMessageAdd('<hr')
+}
+
+listItensPublicPrice()
+
 let browserGlobal = checkBrowser();
 
 import io from "socket.io-client";
@@ -38,6 +50,16 @@ require("./clients/btnForgotLogin");
 require("./clients/btnRedefinePassword");
 require("./clients/linkForgotPasswordBack");
 require("./clients/btnSessions");
+require("./clients/btnGift");
+require("./clients/btnMinimizeChat");
+require("./clients/btnMaximizeChat");
+
+
+const {
+    UpdateChallgenteInfo
+} = require("./clients/class/UpdateChallgenteInfo");
+
+
 const DisplayCostSessionEstimate = require("./clients/class/DisplayCostSessionEstimate");
 const DisplayTimeEstimate = require("./clients/class/DisplayTimeEstimate");
 let displayCostSessionEstimate = new DisplayCostSessionEstimate.DisplayCostSessionEstimate(
@@ -49,6 +71,12 @@ const {
 } = require("./clients/class/CamgirlTabs");
 
 new CamgirlTabs();
+
+const {
+    ListGirlTabsControl
+} = require("./clients/class/ListGirlTabsControl");
+
+new ListGirlTabsControl();
 
 const {
     Helper
@@ -125,6 +153,7 @@ function connectSocket() {
             clientRoom
         });
         const clientID = socket.id;
+
     });
 }
 
@@ -283,6 +312,7 @@ function uuidv4() {
 }
 
 $("#btnSend").click(function () {
+
     let message = $("#txtAreaMessage").val();
 
     $("#txtAreaMessage").val("");
@@ -290,14 +320,18 @@ $("#btnSend").click(function () {
     message = message.trim();
 
     if (message != "") {
-        let history = $("#history-messages").html();
-        history = history + "<br><b>Eu:</b> " + escapeHtml(message);
-        $("#history-messages").html(history);
-        $("#history-messages").animate({
-                scrollTop: 9999
-            },
-            "slow"
-        );
+        // let history = $("#history-messages").html();
+
+
+        // history = history + "<br><b>Eu:</b> " + escapeHtml(message);
+        // $("#history-messages").html(history);
+        // $("#history-messages").animate({
+        //         scrollTop: 9999
+        //     },
+        //     "slow"
+        // );
+
+        historyMessageAdd("<br><b>Eu:</b> " + escapeHtml(message))
 
         const messageObject = {
             message,
@@ -307,6 +341,18 @@ $("#btnSend").click(function () {
         socket.emit("clientMessage", messageObject);
     }
 });
+
+function historyMessageAdd(message) {
+    let history = $("#history-messages").html();
+
+    history = history + message;
+    $("#history-messages").html(history);
+    $("#history-messages").animate({
+            scrollTop: 9999
+        },
+        "slow"
+    );
+}
 
 function updateHistoryMessages(message) {
     message = message.trim();
@@ -340,7 +386,7 @@ let listenerClientIsOnline = function () {
         socket.emit("client-listener-is-online", {
             token
         });
-    }, 20000);
+    }, 5000);
 };
 
 // const aproximateCostLoad = () => {
@@ -366,8 +412,20 @@ let listenerClientIsOnline = function () {
 //     }, 1000)
 // }
 
+if (challengeDataGlobal) {
+    const classUpdateChallgenteInfo = new UpdateChallgenteInfo()
+    classUpdateChallgenteInfo.render(challengeDataGlobal)
+}
+
 if (socket) {
     require("./clients/_client-recept-error");
+
+
+    socket.on("challenge_info", data => {
+        const classUpdateChallgenteInfo = new UpdateChallgenteInfo()
+
+        classUpdateChallgenteInfo.render(data)
+    })
 
     socket.on("client-stop-session", () => {
         $("#btnPrivateSession").css("display", "block");
@@ -412,6 +470,8 @@ if (socket) {
         }
     });
 
+
+
     socket.on("message-default-to-client", message => {
         $("#message-default-client").css("display", "block");
         $("#message-default-client").html(
@@ -452,4 +512,24 @@ if (socket) {
             displayTimeEstimate.start();
         }
     });
+
+    socket.on("challengeInfoClient", function (data) {
+
+        $("#challangeInfo").html(`
+            <div class="mb-3">
+                <button class="btn btn-outline-primary">enviar 10 <i class="fas fa-gem"></i></button>
+                <button class="btn btn-outline-primary">enviar 20 <i class="fas fa-gem"></i></button>
+                <button class="btn btn-outline-primary">enviar 30 <i class="fas fa-gem"></i></button>
+                <button class="btn btn-outline-primary">enviar 50 <i class="fas fa-gem"></i></button>
+                <button class="btn btn-outline-primary">enviar 100 <i class="fas fa-gem"></i></button>
+                <button class="btn btn-outline-primary">enviar 200 <i class="fas fa-gem"></i></button>
+                <button class="btn btn-outline-primary">Outro valor <i class="fas fa-gem"></i></button>
+            </div>
+
+            <p>Mostro os peitos por 100 creditos (25 recebidos até o momento)</p>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+            </div>
+        `)
+    })
 }
