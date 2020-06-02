@@ -16,7 +16,7 @@
     <div class="row">
 
         <div id="header-camstream">
-            <h1>Garotas ao vivo</h1>
+            <h1>Garotas ao vivo (em breve)</h1>
         </div>
 
         <div class="col-md-12">
