@@ -40,6 +40,7 @@
                         <li><strong>"Contratantes da Publimetas"</strong> significam os artistas contratantes dos serviços de
                             intermediação de pagamento da Publimetas e que utilizam a plataforma para disponibilizar conteúdo
                             próprio;</li>
+                            
 
                         <li><strong>"Endereço IP"</strong> significa o código atribuído a um terminal de uma rede para
                             permitir a identificação do Usuário, definido segundo parâmetros internacionais;</li>
