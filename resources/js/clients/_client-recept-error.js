@@ -6,15 +6,16 @@ socket.on('_client-recept-error', function (data) {
     let body = $("html, body");
     body.stop().animate({
         scrollTop: 0
-    }, 500, 'swing', function () {
-        //alert("Finished animating");
-    });
+    }, 500, 'swing', function () {});
 
     switch (data.type) {
         case 'INSUFICIENT_CREDITS':
             $('#btnPrivateSession').prop('disabled', false)
             break;
         case 'OPENNED_SESSION_READY':
+            $('#btnPrivateSession').prop('disabled', false)
+            break;
+        case 'GENERIC':
             $('#btnPrivateSession').prop('disabled', false)
             break;
         default:

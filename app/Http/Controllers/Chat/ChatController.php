@@ -21,18 +21,40 @@ class ChatController extends Controller
         $tokenClient = Session::get('clientToken');
 
         /**
+         * valida o usuario
+         */
+        $reponseAuthClient = null;
+        if ($tokenClient) {
+            $reponseAuthClient = $authClient->authByToken($tokenClient);
+            if (!$reponseAuthClient) {
+                Session::forget('clientToken');
+                return redirect()->route('chat');
+            }
+            $reponseAuthClient = json_decode($reponseAuthClient);
+        }
+
+        /**
          * Verifica se o slug existe
          */
         $analistExists = $clientService->getAnalistBySlug($slug);
         if (!$analistExists)
             abort(404);
 
+        
+        $analistExists = json_decode($analistExists);
 
+        /**
+         * acesso com o analista offline
+         */
         $isAvailable = $clientService->checkRoomIsAvailable($slug);
         if (!$isAvailable) {
-            $message = '<i class="fas fa-exclamation"></i> Parece que a modelo não está mais online <i class="fas fa-sad-tear"></i>';
-            Session::flash('flash_message', $message);
-                return redirect()->route('chat');
+            $dataChallenge = null;
+            return view('chat.client.client', 
+                        compact(    'tokenClient', 
+                                    'reponseAuthClient', 
+                                    'isAvailable',
+                                    'analistExists', 
+                                    'dataChallenge'));
         }
 
         /**
@@ -52,18 +74,13 @@ class ChatController extends Controller
             $checkActiveRoom = $clientService->checkActiveRoom($tokenClient, $slug);
             if ($checkActiveRoom) {
                 $message = '<i class="fas fa-exclamation"></i> Identificamos que já existe uma sessao ativa para essa modelo. Caso o problema persista, entre em contato com o suporte atraves do e-mail: ' . env('SUPPORT_EMAIL');
-                    // return view('chat.analist.message',
-                    //             compact('message'));
-
+                
                 Session::flash('flash_message', $message);
                 return redirect()->route('chat');
             }
         }
 
         
-
-        $reponseAuthClient = null;
-        $analistExists = json_decode($analistExists);
 
         /**
          * pegar a proposta ativa
@@ -73,20 +90,15 @@ class ChatController extends Controller
         if (!$tokenClient) {
             $tokenClient = null;
         } else {
-            $reponseAuthClient = $authClient->authByToken($tokenClient);
-            if (!$reponseAuthClient) {
-                Session::forget('clientToken');
-                return redirect()->route('chat');
-            }
-            
-            $reponseAuthClient = json_decode($reponseAuthClient);
-
             return view('chat.client.client', 
-                        compact('tokenClient', 
+                        compact('tokenClient', 'isAvailable',
                                     'reponseAuthClient', 'analistExists', 'dataChallenge'));
         }
 
-        return view('chat.client.client', compact('tokenClient', 'analistExists', 'dataChallenge'));
+        return view('chat.client.client', compact(
+            'isAvailable',
+            'tokenClient', 'analistExists',
+             'dataChallenge'));
     }
 
     public function analist($slug, AnalistService $analistService)

@@ -209,6 +209,10 @@ socket.on("analist-stop-session", () => {
     displayTimeEstimate.stop();
 });
 
+socket.on("update_gains", () => {
+    gainstUpdate.gainstUpdate();
+})
+
 // Answers aacho que eh aqui
 socket.on("receiveClientSDP", function (data) {
     let msg = JSON.parse(data);

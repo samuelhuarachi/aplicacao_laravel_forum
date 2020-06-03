@@ -20,19 +20,18 @@
             <div class="column80">
 
                 <!-- se tiver token, se tiver autenticado, se tiver credito -->
-                @if($tokenClient && isset($reponseAuthClient) && $reponseAuthClient->nickname &&
-                $reponseAuthClient->credits > 0)
                 <button id="btnPrivateSession" class="float-right">
                     Iniciar privado <i class="far fa-eye-slash"></i></button>
-                @endif
 
+            
+                    
                 <!-- se tiver token, se tiver autenticado -->
                 @if($tokenClient && isset($reponseAuthClient) && $reponseAuthClient->nickname)
                 <button id="btnStopPrivateSession" class="float-right">
                     Encerrar privado</button>
                 @endif
 
-                <h2 class="mt-4">{{ $analistExists->name }} {{ $analistExists->lastname }}</h2>
+                <h2 class="mt-4 text-center">{{ $analistExists->name }} {{ $analistExists->lastname }}</h2>
         
                 @if ($tokenClient && isset($reponseAuthClient) && $reponseAuthClient->email_verified == false)
                 <br><br>
@@ -46,8 +45,13 @@
                 
 
                 <div class="float-right" id="live-info">
-                    <i id="live-circle" class="fas fa-circle"></i>
-                    Live
+                    @if(!$isAvailable)
+                        <i id="off-circle" class="fas fa-circle"></i>
+                            Offline
+                    @else
+                        <i id="live-circle" class="fas fa-circle"></i>
+                        Live
+                    @endif
                 </div>
 
                 @if($tokenClient && isset($reponseAuthClient) && $reponseAuthClient->nickname)

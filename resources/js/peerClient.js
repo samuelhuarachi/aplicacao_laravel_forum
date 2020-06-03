@@ -54,6 +54,7 @@ require("./clients/btnGift");
 require("./clients/btnMinimizeChat");
 require("./clients/btnMaximizeChat");
 
+$("#changeClientPassword").val("");
 
 const {
     UpdateChallgenteInfo
@@ -470,15 +471,17 @@ if (socket) {
         }
     });
 
-
-
     socket.on("message-default-to-client", message => {
         $("#message-default-client").css("display", "block");
         $("#message-default-client").html(
             message +
             '<button style="margin-top:3px;" type="button" class="close"><span aria-hidden="true">&times;</span></button>'
         );
-        //$("#message-default-client").alert()
+        
+        let body = $("html, body");
+        body.stop().animate({
+            scrollTop: 0
+        }, 500, 'swing', function () {});
     });
 
     socket.on("reconnect", function () {
@@ -513,23 +516,27 @@ if (socket) {
         }
     });
 
-    socket.on("challengeInfoClient", function (data) {
-
-        $("#challangeInfo").html(`
-            <div class="mb-3">
-                <button class="btn btn-outline-primary">enviar 10 <i class="fas fa-gem"></i></button>
-                <button class="btn btn-outline-primary">enviar 20 <i class="fas fa-gem"></i></button>
-                <button class="btn btn-outline-primary">enviar 30 <i class="fas fa-gem"></i></button>
-                <button class="btn btn-outline-primary">enviar 50 <i class="fas fa-gem"></i></button>
-                <button class="btn btn-outline-primary">enviar 100 <i class="fas fa-gem"></i></button>
-                <button class="btn btn-outline-primary">enviar 200 <i class="fas fa-gem"></i></button>
-                <button class="btn btn-outline-primary">Outro valor <i class="fas fa-gem"></i></button>
-            </div>
-
-            <p>Mostro os peitos por 100 creditos (25 recebidos até o momento)</p>
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-            </div>
-        `)
+    socket.on("update_credits", () => {
+        updateCreditsValue.go();
     })
+
+    // socket.on("challengeInfoClient", function (data) {
+
+    //     $("#challangeInfo").html(`
+    //         <div class="mb-3">
+    //             <button class="btn btn-outline-primary">enviar 10 <i class="fas fa-gem"></i></button>
+    //             <button class="btn btn-outline-primary">enviar 20 <i class="fas fa-gem"></i></button>
+    //             <button class="btn btn-outline-primary">enviar 30 <i class="fas fa-gem"></i></button>
+    //             <button class="btn btn-outline-primary">enviar 50 <i class="fas fa-gem"></i></button>
+    //             <button class="btn btn-outline-primary">enviar 100 <i class="fas fa-gem"></i></button>
+    //             <button class="btn btn-outline-primary">enviar 200 <i class="fas fa-gem"></i></button>
+    //             <button class="btn btn-outline-primary">Outro valor <i class="fas fa-gem"></i></button>
+    //         </div>
+
+    //         <p>Mostro os peitos por 100 creditos (25 recebidos até o momento)</p>
+    //         <div class="progress">
+    //             <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+    //         </div>
+    //     `)
+    // })
 }

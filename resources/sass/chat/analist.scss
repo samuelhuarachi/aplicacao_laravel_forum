@@ -144,10 +144,10 @@ video {
     padding: 0px;
 
     overflow: scroll;
-    overflow-x: hidden;
-    word-break: break-all;
+    overflow-y: hidden;
     font-size: small;
     padding-left: 5px;
+    white-space: pre-wrap;
 }
 
 .message {

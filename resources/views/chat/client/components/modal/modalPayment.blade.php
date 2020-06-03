@@ -9,7 +9,9 @@
                 'method' => 'post'])
                 !!}
                 <div class="row">
-
+                    <div class="col-md-12">
+                        <h3>Dados do Cartão</h3>
+                    </div>
                     <div class="col">
                         <img class="float-right" width="30" id="card_image"
                             src="{{ asset('images/creditcard/mastercard.png') }}" alt="">
@@ -76,8 +78,8 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <button id="completeOrder" type="button" class="btn btn-danger btn-sm">
-                            Comprar</button>
+                        <button id="completeOrder" type="button" class="btn btn-primary btn-sm">
+                            Adquirir créditos</button>
                         <div class="float-right" id="final-value"></div>
                     </div>
                 </div>

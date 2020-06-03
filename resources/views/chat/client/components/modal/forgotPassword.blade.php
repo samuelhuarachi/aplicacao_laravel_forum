@@ -14,7 +14,7 @@
                     <input class="form-control" type="email" id="inputForgotEmail">
                     <br>
                     <div class="googleRecaptcha" id="recaptchaForgotLogin"></div>
-                    <button id="btnForgotLogin" type="button" class="btn btn-sm btn-danger">
+                    <button id="btnForgotLogin" type="button" class="btn btn-sm btn-primary">
                         Enviar link de verificacao
                         <i class="fas fa-paper-plane"></i></button>
 

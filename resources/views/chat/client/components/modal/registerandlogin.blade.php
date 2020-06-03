@@ -8,8 +8,8 @@
         </button>
         <div class="row">
                     <div  class="col-md-6">
-                        <h3>Faça o login</h3>
-                        <div class="space-area">
+                        <h3>Login</h3>
+                        <div >
                             <form>
                                 <div class="form-group">
                                     <label for="inputEmailLogin">E-mail</label>
@@ -29,8 +29,8 @@
 
                                 <div class="googleRecaptcha" id="recaptchaLogin"></div>
                                 <button id="btnLoginClient" type="button" 
-                                    class="btn btn-sm btn-danger btn-block">
-                                        Login <i class="fas fa-sign-in-alt"></i></button>
+                                    class="btn btn-sm btn-primary">
+                                        Login</button>
                             
                                 <div id="div-message-login-client"></div>
 
@@ -39,8 +39,8 @@
                         </div>
                     </div>
                     <div  class="col-md-6">
-                        <h3>Faça o registro</h3>
-                        <div class="space-area">
+                        <h3>Novo Usuário</h3>
+                        <div>
                             <form id="form-register-new-client">
                                 <div class="form-group">
                                     <label for="inputNicknameRegister">Nickname</label>
@@ -61,14 +61,20 @@
                                         id="inputPasswordRegister" 
                                         >
                                 </div>
-                                <!-- <div class="g-recaptcha" data-sitekey="6LcSuugUAAAAACy-8wrNOLoQOLcL1cMxQScS-oeW"></div>
-                                 -->
+                                
                                 <div class="googleRecaptcha" id="recaptchaRegister"></div>
-                                <button id="registerNewClient" type="button" 
-                                    class="btn btn-sm btn-danger btn-block"
-                                    >
-                                    <i class="fas fa-user-plus"></i> Registrar</button>
 
+                                <p style="margin-bottom: 5px; margin-top: -11px;">
+                                    Estou de acordo com os 
+                                    <a style="color:blue" 
+                                        href="{{ route('chat.termos_de_uso') }}">Termos de Uso</a></p>
+                                
+                                <button id="registerNewClient" type="button" 
+                                    class="btn btn-sm btn-primary"
+                                    >
+                                   Registrar</button>
+
+                                
                                 <div id="div-message-register-new-client"></div>
                             </form>
                         </div>
