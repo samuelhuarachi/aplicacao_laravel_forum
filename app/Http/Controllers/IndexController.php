@@ -66,10 +66,12 @@ class IndexController extends Controller
         //     return $photosList;
         // });
 
-        $photosList = [];
+        $coversList = [];
         $lastSeeList = [];
         $lastSee = new LastSee();
         $photoModel = new Photo();
+        $listt = [];
+
         foreach($cityFounded->topics as $topic)
         {
             // Defenindo foto de capa
@@ -78,46 +80,36 @@ class IndexController extends Controller
             });
             
             if ($photoFounded) {
-                $photosList[$topic->slug] = $photoFounded->photo;
+                $coversList[$topic->slug] = $photoFounded->photo;
             }
 
+            /**
+             * ultima vez que foi vista
+             */
+            $lastSeeFounded = Cache::remember($topic->cellphone ."_" .$topic->city_id, 720, function() use ($lastSee, $topic)
+            {
+                return $lastSee
+                    ->select('lastsee', 'current')
+                    ->where('cellphone', $topic->cellphone)
+                    ->where('city_id', $topic->city_id)
+                    ->orderBy('created_at', 'desc')
+                    ->first();
+            });
 
-            // Definin ultima vez vista
-            $lastSeeFounded = $lastSee
-                            ->where('cellphone', $topic->cellphone)
-                            ->where('city_id', $topic->city_id)
-                            ->orderBy('created_at', 'desc')
-                            ->first();
-            
             if ($lastSeeFounded) {
-
-                // if ($lastSeeFounded->current == 0) {
-                //     $findTrannyLocation = $lastSee->where('cellphone', $topic->cellphone)->where('current', 1)->first();
-                //     if ($findTrannyLocation) {
-                //         $findCity = $city->find($findTrannyLocation->city_id);
-                        
-                //         $lastSeeList[$topic->cellphone] = [
-                //             'location' => $findCity->title,
-                //             'data' => $lastSeeFounded->toArray()
-                //         ];
-                //         continue;
-                    
-                //     }
-                // }
-
                 $lastSeeList[$topic->cellphone] = [
                     'data' => $lastSeeFounded->toArray()
                 ];
             }
-        }
-        $coversList = $photosList;
 
-        $listt = [];
-        foreach($cityFounded->topics as $topic)
-        {
+            /**
+             * carrega uma lista da cidade atual, onde a gp esta
+             */
             $statisticSingle->setCellphone($topic->cellphone);
             $listt[$topic->cellphone] = $statisticSingle->get(true, null);
         }
+
+
 
         return view('index', compact(
                     'states',
