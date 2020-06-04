@@ -53,7 +53,7 @@ class IndexController extends Controller
         $stateFounded = $state->find($stateT);
 
 
-        $allCities = Cache::rememberForever('allCities', function () use ($city, $stateT) {
+        $allCities = Cache::rememberForever('allCities_' . $stateT, function () use ($city, $stateT) {
                 return $city->where('state_id', $stateT)->get();
         });
 
