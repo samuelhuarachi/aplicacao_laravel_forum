@@ -78,7 +78,8 @@
 
             <div id="tranny-list" class="card mt-5">
                 <div class="card-header">
-                    <b>Relatos, sobre experiencias dos nossos usuários, com travestis, encontrados:</b>
+                    <b>Relatos, sobre experiencias dos nossos usuários, com travestis, 
+                    encontrados:</b>
                 </div>
                 <div class="card-body">
                     <a class="btn btn-danger" href="{{ route('forum.topic.new', 
@@ -86,10 +87,13 @@
                                 
                         <i class="icon-plus"></i> Novo Tópico</a>
                     <br><br>
+                    {{ $cityFoundedPaginate->links() }}
+
                     @if (count($cityFounded->topics) == 0)
                         <p class="mb-0">Não foi encontrado nenhum tópico para a cidade {{ $cityFounded->title }}</p>
                     @else
-                        @foreach($cityFounded->topics->reverse() as $topic)
+                        <p>Total encontradas: {{ $totaTopics }}</p>
+                        @foreach($cityFoundedPaginate->items() as $topic)
 
                             <div class="card mt-3">
                                 <div class="card-header">
@@ -162,6 +166,8 @@
                                 </div>
                             </div>
                         @endforeach
+                        <br>
+                        {{ $cityFoundedPaginate->links() }}
                     @endif
                 </div>
             </div>

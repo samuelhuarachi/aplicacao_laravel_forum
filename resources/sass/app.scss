@@ -183,6 +183,19 @@ h6 {
     border-radius: 0px;
 }
 
+.page-item.active .page-link {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.page-link:hover {
+    color: #dc3545;
+}
+
+.page-link {
+    color: #dc3545;
+}
+
 #machoman_top {
     max-width: 400px;
     width: 100%;

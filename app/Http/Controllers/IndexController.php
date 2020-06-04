@@ -65,19 +65,15 @@ class IndexController extends Controller
         $listt = [];
         
 
-        $perPage = 100;
-        $page = intval($request->input('page'));
-        if ($page == 0) {
-            $page = 1;
-        }
-        
-      
         $cityFoundedArray = Cache::remember('cityFounded_' . $cityT, 720,
             function () use ($cityFounded) {
                 return $cityFounded->topics->toArray();
         });
 
-        foreach($cityFoundedArray as $topic)
+        $totaTopics =$cityFounded->topics()->count();
+        $cityFoundedPaginate = $cityFounded->topics()->latest()->paginate(100);
+
+        foreach($cityFoundedPaginate->items() as $topic)
         {
             // Defenindo foto de capa
             $photoFounded = Cache::rememberForever('foto-de-capa-'.$topic['cellphone'], function () use($topic, $photoModel) {
@@ -116,10 +112,12 @@ class IndexController extends Controller
 
 
         return view('index', compact(
+                    'cityFoundedPaginate',
                     'states',
                     'stateFounded',
                     'cityFounded',
                     'allCities',
+                    'totaTopics',
                     's3Soul',
                     'listt',
                     'coversList',
