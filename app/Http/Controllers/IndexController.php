@@ -51,53 +51,58 @@ class IndexController extends Controller
 
         $cityFounded = $city->find($cityT);
         $stateFounded = $state->find($stateT);
-        $allCities = $city->where('state_id', $stateT)->get();
 
-        // $coversList  = Cache::remember($stateFounded->slug . '-' . $cityFounded->slug . '-covers', 604800, function () use($stateFounded, $cityFounded, $s3Soul) {
-        //     $photosList = [];
-        //     foreach($cityFounded->topics as $topic)
-        //     {
-        //         $photoFinded = $s3Soul->findOnePhotoTranny($stateFounded->slug, $cityFounded->slug, $topic->slug);
-                
-        //         if ($photoFinded) {
-        //             $photosList[$topic->slug] = $photoFinded;
-        //         }
-        //     }
-        //     return $photosList;
-        // });
+
+        $allCities = Cache::rememberForever('allCities', function () use ($city, $stateT) {
+                return $city->where('state_id', $stateT)->get();
+        });
+
 
         $coversList = [];
         $lastSeeList = [];
         $lastSee = new LastSee();
         $photoModel = new Photo();
         $listt = [];
+        
 
-        foreach($cityFounded->topics as $topic)
+        $perPage = 100;
+        $page = intval($request->input('page'));
+        if ($page == 0) {
+            $page = 1;
+        }
+        
+      
+        $cityFoundedArray = Cache::remember('cityFounded_' . $cityT, 720,
+            function () use ($cityFounded) {
+                return $cityFounded->topics->toArray();
+        });
+
+        foreach($cityFoundedArray as $topic)
         {
             // Defenindo foto de capa
-            $photoFounded = Cache::rememberForever('foto-de-capa-'.$topic->cellphone, function () use($topic, $photoModel) {
-                return $photoModel->where('cellphone', $topic->cellphone)->first();
+            $photoFounded = Cache::rememberForever('foto-de-capa-'.$topic['cellphone'], function () use($topic, $photoModel) {
+                return $photoModel->where('cellphone', $topic['cellphone'])->first();
             });
             
             if ($photoFounded) {
-                $coversList[$topic->slug] = $photoFounded->photo;
+                $coversList[$topic['slug']] = $photoFounded->photo;
             }
 
             /**
              * ultima vez que foi vista
              */
-            $lastSeeFounded = Cache::remember($topic->cellphone ."_" .$topic->city_id, 720, function() use ($lastSee, $topic)
+            $lastSeeFounded = Cache::remember($topic['cellphone'] ."_" .$topic['city_id'], 720, function() use ($lastSee, $topic)
             {
                 return $lastSee
                     ->select('lastsee', 'current')
-                    ->where('cellphone', $topic->cellphone)
-                    ->where('city_id', $topic->city_id)
+                    ->where('cellphone', $topic['cellphone'])
+                    ->where('city_id', $topic['city_id'])
                     ->orderBy('created_at', 'desc')
                     ->first();
             });
 
             if ($lastSeeFounded) {
-                $lastSeeList[$topic->cellphone] = [
+                $lastSeeList[$topic['cellphone']] = [
                     'data' => $lastSeeFounded->toArray()
                 ];
             }
@@ -105,10 +110,9 @@ class IndexController extends Controller
             /**
              * carrega uma lista da cidade atual, onde a gp esta
              */
-            $statisticSingle->setCellphone($topic->cellphone);
-            $listt[$topic->cellphone] = $statisticSingle->get(true, null);
+            $statisticSingle->setCellphone($topic['cellphone']);
+            $listt[$topic['cellphone']] = $statisticSingle->get(true, null);
         }
-
 
 
         return view('index', compact(
