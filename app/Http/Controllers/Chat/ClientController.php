@@ -82,10 +82,11 @@ class ClientController extends Controller
                     ClientService $clientService)
     {
         $data = $request->all();
+
         $clientToken = $data['client_token'];
 
         $response = $clientService->getDataByToken($clientToken);
-        
+
         if (!$response) {
             return redirect()
                     ->route('chat')
@@ -93,11 +94,31 @@ class ClientController extends Controller
         }
 
         $userData = \json_decode($response);
+        
+        /**
+         * se o email do usuario nao estiver verificado
+         */
+        if (!$userData->email_verified) {
+            return redirect()
+                    ->route('chat')
+                    ->withErrors(['Verifique seu e-mail']);
+        }
 
         /**
          * crio uma ordem na api do pagseguro
          */
         $responsePagseguroService = $pagseguroService->newOrder($data, $userData);
+
+        $logCPFHistoy = [
+            "token" => $clientToken,
+            "clientID" => $userData->id,
+            "cpf" => $data["card_cpf"],
+            "transactionID" => "",
+            "name" => $data["card_name"],
+            "ip" => $_SERVER['REMOTE_ADDR'],
+            "birthday" => $data["card_birthday"]
+        ];
+        $clientService->storeCreditCardCPFHistory($logCPFHistoy);
         
         $info = $responsePagseguroService["info"];
         $responsePagseguro = json_decode($responsePagseguroService["response"]);
@@ -116,8 +137,8 @@ class ClientController extends Controller
             
             return redirect()
                     ->route('chat')
-                    ->withErrors([$errorPagseguroMessage . 
-                            'Caso continue tendo problema com o pagamento 
+                    ->withErrors([
+                            'Problemas com seu cartão. Caso continue tendo problema com o pagamento 
                             enviar um e-mail para ' . 
                             env('SUPPORT_EMAIL')]);
         }
@@ -126,8 +147,6 @@ class ClientController extends Controller
          * registra a ordem na minha api
          */
         $registerNew = $pagseguroService->registerNewOrderInApi($clientToken, $responsePagseguroService["response"]);
-
-        // dump($responsePagseguroService["response"]);
 
         Session::flash('flash_message','Obrigado pela sua transacao. Ela sera creditada, assim que recebermos a confirmacao. Voce podera acompanhar o status dela em "transacoes" no menu. Caso tenha algum problema, com alguma transacao, enviar um email para o suporte ' . env('SUPPORT_EMAIL'));
         return redirect()->route('chat');

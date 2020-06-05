@@ -20,13 +20,7 @@ function checkBrowser() {
 }
 
 function listItensPublicPrice() {
-    historyMessageAdd('10 <i class="fas fa-coins"></i> => mostro os peitos <br>')
-    historyMessageAdd('30 <i class="fas fa-coins"></i> => masturbacao <br>')
-    historyMessageAdd('50 <i class="fas fa-coins"></i> => anal <br>')
-    historyMessageAdd('100 <i class="fas fa-coins"></i> => sexo <br>')
-    historyMessageAdd('200 <i class="fas fa-coins"></i> => sexo com gozada na boca <br>')
-    historyMessageAdd('300 <i class="fas fa-coins"></i> => sexo anal <br>')
-    historyMessageAdd('<hr')
+    historyMessageAdd('Bem vindo ao chat')
 }
 
 listItensPublicPrice()
@@ -51,6 +45,7 @@ require("./clients/btnRedefinePassword");
 require("./clients/linkForgotPasswordBack");
 require("./clients/btnSessions");
 require("./clients/btnGift");
+require("./clients/btnGiftYesNo");
 require("./clients/btnMinimizeChat");
 require("./clients/btnMaximizeChat");
 
@@ -313,6 +308,11 @@ function uuidv4() {
 }
 
 $("#btnSend").click(function () {
+
+    if (!token) {
+        $('#modalLoginOrRegisterHTML').modal()
+        return
+    }
 
     let message = $("#txtAreaMessage").val();
 

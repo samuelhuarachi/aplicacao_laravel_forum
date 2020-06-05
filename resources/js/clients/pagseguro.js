@@ -1,6 +1,10 @@
 const PagseguroFormatCreditCard =
     require('./class/PagseguroFormatCreditCard')
 
+const { ValidatePaymentCreditCardForm } =
+    require('./class/ValidatePaymentCreditCardForm')
+
+
 $("#card_validate_message").hide()
 $('#card_number').mask("0000 0000 0000 0000")
 $('#card_expire').mask('00/00')
@@ -14,9 +18,9 @@ $("#card_birthday").mask('00/00/0000')
 jQuery(function ($) {
     $(document).ready(function () {
 
-
-        if ($('#card_number').val()) {
+        if ($('#card_number').length > 0) {
             $('#card_number').validateCreditCard(function (result) {
+                
                 var cardNumber = $("#card_number").val()
                 var cardNumberLength = cardNumber.length
 
@@ -53,14 +57,34 @@ jQuery(function ($) {
 $("#completeOrder").click(function () {
     $('#completeOrder').prop('disabled', true)
 
-    var card_number = PagseguroFormatCreditCard.formatCreditCardNumber($("#card_number").val())
-    var card_expire = PagseguroFormatCreditCard.formatCreditCardExpire($('#card_expire').val())
-    var card_brand = $("#card_brand").val()
-    var card_cvv = $("#card_cvv").val()
-    var expireMonth = card_expire[0]
-    var expireYear = '20' + card_expire[1]
+    let card_number = PagseguroFormatCreditCard.formatCreditCardNumber($("#card_number").val())
+    let card_expire = PagseguroFormatCreditCard.formatCreditCardExpire($('#card_expire').val())
+    let card_brand = $("#card_brand").val()
+    let card_cvv = $("#card_cvv").val()
+    let expireMonth = card_expire[0]
+    let expireYear = '20' + card_expire[1]
 
     $("#client_token").val(token)
-    $("#client-payment-form").submit();
+    
+    const validatePaymentCreditCardForm = new ValidatePaymentCreditCardForm();
+    validatePaymentCreditCardForm.setCreditCardNumber(card_number)
+    validatePaymentCreditCardForm.setExpirateDate($('#card_expire').val())
+    validatePaymentCreditCardForm.setCVV(card_cvv)
+    validatePaymentCreditCardForm.setName($("#card_name").val())
+    validatePaymentCreditCardForm.setCPF($("#card_cpf").val())
+    validatePaymentCreditCardForm.setBirthday($("#card_birthday").val())
 
+    try {
+        validatePaymentCreditCardForm.validate()
+
+        $("#client-payment-form").submit()
+    } catch (error) {
+        $("#div-message-creditcard-client").show()
+        $("#div-message-creditcard-client").html(error.message)
+        $("#div-message-creditcard-client").fadeOut(4000)
+        
+    } finally {
+        $('#completeOrder').prop('disabled', false)
+    }
+    
 })

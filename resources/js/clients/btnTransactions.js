@@ -28,7 +28,7 @@ $("#btnTransactions").click(async function () {
 
         let value = transactionPagseguro.amount.value / 100
 
-        output = output + "<tr><td>" + transactionID + "</td><td>" + status + "</td><td class='text-center'>" + value + " <i class='fas fa-coins'></i></td></tr>"
+        output = output + "<tr><td>" + item._id + "</td><td>" + status + "</td><td class='text-center'>" + value + " <i class='fas fa-coins'></i></td></tr>"
     })
 
     $("#outputTransactions").html("<table class='table'>" + output + "</table>")

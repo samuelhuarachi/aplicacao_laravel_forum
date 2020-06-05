@@ -220,15 +220,14 @@ body {
 
 .alert {
     border-radius: 0px !important;
-
     position: absolute;
     z-index: 999;
     width: 100%;
     margin-left: -5px;
     padding: 10px !important;
     font-family: "Arial";
-
     cursor: pointer;
+    top: 0px;
 }
 
 #menu-area>.btn-link {
@@ -319,17 +318,16 @@ body {
 
 .form-control:focus {
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0) !important;
-    border-color: #bd2130 !important;
+    border: 1px solid #82b3f2;
+    background: #709de30f;
 }
 
 .alert-danger {
     border: 0px !important;
-    background: linear-gradient(0deg,
-            rgba(226, 100, 126, 1) 0%,
-            rgba(255, 169, 197, 1) 15%,
-            rgba(251, 201, 217, 1) 16%,
-            rgba(251, 201, 217, 1) 100%) !important;
+    background: #fbc9d9;
 }
+
+
 
 #session_cost_aproximate,
 #time_aproximate {
@@ -340,7 +338,7 @@ body {
     cursor: pointer;
 }
 
-#div-message-register-new-client {
+#div-message-register-new-client, #div-message-creditcard-client {
     font-size: small;
     color: red;
 }
@@ -386,13 +384,9 @@ body {
 
 .alert-success {
     color: #406a3a;
-    border: 1px solid #23863a;
+    border: none;
     font-weight: bold;
-    background: linear-gradient(0deg,
-            #83b494 0%,
-            #9ad5af 15%,
-            #dbffd9 16%,
-            #dbffd991 100%);
+    background: #dafbda;
 
     border-radius: 0px !important;
     padding: 3px 7px;
@@ -402,9 +396,7 @@ body {
     color: #464646;
     border: 3px solid #ccc;
     font-weight: bold;
-    background: linear-gradient(0deg,
-            #dadada 0%, #dadada 15%,
-            white 16%, #eeeeee85 100%);
+    background: #eee;
     position: absolute;
     z-index: 999;
     width: 100%;
@@ -790,6 +782,11 @@ button.close {
 
 
 
+@media only screen and (max-width: 576px) {
+    .modal-dialog {
+        margin: 1.75rem auto !important;
+    }
+}
 
 @media only screen and (max-width: 558px) {
     video {

@@ -48,7 +48,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="card_name">Nome Impresso no Cartão</label>
-                            <input class="form-control" name="card_name" type="text">
+                            <input id="card_name" class="form-control" name="card_name" type="text">
 
                         </div>
                     </div>
@@ -80,6 +80,7 @@
                     <div class="col-md-12">
                         <button id="completeOrder" type="button" class="btn btn-primary btn-sm">
                             Adquirir créditos</button>
+                        <div id="div-message-creditcard-client"></div>
                         <div class="float-right" id="final-value"></div>
                     </div>
                 </div>

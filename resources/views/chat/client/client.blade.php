@@ -13,6 +13,10 @@
 
 @include('chat.client._menu')
 
+@if ($tokenClient && isset($reponseAuthClient) && $reponseAuthClient->email_verified == false)      
+    @include('chat.client.components.messages.verifiedemail')
+@endif
+
 <div class="container">
 
     <div class="row">
@@ -31,12 +35,10 @@
                     Encerrar privado</button>
                 @endif
 
-                <h2 class="mt-4 text-center">{{ $analistExists->name }} {{ $analistExists->lastname }}</h2>
+                <h2 class="mt-4">
+                    Camgirl {{ $analistExists->name }} {{ $analistExists->lastname }}</h2>
         
-                @if ($tokenClient && isset($reponseAuthClient) && $reponseAuthClient->email_verified == false)
-                <br><br>
-                @include('chat.client.components.messages.verifiedemail')
-                @endif
+                
             </div>
         </div>
         <div class="col-md-12 mt-3">
@@ -88,13 +90,15 @@
         
         <div class="col-md-12 mt-1">
             <div class="mb-3">
-                <button data-value=10 class="btn btn-outline-dark btnGift">enviar 10 <i class="fas fa-coins"></i></button>
-                <button data-value=20 class="btn btn-outline-dark btnGift">enviar 20 <i class="fas fa-coins"></i></button>
-                <button data-value=30 class="btn btn-outline-dark btnGift">enviar 30 <i class="fas fa-coins"></i></button>
-                <button data-value=50 class="btn btn-outline-dark btnGift">enviar 50 <i class="fas fa-coins"></i></button>
-                <button data-value=100 class="btn btn-outline-dark btnGift">enviar 100 <i class="fas fa-coins"></i></button>
-                <button data-value=200 class="btn btn-outline-dark btnGift">enviar 200 <i class="fas fa-coins"></i></button>
-                <button class="btn btn-outline-dark btnGift">Outro valor <i class="fas fa-coins"></i></button>
+            <button data-value=1 class="btn btn-outline-dark btnGiftYesNo">enviar 1 <i class="fas fa-coins"></i></button>
+            <button data-value=5 class="btn btn-outline-dark btnGiftYesNo">enviar 5 <i class="fas fa-coins"></i></button>
+                <button data-value=10 class="btn btn-outline-dark btnGiftYesNo">enviar 10 <i class="fas fa-coins"></i></button>
+                <button data-value=20 class="btn btn-outline-dark btnGiftYesNo">enviar 20 <i class="fas fa-coins"></i></button>
+                <button data-value=30 class="btn btn-outline-dark btnGiftYesNo">enviar 30 <i class="fas fa-coins"></i></button>
+                <button data-value=50 class="btn btn-outline-dark btnGiftYesNo">enviar 50 <i class="fas fa-coins"></i></button>
+                <button data-value=100 class="btn btn-outline-dark btnGiftYesNo">enviar 100 <i class="fas fa-coins"></i></button>
+                <button data-value=200 class="btn btn-outline-dark btnGiftYesNo">enviar 200 <i class="fas fa-coins"></i></button>
+                
             </div>
             
             <div class="column80">
@@ -179,19 +183,22 @@
 
 
 @if(!$tokenClient)
-@include('chat.client.components.modal.registerandlogin')
-@include('chat.client.components.modal.forgotPassword')
+    @include('chat.client.components.modal.registerandlogin')
+    @include('chat.client.components.modal.forgotPassword')
 @endif
+
+@include('chat.client.components.modal.modalYesNoGift')
 
 @if($tokenClient)
-@include('chat.client.components.modal.account')
+    @include('chat.client.components.modal.account')
+    
 
-@if($tokenClient && isset($reponseAuthClient) && $reponseAuthClient->email_verified == true)
-@include('chat.client.components.modal.modalAddCredits')
-@include('chat.client.components.modal.modalPayment')
-@include('chat.client.components.modal.modalTransactions')
-@include('chat.client.components.modal.modalSessions')
-@endif
+    @if($tokenClient && isset($reponseAuthClient) && $reponseAuthClient->email_verified == true)
+        @include('chat.client.components.modal.modalAddCredits')
+        @include('chat.client.components.modal.modalPayment')
+        @include('chat.client.components.modal.modalTransactions')
+        @include('chat.client.components.modal.modalSessions')
+    @endif
 @endif
 
 
