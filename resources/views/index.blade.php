@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-md-12 d-flex justify-content-center mb-3">
             <a href="http://mon.net.br/s02k9">
-                <img id="banner1_top" src="https://forumttt.s3-sa-east-1.amazonaws.com/tesao-de-vaca.png" alt="Deixe ela facinho facinho com tesão de vaca">
+                <img id="banner1_top" src="https://forumttt.s3-sa-east-1.amazonaws.com/Banner_TVaca.jpg" alt="Deixe ela facinho facinho com tesão de vaca">
             </a>
         </div>
     </div>
