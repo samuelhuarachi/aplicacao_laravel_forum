@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12 d-flex justify-content-center mb-3">
-            <a href="https://app.monetizze.com.br/r/AUL9130384">
+            <a href="http://mon.net.br/s02k9">
                 <img id="banner1_top" src="https://forumttt.s3-sa-east-1.amazonaws.com/tesao-de-vaca.png" alt="Deixe ela facinho facinho com tesão de vaca">
             </a>
         </div>
