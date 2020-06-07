@@ -15,7 +15,11 @@
 
 
 <div id="top-info">
-    <b>Seja bem-vindo!</b>
+    <a style="color: #fff" href="http://localhost:3003/camstream">
+    Conheca Boneca Forum 
+    
+                    <img src="http://localhost:3003/images/logo_lado.png" width="128">
+                    </a>
 </div>
 
 <div id="user-info">
