@@ -28,13 +28,14 @@ body {
 
 .onlineFlag {
     position: absolute;
-    background: #fff;
+    background: #575757d1;
     font-family: 'Arial';
     padding: 0px 5px;
     right: 12px;
     border-radius: 4px;
     bottom: 41px;
     font-size: xx-small;
+    color: #fff;
 }
 
 .girl_help {
@@ -111,21 +112,22 @@ body {
 .nav-tabs .nav-link.active {
     color: #fff;
     font-family: "Arial";
-    font-weight: bold;
-    background-color: #a63e9f;
+    font-weight: initial;
+    background-color: #4f4f4f;
     border: none;
 }
 
 .nav-tabs .nav-link {
     color: #fff;
     font-family: "Arial";
-    font-weight: bold;
+    font-weight: initial;
+    border-radius: 0px;
 }
 
 .nav-tabs .nav-link:focus,
 .nav-tabs .nav-link:hover {
     border: none;
-    color: #fb5ac3;
+    color: #000 !important;
 }
 
 .container {
@@ -344,13 +346,10 @@ body {
 }
 
 #btnPrivateSession {
-    background: linear-gradient(180deg,
-            rgb(91, 197, 238) 0%,
-            rgb(150, 216, 242) 51%,
-            rgb(91, 197, 238) 100%);
+    background: #333;
     color: #fff;
-    border: 1px solid #91d3f2;
-    padding: 3px 26px;
+    border: 1px solid #a8a8a8;
+    padding: 7px 33px;
     border-radius: 3px !important;
 
     font-family: "Arial";
@@ -832,6 +831,7 @@ button.close {
     .history {
         height: 21vh;
         margin-top: 3px;
+        border-top: 1px solid #e860ad;
     }
 
     .column80,
