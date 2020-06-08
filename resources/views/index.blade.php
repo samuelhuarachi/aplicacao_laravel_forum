@@ -15,10 +15,10 @@
 
 
 <div id="top-info">
-    <a style="color: #fff" href="http://localhost:3003/camstream">
+    <a style="color: #fff" href="/camstream">
     Conheca Boneca Forum 
     
-                    <img src="http://localhost:3003/images/logo_lado.png" width="128">
+                    <img src="/images/logo_lado.png" width="128">
                     </a>
 </div>
 
