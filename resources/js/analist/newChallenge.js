@@ -45,7 +45,7 @@ $("#newChallenge").click(async function () {
         $("#div-message-new-challenge").css("marginBottom", "10px")
         $("#div-message-new-challenge").show()
         $("#div-message-new-challenge").html(error)
-        $("#div-message-new-challenge").fadeOut(4000)
+        $("#div-message-new-challenge").delay(4000).hide()
     } finally {
         $('#newChallenge').prop('disabled', false)
     }

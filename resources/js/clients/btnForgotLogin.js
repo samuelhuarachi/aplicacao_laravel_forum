@@ -27,7 +27,7 @@ $("#btnForgotLogin").click(async () => {
     } catch (error) {
         $("#div-message-forgot-login-client").show()
         $("#div-message-forgot-login-client").html(error)
-        $("#div-message-forgot-login-client").fadeOut(4000)
+        $("#div-message-forgot-login-client").delay(4000).hide()
     } finally {
         $('#btnForgotLogin').prop('disabled', false)
     }

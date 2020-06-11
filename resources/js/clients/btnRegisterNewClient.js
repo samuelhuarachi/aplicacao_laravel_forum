@@ -32,6 +32,6 @@ $("#registerNewClient").click(async function () {
         $('#registerNewClient').prop('disabled', false)
         $("#div-message-register-new-client").show()
         $("#div-message-register-new-client").html(error)
-        $("#div-message-register-new-client").fadeOut(4000)
+        $("#div-message-register-new-client").delay(4000).hide()
     }
 })
