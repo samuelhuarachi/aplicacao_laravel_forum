@@ -426,6 +426,8 @@ if (socket) {
         const classUpdateChallgenteInfo = new UpdateChallgenteInfo()
 
         classUpdateChallgenteInfo.render(data)
+
+        updateCreditsValue.go();
     })
 
     socket.on("client-stop-session", () => {

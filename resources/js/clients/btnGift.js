@@ -2,6 +2,8 @@ const {
     Helper
 } = require("./Helper")
 
+const updateCreditsValue = require("./updateCreditsValue")
+
 $("#btnGift").click((e) => {
     $('#modalYesNoGift').modal('hide')
 
@@ -18,5 +20,9 @@ $("#btnGift").click((e) => {
             value,
             token
         })
+
+        updateCreditsValue.go()
     }
+
+
 })

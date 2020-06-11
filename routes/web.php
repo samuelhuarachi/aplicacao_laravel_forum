@@ -157,30 +157,30 @@ function() {
     Route::get('', 'Chat\ChatController@chat')
                             ->name('chat');
 
-    Route::get('client/auth/{token}', 'Chat\ClientController@authClient')
+    Route::get('garota/auth/{token}', 'Chat\ClientController@authClient')
         ->name('chat.client.auth.token');
 
-    Route::get('client/email_verified/{nickname}/{email_token}', 'Chat\ClientController@emailVerified')
+    Route::get('garota/email_verified/{nickname}/{email_token}', 'Chat\ClientController@emailVerified')
         ->name('chat.client.email_verified');
 
-    Route::get('client/forgot_email/{nickname}/{token}', 
+    Route::get('garota/forgot_email/{nickname}/{token}', 
                     'Chat\ClientController@forgotEmail')
         ->name('chat.client.forgot_email');
 
-    Route::get('client/resend-verified-mail/{token}', 
+    Route::get('garota/resend-verified-mail/{token}', 
                     'Chat\ClientController@resendVerifiedMail')
         ->name('chat.client.resend-verified-mail');
 
-    Route::get('client/logout', 'Chat\ClientController@logout')
+    Route::get('garota/logout', 'Chat\ClientController@logout')
         ->name('chat.client.logout');
 
-    Route::post('client/payment', 'Chat\ClientController@payment')
+    Route::post('garota/payment', 'Chat\ClientController@payment')
         ->name('chat.client.payment');
 
-    Route::get('client/transactions', 'Chat\ClientController@transactions')
+    Route::get('garota/transactions', 'Chat\ClientController@transactions')
         ->name('chat.client.transactions');
 
-    Route::get('client/{slug}', 'Chat\ChatController@client')
+    Route::get('garota/{slug}', 'Chat\ChatController@client')
             ->name('chat.client');
 });
 

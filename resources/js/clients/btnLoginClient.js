@@ -21,7 +21,7 @@ $("#btnLoginClient").click(async function () {
                 throw new Error(error.response.data.error)
             })
 
-        window.location.replace("/camstream/client/auth/" + getLogin.data.token)
+        window.location.replace("/camstream/garota/auth/" + getLogin.data.token)
     } catch (error) {
         $("#div-message-login-client").css("color", "red")
         $("#div-message-login-client").css("marginBottom", "10px")

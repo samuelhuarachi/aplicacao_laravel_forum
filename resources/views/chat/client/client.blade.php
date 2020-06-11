@@ -60,8 +60,13 @@
                 <div id="client-info-panel">
 
                     <span><i class="fas fa-user mr-1"></i> {{ $reponseAuthClient->nickname }}</span>
-                    <span id="creditsTopStreamVideo" class="ml-3"><i class="fas fa-donate mr-1"></i>
-                        {{ number_format($reponseAuthClient->credits, 2) }}</span>
+                    <span id="creditsTopStreamVideo" class="ml-3">
+                    
+                    <i class="fas fa-donate mr-1"></i>
+                        {{ number_format($reponseAuthClient->credits, 2) }}
+                    <i class="fas fa-ban ml-3"></i>
+                        {{ number_format($reponseAuthClient->credits_blocked, 2) }}  
+                    </span>
                     <span id="session_cost_aproximate" class="ml-3"></span>
                     <span id="time_aproximate" class="ml-3"></span>
                 </div>
@@ -104,13 +109,16 @@
             <div class="column80">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a id="cam_girl_description_link" class="nav-link active" ><i class="fas fa-address-card"></i> Sobre mim</a>
+                        <a id="cam_girl_description_link" class="nav-link active" >
+                            Sobre mim</a>
                     </li>
                     <li class="nav-item">
-                        <a id="cam_girl_photos_link" class="nav-link" ><i class="fas fa-camera-retro"></i> Fotos</a>
+                        <a id="cam_girl_photos_link" class="nav-link" >
+                        <i class="far fa-image mr-1"></i> Fotos</a>
                     </li>
                     <li class="nav-item">
-                        <a id="cam_girl_videos_link" class="nav-link" ><i class="fas fa-film"></i> Videos</a>
+                        <a id="cam_girl_videos_link" class="nav-link" >
+                        <i class="fas fa-film mr-1"></i> Videos</a>
                     </li>
                 </ul>
                 <br>

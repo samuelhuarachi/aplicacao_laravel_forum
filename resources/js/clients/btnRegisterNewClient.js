@@ -25,7 +25,7 @@ $("#registerNewClient").click(async function () {
 
         $('#modalLoginOrRegisterHTML').modal('hide')
 
-        window.location.replace("/camstream/client/auth/" + response.data.token)
+        window.location.replace("/camstream/garota/auth/" + response.data.token)
 
         $('#registerNewClient').prop('disabled', false)
     } catch (error) {

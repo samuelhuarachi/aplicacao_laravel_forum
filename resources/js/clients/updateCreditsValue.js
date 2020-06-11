@@ -7,7 +7,10 @@ const go = () => {
             token
         })
         .then(function (response) {
-            $("#creditsTopStreamVideo").html('<i class="fas fa-donate mr-1"></i> ' + response.data.credits.toFixed(2));
+            console.log(response)
+            $("#creditsTopStreamVideo").html(
+                `<i class="fas fa-coins mr-1"></i> ${response.data.credits.toFixed(2)} 
+                <i class="fas fa-ban ml-3"></i> ${response.data.credits_blocked.toFixed(2)}`);
         })
         .catch(function (error) {
             throw new Error(error)

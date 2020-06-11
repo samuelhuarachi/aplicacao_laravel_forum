@@ -122,12 +122,13 @@ body {
     font-family: "Arial";
     font-weight: initial;
     border-radius: 0px;
+    letter-spacing: 1px;
 }
 
 .nav-tabs .nav-link:focus,
 .nav-tabs .nav-link:hover {
     border: none;
-    color: #000 !important;
+    color: #f946cc !important;
 }
 
 .container {
