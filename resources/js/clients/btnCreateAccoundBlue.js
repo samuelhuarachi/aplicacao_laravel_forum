@@ -1,0 +1,7 @@
+
+$("#btnCreateAccoundBlue").click(() => {
+    
+    $('#modalLoginOrRegisterHTML').modal()
+    
+})
+

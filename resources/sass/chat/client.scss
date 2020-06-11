@@ -310,6 +310,7 @@ body {
     width: 100%;
     padding: 50px 30px;
     margin-bottom: 2px;
+    padding-right: 15px;
 }
 
 .form-control {
@@ -521,6 +522,14 @@ video {
     font-weight: bold !important;
 }
 
+#btnCreditsGreen, #btnCreateAccoundBlue {
+    padding: 10px 40px;
+    margin: 0px !important;
+    border-radius: 8px !important;
+}
+
+
+
 .btn:focus {
     box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0) !important;
 }
@@ -540,6 +549,7 @@ video {
     border: 1px solid #222;
     padding: 10px;
     background: #1e1e1e;
+    padding-bottom: 7px;
 }
 
 .figure-caption {
@@ -582,6 +592,7 @@ video {
 
 figure {
     margin: 0px !important;
+    margin-bottom: 3px !important;
 }
 
 .tranny-cover-thumb {

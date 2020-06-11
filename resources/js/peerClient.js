@@ -30,6 +30,8 @@ let browserGlobal = checkBrowser();
 import io from "socket.io-client";
 
 require("./clients/btnCredits");
+require("./clients/btnCreditsGreen");
+require("./clients/btnCreateAccoundBlue");
 require("./clients/btnRegisterNewClient");
 require("./clients/btnLoginClient");
 require("./clients/btnClientAccount");

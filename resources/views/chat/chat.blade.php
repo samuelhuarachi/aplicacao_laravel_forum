@@ -16,16 +16,38 @@
     <div class="row">
 
         <div id="header-camstream">
+            <div class="float-right">
+                @if(!$tokenClient)
+                    <button id="btnCreateAccoundBlue" class="btn btn-info btn-lg">Criar uma conta gratis</button>
+                @else
+                    
+                   
+                    <button id="btnCreditsGreen" class="btn btn-success btn-lg mb-2">
+                            Adicionar Creditos</button>
+                @endif
+            </div>
+
             <h1>Garotas ao vivo na webcam (em breve)</h1>
+           
         </div>
 
         <div class="col-md-12">
             <br>
-            <center>
-                Confiras as melhores garotas da BonecaForum/GarotaForum CamStream
-            </center>
 
-            <ul class="nav nav-tabs mb-3">
+            @if ($tokenClient)
+                Nickname: {{ $reponseAuthClient->nickname }}
+                <div class="float-right">
+                    {{ $reponseAuthClient->credits }} 
+                            <i class="fas fa-coins mr-2"></i> 
+
+                            {{ $reponseAuthClient->credits_blocked }} 
+                            <i class="fas fa-ban"></i>
+                </div>
+                <div style="clear:both"></div>
+            @endif
+
+            
+            <ul class="nav nav-tabs mb-3 mt-3">
                 <li class="nav-item">
                     <a id="btn_woman_list" class="nav-link active">
                         Mulheres</a>
