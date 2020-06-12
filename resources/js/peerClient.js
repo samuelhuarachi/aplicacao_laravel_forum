@@ -499,8 +499,6 @@ if (socket) {
 
     socket.on("receiveAnalistICE", function (data) {
         let msg = JSON.parse(data);
-        //console.log(pc)
-        // console.log(msg)
         pc.addIceCandidate(new RTCIceCandidate(msg.ice));
     });
 
