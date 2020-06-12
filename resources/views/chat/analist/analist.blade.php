@@ -17,9 +17,11 @@
                 <a href="{{ route('chat.analist.logout') }}" 
                     class="btn btn-danger btn-sm float-right">Sair</a>
 
-                <a id="btnShowSessionsMenu"
-                    class="btn btn-danger btn-sm float-right">Sessões</a>
-                
+                {{-- <a id="btnShowSessionsMenu"
+                    class="btn btn-danger btn-sm float-right">Sessões</a> --}}
+                <a id="btnGainsReport"
+                    class="btn btn-danger btn-sm float-right">Relatorio de Ganhos</a>
+
                 <a id="btnChallenge"
                     class="btn btn-danger btn-sm float-right">Proposta</a>
                 
