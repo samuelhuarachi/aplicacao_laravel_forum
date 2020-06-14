@@ -56,7 +56,7 @@ body {
             rgba(208, 208, 208, 1) 100%);
     color: #000;
     border: 1px solid #d0d0d0;
-    padding: 3px 26px;
+    padding: 7px 26px;
     border-radius: 3px !important;
     font-family: "Arial";
     font-size: small !important;
@@ -373,6 +373,7 @@ body {
 
 .btn-outline-dark {
     color: #ddd !important;
+    border-radius: 2px !important;
 }
 
 .btn-outline-dark i {
@@ -537,7 +538,11 @@ video {
 .btn {
     font-size: small !important;
     font-weight: bold !important;
+    padding: .375rem 1.2rem !important;
+    border-radius: 2px !important;
 }
+
+
 
 .space-area {
     padding: 10px;

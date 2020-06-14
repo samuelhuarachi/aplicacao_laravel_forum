@@ -13,7 +13,6 @@ async function bannerOnlineGirls() {
         })
 
 
-    console.log(response)
     let output = "";
     response.forEach(function (data) {
         let block = `<div class="girl_banner1">
@@ -26,8 +25,6 @@ async function bannerOnlineGirls() {
         output = output + block
     })
 
-    console.log(response)
-    console.log("dsfasd")
     $("#banner_online_girls").html(output)
 }
 

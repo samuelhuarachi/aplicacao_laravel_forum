@@ -125,14 +125,27 @@ function() {
     /**
      * Analist
      */
-    Route::get('analist/login', 'Chat\ChatController@analistLogin')->name('analist.login');
-    Route::post('analist/authenticate', 'Chat\ChatController@authenticate')
-                    ->name('chat.analist.authenticate');
+
+    Route::group(['prefix' => 'analist'],
+    function() {
+        Route::get('login', 'Chat\ChatController@analistLogin')->name('analist.login');
+
+        Route::post('authenticate', 'Chat\ChatController@authenticate')
+                        ->name('chat.analist.authenticate');
+        
+        Route::get('logout', 'Chat\AnalistController@logout')
+            ->name('chat.analist.logout');
+
+        Route::get('relatorio-de-ganhos', 'Chat\AnalistController@report')
+            ->name('chat.analist.report');
+
+        Route::get('{slug}', 'Chat\ChatController@analist')
+                        ->name('chat.analist');
+
     
-    Route::get('analist/logout', 'Chat\AnalistController@logout')
-        ->name('chat.analist.logout');
-    Route::get('analist/{slug}', 'Chat\ChatController@analist')
-                    ->name('chat.analist');
+    });
+    
+    
 
 
     /**

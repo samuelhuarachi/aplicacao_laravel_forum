@@ -81,4 +81,49 @@ class AnalistService {
 
         return $response;
     }
+
+    public function _isAuthorized()
+    {
+
+    }
+
+    public function _isTokenValid($token)
+    {
+        $url = env("NODEAPI") . "/api/analist/_tokenIsValid";
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Authorization: Bearer ' . $token
+        ));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        
+        $response = curl_exec($ch);
+        $info = curl_getinfo($ch);
+        curl_close($ch);
+
+        if ($info['http_code'] !== 200) {
+            return null;
+        }
+
+        return true;
+    }
+
+    public function getReportData($token, $year, $mounth)
+    {
+        $url = env("NODEAPI") . "/api/analist/report/report/{$year}/{$mounth}";
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Authorization: Bearer ' . $token
+        ));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        
+        $response = curl_exec($ch);
+        $info = curl_getinfo($ch);
+        curl_close($ch);
+
+        if ($info['http_code'] !== 200) {
+            return null;
+        }
+
+        return $response;
+    }
 }

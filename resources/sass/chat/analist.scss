@@ -249,7 +249,7 @@ footer p {
 #top-menu {
     /* background: #fff;
     padding:10px;
-    border: 1px solid rgb(227, 43, 43); */
+    border: 1px solid #e8e8e8; */
 }
 
 body {
@@ -285,8 +285,13 @@ h6 {
     margin-bottom: 0px !important;
 }
 
+.accordion > .card > .card-header {
+    padding: 0px;
+    background: #fff;
+}
+
 .card {
-    border: 1px solid rgb(227, 43, 43);
+    border: 1px solid #e8e8e8;
     border-radius: 0px;
 }
 
@@ -295,7 +300,7 @@ h6 {
 }
 
 .card-header {
-    border-bottom: 1px solid rgb(227, 43, 43);
+    border-bottom: 1px solid #e8e8e8;
     background-color: #dc3545;
     color: #fff;
 }
