@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Baloo&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/chat/analist.css') }}">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
     <title>Boneca Forum - Cam stream</title>
 </head>
 <body>

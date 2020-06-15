@@ -15,35 +15,35 @@
                 <div id="logo-live">Boneca Forum - Cam stream</div>
 
                 <a href="{{ route('chat.analist.logout') }}" 
-                    class="btn btn-danger btn-sm float-right">Sair</a>
+                    class="btn btn-primary btn-sm float-right">Sair</a>
 
                 {{-- <a id="btnShowSessionsMenu"
-                    class="btn btn-danger btn-sm float-right">Sessões</a> --}}
+                    class="btn btn-primary btn-sm float-right">Sessões</a> --}}
                 <a target="_blank"
                     href="{{ route('chat.analist.report') }}"
-                    class="btn btn-danger btn-sm float-right">Relatorio de Ganhos</a>
+                    class="btn btn-primary btn-sm float-right">Relatorio de Ganhos</a>
 
                 <a id="btnChallenge"
-                    class="btn btn-danger btn-sm float-right">Proposta</a>
+                    class="btn btn-primary btn-sm float-right">Proposta</a>
                 
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 mb-4">
             <div id="analist-header">
 
-
-                <div style="width: 100%">
+                <div>
                     <h2>{{ $myData->name }} {{ $myData->lastname }}</h2>
-
+                    
                 </div>
-                <div id="analistGainsInfo">
-                    <b>Ganhos:</b> {{ round($myData->gains, 2) }} <i class="fas fa-coins"></i>
-                </div>
-
                 
+                <div class="float-right">
+                    <b>Ganhos:</b> {{ round($myData->gains, 2) }} <i class="fas fa-coins"></i>
+                   
+                </div>
             </div>
+            
         </div>
     </div>
     <div class="row">
@@ -82,10 +82,20 @@
         </div>
     </div>
 
-    
     <div class="row">
         <div class="col-md-12">
-            <input id="optionAlertWhenNewClientComming" type="checkbox" id="scales" name="scales" > Avisar <i class="fas fa-volume-up"></i>
+            <!-- <input type="checkbox" data-toggle="toggle" data-size="sm"> -->
+
+            <input id="btnOnOff"
+                    type="checkbox"
+                    id="onOff" 
+                    name="onOff"> <label for="btnOnOff">Online/Offline</label>
+
+            <input id="optionAlertWhenNewClientComming"
+                    type="checkbox" 
+                    class="ml-3"
+                    id="scales" 
+                    name="scales" > <label for="optionAlertWhenNewClientComming">Avisar <i class="fas fa-volume-up"></i></label>
 
             <div id="statistic">
                 <div id="control-buttons">
@@ -150,6 +160,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
 <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+
 <script type="text/javascript">
     const BASEURL = '{{ env("NODEAPI") }}';
     let token = '{{ $token }}'

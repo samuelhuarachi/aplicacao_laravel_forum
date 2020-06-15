@@ -6,17 +6,21 @@ import io from "socket.io-client";
 
 connectSocket();
 
-require("./analist/btnStopPrivateSession");
-require("./analist/btnShowSessionsMenu");
-require("./analist/btnChallenge");
-require("./analist/newChallenge");
+require("./analist/btnStopPrivateSession")
+require("./analist/btnShowSessionsMenu")
+require("./analist/btnChallenge")
+require("./analist/newChallenge")
 require("./analist/challenge/btn_challenge_accept")
 require("./analist/challenge/btn_challenge_cancel")
 require("./analist/challenge/btn_challenge_finallize")
+require("./analist/btnOnOff")
+const onOffCheckJS = require("./analist/onOffCheck")
 
 $("#challenge_control_waiting").hide()
 $("#challenge_control_finalize").hide()
 
+$('#btnOnOff').prop('disabled', true)
+onOffCheckJS.onOffCheck()
 
 const {
     UpdateChallgenteInfo
@@ -164,6 +168,7 @@ socket.on("send-current-clients-active-in-room-to-analist", function (
 let listenerAnalistIsOnlineInterval = null;
 let listenerAnalistIsOnline = function () {
     clearInterval(listenerAnalistIsOnlineInterval);
+
     listenerAnalistIsOnlineInterval = setInterval(function () {
         // Avisa o sistema que o analista esta online
         socket.emit("analist-listener-is-online", {
@@ -233,14 +238,6 @@ socket.on("receiveClientSDP", function (data) {
     // listCheckIceReceived[msg.clientId] = false
 });
 
-// socket.on("client_send_ice_to_analist", function (data) {
-//     let msg = JSON.parse(data)
-
-//     listCheckIceReceived[msg.clientId] = true
-
-//     console.log(msg)
-// })
-
 /**
  * recebe o ice do cliente
  */
@@ -250,19 +247,6 @@ socket.on("receiveClientICE", function (data) {
     pc.addIceCandidate(new RTCIceCandidate(data.ice));
 });
 
-// const offerOptions = {
-//     offerToReceiveAudio: 1,
-//     offerToReceiveVideo: 1
-// };
-
-// const stream = canvas.captureStream();
-
-// stream.getTracks().forEach(
-//     track => {
-//         console.log(stream)
-//         console.log(track)
-//     }
-// );
 
 /**
  * gero a oferta
@@ -270,7 +254,6 @@ socket.on("receiveClientICE", function (data) {
 socket.on("generateAnalistOffer", function (clientId) {
     let pc = myConnections[clientId];
     if (pc) {
-        console.log("putzz achei um pc aqui");
         //disconnectPeerByClientSocketID(clientId)
     }
 
@@ -285,7 +268,8 @@ socket.on("generateAnalistOffer", function (clientId) {
                 "sendAnalistICE",
                 JSON.stringify({
                     clientId: clientId,
-                    ice: event.candidate
+                    ice: event.candidate,
+                    
                 })
             );
         } else {
@@ -327,7 +311,8 @@ socket.on("generateAnalistOffer", function (clientId) {
                     "sendNewAnalistOffer",
                     JSON.stringify({
                         clientId: clientId,
-                        sdp: pc.localDescription
+                        sdp: pc.localDescription,
+                        slug
                     })
                 );
             });
@@ -414,13 +399,6 @@ $("#btnSend").click(function () {
     }
 });
 
-// socket.on('connect', function() {
-//     const sessionID = socket.socket.sessionid
-//     console.log(sessionID)
-// });
-
-// ######################################################################
-
 function connectSocket() {
     if (!socket) {
         socket = io(BASEURL).connect();
@@ -436,8 +414,7 @@ function connectSocket() {
         socket.emit(
             "registerAnalist",
             JSON.stringify({
-                id: analistID,
-                slug: slug
+                token
             })
         );
     });

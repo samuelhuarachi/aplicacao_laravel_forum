@@ -113,38 +113,14 @@ class ChatController extends Controller
             abort(403, 'Unauthorized');
         }
 
-
         $myData = \json_decode($analistService->getData());
 
         $token = Session::get('myToken');
 
-        $analistFind = $analistService->sessionOpenedBySlug($slug);
+        //$analistFind = $analistService->sessionOpenedBySlug($slug);
 
         $challengeActive = $analistService->getChellengeActive();
 
-        // $sid    = "AC1d69bbc1f0c36469e49e4bb9d57ac350";
-        // $token2  = "dc0c1a20b57ef9fef382a3ac42bc736f";
-        // $twilio = new Client($sid, $token2);
-
-        // $token2 = $twilio->tokens
-        //                 ->create();
-
-        // dump($token2);
-        // dump($token2->username);
-
-        /**
-         * revisar esse codigo abaixo
-         */
-        // if ($analistFind) {
-        //     $analistFind  = json_decode($analistFind);
-        //     if ($analistFind->findAnalist) {
-        //         $message = "Identificamos que existe uma sessão aberta para você. 
-        //         <br>Caso não consiga solucionar o problema, entrar em contato com suporte.";
-        //         return view('chat.analist.message',
-        //                     compact('message'));
-        //     }
-        // }
-        
         return view('chat.analist.analist', 
                     compact('myData', 'token', 'challengeActive'));
     }
@@ -200,7 +176,6 @@ class ChatController extends Controller
     {
         $analists = json_decode($clientService->getAllAnalists());
         $onlineAnalists = $clientService->onlineAnalists($analists);
-
         
         $tokenClient = Session::get('clientToken');
         $reponseAuthClient = null;
