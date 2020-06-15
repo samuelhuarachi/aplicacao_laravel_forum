@@ -204,6 +204,8 @@ socket.on("client-request-stop-session", () => {
     displayTimeEstimate.stop();
 });
 
+
+
 socket.on("analist-stop-session", () => {
     $("#btnStopPrivateSession").css("display", "none");
     $("#private-session-message").css("display", "none");
