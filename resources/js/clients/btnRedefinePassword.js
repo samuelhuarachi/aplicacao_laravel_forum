@@ -29,14 +29,12 @@ $("#btnRedefinePassword").click(async () => {
 
         $("#div-message-redefine-password-client").show()
         $("#div-message-redefine-password-client").html(messageReponse)
-        $("#div-message-redefine-password-client").delay(4000).hide()
 
         window.location.replace("/camstream");
 
     } catch (error) {
         $("#div-message-redefine-password-client").show()
         $("#div-message-redefine-password-client").html(error)
-        $("#div-message-redefine-password-client").delay(4000).hide()
     } finally {
         $('#btnRedefinePassword').prop('disabled', false)
     }

@@ -33,7 +33,7 @@ class ValidatePaymentCreditCardForm {
         }
         
         if (!this.expirateDate) {
-            throw new Error("A de expiração é obrigatória")
+            throw new Error("A data de expiração é obrigatória")
         }
         
         if (!this.cvv) {

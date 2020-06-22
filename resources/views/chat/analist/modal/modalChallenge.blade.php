@@ -21,7 +21,7 @@
                 </div>
 
                 <button id="newChallenge" class="btn btn-primary btn-block">Lançar</button>
-                <div id="div-message-new-challenge"></div>
+                <div id="div-message-new-challenge" class="message_error_bf"></div>
             </div>
         </div>
     </div>

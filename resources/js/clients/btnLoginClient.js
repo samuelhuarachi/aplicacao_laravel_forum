@@ -27,7 +27,6 @@ $("#btnLoginClient").click(async function () {
         $("#div-message-login-client").css("marginBottom", "10px")
         $("#div-message-login-client").show()
         $("#div-message-login-client").html(error)
-        $("#div-message-login-client").delay(4000).hide()
     } finally {
         $('#btnLoginClient').prop('disabled', false)
     }

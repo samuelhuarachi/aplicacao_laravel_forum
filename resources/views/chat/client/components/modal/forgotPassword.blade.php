@@ -18,7 +18,7 @@
                         Enviar link de verificacao
                         <i class="fas fa-paper-plane"></i></button>
 
-                    <div id="div-message-forgot-login-client"></div>
+                    <div id="div-message-forgot-login-client" class="message_error_bf"></div>
                 </div>
             </div>
         </div>

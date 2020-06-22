@@ -80,7 +80,7 @@
                     <div class="col-md-12">
                         <button id="completeOrder" type="button" class="btn btn-primary btn-sm">
                             Adquirir créditos</button>
-                        <div id="div-message-creditcard-client"></div>
+                        <div id="div-message-creditcard-client" class="message_error_bf"></div>
                         <div class="float-right" id="final-value"></div>
                     </div>
                 </div>

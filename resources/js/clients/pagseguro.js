@@ -81,7 +81,6 @@ $("#completeOrder").click(function () {
     } catch (error) {
         $("#div-message-creditcard-client").show()
         $("#div-message-creditcard-client").html(error.message)
-        $("#div-message-creditcard-client").delay(4000).hide()
         
     } finally {
         $('#completeOrder').prop('disabled', false)

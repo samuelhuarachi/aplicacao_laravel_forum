@@ -25,7 +25,7 @@
                     class="btn btn-sm btn-danger">
                     <i class="fas fa-key"></i> Redefinir</button>
 
-                <div id="div-message-redefine-password-client"></div>
+                <div id="div-message-redefine-password-client" class="message_error_bf"></div>
             </form>
         </div>
         <div class="col-sm"></div>

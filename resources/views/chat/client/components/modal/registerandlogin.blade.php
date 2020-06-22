@@ -32,7 +32,7 @@
                                     class="btn btn-sm btn-primary">
                                         Login</button>
                             
-                                <div id="div-message-login-client"></div>
+                                <div id="div-message-login-client" class="message_error_bf"></div>
 
                                 <a id="linkForgotPassword" href="#">Esqueci minha senha</a>
                             </form>
@@ -75,7 +75,7 @@
                                    Registrar</button>
 
                                 
-                                <div id="div-message-register-new-client"></div>
+                                <div id="div-message-register-new-client" class="message_error_bf"></div>
                             </form>
                         </div>
                     </div> 

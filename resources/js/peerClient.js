@@ -542,3 +542,8 @@ if (socket) {
     //     `)
     // })
 }
+
+
+$(".message_error_bf").click(function() {
+    $(this).css("display", "none")
+})

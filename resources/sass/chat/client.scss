@@ -7,6 +7,25 @@ body {
     display: none;
 }
 
+#div-message-login-client, 
+#div-message-register-new-client, 
+#div-message-forgot-login-client,
+#div-message-redefine-password-client,
+#div-message-creditcard-client {
+    display: none;
+}
+
+.message_error_bf {
+    background: #e15555;
+    color: #fff !important;
+    padding: 4px 12px;
+    font-family: "Arial";
+    font-weight: bold;
+    border-radius: 2px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
 @keyframes girl_help_custom_animation {
     from {
         margin-left: -300px;
@@ -91,7 +110,7 @@ body {
 
 #btnMinimizeChat {
     display: none;
-    padding: 0px 7px;
+    padding: 0px 7px !important;
     background: #641d55;
     border: none;
     margin-bottom: 2px;
@@ -101,7 +120,7 @@ body {
 #btnMaximizeChat {
     display: none;
 
-    padding: 0px 7px;
+    padding: 0px 7px !important;
     background: #641d55;
     border: none;
     margin-bottom: 2px;
@@ -813,6 +832,11 @@ button.close {
 }
 
 @media only screen and (max-width: 815px) {
+
+    .btnGiftYesNo {
+        margin-top: 2px;
+    }
+
     #btnMinimizeChat {
         display: block;
     }
