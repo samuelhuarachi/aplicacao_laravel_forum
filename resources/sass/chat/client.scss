@@ -511,6 +511,8 @@ video {
     height: 100%;
     width: 17%;
     padding-right: 5px;
+    transform: initial;
+    -webkit-transform: initial;
 }
 
 .message {
