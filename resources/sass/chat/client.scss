@@ -790,13 +790,15 @@ button.close {
         bottom: 0px;
     }
     to {
-        bottom: -249px;
+        -webkit-transform: translateY(calc(100% - 27px));
+        transform: translateY(calc(100% - 27px));
     }
 }
 
 @keyframes showChatAnimation {
     from {
-        bottom: -249px;
+        -webkit-transform: translateY(calc(100% - 27px));
+        transform: translateY(calc(100% - 27px));
     }
     to {
         bottom: 0px;
