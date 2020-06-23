@@ -26,7 +26,7 @@
 
     body {
         text-align: center;
-        background: #dc3545;
+        background: #282828;
         text-align: center;
         color: #fff;
         margin-top: 20%;
