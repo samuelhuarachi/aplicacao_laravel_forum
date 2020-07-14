@@ -104,7 +104,7 @@ let saveActiveStream = null;
 
 navigator.mediaDevices
     .getUserMedia({
-        audio: false,
+        audio: true,
         video: true
     })
     .then(stream => {
