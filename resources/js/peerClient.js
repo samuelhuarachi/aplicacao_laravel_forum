@@ -179,41 +179,42 @@ let servers = {
         // {
         //     urls: 'stun:stun.l.google.com:19305'
         // },
-        // {
-        //     urls: "stun:stun1.l.google.com:19305"
-        // },
-        // {
-        //     urls: "stun:stun2.l.google.com:19305"
-        // },
-        // {
-        //     urls: "stun:stun3.l.google.com:19305"
-        // },
-        // {
-        //     urls: "stun:stun4.l.google.com:19305"
-        // }
+        {
+            urls: "stun:stun1.l.google.com:19305"
+        },
+        {
+            urls: "stun:stun2.l.google.com:19305"
+        },
+        {
+            urls: "stun:stun3.l.google.com:19305"
+        },
+        {
+            urls: "stun:stun4.l.google.com:19305"
+        }
         // {
         //     urls: "turn:numb.viagenie.ca:3478",
         //     credential: "abc123321",
         //     username: "batman.batmann@gmail.com"
         // }
-        {
-            urls: "stun:global.stun.twilio.com:3478?transport=udp"
-        },
-        {
-            urls: "turn:global.turn.twilio.com:3478?transport=udp",
-            credential: "/f5kC5ZjPnwFwHKJzTGLkGbmgdhgFZRpwFsiAgf0Zxc=",
-            username: "5fe6df6fc0112c24f0f0e2954d2a17ac5c400eef396f6eb2c20cf17b71c0a24f"
-        },
-        {
-            urls: "turn:global.turn.twilio.com:3478?transport=tcp",
-            credential: "/f5kC5ZjPnwFwHKJzTGLkGbmgdhgFZRpwFsiAgf0Zxc=",
-            username: "5fe6df6fc0112c24f0f0e2954d2a17ac5c400eef396f6eb2c20cf17b71c0a24f"
-        },
-        {
-            urls: "turn:global.turn.twilio.com:443?transport=tcp",
-            credential: "/f5kC5ZjPnwFwHKJzTGLkGbmgdhgFZRpwFsiAgf0Zxc=",
-            username: "5fe6df6fc0112c24f0f0e2954d2a17ac5c400eef396f6eb2c20cf17b71c0a24f"
-        }
+
+        // {
+        //     urls: "stun:global.stun.twilio.com:3478?transport=udp"
+        // },
+        // {
+        //     urls: "turn:global.turn.twilio.com:3478?transport=udp",
+        //     credential: "/f5kC5ZjPnwFwHKJzTGLkGbmgdhgFZRpwFsiAgf0Zxc=",
+        //     username: "5fe6df6fc0112c24f0f0e2954d2a17ac5c400eef396f6eb2c20cf17b71c0a24f"
+        // },
+        // {
+        //     urls: "turn:global.turn.twilio.com:3478?transport=tcp",
+        //     credential: "/f5kC5ZjPnwFwHKJzTGLkGbmgdhgFZRpwFsiAgf0Zxc=",
+        //     username: "5fe6df6fc0112c24f0f0e2954d2a17ac5c400eef396f6eb2c20cf17b71c0a24f"
+        // },
+        // {
+        //     urls: "turn:global.turn.twilio.com:443?transport=tcp",
+        //     credential: "/f5kC5ZjPnwFwHKJzTGLkGbmgdhgFZRpwFsiAgf0Zxc=",
+        //     username: "5fe6df6fc0112c24f0f0e2954d2a17ac5c400eef396f6eb2c20cf17b71c0a24f"
+        // }
     ]
 };
 
@@ -311,10 +312,10 @@ function uuidv4() {
 
 $("#btnSend").click(function () {
 
-    if (!token) {
-        $('#modalLoginOrRegisterHTML').modal()
-        return
-    }
+    // if (!token) {
+    //     $('#modalLoginOrRegisterHTML').modal()
+    //     return
+    // }
 
     let message = $("#txtAreaMessage").val();
 

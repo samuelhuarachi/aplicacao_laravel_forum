@@ -18,6 +18,7 @@ class ChatController extends Controller
                 ClientService $clientService,
                 AuthClient $authClient)
     {
+
         $tokenClient = Session::get('clientToken');
 
         /**
