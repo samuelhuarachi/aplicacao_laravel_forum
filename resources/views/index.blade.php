@@ -141,11 +141,11 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-sm">
-                                            @if (isset($coversList[$topic->slug]))
-                                                <a href="{{ route('forum.topic.details', [$stateFounded->slug, $cityFounded->slug, $topic->slug]) }}">
+                                            
+                                                {{-- <a href="{{ route('forum.topic.details', [$stateFounded->slug, $cityFounded->slug, $topic->slug]) }}">
                                                     <img class="float-left tranny-cover-thumb" src="{{ $coversList[$topic->slug] }}" alt="Foto de capa da travesti {{ $topic->title }}">
-                                                </a>
-                                            @endif
+                                                </a> --}}
+                                            
                                             <a href="{{ route('forum.topic.details', [$stateFounded->slug, $cityFounded->slug, $topic->slug]) }}">{{ $topic->title }}</a>
                                             <br>
                                             <small>{{ $topic->comments->count() }} relatos</small>

@@ -24,14 +24,14 @@ onOffCheckJS.onOffCheck()
 
 const {
     UpdateChallgenteInfo
-} = require("./analist/class/UpdateChallgenteInfo");
-const listOfClientsActiveInYourChatFunction = require("./analist/listOfClientsActiveInYourChatFunction");
-const showQuantityOnlineClients = require("./analist/showQuantityOnlineClients");
-const alertNewClientInRoom = require("./analist/alertNewClientsInRoom");
-const gainstUpdate = require("./analist/gainstUpdate");
-const DisplayCostSessionEstimate = require("./analist/DisplayCostSessionEstimate");
-const DisplayTimeEstimate = require("./clients/class/DisplayTimeEstimate");
-var analistVideo = document.getElementById("analistVideo");
+} = require("./analist/class/UpdateChallgenteInfo")
+const listOfClientsActiveInYourChatFunction = require("./analist/listOfClientsActiveInYourChatFunction")
+const showQuantityOnlineClients = require("./analist/showQuantityOnlineClients")
+const alertNewClientInRoom = require("./analist/alertNewClientsInRoom")
+const gainstUpdate = require("./analist/gainstUpdate")
+const DisplayCostSessionEstimate = require("./analist/DisplayCostSessionEstimate")
+const DisplayTimeEstimate = require("./clients/class/DisplayTimeEstimate")
+var analistVideo = document.getElementById("analistVideo")
 let displayCostSessionEstimate = new DisplayCostSessionEstimate.DisplayCostSessionEstimate(
     analistPricePerHourGlobal
 );

@@ -76,13 +76,13 @@ class IndexController extends Controller
         foreach($cityFoundedPaginate->items() as $topic)
         {
             // Defenindo foto de capa
-            $photoFounded = Cache::rememberForever('foto-de-capa-'.$topic['cellphone'], function () use($topic, $photoModel) {
-                return $photoModel->where('cellphone', $topic['cellphone'])->first();
-            });
+            // $photoFounded = Cache::rememberForever('foto-de-capa-'.$topic['cellphone'], function () use($topic, $photoModel) {
+            //     return $photoModel->where('cellphone', $topic['cellphone'])->first();
+            // });
             
-            if ($photoFounded) {
-                $coversList[$topic['slug']] = $photoFounded->photo;
-            }
+            // if ($photoFounded) {
+            //     $coversList[$topic['slug']] = $photoFounded->photo;
+            // }
 
             /**
              * ultima vez que foi vista
@@ -250,9 +250,9 @@ class IndexController extends Controller
         $request->session()->put('cityT', $cityFounded->id);
 
         $photos = [];
-        if ($topicFind->cellphone && trim($topicFind->cellphone) !== "") {
-            $photos = $photoModel->where('cellphone', $topicFind->cellphone)->get();
-        }
+        // if ($topicFind->cellphone && trim($topicFind->cellphone) !== "") {
+        //     $photos = $photoModel->where('cellphone', $topicFind->cellphone)->get();
+        // }
 
         $findedCellphone = $cellPhoneModel->where('cellphone', $topicFind->cellphone)->first();
 
