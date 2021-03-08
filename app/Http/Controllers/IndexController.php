@@ -19,9 +19,48 @@ use App\Http\Requests\TopicRequest;
 use App\Http\Requests\CommentRequest;
 use Illuminate\Support\Facades\Cache;
 use App\Samuel\Statistic\StatisticSingle;
+use Aws\S3\S3Client;
 
 class IndexController extends Controller
 {
+
+    public function teste2() {
+        echo "teste2";
+
+        $s3Client = S3Client::factory([
+            'credentials' => [
+                'key' => ' AKIAJZ2ERZ5NLDUOLEKA',
+                'secret' => ' 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'
+            ],
+            'version' => 'latest',
+            'region' => 'sa-east-1'
+        ]);
+
+        // $objects = $s3Client->getPaginator('ListObjects', ['Bucket' => "forumttt"]);
+        // foreach ($objects as $listResponse) {
+        //     $items = $listResponse->search("Contents[?starts_with(Key,'production/')]");
+        //     foreach($items as $item) {
+        //         dump($item['Key']);
+        //     }
+        // }
+        //$s3Client->deleteMatchingObjects('forumttt', 'local/tocantins');
+
+        $objects = $s3Client->getIterator('ListObjects', array(
+            "Bucket" => 'forumttt',
+            "Prefix" => "production/"
+        )); 
+
+        $i=0;
+
+        foreach ($objects as $a) {
+            print_r($a['Key']);
+            echo "<br>";
+
+            if(++$i > 100) break;
+        }
+
+        echo "conectado na s3";
+    }
 
     /**
      * Show the application dashboard.
