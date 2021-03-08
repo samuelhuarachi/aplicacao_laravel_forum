@@ -6,7 +6,7 @@
 
 @section('content')
 
-
+{{-- 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -17,7 +17,7 @@
             <center class="text-center">
                 <em>Alterado em: 31 de maio de 2020</em>
             </center>
-            {{--
+            
             <p>
                 Publimetas LTDA, sociedade limitada constituída em Campinas 
                 ("<strong>Companhia</strong>" ou
@@ -849,11 +849,13 @@
                 <br /><br />
             </p>
 
-            --}}
+            
         </div>
     </div>
 </div>
 </div>
+
+--}}
 
 <style>
     h1,
