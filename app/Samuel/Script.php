@@ -661,7 +661,7 @@ class Script {
                 $photoModel->save();
             }
         }
-        dump("FIM");
+        //dump("FIM");
     }
 
     public function tempFillLasSee()
@@ -679,7 +679,7 @@ class Script {
             $lastSee->current = true;
             $lastSee->save();
         }
-        dump("FIM LAST SEE");
+        //dump("FIM LAST SEE");
     }
 
     public function normalizeLastSee()
@@ -692,6 +692,6 @@ class Script {
         foreach($topicFind as $topic) {
             $this->updateLastSee($topic->cellphone, $topic->city_id);
         }
-        dump("FIM");
+        //dump("FIM");
     }
 }

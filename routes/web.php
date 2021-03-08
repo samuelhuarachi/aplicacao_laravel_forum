@@ -153,17 +153,17 @@ function() {
      */
 
 
-    Route::get('termos-de-uso', function () {
-        return view('chat.termos_de_uso');
-    })->name('chat.termos_de_uso');
+    // Route::get('termos-de-uso', function () {
+    //     return view('chat.termos_de_uso');
+    // })->name('chat.termos_de_uso');
 
-    Route::get('politica-de-privacidade', function () {
-        return view('chat.politica_de_privacidade');
-    })->name('chat.politica_de_privacidade');
+    // Route::get('politica-de-privacidade', function () {
+    //     return view('chat.politica_de_privacidade');
+    // })->name('chat.politica_de_privacidade');
 
-    Route::get('politica-de-cookies', function () {
-        return view('chat.politica_de_cookies');
-    })->name('chat.politica_de_cookies');
+    // Route::get('politica-de-cookies', function () {
+    //     return view('chat.politica_de_cookies');
+    // })->name('chat.politica_de_cookies');
     
 
 
