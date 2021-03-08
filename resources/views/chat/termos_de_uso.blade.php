@@ -16,6 +16,7 @@
                 <em>Última Atualização: 31 de maio de 2020</em>
             </div>
             <br />
+            {{-- 
             Publimetas LTDA, sociedade limitada com sede na Rua Doutor Cesar Bierrembach, 24, Conj 64, Centro, Campinas, SP, CEP 13015-025, Brasil, inscrita no Cadastro Nacional de Pessoas Jurídicas do Ministério da
             Fazenda (CNPJ/MF) sob o n. 20.934.906/0001-90, doravante designada (“Publimetas”), estabelece nestes Termos de Uso
             do Site bonecaforum.com (“Termos de Uso”) as condições para a utilização do Site, especialmente: (i) da
@@ -1076,6 +1077,8 @@
                     nada nestes Termos de Uso restringirá o direito da Publimetas de utilizar, lucrar, divulgar, publicar ou,
                     de outra forma, explorar qualquer feedback, sem pagamento ao Usuário.</li>
             </ul>
+
+            --}}
         </div>
 
 

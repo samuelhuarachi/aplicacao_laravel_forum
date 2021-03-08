@@ -17,6 +17,7 @@
             <center class="text-center">
                 <em>Alterado em: 31 de maio de 2020</em>
             </center>
+            {{--
             <p>
                 Publimetas LTDA, sociedade limitada constituída em Campinas 
                 ("<strong>Companhia</strong>" ou
@@ -847,6 +848,8 @@
                     href="mailto:bonecaforum@protonmail.com">bonecaforum@protonmail.com</a>.
                 <br /><br />
             </p>
+
+            --}}
         </div>
     </div>
 </div>
