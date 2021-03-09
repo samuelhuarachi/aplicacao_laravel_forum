@@ -48,12 +48,9 @@ function() {
     //     'uses' => 'IndexController@teste2'])
     //     ->name('forum.teste2');
 
-    // Route::get('teste3', [
-    //     'uses' => 'IndexController@teste3'])
-    //     ->name('forum.teste3');
-
-
-
+    //Route::get('teste3', [
+    //    'uses' => 'IndexController@teste3'])
+    //    ->name('forum.teste3');
 
     Route::get('', [
         'uses' => 'IndexController@index'])

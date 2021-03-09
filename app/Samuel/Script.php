@@ -55,9 +55,9 @@ class Script {
             $trannyLinkFounded = $this->findTrannyLinksOnThisCity($URL);
             foreach($trannyLinkFounded as $linkTranny)
             {
-                //$linkTranny = 'https://www.travesticomlocal.com.br/acompanhante/gabrielle-lemes/';
-                
-                //dump($linkTranny);
+                // $linkTranny = 'https://www.travesticomlocal.com.br/acompanhante/rosy-pinheiro-trans/';
+                // dump($linkTranny);
+
                 $this->linkTranny = $linkTranny;
 
                 $trannyName = $this->getTrannyName();
@@ -70,6 +70,7 @@ class Script {
                 $isCellphoneValid = $this->isCellphoneValid($cellphone);
 
                 if ($isCellphoneValid) {
+
                     $cellphone = $this->formatCellPhoneNumber($cellphone);
 
                     $description = $this->getDescription();
@@ -267,11 +268,17 @@ class Script {
 
     protected function formatCellPhoneNumber($cellphone)
     {
-        $telExplode = explode(' ', $cellphone);
+        $telExplode = array_filter(explode(' ', $cellphone));
+
+        $ddd = current($telExplode);
+        next($telExplode);
+        $numberCellPhone = current($telExplode);
+
+
         $ddd = $telExplode[0];
         $ddd = $this->formatDDD($ddd);
 
-        $numberCellPhone = $telExplode[1];
+        //$numberCellPhone = $telExplode[1];
         //$ddd = substr($ddd, 1, 2);
         $cellphone = $ddd . $numberCellPhone;
 
@@ -286,7 +293,7 @@ class Script {
             return null;
         }
 
-        $telExplode = explode(' ', $cellphone);
+        $telExplode = array_filter(explode(' ', $cellphone));
 
         if (count($telExplode) !== 2) {
             dump("Número de celular inválido, falha no explode".PHP_EOL."URL: ".$this->linkTranny .PHP_EOL."Cellphone: ".$cellphone);
@@ -294,8 +301,9 @@ class Script {
             return null;
         }
 
-        $ddd = $telExplode[0];
-        $numberCellPhone = $telExplode[1];
+        $ddd = current($telExplode);
+        next($telExplode);
+        $numberCellPhone = current($telExplode);
 
         $ddd = $this->formatDDD($ddd);
 
@@ -304,7 +312,6 @@ class Script {
             return null;
         }
 
-        //$ddd = substr($ddd, 1, 2);
 
         $cellphone = $ddd . $numberCellPhone;
 
@@ -323,6 +330,8 @@ class Script {
         if (!$ddd) {
             return null;
         }
+
+        $ddd = str_replace(array('(',')'), '',$ddd);
 
         $number = intval($ddd);
 
@@ -352,6 +361,10 @@ class Script {
             if ($divClass == 'job_listing-phone') {
                 $allA = $div->getElementsByTagName('a');
                 foreach($allA as $a) {
+
+                    if ($a->textContent == "WhatsApp") {
+                        break;
+                    }
                     return $cellphoneFinded = $a->textContent;
                 }
             }
