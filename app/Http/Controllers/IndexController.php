@@ -20,9 +20,16 @@ use App\Http\Requests\CommentRequest;
 use Illuminate\Support\Facades\Cache;
 use App\Samuel\Statistic\StatisticSingle;
 use Aws\S3\S3Client;
+use App\Samuel\Script;
 
 class IndexController extends Controller
 {
+
+    public function teste3(Script $script) {
+        echo "teste 333";
+        $script->routineScan();
+        
+    }
 
     public function teste2() {
         echo "teste2";

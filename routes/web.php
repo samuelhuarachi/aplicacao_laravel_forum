@@ -43,9 +43,17 @@ Route::get('/', function () {
 Route::group(['prefix' => 'forum/travesti'],
 function() {
 
+
     // Route::get('teste2', [
     //     'uses' => 'IndexController@teste2'])
     //     ->name('forum.teste2');
+
+    // Route::get('teste3', [
+    //     'uses' => 'IndexController@teste3'])
+    //     ->name('forum.teste3');
+
+
+
 
     Route::get('', [
         'uses' => 'IndexController@index'])

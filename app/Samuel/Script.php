@@ -44,6 +44,8 @@ class Script {
         $this->createLogFile();
         $listOfLinks = $this->generalService->travestiComLocalMap();
 
+        //dd($listOfLinks);
+
         foreach($listOfLinks as $currentLink)
         {
             $stateID = $currentLink['state_id'];
@@ -53,7 +55,7 @@ class Script {
             $trannyLinkFounded = $this->findTrannyLinksOnThisCity($URL);
             foreach($trannyLinkFounded as $linkTranny)
             {
-                // $linkTranny = 'https://www.travesticomlocal.com.br/acompanhante/patricia-silva/';
+                //$linkTranny = 'https://www.travesticomlocal.com.br/acompanhante/gabrielle-lemes/';
                 
                 //dump($linkTranny);
                 $this->linkTranny = $linkTranny;
@@ -267,8 +269,10 @@ class Script {
     {
         $telExplode = explode(' ', $cellphone);
         $ddd = $telExplode[0];
+        $ddd = $this->formatDDD($ddd);
+
         $numberCellPhone = $telExplode[1];
-        $ddd = substr($ddd, 1, 2);
+        //$ddd = substr($ddd, 1, 2);
         $cellphone = $ddd . $numberCellPhone;
 
         $justNumbersPhone = preg_replace('/\D/', '', $cellphone);
@@ -293,12 +297,15 @@ class Script {
         $ddd = $telExplode[0];
         $numberCellPhone = $telExplode[1];
 
-        if (strlen($ddd) !== 3) {
+        $ddd = $this->formatDDD($ddd);
+
+        if (!$ddd) {
             dump("Número de celular inválido, falha no ddd".PHP_EOL."URL: ".$this->linkTranny .PHP_EOL."Cellphone: ".$cellphone);
             return null;
         }
 
-        $ddd = substr($ddd, 1, 2);
+        //$ddd = substr($ddd, 1, 2);
+
         $cellphone = $ddd . $numberCellPhone;
 
         $justNumbersPhone = preg_replace('/\D/', '', $cellphone);
@@ -307,7 +314,29 @@ class Script {
             $this->writeInLog("Número de celular inválido".PHP_EOL."URL: ".$this->linkTranny .PHP_EOL."Cellphone: ".$cellphone);
             return null;
         }
+
         return true;
+    }
+
+    protected function formatDDD($ddd) {
+
+        if (!$ddd) {
+            return null;
+        }
+
+        $number = intval($ddd);
+
+        if ($number == 0) { 
+            return null;
+        }
+
+        $ddd = strval($number);
+
+        if (strlen($ddd) !== 2) {
+            return null;
+        }
+
+        return $ddd;
     }
 
     protected function getTrannyCellPhone()
