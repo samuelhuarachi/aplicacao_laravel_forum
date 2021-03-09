@@ -44,8 +44,8 @@ class CamgirlTabs {
         this.cam_girl_photos_link.addClass("active")
         this.cam_girl_videos_link.removeClass("active")
 
-        this.cam_girl_description.show()
-        this.cam_girl_photos.hide()
+        this.cam_girl_description.hide()
+        this.cam_girl_photos.show()
         this.cam_girl_videos.hide()
     }
 
