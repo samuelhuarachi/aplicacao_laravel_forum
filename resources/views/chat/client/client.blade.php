@@ -95,14 +95,14 @@
         
         <div class="col-md-12 mt-1">
             <div class="mb-3">
-            <button data-value=1 class="btn btn-outline-dark btnGiftYesNo">enviar 1 <i class="fas fa-coins"></i></button>
+            
             <button data-value=5 class="btn btn-outline-dark btnGiftYesNo">enviar 5 <i class="fas fa-coins"></i></button>
-                <button data-value=10 class="btn btn-outline-dark btnGiftYesNo">enviar 10 <i class="fas fa-coins"></i></button>
-                <button data-value=20 class="btn btn-outline-dark btnGiftYesNo">enviar 20 <i class="fas fa-coins"></i></button>
-                <button data-value=30 class="btn btn-outline-dark btnGiftYesNo">enviar 30 <i class="fas fa-coins"></i></button>
-                <button data-value=50 class="btn btn-outline-dark btnGiftYesNo">enviar 50 <i class="fas fa-coins"></i></button>
-                <button data-value=100 class="btn btn-outline-dark btnGiftYesNo">enviar 100 <i class="fas fa-coins"></i></button>
-                <button data-value=200 class="btn btn-outline-dark btnGiftYesNo">enviar 200 <i class="fas fa-coins"></i></button>
+            <button data-value=10 class="btn btn-outline-dark btnGiftYesNo">enviar 10 <i class="fas fa-coins"></i></button>
+            <button data-value=20 class="btn btn-outline-dark btnGiftYesNo">enviar 20 <i class="fas fa-coins"></i></button>
+            <button data-value=30 class="btn btn-outline-dark btnGiftYesNo">enviar 30 <i class="fas fa-coins"></i></button>
+            <button data-value=50 class="btn btn-outline-dark btnGiftYesNo">enviar 50 <i class="fas fa-coins"></i></button>
+            <button data-value=100 class="btn btn-outline-dark btnGiftYesNo">enviar 100 <i class="fas fa-coins"></i></button>
+            <button data-value=200 class="btn btn-outline-dark btnGiftYesNo">enviar 200 <i class="fas fa-coins"></i></button>
                 
             </div>
             
