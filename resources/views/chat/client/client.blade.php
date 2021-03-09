@@ -109,11 +109,11 @@
             <div class="column80">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a id="cam_girl_description_link" class="nav-link active" >
+                        <a id="cam_girl_description_link" class="nav-link" >
                             Sobre mim</a>
                     </li>
                     <li class="nav-item">
-                        <a id="cam_girl_photos_link" class="nav-link" >
+                        <a id="cam_girl_photos_link" class="nav-link active" >
                         <i class="far fa-image mr-1"></i> Fotos</a>
                     </li>
                     <li class="nav-item">

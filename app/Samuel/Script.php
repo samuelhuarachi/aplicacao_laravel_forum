@@ -362,7 +362,8 @@ class Script {
                 $allA = $div->getElementsByTagName('a');
                 foreach($allA as $a) {
 
-                    if ($a->textContent == "WhatsApp") {
+                    if ($a->textContent == "WhatsApp" || $a->textContent == "Whatsapp" || $a->textContent == "WhatsaApp") {
+
                         break;
                     }
                     return $cellphoneFinded = $a->textContent;
