@@ -40,8 +40,8 @@ class CamgirlTabs {
     }
 
     firsConfig() {
-        this.cam_girl_description_link.addClass("active")
-        this.cam_girl_photos_link.removeClass("active")
+        this.cam_girl_description_link.removeClass("active")
+        this.cam_girl_photos_link.addClass("active")
         this.cam_girl_videos_link.removeClass("active")
 
         this.cam_girl_description.show()
