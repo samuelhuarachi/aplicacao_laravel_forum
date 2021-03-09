@@ -108,27 +108,24 @@
             
             <div class="column80">
                 <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a id="cam_girl_description_link" class="nav-link" >
-                            Sobre mim</a>
-                    </li>
+
                     <li class="nav-item">
                         <a id="cam_girl_photos_link" class="nav-link active" >
                         <i class="far fa-image mr-1"></i> Fotos</a>
                     </li>
+
+                    <li class="nav-item">
+                        <a id="cam_girl_description_link" class="nav-link" >
+                            Sobre mim</a>
+                    </li>
+                    
                     <li class="nav-item">
                         <a id="cam_girl_videos_link" class="nav-link" >
                         <i class="fas fa-film mr-1"></i> Videos</a>
                     </li>
                 </ul>
                 <br>
-                <div id="cam_girl_description">
-                    @if(isset($analistExists) && isset($analistExists->description))
 
-                    {!! $analistExists->description !!}
-
-                    @endif
-                </div>
                 <div id="cam_girl_photos">
 
                     @if(isset($analistExists) && isset($analistExists->gallery))
@@ -144,6 +141,15 @@
                     
                    
                 </div>
+                
+                <div id="cam_girl_description">
+                    @if(isset($analistExists) && isset($analistExists->description))
+
+                    {!! $analistExists->description !!}
+
+                    @endif
+                </div>
+                
                 <div id="cam_girl_videos">
                     A garota não postou videos até o momento
                 </div>
