@@ -5,7 +5,7 @@
                 <div id="logo-live">
                 <!-- <i style="margin-right: 10px;" class="fas fa-stream"></i>  -->
                 <a style="color: #fff" href="{{ route('chat') }}">
-                    <img width="128" src="{{ asset('images/logo_lado.png') }}" />
+                    <img style="padding-top:4px;" width="128" src="{{ asset('images/logo_lado.png') }}" />
                 </a>
                 </div>
 
