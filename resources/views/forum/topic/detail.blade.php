@@ -52,6 +52,13 @@
             
             <h1>Travesti {{ ucwords($topicFind->title) }}</h1>
 
+            @if($findedCellphone && trim($findedCellphone->linkt) !== "")
+               
+                <p>Veja as fotos dela em:<br>
+                <a rel=”nofollow” href="{{ $findedCellphone->linkt }}" target="_blank">{{ $findedCellphone->linkt }}</a> </p>
+
+            @endif
+
 
             <div class="card">
                 <div class="card-body">

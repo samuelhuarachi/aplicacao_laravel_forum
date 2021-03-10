@@ -99,7 +99,6 @@ class Script {
                         }
                     }
 
-
                     $this->updateLastSee($cellphone, $cityID);
                     $this->updateLinkInCellphoneTable($cellphone, $linkTranny);
                     
@@ -115,7 +114,6 @@ class Script {
     protected function updateLinkInCellphoneTable($cellphone, $linkTranny) {
         $findCellphone = $this->cellphoneModel->where('cellphone', $cellphone)->first();
         if ($findCellphone) {
-
             $findCellphone->update([
                 'linkt' => $linkTranny
             ]);
