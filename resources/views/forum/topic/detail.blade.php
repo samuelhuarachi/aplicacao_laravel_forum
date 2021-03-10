@@ -55,7 +55,7 @@
             @if($findedCellphone && trim($findedCellphone->linkt) !== "")
                
                 <p>Veja as fotos dela em:<br>
-                <a rel=”nofollow” href="{{ $findedCellphone->linkt }}" target="_blank">{{ $findedCellphone->linkt }}</a> </p>
+                <a rel=”nofollow” href="{{ $findedCellphone->linkt }}#text-242" target="_blank">{{ $findedCellphone->linkt }}</a> </p>
 
             @endif
 
