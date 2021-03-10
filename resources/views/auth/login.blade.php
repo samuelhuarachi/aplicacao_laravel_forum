@@ -13,9 +13,9 @@
                     <i class="icon-chevron-left"></i>  Voltar a página inicial do forum</a>
                 
                     <a href="{{ route('register') }}">
-                        <button type="button" class="btn btn-dark float-right">
-                            <i class="icon-sign-blank"></i> 
-                                Sou novo, fazer meu cadastro rápido</button>
+                        <button type="button" class="btn btn-primary float-right">
+            
+                                Cadastrar</button>
                     </a>
 
                 </div>

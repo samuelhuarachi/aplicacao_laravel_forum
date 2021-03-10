@@ -126,6 +126,28 @@ footer p {
     margin-bottom: .25rem;
 }
 
+#menu2 {
+    margin-bottom: 10px;
+    background: #dc3545;
+    color: #fff !important;
+}
+
+#menu2 a, #menu2 button {
+    color: #fff;
+}
+
+#menu2 .navbar-toggler {
+    background: #ea9090;
+    outline: none;
+}
+
+#menu2 .navbar-toggler-icon {
+    background-image:  url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 0, 0, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+
+
+
 #top-menu {
     /* background: #fff;
     padding:10px;

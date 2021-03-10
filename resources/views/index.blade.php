@@ -1,7 +1,9 @@
 @extends('base')
 
 
-@section('content')
+@section('content') 
+
+
 
 <div class="container">
     <div class="row">
@@ -16,7 +18,7 @@
 
 <div id="top-info">
     <a style="color: #fff" href="/camstream">
-    Conheca Boneca Forum 
+    Clique aqui, e conheca Boneca Forum 
                     <img src="/images/logo_lado.png" width="128">
                     </a>
 </div>
@@ -32,15 +34,7 @@
         <div class="col-md-12">
 
             <h1>Acompanhantes Travestis em {{ $cityFounded->title }}</h1>
-                <a href="{{ route('login') }}">
-                <button type="button" class="btn btn-light">
-                <i class="icon-user"></i> Entrar</button>
-            </a>
-            
-            <a href="{{ route('register') }}">
-                <button type="button" class="btn btn-primary float-right">
-                        Cadastre para deixar seu relato</button>
-            </a>
+               
         </div>
     </div>
 

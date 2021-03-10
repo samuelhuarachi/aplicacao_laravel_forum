@@ -66,37 +66,63 @@
             <p class="logo"><a href="/">Boneca Fórum</a></p>
             <p class="logo-description">Encontre as mais belas travestis da sua cidade</p>
         </div>
-        <div class="col-md-12 mb-3">
-            <nav id="menu">
-
-                @auth
-                    <div class="row mb-3">
-                        <div class="col-md-12">
-                        
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                                {{ csrf_field() }}
-                                <button class="float-right" type="submit">Sair do forum</button>
-                            </form>
-                        
-                        </div>
-                    </div>
-                @endauth
-                <ul id="top-menu">
-                    <li>
-                        <a class="btn btn-danger" href="{{ route('forum.index') }}/#tranny-list">Veja mais travestis na sua cidade</a>
-                    </li>
-                    
-                    @auth
-                        <li>
-                            <a href="{{ route('forum.myaccount') }}">
-                                <i class="icon-user"></i> Minha Conta</a>
-                        </li>
-                    @endauth
-                </ul>
-            </nav>
-        </div>
+       
     </div>
 </div>
+
+
+            
+
+<nav id="menu2" class="navbar navbar-expand-lg">
+
+<div class="container">
+  
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('forum.index') }}">Inicio</a>
+        </li>
+
+        @if(!Auth::check())
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('register') }}">Cadsastrar</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('login') }}">Login</a>
+        </li>
+      @endif
+
+      @if(Auth::check())
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('forum.myaccount') }}">Minha Conta</a>
+      </li>
+
+      
+        <form id="logout-form" action="{{ route('logout') }}" method="POST">
+            {{ csrf_field() }}
+            <li class="nav-item">
+            <button class="btn btn-link nav-link" type="submit">Sair</button>
+            </li>
+        </form>
+        @endif
+    </ul>
+
+{{--
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>--}}
+
+
+  </div>
+</div>
+</nav>
 
 @yield('content')
 

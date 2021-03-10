@@ -36,16 +36,7 @@
         {{-- <a href="{{ route('forum.index') }}">
                     <i class="icon-chevron-left"></i>  Voltar a página inicial do forum</a>
             <br><br> --}}
-                <a href="{{ route('login') }}">
-                <button type="button" class="btn btn-light">
-                <i class="icon-user"></i> Entrar</button>
-            </a>
-
-            <a href="{{ route('register') }}">
-                <button type="button" class="btn btn-primary float-right">
-                        Cadastre para deixar seu relato</button>
-            </a>
-            <br><br>
+            
         </div>
         
         <div class="col-md-12">
