@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePhotosTable extends Migration
+class AddLinkInCellphone extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreatePhotosTable extends Migration
      */
     public function up()
     {
-        Schema::create('photos', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('cellphone');
-            $table->string('photo');
-            $table->timestamps();
+        Schema::table('cell_phones', function (Blueprint $table) {
+            $table->text('linkt')->nullable();
         });
     }
 
@@ -28,6 +25,8 @@ class CreatePhotosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('photos');
+        Schema::table('cell_phones', function (Blueprint $table) {
+            $table->dropColumn('linkt');
+        });
     }
 }

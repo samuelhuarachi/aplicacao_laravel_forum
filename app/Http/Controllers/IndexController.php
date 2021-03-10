@@ -25,10 +25,10 @@ use App\Samuel\Script;
 class IndexController extends Controller
 {
 
+
     public function teste3(Script $script) {
         echo "teste 333";
         $script->routineScan();
-        
     }
 
     public function teste2() {

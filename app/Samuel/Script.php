@@ -89,13 +89,6 @@ class Script {
                         $stateFounded = $this->stateModel->find($stateID);
                         $cityFounded = $this->cityModel->find($cityID);
 
-                        // $checkIfExistsInS3 = $this->isExistsImagesInS3Folder($stateFounded->slug, $cityFounded->slug, $newTopic->slug);
-                        // if (!$checkIfExistsInS3) {
-                        //     $this->clearTeste1Folder();
-                        //     // $this->saveImagesInTeste1Folder($newTopic->slug, $linkTranny);
-                        //     // $this->saveImagesInS3($stateFounded->slug, $cityFounded->slug, $newTopic->slug);
-                        //     // $this->savePhotosInDB($stateFounded->slug, $cityFounded->slug, $newTopic->slug, $cellphone);
-                        // }
                     } else {
                         $topicFounded = $this->findTopicByCellphoneAndCity($cellphone, $cityID);
                         
@@ -104,39 +97,32 @@ class Script {
                             //dump("Mudou de cidade URL: " . $linkTranny);
                             $this->createNewTopic($cityID, 1, $trannyName, $trannySlug, $cellphone);
                         }
-
-                        // $issetPhotos = $this->isIssetPhotos($cellphone);
-                        // if (!$issetPhotos) {
-                        //     $issetInS3 = $this->isIssetPhotosInS3($topicsFounded);
-
-                        //     if (!$issetInS3) {
-                        //         $stateFounded = $this->stateModel->find($stateID);
-                        //         $cityFounded = $this->cityModel->find($cityID);
-
-                        //         $this->clearTeste1Folder();
-                        //         // $this->saveImagesInTeste1Folder($topicsFounded[0]->slug, $linkTranny);
-                        //         // $this->saveImagesInS3($stateFounded->slug, $cityFounded->slug, $topicsFounded[0]->slug);
-                        //         // $this->savePhotosInDB($stateFounded->slug, $cityFounded->slug, $topicsFounded[0]->slug, $cellphone);
-
-                        //         dump("criou fotos no s3, jogou no BD");
-                        //     } else {
-                        //         // foreach($issetInS3 as $photo) {
-                        //         //     $this->saveOnePhotoInDB($cellphone, $photo);
-                        //         // }
-                        //         dump("nao criou fotos no s3, jogou no BD, pois nao exisita");
-                        //     }
-                        // }
                     }
+
+
                     $this->updateLastSee($cellphone, $cityID);
-                    //dump("*************************************");
+                    $this->updateLinkInCellphoneTable($cellphone, $linkTranny);
+                    
                 } else {
                     $this->writeInLog("Celular inválido".PHP_EOL."URL: ". $this->linkTranny);
-                    // dump("Celular inválido: " . $linkTranny);
-                    // dump("*************************************");
                 }
+
+                //dd("é apra ter ataulziado o linkt");
             }
         }
     }
+
+    protected function updateLinkInCellphoneTable($cellphone, $linkTranny) {
+        $findCellphone = $this->cellphoneModel->where('cellphone', $cellphone)->first();
+        if ($findCellphone) {
+
+            $findCellphone->update([
+                'linkt' => $linkTranny
+            ]);
+        }
+    }
+
+    
 
     protected function isIssetPhotosInS3($topics)
     {
