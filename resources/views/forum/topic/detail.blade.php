@@ -7,7 +7,7 @@
 
 <div id="top-info">
 <a style="color: #fff" href="/camstream">
-    Conheca Boneca Forum 
+    Clique aqui, e conheca Boneca Forum 
     
                     <img src="/images/logo_lado.png" width="128">
                     </a>
