@@ -73,10 +73,18 @@
                     @endif
                 </div>
             </div>
+
+            @if($findedCellphone && trim($findedCellphone->linkt) !== "")
+                <iframe src="{{ $findedCellphone->linkt }}" 
+                style="margin-top: 10px"
+                height="200" 
+                width="100%" 
+                title="Travesti Fotos"></iframe> 
+            @endif
             
 
             @if($photos)
-                <h2 class="mt-3">Fotos</h2>
+                {{-- <h2 class="mt-3">Fotos</h2>
                 <div class="card">
                     <div class="card-body">
                         <small>Clique para ampliar</small><br>
@@ -88,7 +96,7 @@
                             </a>
                         @endforeach
                     </div>
-                </div>
+                </div> --}}
             @endif
 
             @if($findedCellphone && trim($findedCellphone->about) !== "")
@@ -121,7 +129,7 @@
 
         @endphp
 
-
+        
             @if ($commentsFoundded->count() == 0)
                 <div class="card">
                     <div class="card-body">
