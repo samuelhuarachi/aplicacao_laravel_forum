@@ -43,9 +43,8 @@
             
             <h1>Travesti {{ ucwords($topicFind->title) }}</h1>
 
-            {{ dump(Cache::get(str_replace(' ', '', $topicFind['cellphone']) . '_new_girl') == false) }}
-            
-            @if ( Cache::get(str_replace(' ', '', $topicFind['cellphone']) . '_new_girl') == 0)
+           
+            @if ( Cache::get(str_replace(' ', '', $topicFind['cellphone']) . '_new_girl') !== false)
                 <p> <span class="badge badge-secondary">Garota identificada como novata, pelo nosso sistema</span></p>
             @endif
 
