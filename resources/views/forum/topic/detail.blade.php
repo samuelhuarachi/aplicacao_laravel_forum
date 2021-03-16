@@ -110,7 +110,19 @@
                                 
                 <i class="icon-plus"></i> Novo relato ou comentário</a>
                         <br><br>
-            @if ($topicFind->comments->count() == 0)
+
+                        @php
+
+        $commentsFoundded = $topicFind->where('cellphone', $topicFind->cellphone)
+                                            ->join('comments', 'topics.id', '=', 'comments.topic_id')
+                                            ->select('comments.*')
+                                            ->get();
+
+
+        @endphp
+
+
+            @if ($commentsFoundded->count() == 0)
                 <div class="card">
                     <div class="card-body">
                         Nenhum relato no momento. Seja o primeiro a comentar.
@@ -118,15 +130,7 @@
                 </div>
             @else
 
-                @php
-
-                $commentsFoundded = $topicFind->where('cellphone', $topicFind->cellphone)
-                                                    ->join('comments', 'topics.id', '=', 'comments.topic_id')
-                                                    ->select('comments.*')
-                                                    ->get();
-
-
-                @endphp
+                
 
                 @foreach($commentsFoundded as $topicComment)
 
