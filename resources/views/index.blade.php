@@ -92,6 +92,9 @@
                         <p>Total encontradas: {{ $totaTopics }}</p>
                         @foreach($cityFoundedPaginate->items() as $topic)
 
+
+                            
+
                             <div class="card mt-3">
                                 <div class="card-header">
                                     @if (isset($lastSeeList[$topic->cellphone]))
@@ -139,8 +142,13 @@
                                                 {{-- <a href="{{ route('forum.topic.details', [$stateFounded->slug, $cityFounded->slug, $topic->slug]) }}">
                                                     <img class="float-left tranny-cover-thumb" src="{{ $coversList[$topic->slug] }}" alt="Foto de capa da travesti {{ $topic->title }}">
                                                 </a> --}}
-                                            
+
                                             <a href="{{ route('forum.topic.details', [$stateFounded->slug, $cityFounded->slug, $topic->slug]) }}">{{ $topic->title }}</a>
+
+                                            @if (isset($cellPhoneNewGirl[$topic->cellphone]) && $cellPhoneNewGirl[$topic->cellphone] == 0)
+                                                <span class="badge badge-secondary">novata</span>
+                                            @endif
+
                                             <br>
                                             <small>{{ $topic->comments->count() }} relatos</small>
                                             

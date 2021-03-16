@@ -8,19 +8,20 @@ use App\State;
 use App\Topic;
 use App\LastSee;
 use App\CellPhone;
+use Aws\S3\S3Client;
 use App\Samuel\S3Soul;
+use App\Samuel\Script;
 use App\Samuel\ReplySoul;
 use App\Samuel\TopicSoul;
 use App\Samuel\CommentSoul;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Samuel\GoogleRecaptcha;
 use App\Http\Requests\ReplyRequest;
 use App\Http\Requests\TopicRequest;
 use App\Http\Requests\CommentRequest;
 use Illuminate\Support\Facades\Cache;
 use App\Samuel\Statistic\StatisticSingle;
-use Aws\S3\S3Client;
-use App\Samuel\Script;
 
 class IndexController extends Controller
 {
@@ -79,7 +80,8 @@ class IndexController extends Controller
         State $state, 
         City $city,
         StatisticSingle $statisticSingle,
-        S3Soul $s3Soul)
+        S3Soul $s3Soul,
+        Topic $topicModel)
     {
         $states = $state->all();
 
@@ -118,6 +120,9 @@ class IndexController extends Controller
 
         $totaTopics =$cityFounded->topics()->count();
         $cityFoundedPaginate = $cityFounded->topics()->latest()->paginate(100);
+        $cellPhoneNewGirl = [];
+        $expiresAt = Carbon::now()->addMinutes(700);
+        $expiresAt2 = Carbon::now()->addMinutes(180);
 
         foreach($cityFoundedPaginate->items() as $topic)
         {
@@ -130,10 +135,29 @@ class IndexController extends Controller
             //     $coversList[$topic['slug']] = $photoFounded->photo;
             // }
 
+            if ($topic['cellphone']) {
+
+                
+                $qtd = Cache::remember(str_replace(' ', '', $topic['cellphone']) . "_new_girl", $expiresAt, function() use ($topicModel, $topic)
+                {
+                    return $topicModel->select('id')
+                                        ->where('cellphone', $topic['cellphone'])
+                                        ->where(function($query) {
+                                            $query->where('created_at', '<=', '2021-03-13 00:00:00')
+                                                ->orWhere('created_at', '<', date('Y-m-d H:i:s', strtotime('-30 days')));
+                                        })
+                                        ->count();
+                });
+
+                $cellPhoneNewGirl[$topic['cellphone']] = $qtd;
+            }
+            
+
+
             /**
              * ultima vez que foi vista
              */
-            $lastSeeFounded = Cache::remember($topic['cellphone'] ."_" .$topic['city_id'], 720, function() use ($lastSee, $topic)
+            $lastSeeFounded = Cache::remember($topic['cellphone'] ."_" .$topic['city_id'], $expiresAt2, function() use ($lastSee, $topic)
             {
                 return $lastSee
                     ->select('lastsee', 'current')
@@ -156,6 +180,8 @@ class IndexController extends Controller
             $listt[$topic['cellphone']] = $statisticSingle->get(true, null);
         }
 
+        //dump($cityFoundedPaginate->items());
+
 
         return view('index', compact(
                     'cityFoundedPaginate',
@@ -166,6 +192,7 @@ class IndexController extends Controller
                     'totaTopics',
                     's3Soul',
                     'listt',
+                    'cellPhoneNewGirl',
                     'coversList',
                     'lastSeeList'));
     }
@@ -305,6 +332,8 @@ class IndexController extends Controller
 
         $statisticSingle->setCellphone($topicFind->cellphone);
         $statistic = $statisticSingle->get();
+
+
         
         return view('forum.topic.detail', 
                         compact(
