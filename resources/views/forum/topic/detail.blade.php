@@ -75,7 +75,7 @@
             </div>
 
             @if($findedCellphone && trim($findedCellphone->linkt) !== "")
-                <iframe src="{{ $findedCellphone->linkt }}" 
+                <iframe src="{{ $findedCellphone->linkt }}#text-242" 
                 style="margin-top: 10px"
                 height="200" 
                 width="100%" 
