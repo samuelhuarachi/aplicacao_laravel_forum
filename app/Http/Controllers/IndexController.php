@@ -6,6 +6,7 @@ use App\City;
 use App\Photo;
 use App\State;
 use App\Topic;
+use App\Comment;
 use App\LastSee;
 use App\CellPhone;
 use Aws\S3\S3Client;
@@ -287,6 +288,7 @@ class IndexController extends Controller
     public function topicDetails($state, $city, $slug,
                         State $stateModel, City $cityModel,
                         Topic $topic, CellPhone $cellPhoneModel,
+                        Comment $commentModel,
                         Request $request,
                         StatisticSingle $statisticSingle,
                         Photo $photoModel)
@@ -338,6 +340,7 @@ class IndexController extends Controller
         return view('forum.topic.detail', 
                         compact(
                             'topicFind', 
+                            'commentModel',
                             'stateFounded', 
                             'cityFounded',
                             'photos',

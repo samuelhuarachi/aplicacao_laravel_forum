@@ -117,7 +117,25 @@
                     </div>
                 </div>
             @else
-                @foreach($topicFind->comments as $comment)
+
+                @php
+
+                $commentsFoundded = $topicFind->where('cellphone', $topicFind->cellphone)
+                                                    ->join('comments', 'topics.id', '=', 'comments.topic_id')
+                                                    ->select('comments.*')
+                                                    ->get();
+
+
+                @endphp
+
+                @foreach($commentsFoundded as $topicComment)
+
+                    @php
+
+                    $comment = $commentModel->where('id', $topicComment->id)->first();
+
+                    @endphp
+
                     <div class="card mt-3">
                         <div class="card-header">
                             <span class="float-right">

@@ -150,7 +150,17 @@
                                             @endif
 
                                             <br>
-                                            <small>{{ $topic->comments->count() }} relatos</small>
+
+
+                                            @php
+
+                                            $reportCount = $topic->where('cellphone', $topic->cellphone)
+                                                    ->join('comments', 'topics.id', '=', 'comments.topic_id')
+                                                    ->select('comments.id')
+                                                    ->count();
+                                            @endphp
+
+                                            <small>{{ $reportCount }} relatos</small>
                                             
                                         </div>
                                         <div class="col-sm">
