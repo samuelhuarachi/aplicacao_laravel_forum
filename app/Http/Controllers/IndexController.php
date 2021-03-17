@@ -334,15 +334,27 @@ class IndexController extends Controller
 
         $statisticSingle->setCellphone($topicFind->cellphone);
         $statistic = $statisticSingle->get();
-
-
         
+
+        $expiresAt = Carbon::now()->addMinutes(700);
+        $qtdNewGirl = Cache::remember(str_replace(' ', '', $topicFind->cellphone) . "_new_girl", $expiresAt, function() use ($topic, $topicFind)
+                {
+                    return $topicModel->select('id')
+                                        ->where('cellphone', $topicFind->cellphone)
+                                        ->where(function($query) {
+                                            $query->where('created_at', '<=', '2021-03-13 00:00:00')
+                                                ->orWhere('created_at', '<', date('Y-m-d H:i:s', strtotime('-30 days')));
+                                        })
+                                        ->count();
+                });
+                
         return view('forum.topic.detail', 
                         compact(
                             'topicFind', 
                             'commentModel',
                             'stateFounded', 
                             'cityFounded',
+                            'qtdNewGirl',
                             'photos',
                             'statistic',
                             'findedCellphone'));
