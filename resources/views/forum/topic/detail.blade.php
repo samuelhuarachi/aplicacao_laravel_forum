@@ -36,15 +36,13 @@
         {{-- <a href="{{ route('forum.index') }}">
                     <i class="icon-chevron-left"></i>  Voltar a página inicial do forum</a>
             <br><br> --}}
-            
         </div>
         
         <div class="col-md-12">
             
             <h1>Travesti {{ ucwords($topicFind->title) }}</h1>
 
-            
-            @if ( $qtdNewGirl === 0)
+            @if ($qtdNewGirl === 0)
                 <p> <span class="badge badge-secondary">Garota identificada como novata, pelo nosso sistema</span></p>
             @endif
 

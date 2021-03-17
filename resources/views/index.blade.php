@@ -148,10 +148,7 @@
                                             @if (isset($cellPhoneNewGirl[$topic->cellphone]) && $cellPhoneNewGirl[$topic->cellphone] == 0)
                                                 <span class="badge badge-secondary">novata</span>
                                             @endif
-
                                             <br>
-
-
                                             @php
 
                                             $reportCount = $topic->where('cellphone', $topic->cellphone)

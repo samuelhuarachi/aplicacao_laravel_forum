@@ -339,7 +339,7 @@ class IndexController extends Controller
         $expiresAt = Carbon::now()->addMinutes(700);
         $qtdNewGirl = Cache::remember(str_replace(' ', '', $topicFind->cellphone) . "_new_girl", $expiresAt, function() use ($topic, $topicFind)
                 {
-                    return $topicModel->select('id')
+                    return $topic->select('id')
                                         ->where('cellphone', $topicFind->cellphone)
                                         ->where(function($query) {
                                             $query->where('created_at', '<=', '2021-03-13 00:00:00')
