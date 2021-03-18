@@ -231,6 +231,30 @@ class IndexController extends Controller
             $cityFind = $city->where('slug', 'sao-luis')->first();
         }elseif($stateFind->slug == 'mato-grosso-do-sul') {
             $cityFind = $city->where('slug', 'campo-grande-')->first();
+        }elseif($stateFind->slug == 'mato-grosso') {
+            $cityFind = $city->where('slug', 'cuiaba')->first();
+        }elseif($stateFind->slug == 'para') {
+            $cityFind = $city->where('slug', 'belem')->first();
+        }elseif($stateFind->slug == 'paraiba') {
+            $cityFind = $city->where('slug', 'joao-pessoa')->first();
+        }elseif($stateFind->slug == 'pernambuco') {
+            $cityFind = $city->where('slug', 'recife')->first();
+        }elseif($stateFind->slug == 'piaui') {
+            $cityFind = $city->where('slug', 'teresina')->first();
+        }elseif($stateFind->slug == 'parana') {
+            $cityFind = $city->where('slug', 'curitiba')->first();
+        }elseif($stateFind->slug == 'rio-grande-do-norte') {
+            $cityFind = $city->where('slug', 'natal')->first();
+        }elseif($stateFind->slug == 'rondonia') {
+            $cityFind = $city->where('slug', 'porto-velho')->first();
+        }elseif($stateFind->slug == 'roraima') {
+            $cityFind = $city->where('slug', 'boa-vista')->first();
+        }elseif($stateFind->slug == 'rio-grande-do-sul') {
+            $cityFind = $city->where('slug', 'porto-alegre')->first();
+        }elseif($stateFind->slug == 'santa-catarina') {
+            $cityFind = $city->where('slug', 'florianopolis')->first();
+        }elseif($stateFind->slug == 'tocantins') {
+            $cityFind = $city->where('slug', 'palmas')->first();
             
         }else {
             $cityFind = $city->where('state_id', $stateFind->id)->first();
