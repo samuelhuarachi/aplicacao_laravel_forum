@@ -221,6 +221,17 @@ class IndexController extends Controller
             $cityFind = $city->where('slug', 'macapa')->first();
         }elseif($stateFind->slug == 'bahia') {
             $cityFind = $city->where('slug', 'salvador')->first();
+        }elseif($stateFind->slug == 'ceara') {
+            $cityFind = $city->where('slug', 'fortaleza')->first();
+        }elseif($stateFind->slug == 'espirito-santo') {
+            $cityFind = $city->where('slug', 'vitoria')->first();
+        }elseif($stateFind->slug == 'goias') {
+            $cityFind = $city->where('slug', 'goiania')->first();
+        }elseif($stateFind->slug == 'maranhao') {
+            $cityFind = $city->where('slug', 'sao-luis')->first();
+        }elseif($stateFind->slug == 'mato-grosso-do-sul') {
+            $cityFind = $city->where('slug', 'campo-grande-')->first();
+            
         }else {
             $cityFind = $city->where('state_id', $stateFind->id)->first();
         }
