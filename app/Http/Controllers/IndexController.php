@@ -255,6 +255,8 @@ class IndexController extends Controller
             $cityFind = $city->where('slug', 'florianopolis')->first();
         }elseif($stateFind->slug == 'tocantins') {
             $cityFind = $city->where('slug', 'palmas')->first();
+        }elseif($stateFind->slug == 'sergipe') {
+            $cityFind = $city->where('slug', 'aracaju')->first();
             
         }else {
             $cityFind = $city->where('state_id', $stateFind->id)->first();
