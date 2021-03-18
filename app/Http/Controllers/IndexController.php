@@ -209,6 +209,18 @@ class IndexController extends Controller
             $cityFind = $city->where('slug', 'sao-paulo')->first();
         }elseif($stateFind->slug == 'rio-de-janeiro') {
             $cityFind = $city->where('slug', 'rio-de-janeiro')->first();
+        }elseif($stateFind->slug == 'minas-gerais') {
+            $cityFind = $city->where('slug', 'belo-horizonte')->first();
+        }elseif($stateFind->slug == 'acre') {
+            $cityFind = $city->where('slug', 'rio-branco')->first();
+        }elseif($stateFind->slug == 'alagoas') {
+            $cityFind = $city->where('slug', 'maceio')->first();
+        }elseif($stateFind->slug == 'amazonas') {
+            $cityFind = $city->where('slug', 'manaus')->first();
+        }elseif($stateFind->slug == 'amapa') {
+            $cityFind = $city->where('slug', 'macapa')->first();
+        }elseif($stateFind->slug == 'bahia') {
+            $cityFind = $city->where('slug', 'salvador')->first();
         }else {
             $cityFind = $city->where('state_id', $stateFind->id)->first();
         }
