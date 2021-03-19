@@ -73,7 +73,18 @@
                 </div>
             </div>
 
-            <div id="tranny-list" class="card mt-5">
+            <form class="mt-5" action="{{ route('forum.index') }}">
+                <label for="cellphone">Pesquisar pelo celular:</label><br>
+                <input 
+                        type="text" 
+                        id="cellphone_search"
+                        name="cellphone" 
+                        placeholder="(XX) XXXXX-XXXX" 
+                        value=""><br>
+                <input class="btn btn-primary" type="submit" value="Pesquisar">
+            </form> 
+
+            <div id="tranny-list" class="card mt-2">
                 <div class="card-header">
                     <b>Relatos, sobre experiencias dos nossos usuários, com travestis, 
                     encontrados:</b>
@@ -84,11 +95,16 @@
                                 
                         <i class="icon-plus"></i> Novo Tópico</a>
                     <br><br>
-                    {{ $cityFoundedPaginate->links() }}
+
+                    @if (!$cellphoneSearch)
+                        {{ $cityFoundedPaginate->links() }}
+                    @endif
 
                     @if (count($cityFounded->topics) == 0)
                         <p class="mb-0">Não foi encontrado nenhum tópico para a cidade {{ $cityFounded->title }}</p>
                     @else
+
+                        
                         <p>Total encontradas: {{ $totaTopics }}</p>
                         @foreach($cityFoundedPaginate->items() as $topic)
 
@@ -179,7 +195,9 @@
                             </div>
                         @endforeach
                         <br>
-                        {{ $cityFoundedPaginate->links() }}
+                        @if (!$cellphoneSearch)
+                            {{ $cityFoundedPaginate->links() }}
+                        @endif
                     @endif
                 </div>
             </div>
@@ -199,5 +217,10 @@
 const BASEURL = '{{ env("NODEAPI") }}'
 </script>
 <script src="{{ asset('js/forum.js') }}"></script>
+<script>
+
+$('#cellphone_search').mask('(00) 00000-0000');
+
+</script>
 
 @endsection

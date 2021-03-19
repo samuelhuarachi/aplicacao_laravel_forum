@@ -52,10 +52,7 @@ function() {
     //    'uses' => 'IndexController@teste3'])
     //    ->name('forum.teste3');
 
-    Route::get('', [
-        'uses' => 'IndexController@index'])
-        ->name('forum.index');
-
+    
     Route::get('{state}/{city}/{slug}', [
         'uses' => 'IndexController@topicDetails'])
         ->name('forum.topic.details');
@@ -67,6 +64,8 @@ function() {
     Route::put('set-new-city', [
         'uses' => 'IndexController@setNewCity'])
         ->name('forum.set-new-city');
+
+    
 
 
         Route::group(['middleware' => ['verified', 'auth']], function()
@@ -125,6 +124,11 @@ function() {
                 'uses' => 'MyAccountController@replyRemove'])
                 ->name('forum.reply.remove');
     });
+
+
+    Route::get('{cellphone?}', [
+        'uses' => 'IndexController@index'])
+        ->name('forum.index');
 });
 
 

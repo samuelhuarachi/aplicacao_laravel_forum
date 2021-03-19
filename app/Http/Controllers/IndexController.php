@@ -18,6 +18,7 @@ use App\Samuel\CommentSoul;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Samuel\GoogleRecaptcha;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ReplyRequest;
 use App\Http\Requests\TopicRequest;
 use App\Http\Requests\CommentRequest;
@@ -84,6 +85,8 @@ class IndexController extends Controller
         S3Soul $s3Soul,
         Topic $topicModel)
     {
+        $cellphone = $request->input('cellphone');
+
         $states = $state->all();
 
         $stateT = $request->session()->get('stateT');
@@ -119,11 +122,29 @@ class IndexController extends Controller
                 return $cityFounded->topics->toArray();
         });
 
-        $totaTopics =$cityFounded->topics()->count();
-        $cityFoundedPaginate = $cityFounded->topics()->latest()->paginate(100);
+
+        $cellphoneSearch = null;
+        if ($cellphone && $cellphone !== "") {
+            $topicFouded = $topicModel->where('cellphone', $cellphone)->limit(1)->get();
+            $totaTopics = 1;
+            $cityFoundedPaginate = $topicModel->where('cellphone', $cellphone)->paginate(1);
+            $cellphoneSearch = true;
+
+            if ($topicFouded) {
+                $cityFounded = $topicFouded->first()->city;
+                $stateFounded = $topicFouded->first()->city->state;
+            }
+
+        } else {
+            $totaTopics =$cityFounded->topics()->count();
+            $cityFoundedPaginate = $cityFounded->topics()->latest()->paginate(100);
+        }
+        
+
         $cellPhoneNewGirl = [];
         $expiresAt = Carbon::now()->addMinutes(700);
         $expiresAt2 = Carbon::now()->addMinutes(180);
+
 
         foreach($cityFoundedPaginate->items() as $topic)
         {
@@ -195,6 +216,7 @@ class IndexController extends Controller
                     'listt',
                     'cellPhoneNewGirl',
                     'coversList',
+                    'cellphoneSearch',
                     'lastSeeList'));
     }
 
