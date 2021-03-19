@@ -25,7 +25,7 @@
 
 
 <div id="user-info">
-    <i class="icon-circle"></i>
+    <i class="icon-pushpin"></i>
     <b>{{ $stateFounded->title }}</b> / <b>{{ $cityFounded->title }}</b>
 </div>
 
