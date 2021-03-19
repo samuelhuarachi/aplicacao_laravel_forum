@@ -51,7 +51,7 @@
                     @endforeach
                 </div>
             </div>
-            <div class="card mt-5">
+            <div class="card mt-3">
                 <div class="card-header">
                     <b>Selecione sua cidade</b>
                 </div>
@@ -73,7 +73,7 @@
                 </div>
             </div>
 
-            <form class="mt-5" action="{{ route('forum.index') }}">
+            <form class="mt-3" action="{{ route('forum.index') }}">
                 <label for="cellphone">Pesquisar pelo celular:</label><br>
                 <input 
                         type="text" 
