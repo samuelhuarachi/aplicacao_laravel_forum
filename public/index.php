@@ -1,6 +1,5 @@
 <?php
 
-print_r($_SERVER['HTTP_CF_VISITOR']);
 
 if ($_SERVER['HTTP_CF_VISITOR'] === '{"scheme":"http"}') {
     // header('HTTP/1.1 301 Moved Permanently');
