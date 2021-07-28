@@ -22,7 +22,7 @@ class Authenticate {
         $url = env("NODEAPI") . "/api/authenticate";
         $ch = curl_init($url);
         // curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        //     'Authorization: Bearer abd90df5f27a7b170cd775abf89d632b350b7c1c9d53e08b340cd9832ce52c2c'
+        //     'Authorization: Bearer '
         // ));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, 1);

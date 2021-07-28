@@ -45,12 +45,6 @@
     </div>
 </main>
 
-<!-- <div id="user-info">
-    <audio controls autoplay loop>
-        <source src="{{ asset('music/queen-under-pressure.mp3') }}" type="audio/mp3">
-    </audio>
-</div> -->
-
 @endsection
 
 @section('footer')

@@ -1,58 +1,12 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-
-
 Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('tools/folders', [
-//     'uses' => 'ToolsController@createS3FoldersOfGirls']);
-
-// Route::get('tools/extract-images', [
-//     'uses' => 'ToolsController@extractImagesFromWebSite']);
-
-// Route::get('tools/full-scan', [
-//     'uses' => 'ToolsController@fullScan']);
-
-
-
-// Route::get('tools/get-city-and-state-topics-available', [
-//     'uses' => 'ToolsController@getCityAvailable']);
-
-// Route::get('tools/routine-scan', [
-//     'uses' => 'ToolsController@routineScan']);
-
-// Route::get('tools/fill-photos', [
-//     'uses' => 'ToolsController@fillPhotos']);
-
-// Route::get('sitemap/generate', [
-//     'uses' => 'SitemapController@generate']);
-
 Route::group(['prefix' => 'forum/travesti'],
 function() {
 
-
-    // Route::get('teste2', [
-    //     'uses' => 'IndexController@teste2'])
-    //     ->name('forum.teste2');
-
-    // Route::get('teste3', [
-    //    'uses' => 'IndexController@teste3'])
-    //    ->name('forum.teste3');
-
-    
     Route::get('{state}/{city}/{slug}', [
         'uses' => 'IndexController@topicDetails'])
         ->name('forum.topic.details');
@@ -64,9 +18,6 @@ function() {
     Route::put('set-new-city', [
         'uses' => 'IndexController@setNewCity'])
         ->name('forum.set-new-city');
-
-    
-
 
         Route::group(['middleware' => ['verified', 'auth']], function()
         {
@@ -124,7 +75,6 @@ function() {
                 'uses' => 'MyAccountController@replyRemove'])
                 ->name('forum.reply.remove');
     });
-
 
     Route::get('{cellphone?}', [
         'uses' => 'IndexController@index'])

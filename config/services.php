@@ -30,7 +30,7 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
     'sparkpost' => [
-        'secret' => '76b158727b8958b037dbc5c9614cb4b747e8501f',
+        'secret' => '',
     ],
     
     'loggly' => [

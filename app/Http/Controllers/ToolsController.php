@@ -34,8 +34,8 @@ class ToolsController extends Controller
 
         $s3Client = S3Client::factory([
             'credentials' => [
-                'key' => ' AKIAJZ2ERZ5NLDUOLEKA',
-                'secret' => ' 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'
+                'key' => ' ',
+                'secret' => ' '
             ],
             'version' => 'latest',
             'region' => 'sa-east-1'
@@ -346,8 +346,8 @@ class ToolsController extends Controller
     {
         $s3Client = S3Client::factory([
             'credentials' => [
-                'key' => ' AKIAJZ2ERZ5NLDUOLEKA',
-                'secret' => ' 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'
+                'key' => ' ',
+                'secret' => ''
             ],
             'version' => 'latest',
             'region' => 'sa-east-1'
@@ -374,8 +374,8 @@ class ToolsController extends Controller
         
         $s3Client = S3Client::factory([
             'credentials' => [
-                'key' => ' AKIAJZ2ERZ5NLDUOLEKA',
-                'secret' => ' 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'
+                'key' => ' ',
+                'secret' => ' '
             ],
             'version' => 'latest',
             'region' => 'sa-east-1'

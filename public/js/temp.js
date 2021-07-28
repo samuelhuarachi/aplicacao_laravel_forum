@@ -1,4 +1,4 @@
-<script>
+
     
       jQuery(function($) {
          
@@ -158,4 +158,4 @@
           }
       });
   
-      </script>
+    

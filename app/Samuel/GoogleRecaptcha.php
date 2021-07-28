@@ -7,7 +7,7 @@ class GoogleRecaptcha {
 
     public function isValid($response)
     {
-        $secret = '6LdCjtIUAAAAACz1QRmwJHHvIJZYwpkKV9SQR2GW';
+        $secret = '';
         $ip = $_SERVER['REMOTE_ADDR'];
         
         $dav = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secret."&response=".$response);

@@ -21,6 +21,6 @@
 <div class="form-group row">
     <div class="col-md-4"></div>
     <div class="col-md-6">
-        <div class="g-recaptcha" data-sitekey="6LdCjtIUAAAAACvMQa2ejy8_nxFcWXun9PmZtx7B"></div>
+        <div class="g-recaptcha" data-sitekey=""></div>
     </div>
 </div>

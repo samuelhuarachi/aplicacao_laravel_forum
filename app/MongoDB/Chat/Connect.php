@@ -10,8 +10,8 @@ class Connect implements IConnect{
     public function __construct()
     {
         $this->mongoConnection = new \MongoDB\Driver\Manager('mongodb://ds121311.mlab.com:21311', [
-            'username' => 'samuel',
-            'password' => 'sempre123',
+            'username' => '',
+            'password' => '',
             'db'       => 'forumb'
         ]);
     }
