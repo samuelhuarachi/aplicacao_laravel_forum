@@ -17,7 +17,7 @@ class S3Soul
         ]);
     }
 
-    public function findOnePhotoTranny($stateSlug, $citySlug, $topicSlug) {
+    public function findOnePhotoGirls($stateSlug, $citySlug, $topicSlug) {
         
         $s3Client = $this->getS3Client();
         $folder2 = env("APP_ENV").'/'.$stateSlug.'/'.$citySlug.'/'.$topicSlug.'/photos/';

@@ -4,7 +4,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'forum/travesti'],
+Route::group(['prefix' => 'forum/garotas'],
 function() {
 
     Route::get('{state}/{city}/{slug}', [

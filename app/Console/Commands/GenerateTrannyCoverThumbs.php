@@ -7,7 +7,7 @@ use App\Samuel\S3Soul;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
 
-class GenerateTrannyCoverThumbs extends Command
+class GenerateGirlsCoverThumbs extends Command
 {
     /**
      * The name and signature of the console command.
@@ -21,7 +21,7 @@ class GenerateTrannyCoverThumbs extends Command
      *
      * @var string
      */
-    protected $description = 'Gera thumb das travestis';
+    protected $description = 'Gera thumb das garotass';
 
     /**
      * Create a new command instance.
@@ -50,7 +50,7 @@ class GenerateTrannyCoverThumbs extends Command
 
             foreach($cityFounded->topics as $topic)
             {
-                $photoFinded = $s3Soul->findOnePhotoTranny('rio-de-janeiro', 'rio-de-janeiro', $topic->slug);
+                $photoFinded = $s3Soul->findOnePhotoGirls('rio-de-janeiro', 'rio-de-janeiro', $topic->slug);
                 if ($photoFinded) {
                     $photosList[$topic->slug] = $photoFinded;
                 }

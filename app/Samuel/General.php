@@ -40,267 +40,267 @@ class General
         }
     }
 
-    public function travestiComLocalMap()
+    public function garotasComLocalMap()
     {
 
         return [
             [
-                'url' => 'https://www.travesticomlocal.com.br/porto-velho/',
+                'url' => 'https://www.garotascomlocal.com.br/porto-velho/',
                 'state_id' => 21,
                 'city_id' => 17
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/rio-branco/',
+                'url' => 'https://www.garotascomlocal.com.br/rio-branco/',
                 'state_id' => 1,
                 'city_id' => 67
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/manaus/',
+                'url' => 'https://www.garotascomlocal.com.br/manaus/',
                 'state_id' => 3,
                 'city_id' => 112
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/ananindeua/',
+                'url' => 'https://www.garotascomlocal.com.br/ananindeua/',
                 'state_id' => 13,
                 'city_id' => 161
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/belem/',
+                'url' => 'https://www.garotascomlocal.com.br/belem/',
                 'state_id' => 14,
                 'city_id' => 170
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/macapa/',
+                'url' => 'https://www.garotascomlocal.com.br/macapa/',
                 'state_id' => 4,
                 'city_id' => 303
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/palmas/',
+                'url' => 'https://www.garotascomlocal.com.br/palmas/',
                 'state_id' => 27,
                 'city_id' => 443
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/sao-luis/',
+                'url' => 'https://www.garotascomlocal.com.br/sao-luis/',
                 'state_id' => 10,
                 'city_id' => 635
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/teresina/',
+                'url' => 'https://www.garotascomlocal.com.br/teresina/',
                 'state_id' => 17,
                 'city_id' => 881
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/fortaleza/',
+                'url' => 'https://www.garotascomlocal.com.br/fortaleza/',
                 'state_id' => 6,
                 'city_id' => 948
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/natal/',
+                'url' => 'https://www.garotascomlocal.com.br/natal/',
                 'state_id' => 20,
                 'city_id' => 1162
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/campina-grande/',
+                'url' => 'https://www.garotascomlocal.com.br/campina-grande/',
                 'state_id' => 20,
                 'city_id' => 1162
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/joao-pessoa/',
+                'url' => 'https://www.garotascomlocal.com.br/joao-pessoa/',
                 'state_id' => 15,
                 'city_id' => 1336
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/recife/',
+                'url' => 'https://www.garotascomlocal.com.br/recife/',
                 'state_id' => 16,
                 'city_id' => 1595
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/maceio/',
+                'url' => 'https://www.garotascomlocal.com.br/maceio/',
                 'state_id' => 2,
                 'city_id' => 1695
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/aracaju/',
+                'url' => 'https://www.garotascomlocal.com.br/aracaju/',
                 'state_id' => 25,
                 'city_id' => 1753
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/feira-de-santana/',
+                'url' => 'https://www.garotascomlocal.com.br/feira-de-santana/',
                 'state_id' => 5,
                 'city_id' => 1956
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/salvador/',
+                'url' => 'https://www.garotascomlocal.com.br/salvador/',
                 'state_id' => 5,
                 'city_id' => 2161
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/belo-horizonte/',
+                'url' => 'https://www.garotascomlocal.com.br/belo-horizonte/',
                 'state_id' => 11,
                 'city_id' => 2308
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/divinopolis/',
+                'url' => 'https://www.garotascomlocal.com.br/divinopolis/',
                 'state_id' => 11,
                 'city_id' => 2489
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/juiz-de-fora/',
+                'url' => 'https://www.garotascomlocal.com.br/juiz-de-fora/',
                 'state_id' => 11,
                 'city_id' => 2662
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/patos-de-minas/',
+                'url' => 'https://www.garotascomlocal.com.br/patos-de-minas/',
                 'state_id' => 11,
                 'city_id' => 2803
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/uberaba/',
+                'url' => 'https://www.garotascomlocal.com.br/uberaba/',
                 'state_id' => 11,
                 'city_id' => 3065
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/uberlandia/',
+                'url' => 'https://www.garotascomlocal.com.br/uberlandia/',
                 'state_id' => 11,
                 'city_id' => 3066
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/varginha/',
+                'url' => 'https://www.garotascomlocal.com.br/varginha/',
                 'state_id' => 11,
                 'city_id' => 3076
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/cachoeiro-de-itapemirim/',
+                'url' => 'https://www.garotascomlocal.com.br/cachoeiro-de-itapemirim/',
                 'state_id' => 8,
                 'city_id' => 3111
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/cabo-frio/',
+                'url' => 'https://www.garotascomlocal.com.br/cabo-frio/',
                 'state_id' => 19,
                 'city_id' => 3185
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/campos-dos-goytacazes/',
+                'url' => 'https://www.garotascomlocal.com.br/campos-dos-goytacazes/',
                 'state_id' => 19,
                 'city_id' => 3190
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/rj/',
+                'url' => 'https://www.garotascomlocal.com.br/rj/',
                 'state_id' => 19,
                 'city_id' => 3241
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/volta-redonda/',
+                'url' => 'https://www.garotascomlocal.com.br/volta-redonda/',
                 'state_id' => 19,
                 'city_id' => 3265
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/bauru/',
+                'url' => 'https://www.garotascomlocal.com.br/bauru/',
                 'state_id' => 26,
                 'city_id' => 3333
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/campinas/',
+                'url' => 'https://www.garotascomlocal.com.br/campinas/',
                 'state_id' => 26,
                 'city_id' => 3374
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/ribeirao-preto/',
+                'url' => 'https://www.garotascomlocal.com.br/ribeirao-preto/',
                 'state_id' => 26,
                 'city_id' => 3753
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/sao-jose-do-rio-preto/',
+                'url' => 'https://www.garotascomlocal.com.br/sao-jose-do-rio-preto/',
                 'state_id' => 26,
                 'city_id' => 3822
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/sao-paulo-sp/',
+                'url' => 'https://www.garotascomlocal.com.br/sao-paulo-sp/',
                 'state_id' => 26,
                 'city_id' => 3828
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/curitiba/',
+                'url' => 'https://www.garotascomlocal.com.br/curitiba/',
                 'state_id' => 18,
                 'city_id' => 4004
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/foz-do-iguacu/',
+                'url' => 'https://www.garotascomlocal.com.br/foz-do-iguacu/',
                 'state_id' => 18,
                 'city_id' => 4029
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/londrina/',
+                'url' => 'https://www.garotascomlocal.com.br/londrina/',
                 'state_id' => 18,
                 'city_id' => 4101
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/maringa/',
+                'url' => 'https://www.garotascomlocal.com.br/maringa/',
                 'state_id' => 18,
                 'city_id' => 4119
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/ponta-grossa/',
+                'url' => 'https://www.garotascomlocal.com.br/ponta-grossa/',
                 'state_id' => 18,
                 'city_id' => 4185
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/brusque/',
+                'url' => 'https://www.garotascomlocal.com.br/brusque/',
                 'state_id' => 24,
                 'city_id' => 4357
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/chapeco/',
+                'url' => 'https://www.garotascomlocal.com.br/chapeco/',
                 'state_id' => 24,
                 'city_id' => 4376
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/florianopolis/',
+                'url' => 'https://www.garotascomlocal.com.br/florianopolis/',
                 'state_id' => 24,
                 'city_id' => 4397
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/jaragua-do-sul/',
+                'url' => 'https://www.garotascomlocal.com.br/jaragua-do-sul/',
                 'state_id' => 24,
                 'city_id' => 4443
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/joinville/',
+                'url' => 'https://www.garotascomlocal.com.br/joinville/',
                 'state_id' => 24,
                 'city_id' => 4446
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/passo-fundo/',
+                'url' => 'https://www.garotascomlocal.com.br/passo-fundo/',
                 'state_id' => 23,
                 'city_id' => 4907
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/porto-alegre/',
+                'url' => 'https://www.garotascomlocal.com.br/porto-alegre/',
                 'state_id' => 23,
                 'city_id' => 4927
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/campo-grande/',
+                'url' => 'https://www.garotascomlocal.com.br/campo-grande/',
                 'state_id' => 12,
                 'city_id' => 5118
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/dourados/',
+                'url' => 'https://www.garotascomlocal.com.br/dourados/',
                 'state_id' => 12,
                 'city_id' => 5130
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/goiania/',
+                'url' => 'https://www.garotascomlocal.com.br/goiania/',
                 'state_id' => 9,
                 'city_id' => 5412
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/brasilia-df/',
+                'url' => 'https://www.garotascomlocal.com.br/brasilia-df/',
                 'state_id' => 7,
                 'city_id' => 5564
             ],
             [
-                'url' => 'https://www.travesticomlocal.com.br/cuiaba/',
+                'url' => 'https://www.garotascomlocal.com.br/cuiaba/',
                 'state_id' => 13,
                 'city_id' => 5214
             ],

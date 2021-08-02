@@ -24,7 +24,7 @@ class SitemapController extends Controller
             $state = $city->state;
 
             if ($topic->cellphone && trim($topic->cellphone) !== "") {
-                $url = 'https://www.bonecaforum.com/forum/travesti/' . $state->slug . '/' . $city->slug . '/' . $topic->slug;
+                $url = 'https://www.bonecaforum.com/forum/garotas/' . $state->slug . '/' . $city->slug . '/' . $topic->slug;
 
             
             echo "

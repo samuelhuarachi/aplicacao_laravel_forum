@@ -11594,7 +11594,7 @@
 [stacktrace]
 #0 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'file_get_conten...', '/usr/share/ngin...', 352, Array)
 #1 /usr/share/nginx/app/Samuel/Script.php(352): file_get_contents('https://www.tra...')
-#2 /usr/share/nginx/app/Samuel/Script.php(70): App\\Samuel\\Script->getTrannyCellPhone()
+#2 /usr/share/nginx/app/Samuel/Script.php(70): App\\Samuel\\Script->getGirlsCellPhone()
 #3 /usr/share/nginx/app/Http/Controllers/IndexController.php(30): App\\Samuel\\Script->routineScan()
 #4 [internal function]: App\\Http\\Controllers\\IndexController->teste3(Object(App\\Samuel\\Script))
 #5 /usr/share/nginx/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): call_user_func_array(Array, Array)

@@ -2,10 +2,10 @@ class ListGirlTabsControl {
 
     constructor() {
         this.cam_girl_description_link = $("#btn_woman_list")
-        this.cam_girl_photos_link = $("#btn_tranny_list")
+        this.cam_girl_photos_link = $("#btn_girl_list")
 
         this.cam_girl_description = $("#woman_list")
-        this.cam_girl_photos = $("#tranny_list")
+        this.cam_girl_photos = $("#girl_list")
 
         this.cam_girl_description_link.click(this.camGirlDescriptionLinkClick.bind(
             null,

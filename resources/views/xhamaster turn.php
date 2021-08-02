@@ -11028,7 +11028,7 @@
                         "country": "",
                         "doSpy": true,
                         "doPrivate": true,
-                        "gender": "femaleTranny",
+                        "gender": "femaleGirls",
                         "isHd": true,
                         "isVr": false,
                         "is2d": true,

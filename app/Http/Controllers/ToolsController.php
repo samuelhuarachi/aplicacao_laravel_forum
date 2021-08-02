@@ -89,7 +89,7 @@ class ToolsController extends Controller
     {
         //This will return the HTML source of the page as a string.
         $htmlString = file_get_contents(
-            'https://www.travesticomlocal.com.br/acompanhante/kely-couto/');
+            'https://www.garotascomlocal.com.br/acompanhante/kely-couto/');
 
         //Create a new DOMDocument object.
         $htmlDom = new \DOMDocument;
@@ -126,7 +126,7 @@ class ToolsController extends Controller
             //dump($imgSrc);
 
             $url = $imgSrc;
-            $img = 'teste1/foto-da-travesti-kely-couto-'.$count.'.webp';
+            $img = 'teste1/foto-da-garotas-kely-couto-'.$count.'.webp';
             file_put_contents($img, file_get_contents($url));
 
             $count = $count + 1;
@@ -160,7 +160,7 @@ class ToolsController extends Controller
         $slugify = new \Cocur\Slugify\Slugify();
         $stateSlug = 'bahia';
         $citySlug = 'salvador';
-        $url = 'https://www.travesticomlocal.com.br/salvador/';
+        $url = 'https://www.garotascomlocal.com.br/salvador/';
 
         $stateFind = $stateModel->where('slug', $stateSlug)->first();
         $cityFind = $cityModel->where('slug', $citySlug)->where('state_id', $stateFind->id)->first();
@@ -265,23 +265,23 @@ class ToolsController extends Controller
         $general->generateSchemaScanCityState($citysAvailable);
     }
 
-    public function createNewTopic($cityID, $userID, $trannyName, $trannySlug, $cellphone)
+    public function createNewTopic($cityID, $userID, $girlName, $girlSlug, $cellphone)
     {
-        $trannySlug = $this->ajustSlugIsExists($trannySlug, $cityID);
+        $girlSlug = $this->ajustSlugIsExists($girlSlug, $cityID);
 
         $topic = new Topic;
         $topic->city_id = $cityID;
         $topic->user_id = $userID;
-        $topic->title = $trannyName;
-        $topic->slug = $trannySlug;
+        $topic->title = $girlName;
+        $topic->slug = $girlSlug;
         $topic->cellphone = $cellphone;
         $topic->save();
     }
 
-    function ajustSlugIsExists($trannySlug, $cityID)
+    function ajustSlugIsExists($girlSlug, $cityID)
     {
         $topic = new Topic;
-        $slug = $trannySlug;
+        $slug = $girlSlug;
         $checkIfExists = true;
         $count = 0;
         $slugBackup = $slug;
@@ -313,7 +313,7 @@ class ToolsController extends Controller
         }
     }
 
-    public function saveImagesInTeste1Folder($trannySlug, $url)
+    public function saveImagesInTeste1Folder($girlSlug, $url)
     {
         $htmlString = file_get_contents($url);
         $htmlDom = new \DOMDocument;
@@ -324,9 +324,9 @@ class ToolsController extends Controller
         foreach($imageTags as $imageTag) {
             $imgSrc = $imageTag->getAttribute('src');
             
-            if ($imgSrc !== 'https://www.travesticomlocal.com.br/wp-content/uploads/2015/05/cropped-cropped-acompanhantes-travestis-de-programa-com-local.png' && $imgSrc !== 'https://www.travesticomlocal.com.br/wp-content/uploads/2020/02/cropped-cropped-acompanhantes-travestis-de-programa-com-local.png') {
+            if ($imgSrc !== 'https://www.garotascomlocal.com.br/wp-content/uploads/2015/05/cropped-cropped-acompanhantes-garotass-de-programa-com-local.png' && $imgSrc !== 'https://www.garotascomlocal.com.br/wp-content/uploads/2020/02/cropped-cropped-acompanhantes-garotass-de-programa-com-local.png') {
                 
-                $img = storage_path('logs') . '/foto-da-travesti-'.$trannySlug.'-'.$count.'.webp';
+                $img = storage_path('logs') . '/foto-da-garotas-'.$girlSlug.'-'.$count.'.webp';
                 
                 // file_put_contents($img, file_get_contents($imgSrc));
 

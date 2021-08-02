@@ -15,7 +15,7 @@ class Script {
 
     protected $generalService;
     protected $logFileName;
-    protected $linkTranny;
+    protected $linkGirls;
     protected $topicModel;
     protected $lastSeeModel;
     protected $stateModel;
@@ -42,7 +42,7 @@ class Script {
     {
         $slugify = new \Cocur\Slugify\Slugify();
         $this->createLogFile();
-        $listOfLinks = $this->generalService->travestiComLocalMap();
+        $listOfLinks = $this->generalService->garotasComLocalMap();
 
         //dd($listOfLinks);
 
@@ -52,21 +52,21 @@ class Script {
             $cityID = $currentLink['city_id'];
             $URL = $currentLink['url'];
 
-            $trannyLinkFounded = $this->findTrannyLinksOnThisCity($URL);
-            foreach($trannyLinkFounded as $linkTranny)
+            $girlLinkFounded = $this->findGirlsLinksOnThisCity($URL);
+            foreach($girlLinkFounded as $linkGirls)
             {
-                // $linkTranny = 'https://www.travesticomlocal.com.br/acompanhante/rosy-pinheiro-trans/';
-                // dump($linkTranny);
+                // $linkGirls = 'https://www.garotascomlocal.com.br/acompanhante/rosy-pinheiro-trans/';
+                // dump($linkGirls);
 
-                $this->linkTranny = $linkTranny;
+                $this->linkGirls = $linkGirls;
 
-                $trannyName = $this->getTrannyName();
-                if ($trannyName == "") {
-                    $this->writeInLog("Nome da travesti inválido".PHP_EOL."URL: ". $this->linkTranny);
+                $girlName = $this->getGirlsName();
+                if ($girlName == "") {
+                    $this->writeInLog("Nome da garotas inválido".PHP_EOL."URL: ". $this->linkGirls);
                     continue;
                 }
 
-                $cellphone = $this->getTrannyCellPhone();
+                $cellphone = $this->getGirlsCellPhone();
                 $isCellphoneValid = $this->isCellphoneValid($cellphone);
 
                 if ($isCellphoneValid) {
@@ -74,17 +74,17 @@ class Script {
                     $cellphone = $this->formatCellPhoneNumber($cellphone);
 
                     $description = $this->getDescription();
-                    $trannySlug = $slugify->slugify($trannyName);
+                    $girlSlug = $slugify->slugify($girlName);
 
 
                     // if topic exists
                     $topicsFounded = $this->findTopicByCellphone($cellphone);
 
                     if (count($topicsFounded) == 0) {
-                        $this->writeInLog("Nova travesti URL: " . $linkTranny);
-                        //dump("Nova travesti URL: " . $linkTranny);
-                        $newTopic = $this->createNewTopic($cityID, 1, $trannyName, $trannySlug, $cellphone);
-                        $this->saveTrannyDescription($cellphone, $description);
+                        $this->writeInLog("Nova garotas URL: " . $linkGirls);
+                        //dump("Nova garotas URL: " . $linkGirls);
+                        $newTopic = $this->createNewTopic($cityID, 1, $girlName, $girlSlug, $cellphone);
+                        $this->saveGirlsDescription($cellphone, $description);
 
                         $stateFounded = $this->stateModel->find($stateID);
                         $cityFounded = $this->cityModel->find($cityID);
@@ -93,17 +93,17 @@ class Script {
                         $topicFounded = $this->findTopicByCellphoneAndCity($cellphone, $cityID);
                         
                         if (!$topicFounded) {
-                            $this->writeInLog("Mudou de cidade URL: " . $linkTranny);
-                            //dump("Mudou de cidade URL: " . $linkTranny);
-                            $this->createNewTopic($cityID, 1, $trannyName, $trannySlug, $cellphone);
+                            $this->writeInLog("Mudou de cidade URL: " . $linkGirls);
+                            //dump("Mudou de cidade URL: " . $linkGirls);
+                            $this->createNewTopic($cityID, 1, $girlName, $girlSlug, $cellphone);
                         }
                     }
 
                     $this->updateLastSee($cellphone, $cityID);
-                    $this->updateLinkInCellphoneTable($cellphone, $linkTranny);
+                    $this->updateLinkInCellphoneTable($cellphone, $linkGirls);
                     
                 } else {
-                    $this->writeInLog("Celular inválido".PHP_EOL."URL: ". $this->linkTranny);
+                    $this->writeInLog("Celular inválido".PHP_EOL."URL: ". $this->linkGirls);
                 }
 
                 //dd("é apra ter ataulziado o linkt");
@@ -111,11 +111,11 @@ class Script {
         }
     }
 
-    protected function updateLinkInCellphoneTable($cellphone, $linkTranny) {
+    protected function updateLinkInCellphoneTable($cellphone, $linkGirls) {
         $findCellphone = $this->cellphoneModel->where('cellphone', $cellphone)->first();
         if ($findCellphone) {
             $findCellphone->update([
-                'linkt' => $linkTranny
+                'linkt' => $linkGirls
             ]);
         }
     }
@@ -159,7 +159,7 @@ class Script {
         $photoModel->save();
     }
 
-    protected function saveTrannyDescription($cellphone, $description)
+    protected function saveGirlsDescription($cellphone, $description)
     {
         $findCellphone = $this->cellphoneModel->where('cellphone', $cellphone)->first();
         if (!$findCellphone) {
@@ -223,7 +223,7 @@ class Script {
 
     protected function getDescription()
     {
-        $htmlString = file_get_contents($this->linkTranny);
+        $htmlString = file_get_contents($this->linkGirls);
         $dom = new \DOMDocument;
         @$dom->loadHTML($htmlString);
         $allAside = $dom->getElementsByTagName('aside');
@@ -236,9 +236,9 @@ class Script {
         return null;
     }
 
-    protected function getTrannyName()
+    protected function getGirlsName()
     {
-        $htmlString = file_get_contents($this->linkTranny);
+        $htmlString = file_get_contents($this->linkGirls);
         $dom = new \DOMDocument;
         @$dom->loadHTML($htmlString);
         $allHeaders1 = $dom->getElementsByTagName('h1');
@@ -273,15 +273,15 @@ class Script {
     protected function isCellphoneValid($cellphone)
     {
         if ($cellphone == "") {
-            $this->writeInLog("Número de celular inválido, vazio".PHP_EOL."URL: ".$this->linkTranny .PHP_EOL."Cellphone: ".$cellphone);
+            $this->writeInLog("Número de celular inválido, vazio".PHP_EOL."URL: ".$this->linkGirls .PHP_EOL."Cellphone: ".$cellphone);
             return null;
         }
 
         $telExplode = array_filter(explode(' ', $cellphone));
 
         if (count($telExplode) !== 2) {
-            dump("Número de celular inválido, falha no explode".PHP_EOL."URL: ".$this->linkTranny .PHP_EOL."Cellphone: ".$cellphone);
-            $this->writeInLog("Número de celular inválido".PHP_EOL."URL: ".$this->linkTranny .PHP_EOL."Cellphone: ".$cellphone);
+            dump("Número de celular inválido, falha no explode".PHP_EOL."URL: ".$this->linkGirls .PHP_EOL."Cellphone: ".$cellphone);
+            $this->writeInLog("Número de celular inválido".PHP_EOL."URL: ".$this->linkGirls .PHP_EOL."Cellphone: ".$cellphone);
             return null;
         }
 
@@ -292,7 +292,7 @@ class Script {
         $ddd = $this->formatDDD($ddd);
 
         if (!$ddd) {
-            dump("Número de celular inválido, falha no ddd".PHP_EOL."URL: ".$this->linkTranny .PHP_EOL."Cellphone: ".$cellphone);
+            dump("Número de celular inválido, falha no ddd".PHP_EOL."URL: ".$this->linkGirls .PHP_EOL."Cellphone: ".$cellphone);
             return null;
         }
 
@@ -302,7 +302,7 @@ class Script {
         $justNumbersPhone = preg_replace('/\D/', '', $cellphone);
 
         if (strlen((string)$justNumbersPhone) != 11) {
-            $this->writeInLog("Número de celular inválido".PHP_EOL."URL: ".$this->linkTranny .PHP_EOL."Cellphone: ".$cellphone);
+            $this->writeInLog("Número de celular inválido".PHP_EOL."URL: ".$this->linkGirls .PHP_EOL."Cellphone: ".$cellphone);
             return null;
         }
 
@@ -332,10 +332,10 @@ class Script {
         return $ddd;
     }
 
-    protected function getTrannyCellPhone()
+    protected function getGirlsCellPhone()
     {
         $cellphoneFinded = null;
-        $htmlString = file_get_contents($this->linkTranny);
+        $htmlString = file_get_contents($this->linkGirls);
         $dom = new \DOMDocument;
         @$dom->loadHTML($htmlString);
 
@@ -385,7 +385,7 @@ class Script {
         fclose($log);
     }
 
-    protected function findTrannyLinksOnThisCity($url)
+    protected function findGirlsLinksOnThisCity($url)
     {
         $htmlString = file_get_contents($url);
         $dom = new \DOMDocument;
@@ -409,7 +409,7 @@ class Script {
         $slugify = new \Cocur\Slugify\Slugify();
         $stateSlug = 'amapa';
         $citySlug = 'macapa';
-        $url = 'https://www.travesticomlocal.com.br/macapa/';
+        $url = 'https://www.garotascomlocal.com.br/macapa/';
 
         $stateFind = $stateModel->where('slug', $stateSlug)->first();
         $cityFind = $cityModel->where('slug', $citySlug)->where('state_id', $stateFind->id)->first();
@@ -503,25 +503,25 @@ class Script {
         }
     }
 
-    public function createNewTopic($cityID, $userID, $trannyName, $trannySlug, $cellphone)
+    public function createNewTopic($cityID, $userID, $girlName, $girlSlug, $cellphone)
     {
-        $trannySlug = $this->ajustSlugIsExists($trannySlug, $cityID);
+        $girlSlug = $this->ajustSlugIsExists($girlSlug, $cityID);
 
         $topic = new Topic;
         $topic->city_id = $cityID;
         $topic->user_id = $userID;
-        $topic->title = $trannyName;
-        $topic->slug = $trannySlug;
+        $topic->title = $girlName;
+        $topic->slug = $girlSlug;
         $topic->cellphone = $cellphone;
         $topic->save();
 
         return $topic;
     }
 
-    function ajustSlugIsExists($trannySlug, $cityID)
+    function ajustSlugIsExists($girlSlug, $cityID)
     {
         $topic = new Topic;
-        $slug = $trannySlug;
+        $slug = $girlSlug;
         $checkIfExists = true;
         $count = 0;
         $slugBackup = $slug;
@@ -553,7 +553,7 @@ class Script {
         }
     }
 
-    public function saveImagesInTeste1Folder($trannySlug, $url)
+    public function saveImagesInTeste1Folder($girlSlug, $url)
     {
         $htmlString = file_get_contents($url);
         $htmlDom = new \DOMDocument;
@@ -564,9 +564,9 @@ class Script {
         foreach($imageTags as $imageTag) {
             $imgSrc = $imageTag->getAttribute('src');
             
-            if ($imgSrc !== 'https://www.travesticomlocal.com.br/wp-content/uploads/2015/05/cropped-cropped-acompanhantes-travestis-de-programa-com-local.png' && $imgSrc !== 'https://www.travesticomlocal.com.br/wp-content/uploads/2020/02/cropped-cropped-acompanhantes-travestis-de-programa-com-local.png') {
+            if ($imgSrc !== 'https://www.garotascomlocal.com.br/wp-content/uploads/2015/05/cropped-cropped-acompanhantes-garotass-de-programa-com-local.png' && $imgSrc !== 'https://www.garotascomlocal.com.br/wp-content/uploads/2020/02/cropped-cropped-acompanhantes-garotass-de-programa-com-local.png') {
                 
-                $img = storage_path('logs') . '/foto-da-travesti-'.$trannySlug.'-'.$count.'.webp';
+                $img = storage_path('logs') . '/foto-da-garotas-'.$girlSlug.'-'.$count.'.webp';
                 
                 
 

@@ -53,7 +53,7 @@
                         Mulheres</a>
                 </li>
                 <li class="nav-item">
-                    <a id="btn_tranny_list" class="nav-link" >
+                    <a id="btn_girl_list" class="nav-link" >
                         Transex <i class="fas fa-transgender"></i></a>
                 </li>
             </ul>
@@ -95,7 +95,7 @@
                     </figure>
                 @endforeach
             </div>
-            <div id="tranny_list">
+            <div id="girl_list">
                 Não encontramos nenhuma no momento
                 <br>
                 <br>

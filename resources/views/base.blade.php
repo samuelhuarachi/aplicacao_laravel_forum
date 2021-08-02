@@ -8,19 +8,19 @@
     @if(\Request::route()->getName() == 'forum.topic.details')
 
         @if ($topicFind->cellphone && trim($topicFind->cellphone) !== '')
-            <title>Boneca Forum | Travesti {{ ucwords($topicFind->title) }} {{ $topicFind->cellphone }}</title>
+            <title>Boneca Forum | garotas {{ ucwords($topicFind->title) }} {{ $topicFind->cellphone }}</title>
         @else
             <title>Boneca Forum | Tópico {{ ucwords($topicFind->title) }}</title>
         @endif
             
     @else 
-        <title>Boneca Forum | Forum de relato das experiência dos usuários, com travestis</title>
+        <title>Boneca Forum | Forum de relato das experiência dos usuários, com garotass</title>
     @endif
     
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
-    <meta name="description" content="Forum travesti tras relatos de usuários sobre experiencias com as travestis no Brasil."> 
+    <meta name="description" content="Forum garotas tras relatos de usuários sobre experiencias com as garotass no Brasil."> 
     <meta name="og:title" property="og:title" content="Forum bonecas tem relatos de experiencias de pessoas com travetis no Brasil"> 
     <meta name="robots" content="index, follow"> 
     <link href="https://www.bonecaforum.com{{ $_SERVER['REQUEST_URI'] }}" rel="canonical"> 
@@ -64,7 +64,7 @@
     <div class="row">
         <div  class="col-md-12 mb-3">
             <p class="logo"><a href="/">Boneca Fórum</a></p>
-            <p class="logo-description">Encontre as mais belas travestis da sua cidade</p>
+            <p class="logo-description">Encontre as mais belas garotass da sua cidade</p>
         </div>
        
     </div>
@@ -133,7 +133,7 @@
             <a href="#">Ir para o topo</a>
         </p>
         @if (env('REMOVE_PORN')!='true')
-            <p>Boneca Fórum - Relatos, acompanhantes travestis no Brasil</p>
+            <p>Boneca Fórum - Relatos, acompanhantes garotass no Brasil</p>
         @endif
     </div>
 </footer>

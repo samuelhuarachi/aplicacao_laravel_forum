@@ -33,7 +33,7 @@
     <div class="row mb-3">
         <div class="col-md-12">
 
-            <h1>Acompanhantes Travestis em {{ $cityFounded->title }}</h1>
+            <h1>Acompanhantes garotass em {{ $cityFounded->title }}</h1>
                
         </div>
     </div>
@@ -84,9 +84,9 @@
                 <input class="btn btn-primary" type="submit" value="Pesquisar">
             </form> 
 
-            <div id="tranny-list" class="card mt-2">
+            <div id="girl-list" class="card mt-2">
                 <div class="card-header">
-                    <b>Relatos, sobre experiencias dos nossos usuários, com travestis, 
+                    <b>Relatos, sobre experiencias dos nossos usuários, com garotass, 
                     encontrados:</b>
                 </div>
                 <div class="card-body">
@@ -156,7 +156,7 @@
                                         <div class="col-sm">
                                             
                                                 {{-- <a href="{{ route('forum.topic.details', [$stateFounded->slug, $cityFounded->slug, $topic->slug]) }}">
-                                                    <img class="float-left tranny-cover-thumb" src="{{ $coversList[$topic->slug] }}" alt="Foto de capa da travesti {{ $topic->title }}">
+                                                    <img class="float-left girl-cover-thumb" src="{{ $coversList[$topic->slug] }}" alt="Foto de capa da garotas {{ $topic->title }}">
                                                 </a> --}}
 
                                             <a href="{{ route('forum.topic.details', [$stateFounded->slug, $cityFounded->slug, $topic->slug]) }}">{{ $topic->title }}</a>

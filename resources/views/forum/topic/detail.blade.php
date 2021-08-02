@@ -40,7 +40,7 @@
         
         <div class="col-md-12">
             
-            <h1>Travesti {{ ucwords($topicFind->title) }}</h1>
+            <h1>garotas {{ ucwords($topicFind->title) }}</h1>
 
             @if ($qtdNewGirl === 0)
                 <p> <span class="badge badge-secondary">Garota identificada como novata, pelo nosso sistema</span></p>
@@ -78,7 +78,7 @@
                 style="margin-top: 10px"
                 height="200" 
                 width="100%" 
-                title="Travesti Fotos"></iframe> 
+                title="garotas Fotos"></iframe> 
             @endif
             
 
@@ -89,9 +89,9 @@
                         <small>Clique para ampliar</small><br>
                         @foreach($photos as $photo)
                             <a 
-                            data-caption="Fotos da travesti {{ ucwords($topicFind->title) }}"
+                            data-caption="Fotos da garotas {{ ucwords($topicFind->title) }}"
                             data-fancybox="gallery" href="{{ $photo->photo }}">
-                                <img class="image-in-gallery" src="{{ $photo->photo }}" alt="Fotos da travesti {{ ucwords($topicFind->title) }}">
+                                <img class="image-in-gallery" src="{{ $photo->photo }}" alt="Fotos da garotas {{ ucwords($topicFind->title) }}">
                             </a>
                         @endforeach
                     </div>

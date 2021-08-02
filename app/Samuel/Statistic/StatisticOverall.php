@@ -17,7 +17,7 @@ class StatisticOverall {
         ];
     }
 
-    public function newTrannyByCity($cityID)
+    public function newGirlsByCity($cityID)
     {
 
 
